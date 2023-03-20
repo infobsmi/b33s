@@ -3,7 +3,7 @@
 
 // Copyright (c) 2015-2022 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -28,8 +28,8 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/minio/minio-go/v7"
-	cr "github.com/minio/minio-go/v7/pkg/credentials"
+	"github.com/infobsmi/b33s-go/v7"
+	cr "github.com/infobsmi/b33s-go/v7/pkg/credentials"
 )
 
 var (

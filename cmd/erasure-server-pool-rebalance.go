@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2022 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -32,9 +32,9 @@ import (
 
 	"github.com/lithammer/shortuuid/v4"
 	"github.com/minio/madmin-go/v2"
-	"github.com/minio/minio/internal/bucket/lifecycle"
-	"github.com/minio/minio/internal/hash"
-	"github.com/minio/minio/internal/logger"
+	"github.com/infobsmi/b33s/internal/bucket/lifecycle"
+	"github.com/infobsmi/b33s/internal/hash"
+	"github.com/infobsmi/b33s/internal/logger"
 	"github.com/minio/pkg/env"
 )
 

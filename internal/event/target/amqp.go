@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2022 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -28,8 +28,8 @@ import (
 	"path/filepath"
 	"sync"
 
-	"github.com/minio/minio/internal/event"
-	"github.com/minio/minio/internal/logger"
+	"github.com/infobsmi/b33s/internal/event"
+	"github.com/infobsmi/b33s/internal/logger"
 	xnet "github.com/minio/pkg/net"
 	"github.com/rabbitmq/amqp091-go"
 )

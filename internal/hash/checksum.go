@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2022 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -27,8 +27,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/minio/minio/internal/hash/sha256"
-	xhttp "github.com/minio/minio/internal/http"
+	"github.com/infobsmi/b33s/internal/hash/sha256"
+	xhttp "github.com/infobsmi/b33s/internal/http"
 )
 
 // MinIOMultipartChecksum is as metadata on multipart uploads to indicate checksum type.

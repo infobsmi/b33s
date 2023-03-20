@@ -8,7 +8,7 @@ assignees: ''
 ---
 
 ## NOTE
-If this case is urgent, please subscribe to [Subnet](https://min.io/pricing) so that our 24/7 support team may help you faster.
+
 
 <!--- Provide a general summary of the issue in the Title above -->
 
@@ -27,7 +27,7 @@ If this case is urgent, please subscribe to [Subnet](https://min.io/pricing) so 
 ## Steps to Reproduce (for bugs)
 <!--- Provide a link to a live example, or an unambiguous set of steps to -->
 <!--- reproduce this bug. Include code to reproduce, if relevant -->
-<!--- and make sure you have followed https://github.com/minio/minio/tree/release/docs/debugging to capture relevant logs -->
+<!--- and make sure you have followed https://github.com/infobsmi/b33s/tree/release/docs/debugging to capture relevant logs -->
 
 1.
 2.

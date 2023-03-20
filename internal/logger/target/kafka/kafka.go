@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2022 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -30,8 +30,8 @@ import (
 	"github.com/Shopify/sarama"
 	saramatls "github.com/Shopify/sarama/tools/tls"
 
-	"github.com/minio/minio/internal/logger/message/audit"
-	"github.com/minio/minio/internal/logger/target/types"
+	"github.com/infobsmi/b33s/internal/logger/message/audit"
+	"github.com/infobsmi/b33s/internal/logger/target/types"
 	xnet "github.com/minio/pkg/net"
 )
 

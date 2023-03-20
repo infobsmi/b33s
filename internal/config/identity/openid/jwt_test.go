@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2022 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -32,9 +32,9 @@ import (
 
 	jwtg "github.com/golang-jwt/jwt/v4"
 	jwtgo "github.com/golang-jwt/jwt/v4"
-	"github.com/minio/minio/internal/arn"
-	"github.com/minio/minio/internal/config"
-	jwtm "github.com/minio/minio/internal/jwt"
+	"github.com/infobsmi/b33s/internal/arn"
+	"github.com/infobsmi/b33s/internal/config"
+	jwtm "github.com/infobsmi/b33s/internal/jwt"
 	xnet "github.com/minio/pkg/net"
 )
 

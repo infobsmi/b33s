@@ -8,9 +8,9 @@ assignees: ''
 ---
 
 ## NOTE
-All GitHub issues are addressed on a best-effort basis at MinIO's sole discretion. There are no Service Level Agreements (SLA) or Objectives (SLO). Remember our [Code of Conduct](https://github.com/minio/minio/blob/master/code_of_conduct.md) when engaging with MinIO Engineers and the larger community.
+All GitHub issues are addressed on a best-effort basis at b33s's sole discretion. There are no Service Level Agreements (SLA) or Objectives (SLO). Remember our [Code of Conduct](https://github.com/infobsmi/b33s/blob/master/code_of_conduct.md) when engaging with b33s Engineers and the larger community.
 
-For urgent issues (e.g. production down, etc.), subscribe to [SUBNET](https://min.io/pricing?jmp=github) for direct to engineering support.
+
  
 <!--- Provide a general summary of the issue in the Title above -->
 
@@ -29,7 +29,7 @@ For urgent issues (e.g. production down, etc.), subscribe to [SUBNET](https://mi
 ## Steps to Reproduce (for bugs)
 <!--- Provide a link to a live example, or an unambiguous set of steps to -->
 <!--- reproduce this bug. Include code to reproduce, if relevant -->
-<!--- and make sure you have followed https://github.com/minio/minio/tree/release/docs/debugging to capture relevant logs -->
+<!--- and make sure you have followed https://github.com/infobsmi/b33s/tree/release/docs/debugging to capture relevant logs -->
 
 1.
 2.
@@ -42,10 +42,10 @@ For urgent issues (e.g. production down, etc.), subscribe to [SUBNET](https://mi
 
 ## Regression
 <!-- Is this issue a regression? (Yes / No) -->
-<!-- If Yes, optionally please include minio version or commit id or PR# that caused this regression, if you have these details. -->
+<!-- If Yes, optionally please include b33s version or commit id or PR# that caused this regression, if you have these details. -->
 
 ## Your Environment
 <!--- Include as many relevant details about the environment you experienced the bug in -->
-* Version used (`minio --version`):
+* Version used (`b33s --version`):
 * Server setup and configuration:
 * Operating System and version (`uname -a`):
