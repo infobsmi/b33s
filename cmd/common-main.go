@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -53,15 +53,15 @@ import (
 	"github.com/minio/console/restapi/operations"
 	"github.com/minio/kes"
 	"github.com/minio/madmin-go/v2"
-	"github.com/minio/minio-go/v7"
-	"github.com/minio/minio-go/v7/pkg/credentials"
-	"github.com/minio/minio-go/v7/pkg/set"
-	"github.com/minio/minio/internal/auth"
-	"github.com/minio/minio/internal/color"
-	"github.com/minio/minio/internal/config"
-	"github.com/minio/minio/internal/handlers"
-	"github.com/minio/minio/internal/kms"
-	"github.com/minio/minio/internal/logger"
+	"github.com/infobsmi/b33s-go/v7"
+	"github.com/infobsmi/b33s-go/v7/pkg/credentials"
+	"github.com/infobsmi/b33s-go/v7/pkg/set"
+	"github.com/infobsmi/b33s/internal/auth"
+	"github.com/infobsmi/b33s/internal/color"
+	"github.com/infobsmi/b33s/internal/config"
+	"github.com/infobsmi/b33s/internal/handlers"
+	"github.com/infobsmi/b33s/internal/kms"
+	"github.com/infobsmi/b33s/internal/logger"
 	"github.com/minio/pkg/certs"
 	"github.com/minio/pkg/console"
 	"github.com/minio/pkg/ellipses"
@@ -83,7 +83,7 @@ func init() {
 		if mousetrap.StartedByExplorer() {
 			fmt.Printf("Don't double-click %s\n", os.Args[0])
 			fmt.Println("You need to open cmd.exe/PowerShell and run it from the command line")
-			fmt.Println("Refer to the docs here on how to run it as a Windows Service https://github.com/minio/minio-service/tree/master/windows")
+			fmt.Println("Refer to the docs here on how to run it as a Windows Service https://github.com/infobsmi/b33s-service/tree/master/windows")
 			fmt.Println("Press the Enter Key to Exit")
 			fmt.Scanln()
 			os.Exit(1)

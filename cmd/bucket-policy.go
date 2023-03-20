@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -26,11 +26,11 @@ import (
 	"time"
 
 	jsoniter "github.com/json-iterator/go"
-	miniogopolicy "github.com/minio/minio-go/v7/pkg/policy"
-	"github.com/minio/minio-go/v7/pkg/tags"
-	"github.com/minio/minio/internal/handlers"
-	xhttp "github.com/minio/minio/internal/http"
-	"github.com/minio/minio/internal/logger"
+	miniogopolicy "github.com/infobsmi/b33s-go/v7/pkg/policy"
+	"github.com/infobsmi/b33s-go/v7/pkg/tags"
+	"github.com/infobsmi/b33s/internal/handlers"
+	xhttp "github.com/infobsmi/b33s/internal/http"
+	"github.com/infobsmi/b33s/internal/logger"
 	"github.com/minio/pkg/bucket/policy"
 )
 

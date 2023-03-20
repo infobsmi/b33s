@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -30,9 +30,9 @@ import (
 
 	"github.com/minio/highwayhash"
 	"github.com/minio/madmin-go/v2"
-	"github.com/minio/minio-go/v7/pkg/set"
-	xhttp "github.com/minio/minio/internal/http"
-	"github.com/minio/minio/internal/logger/message/log"
+	"github.com/infobsmi/b33s-go/v7/pkg/set"
+	xhttp "github.com/infobsmi/b33s/internal/http"
+	"github.com/infobsmi/b33s/internal/logger/message/log"
 )
 
 // HighwayHash key for logging in anonymous mode
@@ -131,7 +131,7 @@ func uniqueEntries(paths []string) []string {
 }
 
 // Init sets the trimStrings to possible GOPATHs
-// and GOROOT directories. Also append github.com/minio/minio
+// and GOROOT directories. Also append github.com/infobsmi/b33s
 // This is done to clean up the filename, when stack trace is
 // displayed when an error happens.
 func Init(goPath string, goRoot string) {
@@ -175,9 +175,9 @@ func Init(goPath string, goRoot string) {
 	// Remove duplicate entries.
 	trimStrings = uniqueEntries(trimStrings)
 
-	// Add "github.com/minio/minio" as the last to cover
-	// paths like "{GOROOT}/src/github.com/minio/minio"
-	// and "{GOPATH}/src/github.com/minio/minio"
+	// Add "github.com/infobsmi/b33s" as the last to cover
+	// paths like "{GOROOT}/src/github.com/infobsmi/b33s"
+	// and "{GOPATH}/src/github.com/infobsmi/b33s"
 	trimStrings = append(trimStrings, filepath.Join("github.com", "minio", "minio")+string(filepath.Separator))
 }
 

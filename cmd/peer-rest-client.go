@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -30,11 +30,11 @@ import (
 	"time"
 
 	"github.com/minio/madmin-go/v2"
-	"github.com/minio/minio/internal/event"
-	xhttp "github.com/minio/minio/internal/http"
-	"github.com/minio/minio/internal/logger"
-	"github.com/minio/minio/internal/logger/message/log"
-	"github.com/minio/minio/internal/rest"
+	"github.com/infobsmi/b33s/internal/event"
+	xhttp "github.com/infobsmi/b33s/internal/http"
+	"github.com/infobsmi/b33s/internal/logger"
+	"github.com/infobsmi/b33s/internal/logger/message/log"
+	"github.com/infobsmi/b33s/internal/rest"
 	xnet "github.com/minio/pkg/net"
 	"github.com/tinylib/msgp/msgp"
 )

@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -30,14 +30,14 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/minio/minio-go/v7/pkg/tags"
-	"github.com/minio/minio/internal/amztime"
-	sse "github.com/minio/minio/internal/bucket/encryption"
-	"github.com/minio/minio/internal/bucket/lifecycle"
-	"github.com/minio/minio/internal/event"
-	xhttp "github.com/minio/minio/internal/http"
-	"github.com/minio/minio/internal/logger"
-	"github.com/minio/minio/internal/s3select"
+	"github.com/infobsmi/b33s-go/v7/pkg/tags"
+	"github.com/infobsmi/b33s/internal/amztime"
+	sse "github.com/infobsmi/b33s/internal/bucket/encryption"
+	"github.com/infobsmi/b33s/internal/bucket/lifecycle"
+	"github.com/infobsmi/b33s/internal/event"
+	xhttp "github.com/infobsmi/b33s/internal/http"
+	"github.com/infobsmi/b33s/internal/logger"
+	"github.com/infobsmi/b33s/internal/s3select"
 )
 
 const (

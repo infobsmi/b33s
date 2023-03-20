@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -36,8 +36,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	xhttp "github.com/minio/minio/internal/http"
-	"github.com/minio/minio/internal/logger"
+	xhttp "github.com/infobsmi/b33s/internal/http"
+	"github.com/infobsmi/b33s/internal/logger"
 	"github.com/minio/pkg/env"
 	xnet "github.com/minio/pkg/net"
 	"github.com/minio/selfupdate"
@@ -212,7 +212,7 @@ func IsPCFTile() bool {
 //	MinIO (<OS>; <ARCH>[; <MODE>][; dcos][; kubernetes][; docker][; source]) MinIO/<VERSION> MinIO/<RELEASE-TAG> MinIO/<COMMIT-ID> [MinIO/universe-<PACKAGE-NAME>] [MinIO/helm-<HELM-VERSION>]
 //
 // Any change here should be discussed by opening an issue at
-// https://github.com/minio/minio/issues.
+// https://github.com/infobsmi/b33s/issues.
 func getUserAgent(mode string) string {
 	userAgentParts := []string{}
 	// Helper function to concisely append a pair of strings to a

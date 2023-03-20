@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -35,17 +35,17 @@ import (
 	"time"
 
 	"github.com/minio/cli"
-	"github.com/minio/minio-go/v7"
-	"github.com/minio/minio-go/v7/pkg/credentials"
-	"github.com/minio/minio-go/v7/pkg/set"
-	"github.com/minio/minio/internal/auth"
-	"github.com/minio/minio/internal/bucket/bandwidth"
-	"github.com/minio/minio/internal/color"
-	"github.com/minio/minio/internal/config"
-	"github.com/minio/minio/internal/fips"
-	xhttp "github.com/minio/minio/internal/http"
-	"github.com/minio/minio/internal/logger"
-	"github.com/minio/minio/internal/rest"
+	"github.com/infobsmi/b33s-go/v7"
+	"github.com/infobsmi/b33s-go/v7/pkg/credentials"
+	"github.com/infobsmi/b33s-go/v7/pkg/set"
+	"github.com/infobsmi/b33s/internal/auth"
+	"github.com/infobsmi/b33s/internal/bucket/bandwidth"
+	"github.com/infobsmi/b33s/internal/color"
+	"github.com/infobsmi/b33s/internal/config"
+	"github.com/infobsmi/b33s/internal/fips"
+	xhttp "github.com/infobsmi/b33s/internal/http"
+	"github.com/infobsmi/b33s/internal/logger"
+	"github.com/infobsmi/b33s/internal/rest"
 	"github.com/minio/pkg/certs"
 	"github.com/minio/pkg/env"
 )

@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -46,20 +46,20 @@ import (
 	"github.com/felixge/fgprof"
 	"github.com/gorilla/mux"
 	"github.com/minio/madmin-go/v2"
-	"github.com/minio/minio-go/v7"
-	miniogopolicy "github.com/minio/minio-go/v7/pkg/policy"
-	"github.com/minio/minio/internal/config"
-	"github.com/minio/minio/internal/config/api"
-	xtls "github.com/minio/minio/internal/config/identity/tls"
-	"github.com/minio/minio/internal/deadlineconn"
-	"github.com/minio/minio/internal/fips"
-	"github.com/minio/minio/internal/handlers"
-	"github.com/minio/minio/internal/hash"
-	xhttp "github.com/minio/minio/internal/http"
-	ioutilx "github.com/minio/minio/internal/ioutil"
-	"github.com/minio/minio/internal/logger"
-	"github.com/minio/minio/internal/logger/message/audit"
-	"github.com/minio/minio/internal/mcontext"
+	"github.com/infobsmi/b33s-go/v7"
+	miniogopolicy "github.com/infobsmi/b33s-go/v7/pkg/policy"
+	"github.com/infobsmi/b33s/internal/config"
+	"github.com/infobsmi/b33s/internal/config/api"
+	xtls "github.com/infobsmi/b33s/internal/config/identity/tls"
+	"github.com/infobsmi/b33s/internal/deadlineconn"
+	"github.com/infobsmi/b33s/internal/fips"
+	"github.com/infobsmi/b33s/internal/handlers"
+	"github.com/infobsmi/b33s/internal/hash"
+	xhttp "github.com/infobsmi/b33s/internal/http"
+	ioutilx "github.com/infobsmi/b33s/internal/ioutil"
+	"github.com/infobsmi/b33s/internal/logger"
+	"github.com/infobsmi/b33s/internal/logger/message/audit"
+	"github.com/infobsmi/b33s/internal/mcontext"
 	"github.com/minio/pkg/certs"
 	"github.com/minio/pkg/env"
 	xnet "github.com/minio/pkg/net"

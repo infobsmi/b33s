@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -26,9 +26,9 @@ import (
 	"time"
 
 	"github.com/minio/madmin-go/v2"
-	minio "github.com/minio/minio-go/v7"
-	cr "github.com/minio/minio-go/v7/pkg/credentials"
-	"github.com/minio/minio-go/v7/pkg/set"
+	minio "github.com/infobsmi/b33s-go/v7"
+	cr "github.com/infobsmi/b33s-go/v7/pkg/credentials"
+	"github.com/infobsmi/b33s-go/v7/pkg/set"
 )
 
 func runAllIAMSTSTests(suite *TestSuiteIAM, c *check) {
@@ -440,7 +440,7 @@ func (s *TestSuiteIAM) TestSTSForRoot(c *check) {
 }
 
 // SetUpLDAP - expects to setup an LDAP test server using the test LDAP
-// container and canned data from https://github.com/minio/minio-ldap-testing
+// container and canned data from https://github.com/infobsmi/b33s-ldap-testing
 func (s *TestSuiteIAM) SetUpLDAP(c *check, serverAddr string) {
 	ctx, cancel := context.WithTimeout(context.Background(), testDefaultTimeout)
 	defer cancel()
@@ -1099,7 +1099,7 @@ const (
 )
 
 // SetUpOpenIDs - sets up one or more OpenID test servers using the test OpenID
-// container and canned data from https://github.com/minio/minio-ldap-testing
+// container and canned data from https://github.com/infobsmi/b33s-ldap-testing
 //
 // Each set of client app params corresponds to a separate openid server, and
 // the i-th server in this will be applied the i-th policy in `rolePolicies`. If
@@ -1135,7 +1135,7 @@ func (s *TestSuiteIAM) SetUpOpenIDs(c *check, testApps []OpenIDClientAppParams, 
 }
 
 // SetUpOpenID - expects to setup an OpenID test server using the test OpenID
-// container and canned data from https://github.com/minio/minio-ldap-testing
+// container and canned data from https://github.com/infobsmi/b33s-ldap-testing
 func (s *TestSuiteIAM) SetUpOpenID(c *check, serverAddr string, rolePolicy string) {
 	ctx, cancel := context.WithTimeout(context.Background(), testDefaultTimeout)
 	defer cancel()

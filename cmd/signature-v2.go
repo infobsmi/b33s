@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -29,9 +29,9 @@ import (
 	"strconv"
 	"strings"
 
-	xhttp "github.com/minio/minio/internal/http"
+	xhttp "github.com/infobsmi/b33s/internal/http"
 
-	"github.com/minio/minio/internal/auth"
+	"github.com/infobsmi/b33s/internal/auth"
 )
 
 // Whitelist resource list that will be used in query string for signature-V2 calculation.

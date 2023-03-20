@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -28,13 +28,13 @@ import (
 	"sync/atomic"
 	"time"
 
-	objectlock "github.com/minio/minio/internal/bucket/object/lock"
-	"github.com/minio/minio/internal/color"
-	"github.com/minio/minio/internal/config/cache"
-	"github.com/minio/minio/internal/disk"
-	"github.com/minio/minio/internal/hash"
-	"github.com/minio/minio/internal/logger"
-	"github.com/minio/minio/internal/sync/errgroup"
+	objectlock "github.com/infobsmi/b33s/internal/bucket/object/lock"
+	"github.com/infobsmi/b33s/internal/color"
+	"github.com/infobsmi/b33s/internal/config/cache"
+	"github.com/infobsmi/b33s/internal/disk"
+	"github.com/infobsmi/b33s/internal/hash"
+	"github.com/infobsmi/b33s/internal/logger"
+	"github.com/infobsmi/b33s/internal/sync/errgroup"
 	"github.com/minio/pkg/wildcard"
 )
 

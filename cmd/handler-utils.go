@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -30,10 +30,10 @@ import (
 	"strings"
 
 	"github.com/minio/madmin-go/v2"
-	"github.com/minio/minio/internal/auth"
-	"github.com/minio/minio/internal/handlers"
-	xhttp "github.com/minio/minio/internal/http"
-	"github.com/minio/minio/internal/logger"
+	"github.com/infobsmi/b33s/internal/auth"
+	"github.com/infobsmi/b33s/internal/handlers"
+	xhttp "github.com/infobsmi/b33s/internal/http"
+	"github.com/infobsmi/b33s/internal/logger"
 	xnet "github.com/minio/pkg/net"
 )
 
@@ -401,7 +401,7 @@ func errorResponseHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodOptions {
 		return
 	}
-	desc := "Do not upgrade one server at a time - please follow the recommended guidelines mentioned here https://github.com/minio/minio#upgrading-minio for your environment"
+	desc := "Do not upgrade one server at a time - please follow the recommended guidelines mentioned here https://github.com/infobsmi/b33s#upgrading-minio for your environment"
 	switch {
 	case strings.HasPrefix(r.URL.Path, peerRESTPrefix):
 		writeErrorResponseString(r.Context(), w, APIError{

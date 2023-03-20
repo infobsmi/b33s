@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -26,12 +26,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/minio/minio/internal/amztime"
-	"github.com/minio/minio/internal/bucket/replication"
-	"github.com/minio/minio/internal/hash/sha256"
-	xhttp "github.com/minio/minio/internal/http"
-	"github.com/minio/minio/internal/logger"
-	"github.com/minio/minio/internal/sync/errgroup"
+	"github.com/infobsmi/b33s/internal/amztime"
+	"github.com/infobsmi/b33s/internal/bucket/replication"
+	"github.com/infobsmi/b33s/internal/hash/sha256"
+	xhttp "github.com/infobsmi/b33s/internal/http"
+	"github.com/infobsmi/b33s/internal/logger"
+	"github.com/infobsmi/b33s/internal/sync/errgroup"
 )
 
 // Object was stored with additional erasure codes due to degraded system at upload time

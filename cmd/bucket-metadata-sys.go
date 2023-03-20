@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -25,16 +25,16 @@ import (
 	"time"
 
 	"github.com/minio/madmin-go/v2"
-	"github.com/minio/minio-go/v7/pkg/tags"
-	bucketsse "github.com/minio/minio/internal/bucket/encryption"
-	"github.com/minio/minio/internal/bucket/lifecycle"
-	objectlock "github.com/minio/minio/internal/bucket/object/lock"
-	"github.com/minio/minio/internal/bucket/replication"
-	"github.com/minio/minio/internal/bucket/versioning"
-	"github.com/minio/minio/internal/event"
-	"github.com/minio/minio/internal/kms"
-	"github.com/minio/minio/internal/logger"
-	"github.com/minio/minio/internal/sync/errgroup"
+	"github.com/infobsmi/b33s-go/v7/pkg/tags"
+	bucketsse "github.com/infobsmi/b33s/internal/bucket/encryption"
+	"github.com/infobsmi/b33s/internal/bucket/lifecycle"
+	objectlock "github.com/infobsmi/b33s/internal/bucket/object/lock"
+	"github.com/infobsmi/b33s/internal/bucket/replication"
+	"github.com/infobsmi/b33s/internal/bucket/versioning"
+	"github.com/infobsmi/b33s/internal/event"
+	"github.com/infobsmi/b33s/internal/kms"
+	"github.com/infobsmi/b33s/internal/logger"
+	"github.com/infobsmi/b33s/internal/sync/errgroup"
 	"github.com/minio/pkg/bucket/policy"
 )
 

@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -59,14 +59,14 @@ import (
 	"github.com/fatih/color"
 
 	"github.com/gorilla/mux"
-	"github.com/minio/minio-go/v7/pkg/s3utils"
-	"github.com/minio/minio-go/v7/pkg/signer"
-	"github.com/minio/minio/internal/auth"
-	"github.com/minio/minio/internal/config"
-	"github.com/minio/minio/internal/crypto"
-	"github.com/minio/minio/internal/hash"
-	"github.com/minio/minio/internal/logger"
-	"github.com/minio/minio/internal/rest"
+	"github.com/infobsmi/b33s-go/v7/pkg/s3utils"
+	"github.com/infobsmi/b33s-go/v7/pkg/signer"
+	"github.com/infobsmi/b33s/internal/auth"
+	"github.com/infobsmi/b33s/internal/config"
+	"github.com/infobsmi/b33s/internal/crypto"
+	"github.com/infobsmi/b33s/internal/hash"
+	"github.com/infobsmi/b33s/internal/logger"
+	"github.com/infobsmi/b33s/internal/rest"
 	"github.com/minio/pkg/bucket/policy"
 )
 
@@ -718,7 +718,7 @@ func newTestStreamingRequest(method, urlStr string, dataLength, chunkSize int64,
 
 	if body == nil {
 		// this is added to avoid panic during io.ReadAll(req.Body).
-		// th stack trace can be found here  https://github.com/minio/minio/pull/2074 .
+		// th stack trace can be found here  https://github.com/infobsmi/b33s/pull/2074 .
 		// This is very similar to https://github.com/golang/go/issues/7527.
 		req.Body = io.NopCloser(bytes.NewReader([]byte("")))
 	}

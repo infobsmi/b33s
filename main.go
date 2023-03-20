@@ -15,17 +15,17 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package main // import "github.com/minio/minio"
+package main // import "github.com/infobsmi/b33s"
 
 import (
 	"os"
 
 	// MUST be first import.
-	_ "github.com/minio/minio/internal/init"
+	_ "github.com/infobsmi/b33s/internal/init"
 
-	minio "github.com/minio/minio/cmd"
+	b33s "github.com/infobsmi/b33s/cmd"
 )
 
 func main() {
-	minio.Main(os.Args)
+	b33s.Main(os.Args)
 }

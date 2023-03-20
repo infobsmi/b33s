@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -29,9 +29,9 @@ import (
 	"time"
 
 	"github.com/minio/madmin-go/v2"
-	"github.com/minio/minio/internal/handlers"
-	xhttp "github.com/minio/minio/internal/http"
-	"github.com/minio/minio/internal/mcontext"
+	"github.com/infobsmi/b33s/internal/handlers"
+	xhttp "github.com/infobsmi/b33s/internal/http"
+	"github.com/infobsmi/b33s/internal/mcontext"
 )
 
 var ldapPwdRegex = regexp.MustCompile("(^.*?)LDAPPassword=([^&]*?)(&(.*?))?$")
@@ -47,7 +47,7 @@ func redactLDAPPwd(s string) string {
 
 // getOpName sanitizes the operation name for mc
 func getOpName(name string) (op string) {
-	op = strings.TrimPrefix(name, "github.com/minio/minio/cmd.")
+	op = strings.TrimPrefix(name, "github.com/infobsmi/b33s/cmd.")
 	op = strings.TrimSuffix(op, "Handler-fm")
 	op = strings.Replace(op, "objectAPIHandlers", "s3", 1)
 	op = strings.Replace(op, "adminAPIHandlers", "admin", 1)

@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -34,7 +34,7 @@ import (
 	"golang.org/x/crypto/chacha20poly1305"
 
 	"github.com/minio/kes"
-	"github.com/minio/minio/internal/hash/sha256"
+	"github.com/infobsmi/b33s/internal/hash/sha256"
 )
 
 // Parse parses s as single-key KMS. The given string

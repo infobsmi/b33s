@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -28,16 +28,16 @@ import (
 	"time"
 
 	"github.com/dustin/go-humanize"
-	"github.com/minio/minio-go/v7/pkg/set"
+	"github.com/infobsmi/b33s-go/v7/pkg/set"
 	xnet "github.com/minio/pkg/net"
 
-	"github.com/minio/minio/internal/amztime"
-	"github.com/minio/minio/internal/config/dns"
-	"github.com/minio/minio/internal/crypto"
-	xhttp "github.com/minio/minio/internal/http"
-	"github.com/minio/minio/internal/http/stats"
-	"github.com/minio/minio/internal/logger"
-	"github.com/minio/minio/internal/mcontext"
+	"github.com/infobsmi/b33s/internal/amztime"
+	"github.com/infobsmi/b33s/internal/config/dns"
+	"github.com/infobsmi/b33s/internal/crypto"
+	xhttp "github.com/infobsmi/b33s/internal/http"
+	"github.com/infobsmi/b33s/internal/http/stats"
+	"github.com/infobsmi/b33s/internal/logger"
+	"github.com/infobsmi/b33s/internal/mcontext"
 )
 
 const (

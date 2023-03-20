@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -31,19 +31,19 @@ import (
 	"google.golang.org/api/googleapi"
 
 	"github.com/minio/madmin-go/v2"
-	"github.com/minio/minio-go/v7"
-	"github.com/minio/minio-go/v7/pkg/tags"
-	"github.com/minio/minio/internal/auth"
-	"github.com/minio/minio/internal/bucket/lifecycle"
-	"github.com/minio/minio/internal/bucket/replication"
-	"github.com/minio/minio/internal/config/dns"
-	"github.com/minio/minio/internal/crypto"
-	"github.com/minio/minio/internal/logger"
+	"github.com/infobsmi/b33s-go/v7"
+	"github.com/infobsmi/b33s-go/v7/pkg/tags"
+	"github.com/infobsmi/b33s/internal/auth"
+	"github.com/infobsmi/b33s/internal/bucket/lifecycle"
+	"github.com/infobsmi/b33s/internal/bucket/replication"
+	"github.com/infobsmi/b33s/internal/config/dns"
+	"github.com/infobsmi/b33s/internal/crypto"
+	"github.com/infobsmi/b33s/internal/logger"
 
-	objectlock "github.com/minio/minio/internal/bucket/object/lock"
-	"github.com/minio/minio/internal/bucket/versioning"
-	"github.com/minio/minio/internal/event"
-	"github.com/minio/minio/internal/hash"
+	objectlock "github.com/infobsmi/b33s/internal/bucket/object/lock"
+	"github.com/infobsmi/b33s/internal/bucket/versioning"
+	"github.com/infobsmi/b33s/internal/event"
+	"github.com/infobsmi/b33s/internal/hash"
 	"github.com/minio/pkg/bucket/policy"
 )
 
@@ -256,7 +256,7 @@ const (
 	ErrInvalidStorageClass
 	ErrBackendDown
 	// Add new extended error codes here.
-	// Please open a https://github.com/minio/minio/issues before adding
+	// Please open a https://github.com/infobsmi/b33s/issues before adding
 	// new error codes here.
 
 	ErrMalformedJSON

@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -25,7 +25,7 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/minio/minio-go/v7/pkg/set"
+	"github.com/infobsmi/b33s-go/v7/pkg/set"
 )
 
 // ValidateFilterRuleValue - checks if given value is filter rule value or not.

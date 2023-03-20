@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -28,9 +28,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/minio/minio/internal/dsync"
-	"github.com/minio/minio/internal/logger"
-	"github.com/minio/minio/internal/lsync"
+	"github.com/infobsmi/b33s/internal/dsync"
+	"github.com/infobsmi/b33s/internal/logger"
+	"github.com/infobsmi/b33s/internal/lsync"
 )
 
 // local lock servers
@@ -323,7 +323,7 @@ func getSource(n int) string {
 	if ok {
 		filename = pathutil.Base(filename)
 		funcName = strings.TrimPrefix(runtime.FuncForPC(pc).Name(),
-			"github.com/minio/minio/cmd.")
+			"github.com/infobsmi/b33s/cmd.")
 	} else {
 		filename = "<unknown>"
 		lineNum = 0

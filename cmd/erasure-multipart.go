@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -32,12 +32,12 @@ import (
 	"time"
 
 	"github.com/klauspost/readahead"
-	"github.com/minio/minio-go/v7/pkg/set"
-	"github.com/minio/minio/internal/crypto"
-	"github.com/minio/minio/internal/hash"
-	xhttp "github.com/minio/minio/internal/http"
-	"github.com/minio/minio/internal/logger"
-	"github.com/minio/minio/internal/sync/errgroup"
+	"github.com/infobsmi/b33s-go/v7/pkg/set"
+	"github.com/infobsmi/b33s/internal/crypto"
+	"github.com/infobsmi/b33s/internal/hash"
+	xhttp "github.com/infobsmi/b33s/internal/http"
+	"github.com/infobsmi/b33s/internal/logger"
+	"github.com/infobsmi/b33s/internal/sync/errgroup"
 	"github.com/minio/pkg/mimedb"
 )
 

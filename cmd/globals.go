@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -28,32 +28,32 @@ import (
 
 	"github.com/minio/console/restapi"
 	"github.com/minio/madmin-go/v2"
-	"github.com/minio/minio-go/v7"
-	"github.com/minio/minio-go/v7/pkg/set"
-	"github.com/minio/minio/internal/bucket/bandwidth"
-	"github.com/minio/minio/internal/config"
-	"github.com/minio/minio/internal/handlers"
-	"github.com/minio/minio/internal/kms"
+	"github.com/infobsmi/b33s-go/v7"
+	"github.com/infobsmi/b33s-go/v7/pkg/set"
+	"github.com/infobsmi/b33s/internal/bucket/bandwidth"
+	"github.com/infobsmi/b33s/internal/config"
+	"github.com/infobsmi/b33s/internal/handlers"
+	"github.com/infobsmi/b33s/internal/kms"
 	"github.com/rs/dnscache"
 
 	"github.com/dustin/go-humanize"
-	"github.com/minio/minio/internal/auth"
-	"github.com/minio/minio/internal/config/cache"
-	"github.com/minio/minio/internal/config/callhome"
-	"github.com/minio/minio/internal/config/compress"
-	"github.com/minio/minio/internal/config/dns"
-	xldap "github.com/minio/minio/internal/config/identity/ldap"
-	"github.com/minio/minio/internal/config/identity/openid"
-	idplugin "github.com/minio/minio/internal/config/identity/plugin"
-	xtls "github.com/minio/minio/internal/config/identity/tls"
-	polplugin "github.com/minio/minio/internal/config/policy/plugin"
-	"github.com/minio/minio/internal/config/storageclass"
-	"github.com/minio/minio/internal/config/subnet"
-	xhttp "github.com/minio/minio/internal/http"
+	"github.com/infobsmi/b33s/internal/auth"
+	"github.com/infobsmi/b33s/internal/config/cache"
+	"github.com/infobsmi/b33s/internal/config/callhome"
+	"github.com/infobsmi/b33s/internal/config/compress"
+	"github.com/infobsmi/b33s/internal/config/dns"
+	xldap "github.com/infobsmi/b33s/internal/config/identity/ldap"
+	"github.com/infobsmi/b33s/internal/config/identity/openid"
+	idplugin "github.com/infobsmi/b33s/internal/config/identity/plugin"
+	xtls "github.com/infobsmi/b33s/internal/config/identity/tls"
+	polplugin "github.com/infobsmi/b33s/internal/config/policy/plugin"
+	"github.com/infobsmi/b33s/internal/config/storageclass"
+	"github.com/infobsmi/b33s/internal/config/subnet"
+	xhttp "github.com/infobsmi/b33s/internal/http"
 	etcd "go.etcd.io/etcd/client/v3"
 
-	"github.com/minio/minio/internal/event"
-	"github.com/minio/minio/internal/pubsub"
+	"github.com/infobsmi/b33s/internal/event"
+	"github.com/infobsmi/b33s/internal/pubsub"
 	"github.com/minio/pkg/certs"
 	xnet "github.com/minio/pkg/net"
 )

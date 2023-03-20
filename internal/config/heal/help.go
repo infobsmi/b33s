@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -17,7 +17,7 @@
 
 package heal
 
-import "github.com/minio/minio/internal/config"
+import "github.com/infobsmi/b33s/internal/config"
 
 // Help template for caching feature.
 var (

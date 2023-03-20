@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -22,8 +22,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/minio/minio/internal/handlers"
-	xhttp "github.com/minio/minio/internal/http"
+	"github.com/infobsmi/b33s/internal/handlers"
+	xhttp "github.com/infobsmi/b33s/internal/http"
 )
 
 // Version - represents the current version of audit log structure.

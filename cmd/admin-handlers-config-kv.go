@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -28,15 +28,15 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/minio/madmin-go/v2"
-	"github.com/minio/minio/internal/config"
-	"github.com/minio/minio/internal/config/cache"
-	"github.com/minio/minio/internal/config/etcd"
-	xldap "github.com/minio/minio/internal/config/identity/ldap"
-	"github.com/minio/minio/internal/config/identity/openid"
-	idplugin "github.com/minio/minio/internal/config/identity/plugin"
-	polplugin "github.com/minio/minio/internal/config/policy/plugin"
-	"github.com/minio/minio/internal/config/storageclass"
-	"github.com/minio/minio/internal/logger"
+	"github.com/infobsmi/b33s/internal/config"
+	"github.com/infobsmi/b33s/internal/config/cache"
+	"github.com/infobsmi/b33s/internal/config/etcd"
+	xldap "github.com/infobsmi/b33s/internal/config/identity/ldap"
+	"github.com/infobsmi/b33s/internal/config/identity/openid"
+	idplugin "github.com/infobsmi/b33s/internal/config/identity/plugin"
+	polplugin "github.com/infobsmi/b33s/internal/config/policy/plugin"
+	"github.com/infobsmi/b33s/internal/config/storageclass"
+	"github.com/infobsmi/b33s/internal/logger"
 	iampolicy "github.com/minio/pkg/iam/policy"
 )
 

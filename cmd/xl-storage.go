@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -40,11 +40,11 @@ import (
 	jsoniter "github.com/json-iterator/go"
 	"github.com/klauspost/filepathx"
 	"github.com/minio/madmin-go/v2"
-	"github.com/minio/minio/internal/bucket/lifecycle"
-	"github.com/minio/minio/internal/color"
-	"github.com/minio/minio/internal/disk"
-	xioutil "github.com/minio/minio/internal/ioutil"
-	"github.com/minio/minio/internal/logger"
+	"github.com/infobsmi/b33s/internal/bucket/lifecycle"
+	"github.com/infobsmi/b33s/internal/color"
+	"github.com/infobsmi/b33s/internal/disk"
+	xioutil "github.com/infobsmi/b33s/internal/ioutil"
+	"github.com/infobsmi/b33s/internal/logger"
 	"github.com/minio/pkg/console"
 	"github.com/zeebo/xxh3"
 )

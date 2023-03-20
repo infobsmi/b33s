@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -24,9 +24,9 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/minio/minio/internal/fips"
-	"github.com/minio/minio/internal/ioutil"
-	"github.com/minio/minio/internal/logger"
+	"github.com/infobsmi/b33s/internal/fips"
+	"github.com/infobsmi/b33s/internal/ioutil"
+	"github.com/infobsmi/b33s/internal/logger"
 	"github.com/minio/sio"
 )
 
@@ -38,7 +38,7 @@ const (
 	// InsecureSealAlgorithm is the legacy encryption/sealing algorithm used
 	// to derive & seal the key-encryption-key and to en/decrypt the object data.
 	// This algorithm should not be used for new objects because its key derivation
-	// is not optimal. See: https://github.com/minio/minio/pull/6121
+	// is not optimal. See: https://github.com/infobsmi/b33s/pull/6121
 	InsecureSealAlgorithm = "DARE-SHA256"
 )
 

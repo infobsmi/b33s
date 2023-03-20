@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -34,13 +34,13 @@ import (
 	"time"
 
 	"github.com/minio/madmin-go/v2"
-	"github.com/minio/minio-go/v7"
-	"github.com/minio/minio-go/v7/pkg/credentials"
-	cr "github.com/minio/minio-go/v7/pkg/credentials"
-	"github.com/minio/minio-go/v7/pkg/s3utils"
-	"github.com/minio/minio-go/v7/pkg/set"
-	"github.com/minio/minio-go/v7/pkg/signer"
-	"github.com/minio/minio/internal/auth"
+	"github.com/infobsmi/b33s-go/v7"
+	"github.com/infobsmi/b33s-go/v7/pkg/credentials"
+	cr "github.com/infobsmi/b33s-go/v7/pkg/credentials"
+	"github.com/infobsmi/b33s-go/v7/pkg/s3utils"
+	"github.com/infobsmi/b33s-go/v7/pkg/set"
+	"github.com/infobsmi/b33s-go/v7/pkg/signer"
+	"github.com/infobsmi/b33s/internal/auth"
 )
 
 const (

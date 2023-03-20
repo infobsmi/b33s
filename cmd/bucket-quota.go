@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -25,7 +25,7 @@ import (
 	"time"
 
 	"github.com/minio/madmin-go/v2"
-	"github.com/minio/minio/internal/logger"
+	"github.com/infobsmi/b33s/internal/logger"
 )
 
 // BucketQuotaSys - map of bucket and quota configuration.

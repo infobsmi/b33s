@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -26,11 +26,11 @@ import (
 	"io"
 
 	"github.com/minio/highwayhash"
-	"github.com/minio/minio/internal/hash/sha256"
+	"github.com/infobsmi/b33s/internal/hash/sha256"
 	"golang.org/x/crypto/blake2b"
 
-	xioutil "github.com/minio/minio/internal/ioutil"
-	"github.com/minio/minio/internal/logger"
+	xioutil "github.com/infobsmi/b33s/internal/ioutil"
+	"github.com/infobsmi/b33s/internal/logger"
 )
 
 // magic HH-256 key as HH-256 hash of the first 100 decimals of π as utf-8 string with a zero key.

@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -20,17 +20,17 @@ package cmd
 import (
 	"sync"
 
-	"github.com/minio/minio/internal/auth"
-	"github.com/minio/minio/internal/config"
-	"github.com/minio/minio/internal/config/cache"
-	"github.com/minio/minio/internal/config/compress"
-	xldap "github.com/minio/minio/internal/config/identity/ldap"
-	"github.com/minio/minio/internal/config/identity/openid"
-	"github.com/minio/minio/internal/config/notify"
-	"github.com/minio/minio/internal/config/policy/opa"
-	"github.com/minio/minio/internal/config/storageclass"
-	"github.com/minio/minio/internal/event/target"
-	"github.com/minio/minio/internal/logger"
+	"github.com/infobsmi/b33s/internal/auth"
+	"github.com/infobsmi/b33s/internal/config"
+	"github.com/infobsmi/b33s/internal/config/cache"
+	"github.com/infobsmi/b33s/internal/config/compress"
+	xldap "github.com/infobsmi/b33s/internal/config/identity/ldap"
+	"github.com/infobsmi/b33s/internal/config/identity/openid"
+	"github.com/infobsmi/b33s/internal/config/notify"
+	"github.com/infobsmi/b33s/internal/config/policy/opa"
+	"github.com/infobsmi/b33s/internal/config/storageclass"
+	"github.com/infobsmi/b33s/internal/event/target"
+	"github.com/infobsmi/b33s/internal/logger"
 	"github.com/minio/pkg/quick"
 )
 

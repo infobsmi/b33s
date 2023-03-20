@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -33,11 +33,11 @@ import (
 	"github.com/klauspost/compress/s2"
 	"github.com/klauspost/compress/zstd"
 	gzip "github.com/klauspost/pgzip"
-	"github.com/minio/minio/internal/s3select/csv"
-	"github.com/minio/minio/internal/s3select/json"
-	"github.com/minio/minio/internal/s3select/parquet"
-	"github.com/minio/minio/internal/s3select/simdj"
-	"github.com/minio/minio/internal/s3select/sql"
+	"github.com/infobsmi/b33s/internal/s3select/csv"
+	"github.com/infobsmi/b33s/internal/s3select/json"
+	"github.com/infobsmi/b33s/internal/s3select/parquet"
+	"github.com/infobsmi/b33s/internal/s3select/simdj"
+	"github.com/infobsmi/b33s/internal/s3select/sql"
 	"github.com/minio/simdjson-go"
 	"github.com/pierrec/lz4"
 )

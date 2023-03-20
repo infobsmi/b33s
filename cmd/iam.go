@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -34,19 +34,19 @@ import (
 
 	humanize "github.com/dustin/go-humanize"
 	"github.com/minio/madmin-go/v2"
-	"github.com/minio/minio-go/v7/pkg/set"
-	"github.com/minio/minio/internal/arn"
-	"github.com/minio/minio/internal/auth"
-	"github.com/minio/minio/internal/color"
-	"github.com/minio/minio/internal/config"
-	xldap "github.com/minio/minio/internal/config/identity/ldap"
-	"github.com/minio/minio/internal/config/identity/openid"
-	idplugin "github.com/minio/minio/internal/config/identity/plugin"
-	"github.com/minio/minio/internal/config/policy/opa"
-	polplugin "github.com/minio/minio/internal/config/policy/plugin"
-	xhttp "github.com/minio/minio/internal/http"
-	"github.com/minio/minio/internal/jwt"
-	"github.com/minio/minio/internal/logger"
+	"github.com/infobsmi/b33s-go/v7/pkg/set"
+	"github.com/infobsmi/b33s/internal/arn"
+	"github.com/infobsmi/b33s/internal/auth"
+	"github.com/infobsmi/b33s/internal/color"
+	"github.com/infobsmi/b33s/internal/config"
+	xldap "github.com/infobsmi/b33s/internal/config/identity/ldap"
+	"github.com/infobsmi/b33s/internal/config/identity/openid"
+	idplugin "github.com/infobsmi/b33s/internal/config/identity/plugin"
+	"github.com/infobsmi/b33s/internal/config/policy/opa"
+	polplugin "github.com/infobsmi/b33s/internal/config/policy/plugin"
+	xhttp "github.com/infobsmi/b33s/internal/http"
+	"github.com/infobsmi/b33s/internal/jwt"
+	"github.com/infobsmi/b33s/internal/logger"
 	iampolicy "github.com/minio/pkg/iam/policy"
 	etcd "go.etcd.io/etcd/client/v3"
 )

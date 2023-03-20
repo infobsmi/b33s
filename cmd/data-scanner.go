@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -36,13 +36,13 @@ import (
 	"github.com/bits-and-blooms/bloom/v3"
 	"github.com/dustin/go-humanize"
 	"github.com/minio/madmin-go/v2"
-	"github.com/minio/minio/internal/bucket/lifecycle"
-	"github.com/minio/minio/internal/bucket/object/lock"
-	"github.com/minio/minio/internal/bucket/replication"
-	"github.com/minio/minio/internal/color"
-	"github.com/minio/minio/internal/config/heal"
-	"github.com/minio/minio/internal/event"
-	"github.com/minio/minio/internal/logger"
+	"github.com/infobsmi/b33s/internal/bucket/lifecycle"
+	"github.com/infobsmi/b33s/internal/bucket/object/lock"
+	"github.com/infobsmi/b33s/internal/bucket/replication"
+	"github.com/infobsmi/b33s/internal/color"
+	"github.com/infobsmi/b33s/internal/config/heal"
+	"github.com/infobsmi/b33s/internal/event"
+	"github.com/infobsmi/b33s/internal/logger"
 	"github.com/minio/pkg/console"
 	uatomic "go.uber.org/atomic"
 )

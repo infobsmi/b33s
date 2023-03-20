@@ -1,6 +1,6 @@
 // Copyright (c) 2015-2021 MinIO, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -22,8 +22,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/minio/minio/internal/bucket/lifecycle"
-	xhttp "github.com/minio/minio/internal/http"
+	"github.com/infobsmi/b33s/internal/bucket/lifecycle"
+	xhttp "github.com/infobsmi/b33s/internal/http"
 )
 
 func Test_hashDeterministicString(t *testing.T) {
