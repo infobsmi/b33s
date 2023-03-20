@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -119,7 +119,7 @@ func (h *Target) Init() error {
 
 	req.Header.Set(xhttp.ContentType, "application/json")
 
-	// Set user-agent to indicate MinIO release
+	// Set user-agent to indicate B33S release
 	// version to the configured log endpoint
 	req.Header.Set("User-Agent", h.config.UserAgent)
 
@@ -178,10 +178,10 @@ func (h *Target) logEntry(entry interface{}) {
 		return
 	}
 	req.Header.Set(xhttp.ContentType, "application/json")
-	req.Header.Set(xhttp.MinIOVersion, xhttp.GlobalMinIOVersion)
+	req.Header.Set(xhttp.B33SVersion, xhttp.GlobalB33SVersion)
 	req.Header.Set(xhttp.MinioDeploymentID, xhttp.GlobalDeploymentID)
 
-	// Set user-agent to indicate MinIO release
+	// Set user-agent to indicate B33S release
 	// version to the configured log endpoint
 	req.Header.Set("User-Agent", h.config.UserAgent)
 

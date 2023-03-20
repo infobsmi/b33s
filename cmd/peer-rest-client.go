@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -223,7 +223,7 @@ func (client *peerRESTClient) GetMetrics(ctx context.Context, t madmin.MetricTyp
 	return info, err
 }
 
-// GetProcInfo - fetch MinIO process information for a remote node.
+// GetProcInfo - fetch B33S process information for a remote node.
 func (client *peerRESTClient) GetProcInfo(ctx context.Context) (info madmin.ProcInfo, err error) {
 	respBody, err := client.callWithContext(ctx, peerRESTMethodProcInfo, nil, nil, -1)
 	if err != nil {

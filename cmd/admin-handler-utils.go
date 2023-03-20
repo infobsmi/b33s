@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -23,11 +23,11 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/minio/kes"
-	"github.com/minio/madmin-go/v2"
+	"github.com/b33s/kes"
+	"github.com/b33s/madmin-go/v2"
 	"github.com/infobsmi/b33s/internal/auth"
 	"github.com/infobsmi/b33s/internal/config"
-	iampolicy "github.com/minio/pkg/iam/policy"
+	iampolicy "github.com/b33s/pkg/iam/policy"
 )
 
 // validateAdminReq will validate request against and return whether it is allowed.

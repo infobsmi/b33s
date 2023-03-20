@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -46,7 +46,7 @@ const (
 	archiveInfoMetadataKey = ReservedMetadataPrefixLower + "archive-info" // "x-minio-internal-archive-info"
 
 	// Peek into a zip archive
-	xMinIOExtract = "x-minio-extract"
+	xB33SExtract = "x-minio-extract"
 )
 
 // splitZipExtensionPath splits the S3 path to the zip file and the path inside the zip:

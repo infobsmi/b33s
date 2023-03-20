@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -37,7 +37,7 @@ import (
 	"github.com/dustin/go-humanize"
 	"github.com/infobsmi/b33s-go/v7/pkg/set"
 	xhttp "github.com/infobsmi/b33s/internal/http"
-	"github.com/minio/pkg/bucket/policy"
+	"github.com/b33s/pkg/bucket/policy"
 )
 
 // API suite container common to both ErasureSD and Erasure.
@@ -188,7 +188,7 @@ func (s *TestSuiteCommon) TearDownSuite(c *check) {
 
 func (s *TestSuiteCommon) TestBucketSQSNotificationWebHook(c *check) {
 	// Sample bucket notification.
-	bucketNotificationBuf := `<NotificationConfiguration><QueueConfiguration><Event>s3:ObjectCreated:Put</Event><Filter><S3Key><FilterRule><Name>prefix</Name><Value>images/</Value></FilterRule></S3Key></Filter><Id>1</Id><Queue>arn:minio:sqs:us-east-1:444455556666:webhook</Queue></QueueConfiguration></NotificationConfiguration>`
+	bucketNotificationBuf := `<NotificationConfiguration><QueueConfiguration><Event>s3:ObjectCreated:Put</Event><Filter><S3Key><FilterRule><Name>prefix</Name><Value>images/</Value></FilterRule></S3Key></Filter><Id>1</Id><Queue>arn:b33s:sqs:us-east-1:444455556666:webhook</Queue></QueueConfiguration></NotificationConfiguration>`
 	// generate a random bucket Name.
 	bucketName := getRandomBucketName()
 	// HTTP request to create the bucket.
@@ -319,7 +319,7 @@ func (s *TestSuiteCommon) TestObjectDir(c *check) {
 
 func (s *TestSuiteCommon) TestBucketSQSNotificationAMQP(c *check) {
 	// Sample bucket notification.
-	bucketNotificationBuf := `<NotificationConfiguration><QueueConfiguration><Event>s3:ObjectCreated:Put</Event><Filter><S3Key><FilterRule><Name>prefix</Name><Value>images/</Value></FilterRule></S3Key></Filter><Id>1</Id><Queue>arn:minio:sqs:us-east-1:444455556666:amqp</Queue></QueueConfiguration></NotificationConfiguration>`
+	bucketNotificationBuf := `<NotificationConfiguration><QueueConfiguration><Event>s3:ObjectCreated:Put</Event><Filter><S3Key><FilterRule><Name>prefix</Name><Value>images/</Value></FilterRule></S3Key></Filter><Id>1</Id><Queue>arn:b33s:sqs:us-east-1:444455556666:amqp</Queue></QueueConfiguration></NotificationConfiguration>`
 	// generate a random bucket Name.
 	bucketName := getRandomBucketName()
 	// HTTP request to create the bucket.
@@ -1606,7 +1606,7 @@ func (s *TestSuiteCommon) TestListObjectsHandler(c *check) {
 			[]string{
 				"<Key>foo bar 1</Key>",
 				"<Key>foo bar 2</Key>",
-				fmt.Sprintf("<Owner><ID>%s</ID><DisplayName>minio</DisplayName></Owner>", globalMinioDefaultOwnerID),
+				fmt.Sprintf("<Owner><ID>%s</ID><DisplayName>b33s</DisplayName></Owner>", globalMinioDefaultOwnerID),
 			},
 		},
 		{
@@ -1614,7 +1614,7 @@ func (s *TestSuiteCommon) TestListObjectsHandler(c *check) {
 			[]string{
 				"<Key>foo bar 1</Key>",
 				"<Key>foo bar 2</Key>",
-				fmt.Sprintf("<Owner><ID>%s</ID><DisplayName>minio</DisplayName></Owner>", globalMinioDefaultOwnerID),
+				fmt.Sprintf("<Owner><ID>%s</ID><DisplayName>b33s</DisplayName></Owner>", globalMinioDefaultOwnerID),
 			},
 		},
 		{getListObjectsV2URL(s.endPoint, bucketName, "", "1000", "", "url"), []string{"<Key>foo+bar+1</Key>", "<Key>foo+bar+2</Key>"}},
@@ -1744,7 +1744,7 @@ func (s *TestSuiteCommon) TestListObjectsSpecialCharactersHandler(c *check) {
 				"<Key>foo bar 1</Key>",
 				"<Key>foo bar 2</Key>",
 				"<Key>foo &#x1; bar</Key>",
-				fmt.Sprintf("<Owner><ID>%s</ID><DisplayName>minio</DisplayName></Owner>", globalMinioDefaultOwnerID),
+				fmt.Sprintf("<Owner><ID>%s</ID><DisplayName>b33s</DisplayName></Owner>", globalMinioDefaultOwnerID),
 			},
 		},
 		{
@@ -1753,7 +1753,7 @@ func (s *TestSuiteCommon) TestListObjectsSpecialCharactersHandler(c *check) {
 				"<Key>foo bar 1</Key>",
 				"<Key>foo bar 2</Key>",
 				"<Key>foo &#x1; bar</Key>",
-				fmt.Sprintf("<Owner><ID>%s</ID><DisplayName>minio</DisplayName></Owner>", globalMinioDefaultOwnerID),
+				fmt.Sprintf("<Owner><ID>%s</ID><DisplayName>b33s</DisplayName></Owner>", globalMinioDefaultOwnerID),
 			},
 		},
 		{getListObjectsV2URL(s.endPoint, bucketName, "", "1000", "", "url"), []string{"<Key>foo+bar+1</Key>", "<Key>foo+bar+2</Key>", "<Key>foo+%01+bar</Key>"}},

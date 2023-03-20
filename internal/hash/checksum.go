@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2022 MinIO, Inc.
+// Copyright (c) 2015-2022 B33S, Inc.
 //
 // This file is part of B33S Object Storage stack
 //
@@ -31,8 +31,8 @@ import (
 	xhttp "github.com/infobsmi/b33s/internal/http"
 )
 
-// MinIOMultipartChecksum is as metadata on multipart uploads to indicate checksum type.
-const MinIOMultipartChecksum = "x-minio-multipart-checksum"
+// B33SMultipartChecksum is as metadata on multipart uploads to indicate checksum type.
+const B33SMultipartChecksum = "x-minio-multipart-checksum"
 
 // ChecksumType contains information about the checksum type.
 type ChecksumType uint32

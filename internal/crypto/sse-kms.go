@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -25,10 +25,10 @@ import (
 	"path"
 	"strings"
 
-	jsoniter "github.com/json-iterator/go"
 	xhttp "github.com/infobsmi/b33s/internal/http"
 	"github.com/infobsmi/b33s/internal/kms"
 	"github.com/infobsmi/b33s/internal/logger"
+	jsoniter "github.com/json-iterator/go"
 )
 
 type ssekms struct{}

@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -25,12 +25,12 @@ import (
 
 	"github.com/infobsmi/b33s-go/v7/pkg/set"
 	"github.com/infobsmi/b33s/internal/config"
-	"github.com/minio/pkg/ellipses"
-	"github.com/minio/pkg/env"
+	"github.com/b33s/pkg/ellipses"
+	"github.com/b33s/pkg/env"
 )
 
 // This file implements and supports ellipses pattern for
-// `minio server` command line arguments.
+// `b33s server` command line arguments.
 
 // Endpoint set represents parsed ellipses values, also provides
 // methods to get the sets of endpoints.

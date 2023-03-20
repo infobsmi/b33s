@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -43,8 +43,8 @@ func TestObjectAPIPutObjectSingle(t *testing.T) {
 // Tests validate correctness of PutObject.
 func testObjectAPIPutObject(obj ObjectLayer, instanceType string, t TestErrHandler) {
 	// Generating cases for which the PutObject fails.
-	bucket := "minio-bucket"
-	object := "minio-object"
+	bucket := "b33s-bucket"
+	object := "b33s-object"
 
 	// Create bucket.
 	err := obj.MakeBucketWithLocation(context.Background(), bucket, MakeBucketOptions{})
@@ -219,8 +219,8 @@ func TestObjectAPIPutObjectDiskNotFound(t *testing.T) {
 // Tests validate correctness of PutObject.
 func testObjectAPIPutObjectDiskNotFound(obj ObjectLayer, instanceType string, disks []string, t *testing.T) {
 	// Generating cases for which the PutObject fails.
-	bucket := "minio-bucket"
-	object := "minio-object"
+	bucket := "b33s-bucket"
+	object := "b33s-object"
 
 	// Create bucket.
 	err := obj.MakeBucketWithLocation(context.Background(), bucket, MakeBucketOptions{})
@@ -331,8 +331,8 @@ func TestObjectAPIPutObjectStaleFiles(t *testing.T) {
 // Tests validate correctness of PutObject.
 func testObjectAPIPutObjectStaleFiles(obj ObjectLayer, instanceType string, disks []string, t *testing.T) {
 	// Generating cases for which the PutObject fails.
-	bucket := "minio-bucket"
-	object := "minio-object"
+	bucket := "b33s-bucket"
+	object := "b33s-object"
 
 	// Create bucket.
 	err := obj.MakeBucketWithLocation(context.Background(), bucket, MakeBucketOptions{})
@@ -350,7 +350,7 @@ func testObjectAPIPutObjectStaleFiles(obj ObjectLayer, instanceType string, disk
 	}
 
 	for _, disk := range disks {
-		tmpMetaDir := path.Join(disk, minioMetaTmpBucket)
+		tmpMetaDir := path.Join(disk, b33sMetaTmpBucket)
 		files, err := os.ReadDir(tmpMetaDir)
 		if err != nil {
 			t.Fatal(err)
@@ -363,7 +363,7 @@ func testObjectAPIPutObjectStaleFiles(obj ObjectLayer, instanceType string, disk
 			found = true
 		}
 		if found {
-			t.Fatalf("%s: expected: empty, got: non-empty %#v", minioMetaTmpBucket, files)
+			t.Fatalf("%s: expected: empty, got: non-empty %#v", b33sMetaTmpBucket, files)
 		}
 	}
 }
@@ -376,8 +376,8 @@ func TestObjectAPIMultipartPutObjectStaleFiles(t *testing.T) {
 // Tests validate correctness of PutObject.
 func testObjectAPIMultipartPutObjectStaleFiles(obj ObjectLayer, instanceType string, disks []string, t *testing.T) {
 	// Generating cases for which the PutObject fails.
-	bucket := "minio-bucket"
-	object := "minio-object"
+	bucket := "b33s-bucket"
+	object := "b33s-object"
 
 	// Create bucket.
 	err := obj.MakeBucketWithLocation(context.Background(), bucket, MakeBucketOptions{})
@@ -429,7 +429,7 @@ func testObjectAPIMultipartPutObjectStaleFiles(obj ObjectLayer, instanceType str
 	}
 
 	for _, disk := range disks {
-		tmpMetaDir := path.Join(disk, minioMetaTmpBucket)
+		tmpMetaDir := path.Join(disk, b33sMetaTmpBucket)
 		files, err := os.ReadDir(tmpMetaDir)
 		if err != nil {
 			// It's OK to have non-existing tmpMetaDir.

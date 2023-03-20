@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -343,7 +343,7 @@ func registerAPIRouter(router *mux.Router) {
 		// ListenNotification
 		router.Methods(http.MethodGet).HandlerFunc(
 			collectAPIStats("listennotification", gz(httpTraceAll(api.ListenNotificationHandler)))).Queries("events", "{events:.*}")
-		// ResetBucketReplicationStatus - MinIO extension API
+		// ResetBucketReplicationStatus - B33S extension API
 		router.Methods(http.MethodGet).HandlerFunc(
 			collectAPIStats("resetbucketreplicationstatus", maxClients(gz(httpTraceAll(api.ResetBucketReplicationStatusHandler))))).Queries("replication-reset-status", "")
 
@@ -420,7 +420,7 @@ func registerAPIRouter(router *mux.Router) {
 		// PutBucketNotification
 		router.Methods(http.MethodPut).HandlerFunc(
 			collectAPIStats("putbucketnotification", maxClients(gz(httpTraceAll(api.PutBucketNotificationHandler))))).Queries("notification", "")
-		// ResetBucketReplicationStart - MinIO extension API
+		// ResetBucketReplicationStart - B33S extension API
 		router.Methods(http.MethodPut).HandlerFunc(
 			collectAPIStats("resetbucketreplicationstart", maxClients(gz(httpTraceAll(api.ResetBucketReplicationStartHandler))))).Queries("replication-reset", "")
 
@@ -452,7 +452,7 @@ func registerAPIRouter(router *mux.Router) {
 		router.Methods(http.MethodDelete).HandlerFunc(
 			collectAPIStats("deletebucket", maxClients(gz(httpTraceAll(api.DeleteBucketHandler)))))
 
-		// MinIO extension API for replication.
+		// B33S extension API for replication.
 		//
 		// GetBucketReplicationMetrics
 		router.Methods(http.MethodGet).HandlerFunc(

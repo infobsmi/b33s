@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -31,7 +31,7 @@ import (
 
 // Validate all the ListObjects query arguments, returns an APIErrorCode
 // if one of the args do not meet the required conditions.
-// Special conditions required by MinIO server are as below
+// Special conditions required by B33S server are as below
 //   - delimiter if set should be equal to '/', otherwise the request is rejected.
 //   - marker if set should have a common prefix with 'prefix' param, otherwise
 //     the request is rejected.
@@ -125,7 +125,7 @@ func (api objectAPIHandlers) ListObjectVersionsHandler(w http.ResponseWriter, r 
 // criteria to return a subset of the objects in a bucket.
 //
 // NOTE: It is recommended that this API to be used for application development.
-// MinIO continues to support ListObjectsV1 and V2 for supporting legacy tools.
+// B33S continues to support ListObjectsV1 and V2 for supporting legacy tools.
 func (api objectAPIHandlers) ListObjectsV2MHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := newContext(r, w, "ListObjectsV2M")
 
@@ -195,7 +195,7 @@ func (api objectAPIHandlers) ListObjectsV2MHandler(w http.ResponseWriter, r *htt
 // criteria to return a subset of the objects in a bucket.
 //
 // NOTE: It is recommended that this API to be used for application development.
-// MinIO continues to support ListObjectsV1 for supporting legacy tools.
+// B33S continues to support ListObjectsV1 for supporting legacy tools.
 func (api objectAPIHandlers) ListObjectsV2Handler(w http.ResponseWriter, r *http.Request) {
 	ctx := newContext(r, w, "ListObjectsV2")
 
@@ -236,7 +236,7 @@ func (api objectAPIHandlers) ListObjectsV2Handler(w http.ResponseWriter, r *http
 		err               error
 	)
 
-	if r.Header.Get(xMinIOExtract) == "true" && strings.Contains(prefix, archivePattern) {
+	if r.Header.Get(xB33SExtract) == "true" && strings.Contains(prefix, archivePattern) {
 		// Inititate a list objects operation inside a zip file based in the input params
 		listObjectsV2Info, err = listObjectsV2InArchive(ctx, objectAPI, bucket, prefix, token, delimiter, maxKeys, fetchOwner, startAfter)
 	} else {

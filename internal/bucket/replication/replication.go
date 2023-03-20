@@ -1,6 +1,6 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33SObject Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -40,7 +40,7 @@ var (
 type Config struct {
 	XMLName xml.Name `xml:"ReplicationConfiguration" json:"-"`
 	Rules   []Rule   `xml:"Rule" json:"Rules"`
-	// RoleArn is being reused for MinIO replication ARN
+	// RoleArn is being reused for B33S replication ARN
 	RoleArn string `xml:"Role" json:"Role"`
 }
 
@@ -236,7 +236,7 @@ func (c Config) Replicate(obj ObjectOpts) bool {
 		if obj.OpType == DeleteReplicationType {
 			switch {
 			case obj.VersionID != "":
-				// check MinIO extension for versioned deletes
+				// check B33S extension for versioned deletes
 				return rule.DeleteReplication.Status == Enabled
 			default:
 				return rule.DeleteMarkerReplication.Status == Enabled

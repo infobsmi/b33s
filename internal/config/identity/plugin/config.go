@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2022 MinIO, Inc.
+// Copyright (c) 2015-2022 B33S, Inc.
 //
 // This file is part of B33S Object Storage stack
 //

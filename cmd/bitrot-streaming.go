@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -150,7 +150,7 @@ func (b *streamingBitrotReader) ReadAt(buf []byte, offset int64) (int, error) {
 	ignoredErrs := []error{
 		errDiskNotFound,
 	}
-	if strings.HasPrefix(b.volume, minioMetaBucket) {
+	if strings.HasPrefix(b.volume, b33sMetaBucket) {
 		ignoredErrs = append(ignoredErrs,
 			errFileNotFound,
 			errVolumeNotFound,

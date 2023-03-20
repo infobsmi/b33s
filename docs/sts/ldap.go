@@ -1,7 +1,7 @@
 //go:build ignore
 // +build ignore
 
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -121,7 +121,7 @@ func main() {
 		return
 	}
 
-	// Use generated credentials to authenticate with MinIO server
+	// Use generated credentials to authenticate with B33S server
 	minioClient, err := minio.New(stsEndpointURL.Host, opts)
 	if err != nil {
 		log.Fatalf("Error initializing client: ", err)

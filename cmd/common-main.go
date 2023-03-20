@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -186,7 +186,7 @@ func minioConfigToConsoleFeatures() {
 		}
 	}
 	// pass the console subpath configuration
-	if value := env.Get(config.EnvMinIOBrowserRedirectURL, ""); value != "" {
+	if value := env.Get(config.EnvB33SBrowserRedirectURL, ""); value != "" {
 		subPath := path.Clean(pathJoin(strings.TrimSpace(globalBrowserRedirectURL.Path), SlashSeparator))
 		if subPath != SlashSeparator {
 			os.Setenv("CONSOLE_SUBPATH", subPath)
@@ -273,7 +273,7 @@ func initConsoleServer() (*restapi.Server, error) {
 
 	// Pass in console application config. This needs to happen before the
 	// ConfigureAPI() call.
-	restapi.GlobalMinIOConfig = restapi.MinIOConfig{
+	restapi.GlobalB33SConfig = restapi.B33SConfig{
 		OpenIDProviders: buildOpenIDConsoleConfig(),
 	}
 
@@ -629,7 +629,7 @@ func handleCommonEnvVars() {
 		logger.Fatal(config.ErrInvalidBrowserValue(err), "Invalid MINIO_BROWSER value in environment variable")
 	}
 	if globalBrowserEnabled {
-		if redirectURL := env.Get(config.EnvMinIOBrowserRedirectURL, ""); redirectURL != "" {
+		if redirectURL := env.Get(config.EnvB33SBrowserRedirectURL, ""); redirectURL != "" {
 			u, err := xnet.ParseHTTPURL(redirectURL)
 			if err != nil {
 				logger.Fatal(err, "Invalid MINIO_BROWSER_REDIRECT_URL value in environment variable")
@@ -645,7 +645,7 @@ func handleCommonEnvVars() {
 		}
 	}
 
-	if serverURL := env.Get(config.EnvMinIOServerURL, ""); serverURL != "" {
+	if serverURL := env.Get(config.EnvB33SServerURL, ""); serverURL != "" {
 		u, err := xnet.ParseHTTPURL(serverURL)
 		if err != nil {
 			logger.Fatal(err, "Invalid MINIO_SERVER_URL value in environment variable")
@@ -702,7 +702,7 @@ func handleCommonEnvVars() {
 				// Checking if the IP is a DNS entry.
 				addrs, err := globalDNSCache.LookupHost(GlobalContext, endpoint)
 				if err != nil {
-					logger.FatalIf(err, "Unable to initialize MinIO server with [%s] invalid entry found in MINIO_PUBLIC_IPS", endpoint)
+					logger.FatalIf(err, "Unable to initialize B33S server with [%s] invalid entry found in MINIO_PUBLIC_IPS", endpoint)
 				}
 				for _, addr := range addrs {
 					domainIPs.Add(addr)
@@ -733,14 +733,14 @@ func handleCommonEnvVars() {
 	// Check all error conditions first
 	//nolint:gocritic
 	if !env.IsSet(config.EnvRootUser) && env.IsSet(config.EnvRootPassword) {
-		logger.Fatal(config.ErrMissingEnvCredentialRootUser(nil), "Unable to start MinIO")
+		logger.Fatal(config.ErrMissingEnvCredentialRootUser(nil), "Unable to start B33S")
 	} else if env.IsSet(config.EnvRootUser) && !env.IsSet(config.EnvRootPassword) {
-		logger.Fatal(config.ErrMissingEnvCredentialRootPassword(nil), "Unable to start MinIO")
+		logger.Fatal(config.ErrMissingEnvCredentialRootPassword(nil), "Unable to start B33S")
 	} else if !env.IsSet(config.EnvRootUser) && !env.IsSet(config.EnvRootPassword) {
 		if !env.IsSet(config.EnvAccessKey) && env.IsSet(config.EnvSecretKey) {
-			logger.Fatal(config.ErrMissingEnvCredentialAccessKey(nil), "Unable to start MinIO")
+			logger.Fatal(config.ErrMissingEnvCredentialAccessKey(nil), "Unable to start B33S")
 		} else if env.IsSet(config.EnvAccessKey) && !env.IsSet(config.EnvSecretKey) {
-			logger.Fatal(config.ErrMissingEnvCredentialSecretKey(nil), "Unable to start MinIO")
+			logger.Fatal(config.ErrMissingEnvCredentialSecretKey(nil), "Unable to start B33S")
 		}
 	}
 
@@ -867,7 +867,7 @@ func handleKMSConfig() {
 
 		// We check that the default key ID exists or try to create it otherwise.
 		// This implicitly checks that we can communicate to KES. We don't treat
-		// a policy error as failure condition since MinIO may not have the permission
+		// a policy error as failure condition since B33S may not have the permission
 		// to create keys - just to generate/decrypt data encryption keys.
 		if err = KMS.CreateKey(context.Background(), defaultKeyID); err != nil && !errors.Is(err, kes.ErrKeyExists) && !errors.Is(err, kes.ErrNotAllowed) {
 			logger.Fatal(err, "Unable to initialize a connection to KES as specified by the shell environment")
@@ -890,7 +890,7 @@ func getTLSConfig() (x509Certs []*x509.Certificate, manager *certs.Manager, secu
 		return nil, nil, false, err
 	}
 
-	// MinIO has support for multiple certificates. It expects the following structure:
+	// B33S has support for multiple certificates. It expects the following structure:
 	//  certs/
 	//   │
 	//   ├─ public.crt

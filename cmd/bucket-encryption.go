@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -38,7 +38,7 @@ func (sys *BucketSSEConfigSys) Get(bucket string) (*sse.BucketSSEConfig, error) 
 	return sseCfg, err
 }
 
-// validateBucketSSEConfig parses bucket encryption configuration and validates if it is supported by MinIO.
+// validateBucketSSEConfig parses bucket encryption configuration and validates if it is supported by B33S.
 func validateBucketSSEConfig(r io.Reader) (*sse.BucketSSEConfig, error) {
 	encConfig, err := sse.ParseBucketSSEConfig(r)
 	if err != nil {

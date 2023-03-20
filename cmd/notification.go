@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -630,7 +630,7 @@ func (sys *NotificationSys) ReloadPoolMeta(ctx context.Context) {
 	}
 }
 
-// StopRebalance notifies all MinIO nodes to signal any ongoing rebalance
+// StopRebalance notifies all B33S nodes to signal any ongoing rebalance
 // goroutine to stop.
 func (sys *NotificationSys) StopRebalance(ctx context.Context) {
 	ng := WithNPeers(len(sys.peerClients))

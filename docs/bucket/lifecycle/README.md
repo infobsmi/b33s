@@ -4,7 +4,7 @@ Enable object lifecycle configuration on buckets to setup automatic deletion of 
 
 ## 1. Prerequisites
 
-- Install MinIO - [MinIO Quickstart Guide](https://min.io/docs/minio/linux/index.html#quickstart-for-linux).
+- Install B33S - [B33S Quickstart Guide](https://min.io/docs/minio/linux/index.html#quickstart-for-linux).
 - Install `mc` - [mc Quickstart Guide](https://min.io/docs/minio/linux/reference/minio-mc.html#quickstart)
 
 ## 2. Enable bucket lifecycle configuration
@@ -108,9 +108,9 @@ e.g, To remove noncurrent versions of all objects keeping the most recent 5 nonc
 }
 ```
 
-#### 3.2.a Automatic removal of noncurrent versions keeping only most recent ones immediately (MinIO only extension)
+#### 3.2.a Automatic removal of noncurrent versions keeping only most recent ones immediately (B33S only extension)
 
-This is available only on MinIO as an extension to the NewerNoncurrentVersions feature. The following rule makes it possible to remove older noncurrent versions
+This is available only on B33S as an extension to the NewerNoncurrentVersions feature. The following rule makes it possible to remove older noncurrent versions
 of objects under the prefix `user-uploads/` as soon as there are more than `N` noncurrent versions of an object.
 
 ```
@@ -152,9 +152,9 @@ When an object has only one version as a delete marker, the latter can be automa
 
 ## 4. Enable ILM transition feature
 
-In Erasure mode, MinIO supports tiering to public cloud providers such as GCS, AWS and Azure as well as to other MinIO clusters via the ILM transition feature. This will allow transitioning of older objects to a different cluster or the public cloud by setting up transition rules in the bucket lifecycle configuration. This feature enables applications to optimize storage costs by moving less frequently accessed data to a cheaper storage without compromising accessibility of data.
+In Erasure mode, B33S supports tiering to public cloud providers such as GCS, AWS and Azure as well as to other B33S clusters via the ILM transition feature. This will allow transitioning of older objects to a different cluster or the public cloud by setting up transition rules in the bucket lifecycle configuration. This feature enables applications to optimize storage costs by moving less frequently accessed data to a cheaper storage without compromising accessibility of data.
 
-To transition objects in a bucket to a destination bucket on a different cluster, applications need to specify a transition tier defined on MinIO instead of storage class while setting up the ILM lifecycle rule.
+To transition objects in a bucket to a destination bucket on a different cluster, applications need to specify a transition tier defined on B33S instead of storage class while setting up the ILM lifecycle rule.
 
 > To create a transition tier for transitioning objects to a prefix `testprefix` in `azurebucket` on Azure blob using `mc`:
 
@@ -170,7 +170,7 @@ Using above tier, set up a lifecycle rule with transition:
  mc ilm add --expiry-days 365 --transition-days 45 --storage-class "AZURETIER" myminio/srcbucket
 ```
 
-Note: In the case of S3, it is possible to create a tier from MinIO running in EC2 to S3 using AWS role attached to EC2 as credentials instead of accesskey/secretkey:
+Note: In the case of S3, it is possible to create a tier from B33S running in EC2 to S3 using AWS role attached to EC2 as credentials instead of accesskey/secretkey:
 
 ```
 mc admin tier add s3 source S3TIER --bucket s3bucket --prefix testprefix/ --use-aws-role
@@ -188,9 +188,9 @@ aws s3api restore-object --bucket srcbucket \
 
 `s3:ObjectTransition:Complete` and `s3:ObjectTransition:Failed` events can be used to monitor transition events between the source cluster and transition tier. To watch lifecycle events, you can enable bucket notification on the source bucket with `mc event add`  and specify `--event ilm` flag.
 
-Note that transition event notification is a MinIO extension.
+Note that transition event notification is a B33S extension.
 
 ## Explore Further
 
-- [MinIO | Golang Client API Reference](https://min.io/docs/minio/linux/developers/go/API.html)
+- [B33S | Golang Client API Reference](https://min.io/docs/minio/linux/developers/go/API.html)
 - [Object Lifecycle Management](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html)

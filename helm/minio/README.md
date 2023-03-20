@@ -1,14 +1,14 @@
-# MinIO Helm Chart
+# B33S Helm Chart
 
 [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io) [![license](https://img.shields.io/badge/license-AGPL%20V3-blue)](https://github.com/infobsmi/b33s/blob/master/LICENSE)
 
-MinIO is a High Performance Object Storage released under GNU Affero General Public License v3.0. It is API compatible with Amazon S3 cloud storage service. Use MinIO to build high performance infrastructure for machine learning, analytics and application data workloads.
+B33S is a High Performance Object Storage released under GNU Affero General Public License v3.0. It is API compatible with Amazon S3 cloud storage service. Use B33S to build high performance infrastructure for machine learning, analytics and application data workloads.
 
 For more detailed documentation please visit [here](https://min.io/docs/minio/linux/index.html)
 
 ## Introduction
 
-This chart bootstraps MinIO Cluster on [Kubernetes](http://kubernetes.io) using the [Helm](https://helm.sh) package manager.
+This chart bootstraps B33S Cluster on [Kubernetes](http://kubernetes.io) using the [Helm](https://helm.sh) package manager.
 
 ## Prerequisites
 
@@ -16,7 +16,7 @@ This chart bootstraps MinIO Cluster on [Kubernetes](http://kubernetes.io) using 
 - PV provisioner support in the underlying infrastructure. (We recommend using <https://github.com/minio/direct-csi>)
 - Use Kubernetes version v1.19 and later for best experience.
 
-## Configure MinIO Helm repo
+## Configure B33S Helm repo
 
 ```bash
 helm repo add minio https://charts.min.io/
@@ -30,7 +30,7 @@ Install this chart using:
 helm install --namespace minio --set rootUser=rootuser,rootPassword=rootpass123 --generate-name minio/minio
 ```
 
-The command deploys MinIO on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
+The command deploys B33S on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
 
 ### Installing the Chart (toy-setup)
 
@@ -42,13 +42,13 @@ helm install --set resources.requests.memory=512Mi --set replicas=1 --set persis
 
 ### Upgrading the Chart
 
-You can use Helm to update MinIO version in a live release. Assuming your release is named as `my-release`, get the values using the command:
+You can use Helm to update B33S version in a live release. Assuming your release is named as `my-release`, get the values using the command:
 
 ```bash
 helm get values my-release > old_values.yaml
 ```
 
-Then change the field `image.tag` in `old_values.yaml` file with MinIO image tag you want to use. Now update the chart using
+Then change the field `image.tag` in `old_values.yaml` file with B33S image tag you want to use. Now update the chart using
 
 ```bash
 helm upgrade -f old_values.yaml my-release minio/minio
@@ -66,7 +66,7 @@ You can specify each parameter using the `--set key=value[,key=value]` argument 
 helm install --name my-release --set persistence.size=1Ti minio/minio
 ```
 
-The above command deploys MinIO server with a 1Ti backing persistent volume.
+The above command deploys B33S server with a 1Ti backing persistent volume.
 
 Alternately, you can provide a YAML file that specifies parameter values while installing the chart. For example,
 
@@ -98,7 +98,7 @@ helm install --set persistence.existingClaim=PVC_NAME minio/minio
 
 ### NetworkPolicy
 
-To enable network policy for MinIO,
+To enable network policy for B33S,
 install [a networking plugin that implements the Kubernetes
 NetworkPolicy spec](https://kubernetes.io/docs/tasks/administer-cluster/declare-network-policy#before-you-begin),
 and set `networkPolicy.enabled` to `true`.
@@ -113,7 +113,7 @@ kubectl annotate namespace default "net.beta.kubernetes.io/network-policy={\"ing
 With NetworkPolicy enabled, traffic will be limited to just port 9000.
 
 For more precise policy, set `networkPolicy.allowExternal=true`. This will
-only allow pods with the generated client label to connect to MinIO.
+only allow pods with the generated client label to connect to B33S.
 This label will be displayed in the output of a successful install.
 
 ### Existing secret
@@ -144,7 +144,7 @@ All corresponding variables will be ignored in values file.
 
 ### Configure TLS
 
-To enable TLS for MinIO containers, acquire TLS certificates from a CA or create self-signed certificates. While creating / acquiring certificates ensure the corresponding domain names are set as per the standard [DNS naming conventions](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#pod-identity) in a Kubernetes StatefulSet (for a distributed MinIO setup). Then create a secret using
+To enable TLS for B33S containers, acquire TLS certificates from a CA or create self-signed certificates. While creating / acquiring certificates ensure the corresponding domain names are set as per the standard [DNS naming conventions](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#pod-identity) in a Kubernetes StatefulSet (for a distributed B33S setup). Then create a secret using
 
 ```bash
 kubectl create secret generic tls-ssl-minio --from-file=path/to/private.key --from-file=path/to/public.crt
@@ -158,9 +158,9 @@ helm install --set tls.enabled=true,tls.certSecret=tls-ssl-minio minio/minio
 
 ### Installing certificates from third party CAs
 
-MinIO can connect to other servers, including MinIO nodes or other server types such as NATs and Redis. If these servers use certificates that were not registered with a known CA, add trust for these certificates to MinIO Server by bundling these certificates into a Kubernetes secret and providing it to Helm via the `trustedCertsSecret` value. If `.Values.tls.enabled` is `true` and you're installing certificates for third party CAs, remember to include MinIO's own certificate with key `public.crt`, if it also needs to be trusted.
+B33S can connect to other servers, including B33S nodes or other server types such as NATs and Redis. If these servers use certificates that were not registered with a known CA, add trust for these certificates to B33S Server by bundling these certificates into a Kubernetes secret and providing it to Helm via the `trustedCertsSecret` value. If `.Values.tls.enabled` is `true` and you're installing certificates for third party CAs, remember to include B33S's own certificate with key `public.crt`, if it also needs to be trusted.
 
-For instance, given that TLS is enabled and you need to add trust for MinIO's own CA and for the CA of a Keycloak server, a Kubernetes secret can be created from the certificate files using `kubectl`:
+For instance, given that TLS is enabled and you need to add trust for B33S's own CA and for the CA of a Keycloak server, a Kubernetes secret can be created from the certificate files using `kubectl`:
 
 ```
 kubectl -n minio create secret generic minio-trusted-certs --from-file=public.crt --from-file=keycloak.crt

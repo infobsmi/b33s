@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -416,7 +416,7 @@ func (er erasureObjects) newMultipartUpload(ctx context.Context, bucket string, 
 	}
 
 	if opts.WantChecksum != nil && opts.WantChecksum.Type.IsSet() {
-		userDefined[hash.MinIOMultipartChecksum] = opts.WantChecksum.Type.String()
+		userDefined[hash.B33SMultipartChecksum] = opts.WantChecksum.Type.String()
 	}
 
 	modTime := opts.MTime
@@ -443,7 +443,7 @@ func (er erasureObjects) newMultipartUpload(ctx context.Context, bucket string, 
 	}
 	return &NewMultipartUploadResult{
 		UploadID:     uploadID,
-		ChecksumAlgo: userDefined[hash.MinIOMultipartChecksum],
+		ChecksumAlgo: userDefined[hash.B33SMultipartChecksum],
 	}, nil
 }
 
@@ -588,7 +588,7 @@ func (er erasureObjects) PutObjectPart(ctx context.Context, bucket, object, uplo
 	onlineDisks := er.getDisks()
 	writeQuorum := fi.WriteQuorum(er.defaultWQuorum())
 
-	if cs := fi.Metadata[hash.MinIOMultipartChecksum]; cs != "" {
+	if cs := fi.Metadata[hash.B33SMultipartChecksum]; cs != "" {
 		if r.ContentCRCType().String() != cs {
 			return pi, InvalidArgument{
 				Bucket: bucket,
@@ -836,7 +836,7 @@ func (er erasureObjects) ListObjectParts(ctx context.Context, bucket, object, up
 	result.MaxParts = maxParts
 	result.PartNumberMarker = partNumberMarker
 	result.UserDefined = cloneMSS(fi.Metadata)
-	result.ChecksumAlgorithm = fi.Metadata[hash.MinIOMultipartChecksum]
+	result.ChecksumAlgorithm = fi.Metadata[hash.B33SMultipartChecksum]
 
 	// For empty number of parts or maxParts as zero, return right here.
 	if len(partInfoFiles) == 0 || maxParts == 0 {
@@ -951,7 +951,7 @@ func (er erasureObjects) CompleteMultipartUpload(ctx context.Context, bucket str
 
 	// Checksum type set when upload started.
 	var checksumType hash.ChecksumType
-	if cs := fi.Metadata[hash.MinIOMultipartChecksum]; cs != "" {
+	if cs := fi.Metadata[hash.B33SMultipartChecksum]; cs != "" {
 		checksumType = hash.NewChecksumType(cs)
 		if opts.WantChecksum != nil && !opts.WantChecksum.Type.Is(checksumType) {
 			return oi, InvalidArgument{
@@ -1143,7 +1143,7 @@ func (er erasureObjects) CompleteMultipartUpload(ctx context.Context, bucket str
 			fi.Checksum = opts.EncryptFn("object-checksum", fi.Checksum)
 		}
 	}
-	delete(fi.Metadata, hash.MinIOMultipartChecksum) // Not needed in final object.
+	delete(fi.Metadata, hash.B33SMultipartChecksum) // Not needed in final object.
 
 	// Save the final object size and modtime.
 	fi.Size = objectSize

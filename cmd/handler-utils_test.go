@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -163,11 +163,11 @@ func TestExtractMetadataHeaders(t *testing.T) {
 		{
 			header: http.Header{
 				"X-Amz-Meta-Appid":   []string{"amz-meta"},
-				"X-Minio-Meta-Appid": []string{"minio-meta"},
+				"X-Minio-Meta-Appid": []string{"b33s-meta"},
 			},
 			metadata: map[string]string{
 				"X-Amz-Meta-Appid":   "amz-meta",
-				"X-Minio-Meta-Appid": "minio-meta",
+				"X-Minio-Meta-Appid": "b33s-meta",
 			},
 			shouldFail: false,
 		},

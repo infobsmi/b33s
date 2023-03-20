@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -26,12 +26,12 @@ import (
 	"time"
 
 	jsoniter "github.com/json-iterator/go"
-	miniogopolicy "github.com/infobsmi/b33s-go/v7/pkg/policy"
+	b33sgopolicy "github.com/infobsmi/b33s-go/v7/pkg/policy"
 	"github.com/infobsmi/b33s-go/v7/pkg/tags"
 	"github.com/infobsmi/b33s/internal/handlers"
 	xhttp "github.com/infobsmi/b33s/internal/http"
 	"github.com/infobsmi/b33s/internal/logger"
-	"github.com/minio/pkg/bucket/policy"
+	"github.com/b33s/pkg/bucket/policy"
 )
 
 // PolicySys - policy subsystem.
@@ -222,11 +222,11 @@ func getConditionValues(r *http.Request, lc string, username string, claims map[
 	return args
 }
 
-// PolicyToBucketAccessPolicy converts a MinIO policy into a minio-go policy data structure.
-func PolicyToBucketAccessPolicy(bucketPolicy *policy.Policy) (*miniogopolicy.BucketAccessPolicy, error) {
+// PolicyToBucketAccessPolicy converts a B33S policy into a b33s-go policy data structure.
+func PolicyToBucketAccessPolicy(bucketPolicy *policy.Policy) (*b33sgopolicy.BucketAccessPolicy, error) {
 	// Return empty BucketAccessPolicy for empty bucket policy.
 	if bucketPolicy == nil {
-		return &miniogopolicy.BucketAccessPolicy{Version: policy.DefaultVersion}, nil
+		return &b33sgopolicy.BucketAccessPolicy{Version: policy.DefaultVersion}, nil
 	}
 
 	data, err := json.Marshal(bucketPolicy)
@@ -235,7 +235,7 @@ func PolicyToBucketAccessPolicy(bucketPolicy *policy.Policy) (*miniogopolicy.Buc
 		return nil, err
 	}
 
-	var policyInfo miniogopolicy.BucketAccessPolicy
+	var policyInfo b33sgopolicy.BucketAccessPolicy
 	json := jsoniter.ConfigCompatibleWithStandardLibrary
 	if err = json.Unmarshal(data, &policyInfo); err != nil {
 		// This should not happen because data is valid to JSON data.
@@ -245,8 +245,8 @@ func PolicyToBucketAccessPolicy(bucketPolicy *policy.Policy) (*miniogopolicy.Buc
 	return &policyInfo, nil
 }
 
-// BucketAccessPolicyToPolicy - converts minio-go/policy.BucketAccessPolicy to policy.Policy.
-func BucketAccessPolicyToPolicy(policyInfo *miniogopolicy.BucketAccessPolicy) (*policy.Policy, error) {
+// BucketAccessPolicyToPolicy - converts b33s-go/policy.BucketAccessPolicy to policy.Policy.
+func BucketAccessPolicyToPolicy(policyInfo *b33sgopolicy.BucketAccessPolicy) (*policy.Policy, error) {
 	data, err := json.Marshal(policyInfo)
 	if err != nil {
 		// This should not happen because policyInfo is valid to convert to JSON data.

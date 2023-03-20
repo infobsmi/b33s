@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -56,7 +56,7 @@ const (
 var minioReleaseWindowsInfoURL = minioReleaseURL + "minio.exe.sha256sum"
 
 // minioVersionToReleaseTime - parses a standard official release
-// MinIO version string.
+// B33S version string.
 //
 // An official binary's version string is the release time formatted
 // with RFC3339 (in UTC) - e.g. `2017-09-29T19:16:56Z`
@@ -65,7 +65,7 @@ func minioVersionToReleaseTime(version string) (releaseTime time.Time, err error
 }
 
 // releaseTimeToReleaseTag - converts a time to a string formatted as
-// an official MinIO release tag.
+// an official B33S release tag.
 //
 // An official minio release tag looks like:
 // `RELEASE.2017-09-29T19-16-56Z`
@@ -165,14 +165,14 @@ func IsBOSH() bool {
 	return err == nil
 }
 
-// MinIO Helm chart uses DownwardAPIFile to write pod label info to /podinfo/labels
+// B33S Helm chart uses DownwardAPIFile to write pod label info to /podinfo/labels
 // More info: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#store-pod-fields
 // Check if this is Helm package installation and report helm chart version
 func getHelmVersion(helmInfoFilePath string) string {
 	// Read the file exists.
 	helmInfoFile, err := Open(helmInfoFilePath)
 	if err != nil {
-		// Log errors and return "" as MinIO can be deployed
+		// Log errors and return "" as B33S can be deployed
 		// without Helm charts as well.
 		if !osIsNotExist(err) {
 			reqInfo := (&logger.ReqInfo{}).AppendTags("helmInfoFilePath", helmInfoFilePath)
@@ -209,7 +209,7 @@ func IsPCFTile() bool {
 // DO NOT CHANGE USER AGENT STYLE.
 // The style should be
 //
-//	MinIO (<OS>; <ARCH>[; <MODE>][; dcos][; kubernetes][; docker][; source]) MinIO/<VERSION> MinIO/<RELEASE-TAG> MinIO/<COMMIT-ID> [MinIO/universe-<PACKAGE-NAME>] [MinIO/helm-<HELM-VERSION>]
+//	B33S (<OS>; <ARCH>[; <MODE>][; dcos][; kubernetes][; docker][; source]) B33S/<VERSION> B33S/<RELEASE-TAG> B33S/<COMMIT-ID> [B33S/universe-<PACKAGE-NAME>] [B33S/helm-<HELM-VERSION>]
 //
 // Any change here should be discussed by opening an issue at
 // https://github.com/infobsmi/b33s/issues.
@@ -221,7 +221,7 @@ func getUserAgent(mode string) string {
 		userAgentParts = append(userAgentParts, p, q)
 	}
 
-	uaAppend("MinIO (", runtime.GOOS)
+	uaAppend("B33S (", runtime.GOOS)
 	uaAppend("; ", runtime.GOARCH)
 	if mode != "" {
 		uaAppend("; ", mode)
@@ -242,14 +242,14 @@ func getUserAgent(mode string) string {
 		uaAppend("; ", "source")
 	}
 
-	uaAppend(") MinIO/", Version)
-	uaAppend(" MinIO/", ReleaseTag)
-	uaAppend(" MinIO/", CommitID)
+	uaAppend(") B33S/", Version)
+	uaAppend(" B33S/", ReleaseTag)
+	uaAppend(" B33S/", CommitID)
 	if IsDCOS() {
 		universePkgVersion := env.Get("MARATHON_APP_LABEL_DCOS_PACKAGE_VERSION", "")
 		// On DC/OS environment try to the get universe package version.
 		if universePkgVersion != "" {
-			uaAppend(" MinIO/universe-", universePkgVersion)
+			uaAppend(" B33S/universe-", universePkgVersion)
 		}
 	}
 
@@ -257,23 +257,23 @@ func getUserAgent(mode string) string {
 		// In Kubernetes environment, try to fetch the helm package version
 		helmChartVersion := getHelmVersion("/podinfo/labels")
 		if helmChartVersion != "" {
-			uaAppend(" MinIO/helm-", helmChartVersion)
+			uaAppend(" B33S/helm-", helmChartVersion)
 		}
 		// In Kubernetes environment, try to fetch the Operator, VSPHERE plugin version
 		opVersion := env.Get("MINIO_OPERATOR_VERSION", "")
 		if opVersion != "" {
-			uaAppend(" MinIO/operator-", opVersion)
+			uaAppend(" B33S/operator-", opVersion)
 		}
 		vsphereVersion := env.Get("MINIO_VSPHERE_PLUGIN_VERSION", "")
 		if vsphereVersion != "" {
-			uaAppend(" MinIO/vsphere-plugin-", vsphereVersion)
+			uaAppend(" B33S/vsphere-plugin-", vsphereVersion)
 		}
 	}
 
 	if IsPCFTile() {
 		pcfTileVersion := env.Get("MINIO_PCF_TILE_VERSION", "")
 		if pcfTileVersion != "" {
-			uaAppend(" MinIO/pcf-tile-", pcfTileVersion)
+			uaAppend(" B33S/pcf-tile-", pcfTileVersion)
 		}
 	}
 

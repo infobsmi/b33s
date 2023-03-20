@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2022 MinIO, Inc.
+// Copyright (c) 2015-2022 B33S, Inc.
 //
 // This file is part of B33S Object Storage stack
 //
@@ -46,15 +46,15 @@ import (
 
 	"github.com/dustin/go-humanize"
 	"github.com/gorilla/mux"
-	"github.com/klauspost/compress/zip"
-	"github.com/minio/madmin-go/v2"
-	"github.com/minio/madmin-go/v2/estream"
 	"github.com/infobsmi/b33s/internal/dsync"
 	"github.com/infobsmi/b33s/internal/handlers"
 	xhttp "github.com/infobsmi/b33s/internal/http"
 	"github.com/infobsmi/b33s/internal/kms"
 	"github.com/infobsmi/b33s/internal/logger"
 	"github.com/infobsmi/b33s/internal/logger/message/log"
+	"github.com/klauspost/compress/zip"
+	"github.com/minio/madmin-go/v2"
+	"github.com/minio/madmin-go/v2/estream"
 	iampolicy "github.com/minio/pkg/iam/policy"
 	xnet "github.com/minio/pkg/net"
 	"github.com/secure-io/sio-go"
@@ -210,7 +210,7 @@ func (a adminAPIHandlers) ServerUpdateHandler(w http.ResponseWriter, r *http.Req
 
 	writeSuccessResponseJSON(w, jsonBytes)
 
-	// Notify all other MinIO peers signal service.
+	// Notify all other B33S peers signal service.
 	for _, nerr := range globalNotificationSys.SignalService(serviceRestart) {
 		if nerr.Err != nil {
 			logger.GetReqInfo(ctx).SetTags("peerAddress", nerr.Host.String())
@@ -224,8 +224,8 @@ func (a adminAPIHandlers) ServerUpdateHandler(w http.ResponseWriter, r *http.Req
 // ServiceHandler - POST /minio/admin/v3/service?action={action}
 // ----------
 // Supports following actions:
-// - restart (restarts all the MinIO instances in a setup)
-// - stop (stops all the MinIO instances in a setup)
+// - restart (restarts all the B33S instances in a setup)
+// - stop (stops all the B33S instances in a setup)
 // - freeze (freezes all incoming S3 API calls)
 // - unfreeze (unfreezes previously frozen S3 API calls)
 func (a adminAPIHandlers) ServiceHandler(w http.ResponseWriter, r *http.Request) {
@@ -265,7 +265,7 @@ func (a adminAPIHandlers) ServiceHandler(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	// Notify all other MinIO peers signal service.
+	// Notify all other B33S peers signal service.
 	for _, nerr := range globalNotificationSys.SignalService(serviceSig) {
 		if nerr.Err != nil {
 			logger.GetReqInfo(ctx).SetTags("peerAddress", nerr.Host.String())
@@ -273,7 +273,7 @@ func (a adminAPIHandlers) ServiceHandler(w http.ResponseWriter, r *http.Request)
 		}
 	}
 
-	// Reply to the client before restarting, stopping MinIO server.
+	// Reply to the client before restarting, stopping B33S server.
 	writeSuccessResponseHeadersOnly(w)
 
 	switch serviceSig {
@@ -1730,7 +1730,7 @@ func (a adminAPIHandlers) KMSKeyStatusHandler(w http.ResponseWriter, r *http.Req
 		KeyID: keyID,
 	}
 
-	kmsContext := kms.Context{"MinIO admin API": "KMSKeyStatusHandler"} // Context for a test key operation
+	kmsContext := kms.Context{"B33S admin API": "KMSKeyStatusHandler"} // Context for a test key operation
 	// 1. Generate a new key using the KMS.
 	key, err := GlobalKMS.GenerateKey(ctx, keyID, kmsContext)
 	if err != nil {
@@ -2492,7 +2492,7 @@ func fetchKMSStatus() madmin.KMS {
 	}
 	kmsStat.Status = string(madmin.ItemOnline)
 
-	kmsContext := kms.Context{"MinIO admin API": "ServerInfoHandler"} // Context for a test key operation
+	kmsContext := kms.Context{"B33S admin API": "ServerInfoHandler"} // Context for a test key operation
 	// 1. Generate a new key using the KMS.
 	key, err := GlobalKMS.GenerateKey(context.Background(), "", kmsContext)
 	if err != nil {

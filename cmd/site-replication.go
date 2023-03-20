@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2022 MinIO, Inc.
+// Copyright (c) 2015-2022 B33S, Inc.
 //
 // This file is part of B33S Object Storage stack
 //
@@ -34,7 +34,6 @@ import (
 	"sync"
 	"time"
 
-	"github.com/minio/madmin-go/v2"
 	minioClient "github.com/infobsmi/b33s-go/v7"
 	"github.com/infobsmi/b33s-go/v7/pkg/credentials"
 	"github.com/infobsmi/b33s-go/v7/pkg/replication"
@@ -42,6 +41,7 @@ import (
 	"github.com/infobsmi/b33s/internal/auth"
 	sreplication "github.com/infobsmi/b33s/internal/bucket/replication"
 	"github.com/infobsmi/b33s/internal/logger"
+	"github.com/minio/madmin-go/v2"
 	bktpolicy "github.com/minio/pkg/bucket/policy"
 	iampolicy "github.com/minio/pkg/iam/policy"
 )
@@ -1559,7 +1559,7 @@ func (c *SiteReplicationSys) syncToAllPeers(ctx context.Context) error {
 	for _, bucketInfo := range buckets {
 		bucket := bucketInfo.Name
 
-		// MinIO does not store bucket location - so we just check if
+		// B33S does not store bucket location - so we just check if
 		// object locking is enabled.
 		lockConfig, _, err := globalBucketMetadataSys.GetObjectLockConfig(bucket)
 		if err != nil {

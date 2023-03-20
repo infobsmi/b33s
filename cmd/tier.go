@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -122,7 +122,7 @@ func (config *TierConfigMgr) Add(ctx context.Context, tier madmin.TierConfig) er
 	if err != nil {
 		return err
 	}
-	// Check if warmbackend is in use by other MinIO tenants
+	// Check if warmbackend is in use by other B33S tenants
 	inUse, err := d.InUse(ctx)
 	if err != nil {
 		return err
@@ -224,12 +224,12 @@ func (config *TierConfigMgr) Edit(ctx context.Context, tierName string, creds ma
 			return errTierMissingCredentials
 		}
 		cfg.GCS.Creds = base64.URLEncoding.EncodeToString(creds.CredsJSON)
-	case madmin.MinIO:
+	case madmin.B33S:
 		if creds.AccessKey == "" || creds.SecretKey == "" {
 			return errTierMissingCredentials
 		}
-		cfg.MinIO.AccessKey = creds.AccessKey
-		cfg.MinIO.SecretKey = creds.SecretKey
+		cfg.B33S.AccessKey = creds.AccessKey
+		cfg.B33S.SecretKey = creds.SecretKey
 	}
 
 	d, err := newWarmBackend(ctx, cfg)

@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -336,7 +336,7 @@ func (lc Lifecycle) eval(obj ObjectOpts, now time.Time) Event {
 	for _, rule := range lc.FilterRules(obj) {
 		if obj.ExpiredObjectDeleteMarker() {
 			if rule.Expiration.DeleteMarker.val {
-				// Indicates whether MinIO will remove a delete marker with no noncurrent versions.
+				// Indicates whether B33S will remove a delete marker with no noncurrent versions.
 				// Only latest marker is removed. If set to true, the delete marker will be expired;
 				// if set to false the policy takes no action. This cannot be specified with Days or
 				// Date in a Lifecycle Expiration Policy.
@@ -467,7 +467,7 @@ func (lc Lifecycle) SetPredictionHeaders(w http.ResponseWriter, obj ObjectOpts) 
 			fmt.Sprintf(`expiry-date="%s", rule-id="%s"`, event.Due.Format(http.TimeFormat), event.RuleID),
 		}
 	case TransitionAction, TransitionVersionAction:
-		w.Header()[xhttp.MinIOTransition] = []string{
+		w.Header()[xhttp.B33STransition] = []string{
 			fmt.Sprintf(`transition-date="%s", rule-id="%s"`, event.Due.Format(http.TimeFormat), event.RuleID),
 		}
 	}

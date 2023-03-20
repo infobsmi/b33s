@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -1355,7 +1355,7 @@ func (er erasureObjects) DeleteObjects(ctx context.Context, bucket string, objec
 		// VersionID is not set means delete is not specific about
 		// any version, look for if the bucket is versioned or not.
 		if objects[i].VersionID == "" {
-			// MinIO extension to bucket version configuration
+			// B33S extension to bucket version configuration
 			suspended := opts.VersionSuspended
 			versioned := opts.Versioned
 			if opts.PrefixEnabledFn != nil {

@@ -16,7 +16,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -38,7 +38,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -60,7 +60,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -82,7 +82,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -104,7 +104,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -126,7 +126,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -148,7 +148,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -170,7 +170,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -192,7 +192,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -214,7 +214,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -236,7 +236,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -258,7 +258,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -280,7 +280,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -302,7 +302,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -324,7 +324,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -346,7 +346,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -368,7 +368,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -390,7 +390,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -412,7 +412,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -434,7 +434,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -456,7 +456,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -478,7 +478,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -500,7 +500,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -522,7 +522,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -544,7 +544,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -566,7 +566,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -588,7 +588,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -610,7 +610,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -632,7 +632,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -654,7 +654,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -676,7 +676,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -698,7 +698,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -720,7 +720,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -742,7 +742,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -764,7 +764,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -786,7 +786,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -808,7 +808,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -830,7 +830,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -852,7 +852,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -874,7 +874,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -896,7 +896,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -918,7 +918,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -940,7 +940,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -962,7 +962,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -984,7 +984,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -1006,7 +1006,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -1028,7 +1028,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -1050,7 +1050,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -1072,7 +1072,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -1094,7 +1094,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -1116,7 +1116,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -1138,7 +1138,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -1160,7 +1160,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -1182,7 +1182,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -1204,7 +1204,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -1226,7 +1226,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -1248,7 +1248,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -1270,7 +1270,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -1292,7 +1292,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -1314,7 +1314,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -1336,7 +1336,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -1358,7 +1358,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -1380,7 +1380,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -1402,7 +1402,7 @@ entries:
     - cluster
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -1422,7 +1422,7 @@ entries:
     - S3
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -1442,7 +1442,7 @@ entries:
     - S3
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -1462,7 +1462,7 @@ entries:
     - S3
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -1482,7 +1482,7 @@ entries:
     - S3
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -1502,7 +1502,7 @@ entries:
     - S3
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -1522,7 +1522,7 @@ entries:
     - S3
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -1542,7 +1542,7 @@ entries:
     - S3
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s
@@ -1562,7 +1562,7 @@ entries:
     - S3
     maintainers:
     - email: dev@minio.io
-      name: MinIO, Inc
+      name: B33S, Inc
     name: minio
     sources:
     - https://github.com/infobsmi/b33s

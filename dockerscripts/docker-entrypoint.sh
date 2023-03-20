@@ -1,25 +1,25 @@
 #!/bin/sh
 #
 
-# If command starts with an option, prepend minio.
-if [ "${1}" != "minio" ]; then
+# If command starts with an option, prepend b33s.
+if [ "${1}" != "b33s" ]; then
     if [ -n "${1}" ]; then
-        set -- minio "$@"
+        set -- b33s "$@"
     fi
 fi
 
 # su-exec to requested user, if service cannot run exec will fail.
 docker_switch_user() {
-    if [ -n "${MINIO_USERNAME}" ] && [ -n "${MINIO_GROUPNAME}" ]; then
-        if [ -n "${MINIO_UID}" ] && [ -n "${MINIO_GID}" ]; then
-            groupadd -g "$MINIO_GID" "$MINIO_GROUPNAME" && \
-                useradd -u "$MINIO_UID" -g "$MINIO_GROUPNAME" "$MINIO_USERNAME"
+    if [ -n "${B33S_USERNAME}" ] && [ -n "${B33S_GROUPNAME}" ]; then
+        if [ -n "${B33S_UID}" ] && [ -n "${B33S_GID}" ]; then
+            groupadd -g "$B33S_GID" "$b33s_GROUPNAME" && \
+                useradd -u "$b33s_UID" -g "$b33s_GROUPNAME" "$b33s_USERNAME"
         else
-            groupadd "$MINIO_GROUPNAME" && \
-                useradd -g "$MINIO_GROUPNAME" "$MINIO_USERNAME"
+            groupadd "$b33s_GROUPNAME" && \
+                useradd -g "$b33s_GROUPNAME" "$b33s_USERNAME"
         fi
-        exec setpriv --reuid="${MINIO_USERNAME}" \
-             --regid="${MINIO_GROUPNAME}" --keep-groups "$@"
+        exec setpriv --reuid="${B33S_USERNAME}" \
+             --regid="${B33S_GROUPNAME}" --keep-groups "$@"
     else
         exec "$@"
     fi

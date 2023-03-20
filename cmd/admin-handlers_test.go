@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -30,7 +30,7 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
-	"github.com/minio/madmin-go/v2"
+	"github.com/b33s/madmin-go/v2"
 	"github.com/infobsmi/b33s/internal/auth"
 )
 
@@ -62,7 +62,7 @@ func prepareAdminErasureTestBed(ctx context.Context) (*adminErasureTestBed, erro
 		return nil, xlErr
 	}
 
-	// Initialize minio server config.
+	// Initialize b33s server config.
 	if err := newTestConfig(globalMinioDefaultRegion, objLayer); err != nil {
 		cancel()
 		return nil, err

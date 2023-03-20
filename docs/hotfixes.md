@@ -1,10 +1,10 @@
 # Introduction
 
-This document outlines how to make hotfix binaries and containers for MinIO?. The main focus in this article is about how to backport patches to a specific branch and finally building binaries/containers.
+This document outlines how to make hotfix binaries and containers for B33S?. The main focus in this article is about how to backport patches to a specific branch and finally building binaries/containers.
 
 ## Pre-pre requisite
 
-- A working knowledge of MinIO codebase and its various components.
+- A working knowledge of B33S codebase and its various components.
 - A working knowledge of AWS S3 API behaviors and corner cases.
 
 ## Pre-requisite for backporting any fixes
@@ -53,11 +53,11 @@ Date:   Sat Jun 15 11:27:17 2019 -0700
 
 ## Creating a hotfix branch
 
-Customers in MinIO are allowed LTS on any release they choose to standardize. Production setups seldom change and require maintenance. Hotfix branches are such maintenance branches that allow customers to operate a production cluster without drastic changes to their deployment.
+Customers in B33S are allowed LTS on any release they choose to standardize. Production setups seldom change and require maintenance. Hotfix branches are such maintenance branches that allow customers to operate a production cluster without drastic changes to their deployment.
 
 ## Backporting a fix
 
-Developer is advised to clone the MinIO source and checkout the MinIO release tag customer is currently on.
+Developer is advised to clone the B33S source and checkout the B33S release tag customer is currently on.
 
 ```
 λ git checkout RELEASE.2021-04-22T15-44-28Z
@@ -88,7 +88,7 @@ Date:   Mon Nov 8 08:41:27 2021 -0800
 λ git cherry-pick 4f3317effea38c203c358af9cb5ce3c0e4173976
 ```
 
-*A self contained **patch** usually applies fine on the hotfix branch during backports as long it is self contained. There are situations however this may lead to conflicts and the patch will not cleanly apply. Conflicts might be trivial which can be resolved easily, when conflicts seem to be non-trivial or touches the part of the code-base the developer is not confident - to get additional clarity reach out to #hack on MinIOHQ slack channel. Hasty changes must be avoided, minor fixes and logs may be added to hotfix branches but this should not be followed as practice.*
+*A self contained **patch** usually applies fine on the hotfix branch during backports as long it is self contained. There are situations however this may lead to conflicts and the patch will not cleanly apply. Conflicts might be trivial which can be resolved easily, when conflicts seem to be non-trivial or touches the part of the code-base the developer is not confident - to get additional clarity reach out to #hack on B33SHQ slack channel. Hasty changes must be avoided, minor fixes and logs may be added to hotfix branches but this should not be followed as practice.*
 
 Once the **patch** is successfully applied, developer must run tests to validate the fix that was backported by running following tests, locally.
 
@@ -98,7 +98,7 @@ Unit tests
 λ make test
 ```
 
-Verify different type of MinIO deployments work
+Verify different type of B33S deployments work
 
 ```
 λ make verify

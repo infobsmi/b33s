@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -39,13 +39,13 @@ import (
 	"github.com/google/uuid"
 	jsoniter "github.com/json-iterator/go"
 	"github.com/klauspost/filepathx"
-	"github.com/minio/madmin-go/v2"
+	"github.com/b33s/madmin-go/v2"
 	"github.com/infobsmi/b33s/internal/bucket/lifecycle"
 	"github.com/infobsmi/b33s/internal/color"
 	"github.com/infobsmi/b33s/internal/disk"
 	xioutil "github.com/infobsmi/b33s/internal/ioutil"
 	"github.com/infobsmi/b33s/internal/logger"
-	"github.com/minio/pkg/console"
+	"github.com/b33s/pkg/console"
 	"github.com/zeebo/xxh3"
 )
 
@@ -361,7 +361,7 @@ func (s *xlStorage) SetDiskLoc(poolIdx, setIdx, diskIdx int) {
 }
 
 func (s *xlStorage) Healing() *healingTracker {
-	healingFile := pathJoin(s.diskPath, minioMetaBucket,
+	healingFile := pathJoin(s.diskPath, b33sMetaBucket,
 		bucketMetaPrefix, healingTrackerFilename)
 	b, err := os.ReadFile(healingFile)
 	if err != nil {
@@ -380,7 +380,7 @@ func (s *xlStorage) checkODirectDiskSupport() error {
 	// Check if backend is writable and supports O_DIRECT
 	uuid := mustGetUUID()
 	filePath := pathJoin(s.diskPath, ".writable-check-"+uuid+".tmp")
-	defer renameAll(filePath, pathJoin(s.diskPath, minioMetaTmpDeletedBucket, uuid))
+	defer renameAll(filePath, pathJoin(s.diskPath, b33sMetaTmpDeletedBucket, uuid))
 
 	w, err := s.openFileDirect(filePath, os.O_CREATE|os.O_WRONLY|os.O_EXCL)
 	if err != nil {
@@ -552,7 +552,7 @@ func (s *xlStorage) NSScanner(ctx context.Context, cache dataUsageCache, updates
 			case noTiers, oi.DeleteMarker, oi.TransitionedObject.FreeVersion:
 				continue
 			}
-			tier := minioHotTier
+			tier := b33sHotTier
 			if oi.TransitionedObject.Status == lifecycle.TransitionComplete {
 				tier = oi.TransitionedObject.Tier
 			}
@@ -630,7 +630,7 @@ func (s *xlStorage) getVolDir(volume string) (string, error) {
 }
 
 func (s *xlStorage) checkFormatJSON() (os.FileInfo, error) {
-	formatFile := pathJoin(s.diskPath, minioMetaBucket, formatConfigFile)
+	formatFile := pathJoin(s.diskPath, b33sMetaBucket, formatConfigFile)
 	fi, err := Lstat(formatFile)
 	if err != nil {
 		// If the disk is still not initialized.
@@ -682,7 +682,7 @@ func (s *xlStorage) GetDiskID() (string, error) {
 		return diskID, nil
 	}
 
-	formatFile := pathJoin(s.diskPath, minioMetaBucket, formatConfigFile)
+	formatFile := pathJoin(s.diskPath, b33sMetaBucket, formatConfigFile)
 	b, err := os.ReadFile(formatFile)
 	if err != nil {
 		// If the disk is still not initialized.
@@ -1013,7 +1013,7 @@ func (s *xlStorage) DeleteVersions(ctx context.Context, volume string, versions 
 
 func (s *xlStorage) moveToTrash(filePath string, recursive, force bool) error {
 	pathUUID := mustGetUUID()
-	targetPath := pathutil.Join(s.diskPath, minioMetaTmpDeletedBucket, pathUUID)
+	targetPath := pathutil.Join(s.diskPath, b33sMetaTmpDeletedBucket, pathUUID)
 
 	var renameFn func(source, target string) error
 	if recursive {
@@ -1504,7 +1504,7 @@ func (s *xlStorage) readAllData(ctx context.Context, volumeDir string, filePath 
 func (s *xlStorage) ReadAll(ctx context.Context, volume string, path string) (buf []byte, err error) {
 	// Specific optimization to avoid re-read from the drives for `format.json`
 	// in-case the caller is a network operation.
-	if volume == minioMetaBucket && path == formatConfigFile {
+	if volume == b33sMetaBucket && path == formatConfigFile {
 		s.RLock()
 		formatData := make([]byte, len(s.formatData))
 		copy(formatData, s.formatData)
@@ -1850,9 +1850,9 @@ func (s *xlStorage) CreateFile(ctx context.Context, volume, path string, fileSiz
 	parentFilePath := pathutil.Dir(filePath)
 	defer func() {
 		if err != nil {
-			if volume == minioMetaTmpBucket {
+			if volume == b33sMetaTmpBucket {
 				// only cleanup parent path if the
-				// parent volume name is minioMetaTmpBucket
+				// parent volume name is b33sMetaTmpBucket
 				removeAll(parentFilePath)
 			}
 		}
@@ -2134,7 +2134,7 @@ func (s *xlStorage) Delete(ctx context.Context, volume string, path string, dele
 
 func skipAccessChecks(volume string) (ok bool) {
 	switch volume {
-	case minioMetaTmpBucket, minioMetaBucket, minioMetaMultipartBucket, minioMetaTmpDeletedBucket:
+	case b33sMetaTmpBucket, b33sMetaBucket, b33sMetaMultipartBucket, b33sMetaTmpDeletedBucket:
 		ok = true
 	}
 	return ok
@@ -2450,7 +2450,7 @@ func (s *xlStorage) RenameData(ctx context.Context, srcVolume, srcPath string, f
 		}
 	}
 
-	// srcFilePath is always in minioMetaTmpBucket, an attempt to
+	// srcFilePath is always in b33sMetaTmpBucket, an attempt to
 	// remove the temporary folder is enough since at this point
 	// ideally all transaction should be complete.
 

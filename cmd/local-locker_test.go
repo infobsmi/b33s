@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -208,7 +208,7 @@ func TestLocalLockerUnlock(t *testing.T) {
 		arg := dsync.LockArgs{
 			UID:       rUIDs[i*2+1],
 			Resources: []string{name},
-			Source:    "minio",
+			Source:    "b33s",
 			Owner:     "owner",
 			Quorum:    0,
 		}
@@ -236,7 +236,7 @@ func TestLocalLockerUnlock(t *testing.T) {
 		arg := dsync.LockArgs{
 			UID:       wUIDs[i],
 			Resources: names[:],
-			Source:    "minio",
+			Source:    "b33s",
 			Owner:     "owner",
 			Quorum:    0,
 		}

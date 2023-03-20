@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -65,7 +65,7 @@ type xlMetaV1Object struct {
 	Stat    StatInfo `json:"stat"`    // Stat of the current object `xl.meta`.
 	// Erasure coded info for the current object `xl.meta`.
 	Erasure ErasureInfo `json:"erasure"`
-	// MinIO release tag for current object `xl.meta`.
+	// B33S release tag for current object `xl.meta`.
 	Minio struct {
 		Release string `json:"release"`
 	} `json:"minio"`

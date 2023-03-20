@@ -1,5 +1,5 @@
 /*
- * MinIO Object Storage (c) 2021 MinIO, Inc.
+ * B33S Object Storage (c) 2021 B33S, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package cmd
 import (
 	"testing"
 
-	"github.com/minio/minio-go/v7/pkg/set"
+	"github.com/infobsmi/b33s-go/v7/pkg/set"
 )
 
 func TestUpdateDomainIPs(t *testing.T) {

@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2022 MinIO, Inc.
+// Copyright (c) 2015-2022 B33S, Inc.
 //
 // This file is part of B33S Object Storage stack
 //
@@ -224,7 +224,7 @@ func (api objectAPIHandlers) GetBucketReplicationMetricsHandler(w http.ResponseW
 
 // ResetBucketReplicationStartHandler - starts a replication reset for all objects in a bucket which
 // qualify for replication and re-sync the object(s) to target, provided ExistingObjectReplication is
-// enabled for the qualifying rule. This API is a MinIO only extension provided for situations where
+// enabled for the qualifying rule. This API is a B33S only extension provided for situations where
 // remote target is entirely lost,and previously replicated objects need to be re-synced. If resync is
 // already in progress it returns an error
 func (api objectAPIHandlers) ResetBucketReplicationStartHandler(w http.ResponseWriter, r *http.Request) {
@@ -359,7 +359,7 @@ func (api objectAPIHandlers) ResetBucketReplicationStartHandler(w http.ResponseW
 }
 
 // ResetBucketReplicationStatusHandler - returns the status of replication reset.
-// This API is a MinIO only extension
+// This API is a B33S only extension
 func (api objectAPIHandlers) ResetBucketReplicationStatusHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := newContext(r, w, "ResetBucketReplicationStatus")
 	defer logger.AuditLog(ctx, w, r, mustGetClaimsFromToken(r))

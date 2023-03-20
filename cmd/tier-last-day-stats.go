@@ -1,6 +1,6 @@
-// Copyright (c) 2022 MinIO, Inc.
+// Copyright (c) 2022 B33S, Inc.
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33SObject Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -90,7 +90,7 @@ func (l lastDayTierStats) merge(m lastDayTierStats) (merged lastDayTierStats) {
 	return merged
 }
 
-// DailyAllTierStats is used to aggregate last day tier stats across MinIO servers
+// DailyAllTierStats is used to aggregate last day tier stats across B33S servers
 type DailyAllTierStats map[string]lastDayTierStats
 
 func (l DailyAllTierStats) merge(m DailyAllTierStats) {

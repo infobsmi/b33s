@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -67,7 +67,7 @@ import (
 	"github.com/infobsmi/b33s/internal/hash"
 	"github.com/infobsmi/b33s/internal/logger"
 	"github.com/infobsmi/b33s/internal/rest"
-	"github.com/minio/pkg/bucket/policy"
+	"github.com/b33s/pkg/bucket/policy"
 )
 
 // TestMain to set up global env.
@@ -300,7 +300,7 @@ func isSameType(obj1, obj2 interface{}) bool {
 	return reflect.TypeOf(obj1) == reflect.TypeOf(obj2)
 }
 
-// TestServer encapsulates an instantiation of a MinIO instance with a temporary backend.
+// TestServer encapsulates an instantiation of a B33S instance with a temporary backend.
 // Example usage:
 //
 //	s := StartTestServer(t,"Erasure")
@@ -892,7 +892,7 @@ func preSignV2(req *http.Request, accessKeyID, secretAccessKey string, expires i
 		return errors.New("Presign cannot be generated without access and secret keys")
 	}
 
-	// FIXME: Remove following portion of code after fixing a bug in minio-go preSignV2.
+	// FIXME: Remove following portion of code after fixing a bug in b33s-go preSignV2.
 
 	d := UTCNow()
 	// Find epoch expires when the request will expire.
@@ -1477,11 +1477,11 @@ func getListenNotificationURL(endPoint, bucketName string, prefixes, suffixes, e
 	return makeTestTargetURL(endPoint, bucketName, "", queryValue)
 }
 
-// getRandomDisks - Creates a slice of N random disks, each of the form - minio-XXX
+// getRandomDisks - Creates a slice of N random disks, each of the form - b33s-XXX
 func getRandomDisks(N int) ([]string, error) {
 	var erasureDisks []string
 	for i := 0; i < N; i++ {
-		path, err := os.MkdirTemp(globalTestTmpDir, "minio-")
+		path, err := os.MkdirTemp(globalTestTmpDir, "b33s-")
 		if err != nil {
 			// Remove directories created so far.
 			removeRoots(erasureDisks)
@@ -1605,7 +1605,7 @@ func ExecObjectLayerAPIAnonTest(t *testing.T, obj ObjectLayer, testName, bucketN
 	// simple function which returns a message which gives the context of the test
 	// and then followed by the actual error message.
 	failTestStr := func(testType, failMsg string) string {
-		return fmt.Sprintf("MinIO %s: %s fail for \"%s\": \n<Error> %s", instanceType, testType, testName, failMsg)
+		return fmt.Sprintf("B33S %s: %s fail for \"%s\": \n<Error> %s", instanceType, testType, testName, failMsg)
 	}
 
 	// httptest Recorder to capture all the response by the http handler.
@@ -1720,20 +1720,20 @@ func ExecObjectLayerAPINilTest(t TestErrHandler, bucketName, objectName, instanc
 		// read the response body.
 		actualContent, err := io.ReadAll(rec.Body)
 		if err != nil {
-			t.Fatalf("MinIO %s: Failed parsing response body: <ERROR> %v", instanceType, err)
+			t.Fatalf("B33S %s: Failed parsing response body: <ERROR> %v", instanceType, err)
 		}
 
 		actualError := &APIErrorResponse{}
 		if err = xml.Unmarshal(actualContent, actualError); err != nil {
-			t.Errorf("MinIO %s: error response failed to parse error XML", instanceType)
+			t.Errorf("B33S %s: error response failed to parse error XML", instanceType)
 		}
 
 		if actualError.BucketName != bucketName {
-			t.Errorf("MinIO %s: error response bucket name differs from expected value", instanceType)
+			t.Errorf("B33S %s: error response bucket name differs from expected value", instanceType)
 		}
 
 		if actualError.Key != objectName {
-			t.Errorf("MinIO %s: error response object name differs from expected value", instanceType)
+			t.Errorf("B33S %s: error response object name differs from expected value", instanceType)
 		}
 	}
 }
@@ -1928,7 +1928,7 @@ func ExecObjectLayerDiskAlteredTest(t *testing.T, objTest objTestDiskNotFoundTyp
 type objTestStaleFilesType func(obj ObjectLayer, instanceType string, dirs []string, t *testing.T)
 
 // ExecObjectLayerStaleFilesTest - executes object layer tests those leaves stale
-// files/directories under .minio/tmp.  Creates Erasure ObjectLayer instance and runs test for Erasure layer.
+// files/directories under .b33s/tmp.  Creates Erasure ObjectLayer instance and runs test for Erasure layer.
 func ExecObjectLayerStaleFilesTest(t *testing.T, objTest objTestStaleFilesType) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()

@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2022 MinIO, Inc.
+// Copyright (c) 2015-2022 B33S, Inc.
 //
 // This file is part of B33S Object Storage stack
 //
@@ -31,11 +31,11 @@ import (
 	"time"
 
 	"github.com/lithammer/shortuuid/v4"
-	"github.com/minio/madmin-go/v2"
+	"github.com/b33s/madmin-go/v2"
 	"github.com/infobsmi/b33s/internal/bucket/lifecycle"
 	"github.com/infobsmi/b33s/internal/hash"
 	"github.com/infobsmi/b33s/internal/logger"
-	"github.com/minio/pkg/env"
+	"github.com/b33s/pkg/env"
 )
 
 //go:generate msgp -file $GOFILE -unexported
@@ -650,10 +650,10 @@ const (
 )
 
 func (z *erasureServerPools) saveRebalanceStats(ctx context.Context, poolIdx int, opts rebalSaveOpts) error {
-	lock := z.serverPools[0].NewNSLock(minioMetaBucket, rebalMetaName)
+	lock := z.serverPools[0].NewNSLock(b33sMetaBucket, rebalMetaName)
 	lkCtx, err := lock.GetLock(ctx, globalOperationTimeout)
 	if err != nil {
-		logger.LogIf(ctx, fmt.Errorf("failed to acquire write lock on %s/%s: %w", minioMetaBucket, rebalMetaName, err))
+		logger.LogIf(ctx, fmt.Errorf("failed to acquire write lock on %s/%s: %w", b33sMetaBucket, rebalMetaName, err))
 		return err
 	}
 	defer lock.Unlock(lkCtx.Cancel)

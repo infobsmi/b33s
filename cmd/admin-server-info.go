@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -117,7 +117,7 @@ func getLocalServerProperty(endpointServerPools EndpointServerPools, r *http.Req
 		config.EnvSecretKey:         {},
 		config.EnvRootUser:          {},
 		config.EnvRootPassword:      {},
-		config.EnvMinIOSubnetAPIKey: {},
+		config.EnvB33SSubnetAPIKey: {},
 		config.EnvKMSSecretKey:      {},
 	}
 	for _, v := range os.Environ() {

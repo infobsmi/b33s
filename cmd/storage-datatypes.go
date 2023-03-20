@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -197,7 +197,7 @@ type FileInfo struct {
 	// File mode bits.
 	Mode uint32 `msg:"m"`
 
-	// WrittenByVersion is the unix time stamp of the MinIO
+	// WrittenByVersion is the unix time stamp of the B33S
 	// version that created this version of the object.
 	WrittenByVersion uint64 `msg:"wv"`
 

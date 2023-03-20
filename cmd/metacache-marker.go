@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -33,7 +33,7 @@ const markerTagVersion = "v2"
 // parseMarker will parse a marker possibly encoded with encodeMarker
 func (o *listPathOptions) parseMarker() {
 	s := o.Marker
-	if !strings.Contains(s, "[minio_cache:"+markerTagVersion) {
+	if !strings.Contains(s, "[b33s_cache:"+markerTagVersion) {
 		return
 	}
 	start := strings.LastIndex(s, "[")
@@ -47,7 +47,7 @@ func (o *listPathOptions) parseMarker() {
 			continue
 		}
 		switch kv[0] {
-		case "minio_cache":
+		case "b33s_cache":
 			if kv[1] != markerTagVersion {
 				continue
 			}
@@ -83,10 +83,10 @@ func (o *listPathOptions) parseMarker() {
 func (o listPathOptions) encodeMarker(marker string) string {
 	if o.ID == "" {
 		// Mark as returning listing...
-		return fmt.Sprintf("%s[minio_cache:%s,return:]", marker, markerTagVersion)
+		return fmt.Sprintf("%s[b33s_cache:%s,return:]", marker, markerTagVersion)
 	}
 	if strings.ContainsAny(o.ID, "[:,") {
 		logger.LogIf(context.Background(), fmt.Errorf("encodeMarker: uuid %s contained invalid characters", o.ID))
 	}
-	return fmt.Sprintf("%s[minio_cache:%s,id:%s,p:%d,s:%d]", marker, markerTagVersion, o.ID, o.pool, o.set)
+	return fmt.Sprintf("%s[b33s_cache:%s,id:%s,p:%d,s:%d]", marker, markerTagVersion, o.ID, o.pool, o.set)
 }

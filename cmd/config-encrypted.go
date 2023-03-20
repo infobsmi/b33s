@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -152,7 +152,7 @@ func migrateConfigPrefixToEncrypted(objAPI ObjectLayer, encrypted bool) error {
 		if err != nil {
 			return err
 		}
-		logger.Info(fmt.Sprintf("Attempting to re-encrypt config, IAM users and policies on MinIO with %q (%s)", stat.DefaultKey, stat.Name))
+		logger.Info(fmt.Sprintf("Attempting to re-encrypt config, IAM users and policies on B33S with %q (%s)", stat.DefaultKey, stat.Name))
 	}
 
 	results := make(chan ObjectInfo)

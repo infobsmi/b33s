@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -104,7 +104,7 @@ func LookupConfig(kvs config.KVS, transport http.RoundTripper) (cfg Config, err 
 	}
 
 	var proxyURL *xnet.URL
-	proxy := env.Get(config.EnvMinIOSubnetProxy, kvs.Get(config.Proxy))
+	proxy := env.Get(config.EnvB33SSubnetProxy, kvs.Get(config.Proxy))
 	if len(proxy) > 0 {
 		proxyURL, err = xnet.ParseHTTPURL(proxy)
 		if err != nil {
@@ -113,8 +113,8 @@ func LookupConfig(kvs config.KVS, transport http.RoundTripper) (cfg Config, err 
 
 	}
 
-	cfg.License = strings.TrimSpace(env.Get(config.EnvMinIOSubnetLicense, kvs.Get(config.License)))
-	cfg.APIKey = strings.TrimSpace(env.Get(config.EnvMinIOSubnetAPIKey, kvs.Get(config.APIKey)))
+	cfg.License = strings.TrimSpace(env.Get(config.EnvB33SSubnetLicense, kvs.Get(config.License)))
+	cfg.APIKey = strings.TrimSpace(env.Get(config.EnvB33SSubnetAPIKey, kvs.Get(config.APIKey)))
 	cfg.Proxy = proxy
 
 	if transport == nil {

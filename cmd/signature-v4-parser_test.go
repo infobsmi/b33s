@@ -1,6 +1,6 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33S Object Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -199,7 +199,7 @@ func TestParseCredentialHeader(t *testing.T) {
 			expectedErrCode: ErrNone,
 		},
 		// Test Case - 10.
-		// Test case with right inputs -> AccessKey contains `/`. See minio/#6443
+		// Test case with right inputs -> AccessKey contains `/`. See b33s/#6443
 		// "aws4_request" is the valid request version.
 		{
 			inputCredentialStr: generateCredentialStr(
@@ -218,7 +218,7 @@ func TestParseCredentialHeader(t *testing.T) {
 			expectedErrCode: ErrNone,
 		},
 		// Test Case - 11.
-		// Test case with right inputs -> AccessKey contains `=`. See minio/#7376
+		// Test case with right inputs -> AccessKey contains `=`. See b33s/#7376
 		// "aws4_request" is the valid request version.
 		{
 			inputCredentialStr: generateCredentialStr(

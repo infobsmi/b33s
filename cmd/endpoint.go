@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -234,7 +234,7 @@ func (l EndpointServerPools) GetLocalPoolIdx(ep Endpoint) int {
 	return -1
 }
 
-// Legacy returns 'true' if the MinIO server commandline was
+// Legacy returns 'true' if the B33S server commandline was
 // provided with no ellipses pattern, those are considered
 // legacy deployments.
 func (l EndpointServerPools) Legacy() bool {

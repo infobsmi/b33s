@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -75,7 +75,7 @@ var (
 		},
 		config.HelpKV{
 			Key:         Vendor,
-			Description: `Specify vendor type for vendor specific behavior to checking validity of temporary credentials and service accounts on MinIO` + defaultHelpPostfix(Vendor),
+			Description: `Specify vendor type for vendor specific behavior to checking validity of temporary credentials and service accounts on B33S` + defaultHelpPostfix(Vendor),
 			Optional:    true,
 			Type:        "string",
 		},

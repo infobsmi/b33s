@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -31,8 +31,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/minio/madmin-go/v2"
-	minio "github.com/infobsmi/b33s-go/v7"
+	"github.com/b33s/madmin-go/v2"
+	b33s "github.com/infobsmi/b33s-go/v7"
 )
 
 func runAllIAMConcurrencyTests(suite *TestSuiteIAM, c *check) {
@@ -82,7 +82,7 @@ func (s *TestSuiteIAM) TestDeleteUserRace(c *check) {
 	defer cancel()
 
 	bucket := getRandomBucketName()
-	err := s.client.MakeBucket(ctx, bucket, minio.MakeBucketOptions{})
+	err := s.client.MakeBucket(ctx, bucket, b33s.MakeBucketOptions{})
 	if err != nil {
 		c.Fatalf("bucket creat error: %v", err)
 	}

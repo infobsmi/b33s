@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -25,9 +25,9 @@ import (
 	"io"
 	"strings"
 
-	"github.com/klauspost/reedsolomon"
 	xioutil "github.com/infobsmi/b33s/internal/ioutil"
 	"github.com/infobsmi/b33s/internal/logger"
+	"github.com/klauspost/reedsolomon"
 )
 
 // getDataBlockLen - get length of data blocks from encoded blocks.

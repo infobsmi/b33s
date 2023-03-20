@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -21,10 +21,10 @@ import (
 	"reflect"
 	"testing"
 
-	miniogopolicy "github.com/infobsmi/b33s-go/v7/pkg/policy"
+	b33sgopolicy "github.com/infobsmi/b33s-go/v7/pkg/policy"
 	"github.com/infobsmi/b33s-go/v7/pkg/set"
-	"github.com/minio/pkg/bucket/policy"
-	"github.com/minio/pkg/bucket/policy/condition"
+	"github.com/b33s/pkg/bucket/policy"
+	"github.com/b33s/pkg/bucket/policy/condition"
 )
 
 func TestPolicySysIsAllowed(t *testing.T) {
@@ -143,17 +143,17 @@ func TestPolicySysIsAllowed(t *testing.T) {
 	}
 }
 
-func getReadOnlyStatement(bucketName, prefix string) []miniogopolicy.Statement {
-	return []miniogopolicy.Statement{
+func getReadOnlyStatement(bucketName, prefix string) []b33sgopolicy.Statement {
+	return []b33sgopolicy.Statement{
 		{
 			Effect:    string(policy.Allow),
-			Principal: miniogopolicy.User{AWS: set.CreateStringSet("*")},
+			Principal: b33sgopolicy.User{AWS: set.CreateStringSet("*")},
 			Resources: set.CreateStringSet(policy.NewResource(bucketName, "").String()),
 			Actions:   set.CreateStringSet("s3:GetBucketLocation", "s3:ListBucket"),
 		},
 		{
 			Effect:    string(policy.Allow),
-			Principal: miniogopolicy.User{AWS: set.CreateStringSet("*")},
+			Principal: b33sgopolicy.User{AWS: set.CreateStringSet("*")},
 			Resources: set.CreateStringSet(policy.NewResource(bucketName, prefix).String()),
 			Actions:   set.CreateStringSet("s3:GetObject"),
 		},
@@ -181,7 +181,7 @@ func TestPolicyToBucketAccessPolicy(t *testing.T) {
 		},
 	}
 
-	case1Result := &miniogopolicy.BucketAccessPolicy{
+	case1Result := &b33sgopolicy.BucketAccessPolicy{
 		Version:    policy.DefaultVersion,
 		Statements: getReadOnlyStatement("mybucket", "/myobject*"),
 	}
@@ -191,9 +191,9 @@ func TestPolicyToBucketAccessPolicy(t *testing.T) {
 		Statements: []policy.Statement{},
 	}
 
-	case2Result := &miniogopolicy.BucketAccessPolicy{
+	case2Result := &b33sgopolicy.BucketAccessPolicy{
 		Version:    policy.DefaultVersion,
-		Statements: []miniogopolicy.Statement{},
+		Statements: []b33sgopolicy.Statement{},
 	}
 
 	case3Policy := &policy.Policy{
@@ -211,7 +211,7 @@ func TestPolicyToBucketAccessPolicy(t *testing.T) {
 
 	testCases := []struct {
 		bucketPolicy   *policy.Policy
-		expectedResult *miniogopolicy.BucketAccessPolicy
+		expectedResult *b33sgopolicy.BucketAccessPolicy
 		expectErr      bool
 	}{
 		{case1Policy, case1Result, false},
@@ -236,7 +236,7 @@ func TestPolicyToBucketAccessPolicy(t *testing.T) {
 }
 
 func TestBucketAccessPolicyToPolicy(t *testing.T) {
-	case1PolicyInfo := &miniogopolicy.BucketAccessPolicy{
+	case1PolicyInfo := &b33sgopolicy.BucketAccessPolicy{
 		Version:    policy.DefaultVersion,
 		Statements: getReadOnlyStatement("mybucket", "/myobject*"),
 	}
@@ -261,9 +261,9 @@ func TestBucketAccessPolicyToPolicy(t *testing.T) {
 		},
 	}
 
-	case2PolicyInfo := &miniogopolicy.BucketAccessPolicy{
+	case2PolicyInfo := &b33sgopolicy.BucketAccessPolicy{
 		Version:    policy.DefaultVersion,
-		Statements: []miniogopolicy.Statement{},
+		Statements: []b33sgopolicy.Statement{},
 	}
 
 	case2Result := &policy.Policy{
@@ -271,13 +271,13 @@ func TestBucketAccessPolicyToPolicy(t *testing.T) {
 		Statements: []policy.Statement{},
 	}
 
-	case3PolicyInfo := &miniogopolicy.BucketAccessPolicy{
+	case3PolicyInfo := &b33sgopolicy.BucketAccessPolicy{
 		Version:    "12-10-2012",
 		Statements: getReadOnlyStatement("mybucket", "/myobject*"),
 	}
 
 	testCases := []struct {
-		policyInfo     *miniogopolicy.BucketAccessPolicy
+		policyInfo     *b33sgopolicy.BucketAccessPolicy
 		expectedResult *policy.Policy
 		expectErr      bool
 	}{

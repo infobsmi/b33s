@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -735,11 +735,11 @@ func (r restoreObjStatus) Ongoing() bool {
 	return r.ongoing
 }
 
-// OnDisk returns true if restored object contents exist in MinIO. Otherwise returns false.
+// OnDisk returns true if restored object contents exist in B33S. Otherwise returns false.
 // The restore operation could be in one of the following states,
-// - in progress (no content on MinIO's disks yet)
+// - in progress (no content on B33S's disks yet)
 // - completed
-// - completed but expired (again, no content on MinIO's disks)
+// - completed but expired (again, no content on B33S's disks)
 func (r restoreObjStatus) OnDisk() bool {
 	if expiry, ok := r.Expiry(); ok && time.Now().UTC().Before(expiry) {
 		// completed

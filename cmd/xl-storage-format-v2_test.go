@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -33,10 +33,10 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/klauspost/compress/zip"
-	"github.com/klauspost/compress/zstd"
 	"github.com/infobsmi/b33s/internal/bucket/lifecycle"
 	xhttp "github.com/infobsmi/b33s/internal/http"
+	"github.com/klauspost/compress/zip"
+	"github.com/klauspost/compress/zstd"
 )
 
 func TestReadXLMetaNoData(t *testing.T) {

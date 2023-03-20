@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2022 MinIO, Inc.
+// Copyright (c) 2015-2022 B33S, Inc.
 //
 // This file is part of B33S Object Storage stack
 //
@@ -22,18 +22,18 @@ import (
 	"strings"
 	"time"
 
-	"github.com/minio/madmin-go/v2"
-	minio "github.com/infobsmi/b33s-go/v7"
+	"github.com/b33s/madmin-go/v2"
+	b33s "github.com/infobsmi/b33s-go/v7"
 	"github.com/infobsmi/b33s-go/v7/pkg/credentials"
 )
 
-type warmBackendMinIO struct {
+type warmBackendB33S struct {
 	warmBackendS3
 }
 
-var _ WarmBackend = (*warmBackendMinIO)(nil)
+var _ WarmBackend = (*warmBackendB33S)(nil)
 
-func newWarmBackendMinIO(conf madmin.TierMinIO) (*warmBackendMinIO, error) {
+func newWarmBackendB33S(conf madmin.TierB33S) (*warmBackendB33S, error) {
 	u, err := url.Parse(conf.Endpoint)
 	if err != nil {
 		return nil, err
@@ -44,20 +44,20 @@ func newWarmBackendMinIO(conf madmin.TierMinIO) (*warmBackendMinIO, error) {
 	getRemoteTierTargetInstanceTransportOnce.Do(func() {
 		getRemoteTierTargetInstanceTransport = newHTTPTransport(10 * time.Minute)
 	})
-	opts := &minio.Options{
+	opts := &b33s.Options{
 		Creds:     creds,
 		Secure:    u.Scheme == "https",
 		Transport: getRemoteTierTargetInstanceTransport,
 	}
-	client, err := minio.New(u.Host, opts)
+	client, err := b33s.New(u.Host, opts)
 	if err != nil {
 		return nil, err
 	}
-	core, err := minio.NewCore(u.Host, opts)
+	core, err := b33s.NewCore(u.Host, opts)
 	if err != nil {
 		return nil, err
 	}
-	return &warmBackendMinIO{
+	return &warmBackendB33S{
 		warmBackendS3{
 			client: client,
 			core:   core,

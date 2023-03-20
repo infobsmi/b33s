@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -62,7 +62,7 @@ func parseLocationConstraint(r *http.Request) (location string, s3Error APIError
 }
 
 // Validates input location is same as configured region
-// of MinIO server.
+// of B33S server.
 func isValidLocation(location string) bool {
 	return globalSite.Region == "" || globalSite.Region == location
 }
@@ -229,8 +229,8 @@ func extractReqParams(r *http.Request) map[string]string {
 		m["range"] = rangeField
 	}
 
-	if _, ok := r.Header[xhttp.MinIOSourceReplicationRequest]; ok {
-		m[xhttp.MinIOSourceReplicationRequest] = ""
+	if _, ok := r.Header[xhttp.B33SSourceReplicationRequest]; ok {
+		m[xhttp.B33SSourceReplicationRequest] = ""
 	}
 	return m
 }

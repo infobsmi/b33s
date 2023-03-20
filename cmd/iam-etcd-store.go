@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -27,11 +27,11 @@ import (
 	"time"
 	"unicode/utf8"
 
-	jsoniter "github.com/json-iterator/go"
 	"github.com/infobsmi/b33s-go/v7/pkg/set"
 	"github.com/infobsmi/b33s/internal/config"
 	"github.com/infobsmi/b33s/internal/kms"
 	"github.com/infobsmi/b33s/internal/logger"
+	jsoniter "github.com/json-iterator/go"
 	"go.etcd.io/etcd/api/v3/mvccpb"
 	etcd "go.etcd.io/etcd/client/v3"
 )

@@ -1,14 +1,14 @@
-# MinIO Contribution Guide [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io) [![Docker Pulls](https://img.shields.io/docker/pulls/minio/minio.svg?maxAge=604800)](https://hub.docker.com/r/minio/minio/)
+# B33S Contribution Guide [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io) [![Docker Pulls](https://img.shields.io/docker/pulls/minio/minio.svg?maxAge=604800)](https://hub.docker.com/r/minio/minio/)
 
-``MinIO`` community welcomes your contribution. To make the process as seamless as possible, we recommend you read this contribution guide.
+``B33S`` community welcomes your contribution. To make the process as seamless as possible, we recommend you read this contribution guide.
 
 ## Development Workflow
 
-Start by forking the MinIO GitHub repository, make changes in a branch and then send a pull request. We encourage pull requests to discuss code changes. Here are the steps in details:
+Start by forking the B33S GitHub repository, make changes in a branch and then send a pull request. We encourage pull requests to discuss code changes. Here are the steps in details:
 
-### Setup your MinIO GitHub Repository
+### Setup your B33S GitHub Repository
 
-Fork [MinIO upstream](https://github.com/infobsmi/b33s/fork) source repository to your own personal repository. Copy the URL of your MinIO fork (you will need it for the `git clone` command below).
+Fork [B33S upstream](https://github.com/infobsmi/b33s/fork) source repository to your own personal repository. Copy the URL of your B33S fork (you will need it for the `git clone` command below).
 
 ```sh
 git clone https://github.com/infobsmi/b33s
@@ -34,7 +34,7 @@ Before making code changes, make sure you create a separate branch for these cha
 git checkout -b my-new-feature
 ```
 
-### Test MinIO server changes
+### Test B33S server changes
 
 After your code changes, make sure
 
@@ -65,9 +65,9 @@ Pull requests can be created via GitHub. Refer to [this document](https://help.g
 
 ## FAQs
 
-### How does ``MinIO`` manage dependencies?
+### How does ``B33S`` manage dependencies?
 
-``MinIO`` uses `go mod` to manage its dependencies.
+``B33S`` uses `go mod` to manage its dependencies.
 
 - Run `go get foo/bar` in the source folder to add the dependency to `go.mod` file.
 
@@ -76,6 +76,6 @@ To remove a dependency
 - Edit your code and remove the import reference.
 - Run `go mod tidy` in the source folder to remove dependency from `go.mod` file.
 
-### What are the coding guidelines for MinIO?
+### What are the coding guidelines for B33S?
 
-``MinIO`` is fully conformant with Golang style. Refer: [Effective Go](https://github.com/golang/go/wiki/CodeReviewComments) article from Golang project. If you observe offending code, please feel free to send a pull request or ping us on [Slack](https://slack.min.io).
+``B33S`` is fully conformant with Golang style. Refer: [Effective Go](https://github.com/golang/go/wiki/CodeReviewComments) article from Golang project. If you observe offending code, please feel free to send a pull request or ping us on [Slack](https://slack.min.io).

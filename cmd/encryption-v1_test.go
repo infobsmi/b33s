@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -27,7 +27,7 @@ import (
 	"github.com/infobsmi/b33s-go/v7/pkg/encrypt"
 	"github.com/infobsmi/b33s/internal/crypto"
 	xhttp "github.com/infobsmi/b33s/internal/http"
-	"github.com/minio/sio"
+	"github.com/b33s/sio"
 )
 
 var encryptRequestTests = []struct {

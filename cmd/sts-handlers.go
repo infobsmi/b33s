@@ -1,4 +1,4 @@
-/// Copyright (c) 2015-2021 MinIO, Inc.
+/// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -388,7 +388,7 @@ func (sts *stsAPIHandlers) AssumeRoleWithSSO(w http.ResponseWriter, r *http.Requ
 		claims[roleArnClaim] = roleArn.String()
 	} else {
 		// If no role policy is configured, then we use claims from the
-		// JWT. This is a MinIO STS API specific value, this value
+		// JWT. This is a B33S STS API specific value, this value
 		// should be set and configured on your identity provider as
 		// part of JWT custom claims.
 		policySet, ok := iampolicy.GetPoliciesFromClaims(claims, iamPolicyClaimNameOpenID())
@@ -753,10 +753,10 @@ func (sts *stsAPIHandlers) AssumeRoleWithCertificate(w http.ResponseWriter, r *h
 		// gets rejected even when we skip certificate verification. This helps
 		// clients detect malformed certificates during testing instead of e.g.
 		// a self-signed certificate that works while a comparable certificate
-		// issued by a trusted CA fails due to the MinIO server being less strict
+		// issued by a trusted CA fails due to the B33S server being less strict
 		// w.r.t. key usage verification.
 		//
-		// Basically, MinIO is more consistent (from a client perspective) when
+		// Basically, B33S is more consistent (from a client perspective) when
 		// we verify the key usage all the time.
 		var validKeyUsage bool
 		for _, usage := range certificate.ExtKeyUsage {
@@ -841,7 +841,7 @@ func (sts *stsAPIHandlers) AssumeRoleWithCertificate(w http.ResponseWriter, r *h
 }
 
 // AssumeRoleWithCustomToken implements user authentication with custom tokens.
-// These tokens are opaque to MinIO and are verified by a configured (external)
+// These tokens are opaque to B33S and are verified by a configured (external)
 // Identity Management Plugin.
 //
 // API endpoint: https://minio:9000?Action=AssumeRoleWithCustomToken&Token=xxx

@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -32,7 +32,7 @@ import (
 
 	"github.com/cespare/xxhash/v2"
 	"github.com/klauspost/compress/zstd"
-	"github.com/minio/madmin-go/v2"
+	"github.com/b33s/madmin-go/v2"
 	"github.com/infobsmi/b33s/internal/bucket/lifecycle"
 	"github.com/infobsmi/b33s/internal/hash"
 	"github.com/infobsmi/b33s/internal/logger"
@@ -849,7 +849,7 @@ type objectIO interface {
 	PutObject(ctx context.Context, bucket, object string, data *PutObjReader, opts ObjectOptions) (objInfo ObjectInfo, err error)
 }
 
-// load the cache content with name from minioMetaBackgroundOpsBucket.
+// load the cache content with name from b33sMetaBackgroundOpsBucket.
 // Only backend errors are returned as errors.
 // If the object is not found or unable to deserialize d is cleared and nil error is returned.
 func (d *dataUsageCache) load(ctx context.Context, store objectIO, name string) error {
@@ -878,7 +878,7 @@ func (d *dataUsageCache) load(ctx context.Context, store objectIO, name string) 
 	return nil
 }
 
-// save the content of the cache to minioMetaBackgroundOpsBucket with the provided name.
+// save the content of the cache to b33sMetaBackgroundOpsBucket with the provided name.
 func (d *dataUsageCache) save(ctx context.Context, store objectIO, name string) error {
 	var r io.Reader
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -156,7 +156,7 @@ func gcsToObjectError(err error, params ...string) error {
 
 	googleAPIErr, ok := err.(*googleapi.Error)
 	if !ok {
-		// We don't interpret non MinIO errors. As minio errors will
+		// We don't interpret non B33S errors. As minio errors will
 		// have StatusCode to help to convert to object errors.
 		return err
 	}

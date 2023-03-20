@@ -1,6 +1,6 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33SObject Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -62,7 +62,7 @@ type ARN struct {
 // letter or digit. At least 1 character long.
 var validResourceIDRegex = regexp.MustCompile(`^[A-Za-z0-9][A-Za-z0-9_/\.-]*$`)
 
-// NewIAMRoleARN - returns an ARN for a role in MinIO.
+// NewIAMRoleARN - returns an ARN for a role in B33S.
 func NewIAMRoleARN(resourceID, serverRegion string) (ARN, error) {
 	if !validResourceIDRegex.MatchString(resourceID) {
 		return ARN{}, fmt.Errorf("Invalid resource ID: %s", resourceID)

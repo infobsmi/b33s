@@ -18,7 +18,7 @@ catch() {
        done
     fi
 
-    echo "Cleaning up instances of MinIO"
+    echo "Cleaning up instances of B33S"
     pkill minio
     pkill -9 minio
     rm -rf /tmp/multisitea

@@ -1,6 +1,6 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33SObject Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -28,7 +28,7 @@ func TestValidateBucketSSEConfig(t *testing.T) {
 		expectedErr error
 		shouldPass  bool
 	}{
-		// MinIO supported XML
+		// B33S supported XML
 		{
 			inputXML: `<ServerSideEncryptionConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
 			<Rule>

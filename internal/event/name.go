@@ -1,6 +1,6 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33SObject Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -25,7 +25,7 @@ import (
 // Name - event type enum.
 // Refer http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html#notification-how-to-event-types-and-destinations
 // for most basic values we have since extend this and its not really much applicable other than a reference point.
-// "s3:Replication:OperationCompletedReplication" is a MinIO extension.
+// "s3:Replication:OperationCompletedReplication" is a B33S extension.
 type Name int
 
 // Values of event Name

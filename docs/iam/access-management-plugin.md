@@ -1,10 +1,10 @@
 # Access Management Plugin Guide [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
-MinIO now includes support for using an Access Management Plugin. This is to allow object storage access control to be managed externally via a webhook.
+B33S now includes support for using an Access Management Plugin. This is to allow object storage access control to be managed externally via a webhook.
 
-When configured, MinIO sends request and credential details for every API call to an external HTTP(S) endpoint and expects an allow/deny response. MinIO is thus able to delegate access management to an external system, and users are able to use a custom solution instead of S3 standard IAM policies.
+When configured, B33S sends request and credential details for every API call to an external HTTP(S) endpoint and expects an allow/deny response. B33S is thus able to delegate access management to an external system, and users are able to use a custom solution instead of S3 standard IAM policies.
 
-Latency sensitive applications may notice an increased latency due to a request to the external plugin upon every authenticated request to MinIO. User are advised to provision their infrastructure such that latency and performance is acceptable.
+Latency sensitive applications may notice an increased latency due to a request to the external plugin upon every authenticated request to B33S. User are advised to provision their infrastructure such that latency and performance is acceptable.
 
 ## Quickstart
 
@@ -16,7 +16,7 @@ go run access-manager-plugin.go
 
 This program, lets the admin user perform any action and prevents all other users from performing `s3:Put*` operations.
 
-In another terminal start MinIO:
+In another terminal start B33S:
 
 ```sh
 export MINIO_CI_CD=1
@@ -58,7 +58,7 @@ MINIO_POLICY_PLUGIN_COMMENT     (sentence)  optionally add a comment to this set
 
 ## Request and Response
 
-MinIO will make a `POST` request with a JSON body to the given plugin URL. If the auth token parameter is set, it will be sent as an authorization header.
+B33S will make a `POST` request with a JSON body to the given plugin URL. If the auth token parameter is set, it will be sent as an authorization header.
 
 The JSON body structure can be seen from this sample:
 
@@ -97,10 +97,10 @@ The JSON body structure can be seen from this sample:
         "127.0.0.1"
       ],
       "User-Agent": [
-        "MinIO (linux; amd64) minio-go/v7.0.24 mc/DEVELOPMENT.2022-04-20T23-07-53Z"
+        "B33S (linux; amd64) minio-go/v7.0.24 mc/DEVELOPMENT.2022-04-20T23-07-53Z"
       ],
       "UserAgent": [
-        "MinIO (linux; amd64) minio-go/v7.0.24 mc/DEVELOPMENT.2022-04-20T23-07-53Z"
+        "B33S (linux; amd64) minio-go/v7.0.24 mc/DEVELOPMENT.2022-04-20T23-07-53Z"
       ],
       "X-Amz-Content-Sha256": [
         "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
@@ -137,7 +137,7 @@ The JSON body structure can be seen from this sample:
 
 </details>
 
-The response expected by MinIO, is a JSON body with a boolean:
+The response expected by B33S, is a JSON body with a boolean:
 
 ```json
 {

@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -29,7 +29,7 @@ import (
 	"path"
 	"time"
 
-	"github.com/minio/madmin-go/v2"
+	"github.com/b33s/madmin-go/v2"
 	"github.com/infobsmi/b33s-go/v7/pkg/tags"
 	bucketsse "github.com/infobsmi/b33s/internal/bucket/encryption"
 	"github.com/infobsmi/b33s/internal/bucket/lifecycle"
@@ -41,8 +41,8 @@ import (
 	"github.com/infobsmi/b33s/internal/fips"
 	"github.com/infobsmi/b33s/internal/kms"
 	"github.com/infobsmi/b33s/internal/logger"
-	"github.com/minio/pkg/bucket/policy"
-	"github.com/minio/sio"
+	"github.com/b33s/pkg/bucket/policy"
+	"github.com/b33s/sio"
 )
 
 const (
@@ -326,7 +326,7 @@ func (b *BucketMetadata) getAllLegacyConfigs(ctx context.Context, objectAPI Obje
 			switch err.(type) {
 			case ObjectExistsAsDirectory:
 				// in FS mode it possible that we have actual
-				// files in this folder with `.minio.sys/buckets/bucket/configFile`
+				// files in this folder with `.b33s.sys/buckets/bucket/configFile`
 				continue
 			}
 			if errors.Is(err, errConfigNotFound) {

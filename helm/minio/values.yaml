@@ -55,11 +55,11 @@ extraVolumeMounts: []
 ## Additional sidecar containers
 extraContainers: []
 
-## Internal port number for MinIO S3 API container
+## Internal port number for B33S S3 API container
 ## Change service.port to change external port number
 minioAPIPort: "9000"
 
-## Internal port number for MinIO Browser Console container
+## Internal port number for B33S Browser Console container
 ## Change consoleService.port to change external port number
 minioConsolePort: "9001"
 
@@ -85,7 +85,7 @@ runtimeClassName: ""
 
 ## Set default rootUser, rootPassword
 ## AccessKey and secretKey is generated when not set
-## Distributed MinIO ref: https://min.io/docs/minio/linux/operations/install-deploy-manage/deploy-minio-multi-node-multi-drive.html
+## Distributed B33S ref: https://min.io/docs/minio/linux/operations/install-deploy-manage/deploy-minio-multi-node-multi-drive.html
 ##
 rootUser: ""
 rootPassword: ""
@@ -102,11 +102,11 @@ rootPassword: ""
 ## others depend on enabled status of corresponding sections.
 existingSecret: ""
 
-## Directory on the MinIO pof
+## Directory on the B33S pof
 certsPath: "/etc/minio/certs/"
 configPathmc: "/etc/minio/mc/"
 
-## Path where PV would be mounted on the MinIO Pod
+## Path where PV would be mounted on the B33S Pod
 mountPath: "/export"
 ## Override the root directory which the minio server should serve from.
 ## If left empty, it defaults to the value of {{ .Values.mountPath }}
@@ -116,12 +116,12 @@ bucketRoot: ""
 
 # Number of drives attached to a node
 drivesPerNode: 1
-# Number of MinIO containers running
+# Number of B33S containers running
 replicas: 16
-# Number of expanded MinIO clusters
+# Number of expanded B33S clusters
 pools: 1
 
-## TLS Settings for MinIO
+## TLS Settings for B33S
 tls:
   enabled: false
   ## Create a secret with private.key and public.crt files and pass that here. Ref: https://github.com/infobsmi/b33s/tree/master/docs/tls/kubernetes#2-create-kubernetes-secret
@@ -129,9 +129,9 @@ tls:
   publicCrt: public.crt
   privateKey: private.key
 
-## Trusted Certificates Settings for MinIO. Ref: https://min.io/docs/minio/linux/operations/network-encryption.html#third-party-certificate-authorities
+## Trusted Certificates Settings for B33S. Ref: https://min.io/docs/minio/linux/operations/network-encryption.html#third-party-certificate-authorities
 ## Bundle multiple trusted certificates into one secret and pass that here. Ref: https://github.com/infobsmi/b33s/tree/master/docs/tls/kubernetes#2-create-kubernetes-secret
-## When using self-signed certificates, remember to include MinIO's own certificate in the bundle with key public.crt.
+## When using self-signed certificates, remember to include B33S's own certificate in the bundle with key public.crt.
 ## If certSecret is left empty and tls is enabled, this chart installs the public certificate from .Values.tls.certSecret.
 trustedCertsSecret: ""
 
@@ -166,7 +166,7 @@ persistence:
   ##
   subPath: ""
 
-## Expose the MinIO service to be accessed from outside the cluster (LoadBalancer service).
+## Expose the B33S service to be accessed from outside the cluster (LoadBalancer service).
 ## or access it from within the cluster (ClusterIP service). Set the service type and the port to serve it.
 ## ref: http://kubernetes.io/docs/user-guide/services/
 ##
@@ -237,7 +237,7 @@ tolerations: []
 affinity: {}
 topologySpreadConstraints: []
 
-## Add stateful containers to have security context, if enabled MinIO will run as this
+## Add stateful containers to have security context, if enabled B33S will run as this
 ## user and group NOTE: securityContext is only enabled if persistence.enabled=true
 securityContext:
   enabled: true
@@ -333,7 +333,7 @@ users:
   ## Username, password and policy to be assigned to the user
   ## Default policies are [readonly|readwrite|writeonly|consoleAdmin|diagnostics]
   ## Add new policies as explained here https://min.io/docs/minio/kubernetes/upstream/administration/identity-access-management.html#access-management
-  ## NOTE: this will fail if LDAP is enabled in your MinIO deployment
+  ## NOTE: this will fail if LDAP is enabled in your B33S deployment
   ## make sure to disable this if you are using LDAP.
   - accessKey: console
     secretKey: console123
@@ -451,7 +451,7 @@ postJob:
   tolerations: []
   affinity: {}
 
-## Use this field to add environment variables relevant to MinIO server. These fields will be passed on to MinIO container(s)
+## Use this field to add environment variables relevant to B33S server. These fields will be passed on to B33S container(s)
 ## when Chart is deployed
 environment:
   ## Please refer for comprehensive list https://min.io/docs/minio/linux/reference/minio-server/minio-server.html
@@ -490,7 +490,7 @@ podDisruptionBudget:
   enabled: false
   maxUnavailable: 1
 
-## Specify the service account to use for the MinIO pods. If 'create' is set to 'false'
+## Specify the service account to use for the B33S pods. If 'create' is set to 'false'
 ## and 'name' is left unspecified, the account 'default' will be used.
 serviceAccount:
   create: true

@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -869,7 +869,7 @@ func getNodeOnlineTotalMD() MetricDescription {
 		Namespace: clusterMetricNamespace,
 		Subsystem: nodesSubsystem,
 		Name:      onlineTotal,
-		Help:      "Total number of MinIO nodes online",
+		Help:      "Total number of B33S nodes online",
 		Type:      gaugeMetric,
 	}
 }
@@ -879,27 +879,27 @@ func getNodeOfflineTotalMD() MetricDescription {
 		Namespace: clusterMetricNamespace,
 		Subsystem: nodesSubsystem,
 		Name:      offlineTotal,
-		Help:      "Total number of MinIO nodes offline",
+		Help:      "Total number of B33S nodes offline",
 		Type:      gaugeMetric,
 	}
 }
 
-func getMinIOVersionMD() MetricDescription {
+func getB33SVersionMD() MetricDescription {
 	return MetricDescription{
 		Namespace: minioMetricNamespace,
 		Subsystem: softwareSubsystem,
 		Name:      versionInfo,
-		Help:      "MinIO Release tag for the server",
+		Help:      "B33S Release tag for the server",
 		Type:      gaugeMetric,
 	}
 }
 
-func getMinIOCommitMD() MetricDescription {
+func getB33SCommitMD() MetricDescription {
 	return MetricDescription{
 		Namespace: minioMetricNamespace,
 		Subsystem: softwareSubsystem,
 		Name:      commitInfo,
-		Help:      "Git commit hash for the MinIO release",
+		Help:      "Git commit hash for the B33S release",
 		Type:      gaugeMetric,
 	}
 }
@@ -919,7 +919,7 @@ func getMinioFDOpenMD() MetricDescription {
 		Namespace: nodeMetricNamespace,
 		Subsystem: fileDescriptorSubsystem,
 		Name:      openTotal,
-		Help:      "Total number of open file descriptors by the MinIO Server process",
+		Help:      "Total number of open file descriptors by the B33S Server process",
 		Type:      gaugeMetric,
 	}
 }
@@ -929,7 +929,7 @@ func getMinioFDLimitMD() MetricDescription {
 		Namespace: nodeMetricNamespace,
 		Subsystem: fileDescriptorSubsystem,
 		Name:      limitTotal,
-		Help:      "Limit on total number of open file descriptors for the MinIO Server process",
+		Help:      "Limit on total number of open file descriptors for the B33S Server process",
 		Type:      gaugeMetric,
 	}
 }
@@ -974,7 +974,7 @@ func getMinioProcessIOReadCachedBytesMD() MetricDescription {
 	}
 }
 
-func getMinIOProcessSysCallRMD() MetricDescription {
+func getB33SProcessSysCallRMD() MetricDescription {
 	return MetricDescription{
 		Namespace: nodeMetricNamespace,
 		Subsystem: sysCallSubsystem,
@@ -984,7 +984,7 @@ func getMinIOProcessSysCallRMD() MetricDescription {
 	}
 }
 
-func getMinIOProcessSysCallWMD() MetricDescription {
+func getB33SProcessSysCallWMD() MetricDescription {
 	return MetricDescription{
 		Namespace: nodeMetricNamespace,
 		Subsystem: sysCallSubsystem,
@@ -994,7 +994,7 @@ func getMinIOProcessSysCallWMD() MetricDescription {
 	}
 }
 
-func getMinIOGORoutineCountMD() MetricDescription {
+func getB33SGORoutineCountMD() MetricDescription {
 	return MetricDescription{
 		Namespace: nodeMetricNamespace,
 		Subsystem: goRoutines,
@@ -1004,27 +1004,27 @@ func getMinIOGORoutineCountMD() MetricDescription {
 	}
 }
 
-func getMinIOProcessStartTimeMD() MetricDescription {
+func getB33SProcessStartTimeMD() MetricDescription {
 	return MetricDescription{
 		Namespace: nodeMetricNamespace,
 		Subsystem: processSubsystem,
 		Name:      startTime,
-		Help:      "Start time for MinIO process per node, time in seconds since Unix epoc",
+		Help:      "Start time for B33S process per node, time in seconds since Unix epoc",
 		Type:      gaugeMetric,
 	}
 }
 
-func getMinIOProcessUptimeMD() MetricDescription {
+func getB33SProcessUptimeMD() MetricDescription {
 	return MetricDescription{
 		Namespace: nodeMetricNamespace,
 		Subsystem: processSubsystem,
 		Name:      upTime,
-		Help:      "Uptime for MinIO process per node in seconds",
+		Help:      "Uptime for B33S process per node in seconds",
 		Type:      gaugeMetric,
 	}
 }
 
-func getMinIOProcessResidentMemory() MetricDescription {
+func getB33SProcessResidentMemory() MetricDescription {
 	return MetricDescription{
 		Namespace: nodeMetricNamespace,
 		Subsystem: processSubsystem,
@@ -1034,7 +1034,7 @@ func getMinIOProcessResidentMemory() MetricDescription {
 	}
 }
 
-func getMinIOProcessCPUTime() MetricDescription {
+func getB33SProcessCPUTime() MetricDescription {
 	return MetricDescription{
 		Namespace: nodeMetricNamespace,
 		Subsystem: processSubsystem,
@@ -1083,7 +1083,7 @@ func getMinioProcMetrics() *MetricsGroup {
 		if io.SyscR > 0 {
 			metrics = append(metrics,
 				Metric{
-					Description: getMinIOProcessSysCallRMD(),
+					Description: getB33SProcessSysCallRMD(),
 					Value:       float64(io.SyscR),
 				})
 		}
@@ -1091,7 +1091,7 @@ func getMinioProcMetrics() *MetricsGroup {
 		if io.SyscW > 0 {
 			metrics = append(metrics,
 				Metric{
-					Description: getMinIOProcessSysCallWMD(),
+					Description: getB33SProcessSysCallWMD(),
 					Value:       float64(io.SyscW),
 				})
 		}
@@ -1131,7 +1131,7 @@ func getMinioProcMetrics() *MetricsGroup {
 		if startTime > 0 {
 			metrics = append(metrics,
 				Metric{
-					Description: getMinIOProcessStartTimeMD(),
+					Description: getB33SProcessStartTimeMD(),
 					Value:       startTime,
 				})
 		}
@@ -1139,7 +1139,7 @@ func getMinioProcMetrics() *MetricsGroup {
 		if !globalBootTime.IsZero() {
 			metrics = append(metrics,
 				Metric{
-					Description: getMinIOProcessUptimeMD(),
+					Description: getB33SProcessUptimeMD(),
 					Value:       time.Since(globalBootTime).Seconds(),
 				})
 		}
@@ -1147,7 +1147,7 @@ func getMinioProcMetrics() *MetricsGroup {
 		if stat.ResidentMemory() > 0 {
 			metrics = append(metrics,
 				Metric{
-					Description: getMinIOProcessResidentMemory(),
+					Description: getB33SProcessResidentMemory(),
 					Value:       float64(stat.ResidentMemory()),
 				})
 		}
@@ -1155,7 +1155,7 @@ func getMinioProcMetrics() *MetricsGroup {
 		if stat.CPUTime() > 0 {
 			metrics = append(metrics,
 				Metric{
-					Description: getMinIOProcessCPUTime(),
+					Description: getB33SProcessCPUTime(),
 					Value:       stat.CPUTime(),
 				})
 		}
@@ -1168,7 +1168,7 @@ func getGoMetrics() *MetricsGroup {
 	mg := &MetricsGroup{}
 	mg.RegisterRead(func(ctx context.Context) (metrics []Metric) {
 		metrics = append(metrics, Metric{
-			Description: getMinIOGORoutineCountMD(),
+			Description: getB33SGORoutineCountMD(),
 			Value:       float64(runtime.NumGoroutine()),
 		})
 		return
@@ -1424,11 +1424,11 @@ func getMinioVersionMetrics() *MetricsGroup {
 	mg := &MetricsGroup{}
 	mg.RegisterRead(func(_ context.Context) (metrics []Metric) {
 		metrics = append(metrics, Metric{
-			Description:    getMinIOCommitMD(),
+			Description:    getB33SCommitMD(),
 			VariableLabels: map[string]string{"commit": CommitID},
 		})
 		metrics = append(metrics, Metric{
-			Description:    getMinIOVersionMD(),
+			Description:    getB33SVersionMD(),
 			VariableLabels: map[string]string{"version": Version},
 		})
 		return
@@ -2197,7 +2197,7 @@ type minioClusterCollector struct {
 func newMinioClusterCollector(metricsGroups []*MetricsGroup) *minioClusterCollector {
 	return &minioClusterCollector{
 		metricsGroups: metricsGroups,
-		desc:          prometheus.NewDesc("minio_stats", "Statistics exposed by MinIO server per cluster", nil, nil),
+		desc:          prometheus.NewDesc("minio_stats", "Statistics exposed by B33S server per cluster", nil, nil),
 	}
 }
 
@@ -2311,7 +2311,7 @@ func populateAndPublish(metricsGroups []*MetricsGroup, publish func(m Metric) bo
 
 // Collect is called by the Prometheus registry when collecting metrics.
 func (c *minioNodeCollector) Collect(ch chan<- prometheus.Metric) {
-	// Expose MinIO's version information
+	// Expose B33S's version information
 	minioVersionInfo.WithLabelValues(Version, CommitID).Set(1.0)
 
 	populateAndPublish(c.metricsGroups, func(metric Metric) bool {
@@ -2380,7 +2380,7 @@ func getOrderedLabelValueArrays(labelsWithValue map[string]string) (labels, valu
 func newMinioCollectorNode(metricsGroups []*MetricsGroup) *minioNodeCollector {
 	return &minioNodeCollector{
 		metricsGroups: metricsGroups,
-		desc:          prometheus.NewDesc("minio_stats", "Statistics exposed by MinIO server per node", nil, nil),
+		desc:          prometheus.NewDesc("minio_stats", "Statistics exposed by B33S server per node", nil, nil),
 	}
 }
 

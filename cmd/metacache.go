@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -160,5 +160,5 @@ func (m *metacache) delete(ctx context.Context) {
 		logger.LogIf(ctx, errors.New("metacache.delete: expected objAPI to be 'deleteAllStorager'"))
 		return
 	}
-	ez.deleteAll(ctx, minioMetaBucket, metacachePrefixForID(m.bucket, m.id))
+	ez.deleteAll(ctx, b33sMetaBucket, metacachePrefixForID(m.bucket, m.id))
 }

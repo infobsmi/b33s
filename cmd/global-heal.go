@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2022 MinIO, Inc.
+// Copyright (c) 2015-2022 B33S, Inc.
 //
 // This file is part of B33S Object Storage stack
 //
@@ -25,14 +25,14 @@ import (
 	"time"
 
 	"github.com/dustin/go-humanize"
-	"github.com/minio/madmin-go/v2"
+	"github.com/b33s/madmin-go/v2"
 	"github.com/infobsmi/b33s/internal/color"
 	"github.com/infobsmi/b33s/internal/config/storageclass"
 	"github.com/infobsmi/b33s/internal/jobtokens"
 	"github.com/infobsmi/b33s/internal/logger"
-	"github.com/minio/pkg/console"
-	"github.com/minio/pkg/env"
-	"github.com/minio/pkg/wildcard"
+	"github.com/b33s/pkg/console"
+	"github.com/b33s/pkg/env"
+	"github.com/b33s/pkg/wildcard"
 )
 
 const (
@@ -55,7 +55,7 @@ func newBgHealSequence() *healSequence {
 		startTime:   UTCNow(),
 		clientToken: bgHealingUUID,
 		// run-background heal with reserved bucket
-		bucket:   minioReservedBucket,
+		bucket:   b33sReservedBucket,
 		settings: hs,
 		currentStatus: healSequenceStatus{
 			Summary:      healNotStartedStatus,
@@ -302,8 +302,8 @@ func (er *erasureObjects) healErasureSet(ctx context.Context, buckets []string, 
 			}
 			// We might land at .metacache, .trash, .multipart
 			// no need to heal them skip, only when bucket
-			// is '.minio.sys'
-			if bucket == minioMetaBucket {
+			// is '.b33s.sys'
+			if bucket == b33sMetaBucket {
 				if wildcard.Match("buckets/*/.metacache/*", entry.name) {
 					return
 				}

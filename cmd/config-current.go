@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -87,13 +87,13 @@ func initHelp() {
 		config.HelpKV{
 			Key:         config.SubnetSubSys,
 			Type:        "string",
-			Description: "register the cluster to MinIO SUBNET",
+			Description: "register the cluster to B33S SUBNET",
 			Optional:    true,
 		},
 		config.HelpKV{
 			Key:         config.CallhomeSubSys,
 			Type:        "string",
-			Description: "enable callhome to MinIO SUBNET",
+			Description: "enable callhome to B33S SUBNET",
 			Optional:    true,
 		},
 		config.HelpKV{

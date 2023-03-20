@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -297,7 +297,7 @@ func (st *HTTPStats) toServerHTTPStats() ServerHTTPStats {
 // Update statistics from http request and response data
 func (st *HTTPStats) updateStats(api string, r *http.Request, w *xhttp.ResponseRecorder) {
 	// Ignore non S3 requests
-	if strings.HasSuffix(r.URL.Path, minioReservedBucketPathWithSlash) {
+	if strings.HasSuffix(r.URL.Path, b33sReservedBucketPathWithSlash) {
 		return
 	}
 

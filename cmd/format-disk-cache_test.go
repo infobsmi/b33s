@@ -1,6 +1,6 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33SObject Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -36,7 +36,7 @@ func TestDiskCacheFormat(t *testing.T) {
 		t.Fatal(err)
 	}
 	// Do the basic sanity checks to check if initFormatCache() did its job.
-	cacheFormatPath := pathJoin(fsDirs[0], minioMetaBucket, formatConfigFile)
+	cacheFormatPath := pathJoin(fsDirs[0], b33sMetaBucket, formatConfigFile)
 	f, err := os.OpenFile(cacheFormatPath, os.O_RDWR|os.O_SYNC, 0)
 	if err != nil {
 		t.Fatal(err)

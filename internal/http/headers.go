@@ -1,6 +1,6 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33SObject Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -91,13 +91,13 @@ const (
 	AmzBucketReplicationStatus    = "X-Amz-Replication-Status"
 	AmzSnowballExtract            = "X-Amz-Meta-Snowball-Auto-Extract"
 
-	// MinIOSnowballIgnoreDirs will skip creating empty directory objects.
-	MinIOSnowballIgnoreDirs = "X-Amz-Meta-Minio-Snowball-Ignore-Dirs"
-	// MinIOSnowballIgnoreErrors will ignore recoverable errors, typically single files failing to upload.
+	// B33SSnowballIgnoreDirs will skip creating empty directory objects.
+	B33SSnowballIgnoreDirs = "X-Amz-Meta-Minio-Snowball-Ignore-Dirs"
+	// B33SSnowballIgnoreErrors will ignore recoverable errors, typically single files failing to upload.
 	// An error will be printed to console instead.
-	MinIOSnowballIgnoreErrors = "X-Amz-Meta-Minio-Snowball-Ignore-Errors"
-	// MinIOSnowballPrefix will apply this prefix (plus / at end) to all extracted objects
-	MinIOSnowballPrefix = "X-Amz-Meta-Minio-Snowball-Prefix"
+	B33SSnowballIgnoreErrors = "X-Amz-Meta-Minio-Snowball-Ignore-Errors"
+	// B33SSnowballPrefix will apply this prefix (plus / at end) to all extracted objects
+	B33SSnowballPrefix = "X-Amz-Meta-Minio-Snowball-Prefix"
 
 	// Object lock enabled
 	AmzObjectLockEnabled = "x-amz-bucket-object-lock-enabled"
@@ -151,7 +151,7 @@ const (
 	MinioDeploymentID = "x-minio-deployment-id"
 
 	// Server-Status
-	MinIOServerStatus = "x-minio-server-status"
+	B33SServerStatus = "x-minio-server-status"
 
 	// Content Checksums
 	AmzChecksumAlgo   = "x-amz-checksum-algorithm"
@@ -162,54 +162,54 @@ const (
 	AmzChecksumMode   = "x-amz-checksum-mode"
 
 	// Delete special flag to force delete a bucket or a prefix
-	MinIOForceDelete = "x-minio-force-delete"
+	B33SForceDelete = "x-minio-force-delete"
 
 	// Create special flag to force create a bucket
-	MinIOForceCreate = "x-minio-force-create"
+	B33SForceCreate = "x-minio-force-create"
 
 	// Header indicates if the mtime should be preserved by client
-	MinIOSourceMTime = "x-minio-source-mtime"
+	B33SSourceMTime = "x-minio-source-mtime"
 
 	// Header indicates if the etag should be preserved by client
-	MinIOSourceETag = "x-minio-source-etag"
+	B33SSourceETag = "x-minio-source-etag"
 
 	// Writes expected write quorum
-	MinIOWriteQuorum = "x-minio-write-quorum"
+	B33SWriteQuorum = "x-minio-write-quorum"
 
 	// Reports number of drives currently healing
-	MinIOHealingDrives = "x-minio-healing-drives"
+	B33SHealingDrives = "x-minio-healing-drives"
 
 	// Header indicates if the delete marker should be preserved by client
-	MinIOSourceDeleteMarker = "x-minio-source-deletemarker"
+	B33SSourceDeleteMarker = "x-minio-source-deletemarker"
 
 	// Header indicates if the delete marker version needs to be purged.
-	MinIOSourceDeleteMarkerDelete = "x-minio-source-deletemarker-delete"
+	B33SSourceDeleteMarkerDelete = "x-minio-source-deletemarker-delete"
 
 	// Header indicates permanent delete replication status.
-	MinIODeleteReplicationStatus = "X-Minio-Replication-Delete-Status"
+	B33SDeleteReplicationStatus = "X-Minio-Replication-Delete-Status"
 	// Header indicates delete-marker replication status.
-	MinIODeleteMarkerReplicationStatus = "X-Minio-Replication-DeleteMarker-Status"
+	B33SDeleteMarkerReplicationStatus = "X-Minio-Replication-DeleteMarker-Status"
 	// Header indicates if its a GET/HEAD proxy request for active-active replication
-	MinIOSourceProxyRequest = "X-Minio-Source-Proxy-Request"
+	B33SSourceProxyRequest = "X-Minio-Source-Proxy-Request"
 	// Header indicates that this request is a replication request to create a REPLICA
-	MinIOSourceReplicationRequest = "X-Minio-Source-Replication-Request"
+	B33SSourceReplicationRequest = "X-Minio-Source-Replication-Request"
 	// Header indicates replication reset status.
-	MinIOReplicationResetStatus = "X-Minio-Replication-Reset-Status"
+	B33SReplicationResetStatus = "X-Minio-Replication-Reset-Status"
 	// Header indicating target cluster can receive delete marker replication requests because object has been replicated
-	MinIOTargetReplicationReady = "X-Minio-Replication-Ready"
+	B33STargetReplicationReady = "X-Minio-Replication-Ready"
 	// Header asking if cluster can receive delete marker replication request now.
-	MinIOCheckDMReplicationReady = "X-Minio-Check-Replication-Ready"
+	B33SCheckDMReplicationReady = "X-Minio-Check-Replication-Ready"
 	// Header indiicates last tag update time on source
-	MinIOSourceTaggingTimestamp = "X-Minio-Source-Replication-Tagging-Timestamp"
+	B33SSourceTaggingTimestamp = "X-Minio-Source-Replication-Tagging-Timestamp"
 	// Header indiicates last rtention update time on source
-	MinIOSourceObjectRetentionTimestamp = "X-Minio-Source-Replication-Retention-Timestamp"
+	B33SSourceObjectRetentionTimestamp = "X-Minio-Source-Replication-Retention-Timestamp"
 	// Header indiicates last rtention update time on source
-	MinIOSourceObjectLegalHoldTimestamp = "X-Minio-Source-Replication-LegalHold-Timestamp"
+	B33SSourceObjectLegalHoldTimestamp = "X-Minio-Source-Replication-LegalHold-Timestamp"
 	// predicted date/time of transition
-	MinIOTransition = "X-Minio-Transition"
+	B33STransition = "X-Minio-Transition"
 
-	// MinIOCompressed is returned when object is compressed
-	MinIOCompressed = "X-Minio-Compressed"
+	// B33SCompressed is returned when object is compressed
+	B33SCompressed = "X-Minio-Compressed"
 
 	// SUBNET related
 	SubnetAPIKey = "x-subnet-api-key"
@@ -226,6 +226,6 @@ const (
 
 // http headers sent to webhook targets
 const (
-	// Reports the version of MinIO server
-	MinIOVersion = "x-minio-version"
+	// Reports the version of B33S server
+	B33SVersion = "x-minio-version"
 )

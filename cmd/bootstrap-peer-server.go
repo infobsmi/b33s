@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2022 MinIO, Inc.
+// Copyright (c) 2015-2022 B33S, Inc.
 //
 // This file is part of B33S Object Storage stack
 //
@@ -33,13 +33,13 @@ import (
 	xhttp "github.com/infobsmi/b33s/internal/http"
 	"github.com/infobsmi/b33s/internal/logger"
 	"github.com/infobsmi/b33s/internal/rest"
-	"github.com/minio/pkg/env"
+	"github.com/b33s/pkg/env"
 )
 
 const (
 	bootstrapRESTVersion       = "v1"
 	bootstrapRESTVersionPrefix = SlashSeparator + bootstrapRESTVersion
-	bootstrapRESTPrefix        = minioReservedBucketPath + "/bootstrap"
+	bootstrapRESTPrefix        = b33sReservedBucketPath + "/bootstrap"
 	bootstrapRESTPath          = bootstrapRESTPrefix + bootstrapRESTVersionPrefix
 )
 

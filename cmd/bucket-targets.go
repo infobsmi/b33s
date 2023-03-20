@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -24,14 +24,14 @@ import (
 	"sync"
 	"time"
 
-	jsoniter "github.com/json-iterator/go"
-	"github.com/minio/madmin-go/v2"
 	"github.com/infobsmi/b33s-go/v7"
 	"github.com/infobsmi/b33s-go/v7/pkg/credentials"
 	"github.com/infobsmi/b33s/internal/bucket/replication"
 	"github.com/infobsmi/b33s/internal/crypto"
 	"github.com/infobsmi/b33s/internal/kms"
 	"github.com/infobsmi/b33s/internal/logger"
+	jsoniter "github.com/json-iterator/go"
+	"github.com/minio/madmin-go/v2"
 )
 
 const (

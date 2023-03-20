@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -29,9 +29,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/minio/madmin-go/v2"
+	"github.com/b33s/madmin-go/v2"
 	"github.com/infobsmi/b33s/internal/logger"
-	"github.com/minio/pkg/env"
+	"github.com/b33s/pkg/env"
 )
 
 //go:generate stringer -type=storageMetric -trimprefix=storageMetric $GOFILE
@@ -797,15 +797,15 @@ func (p *xlStorageDiskIDCheck) monitorDiskStatus() {
 			// Queue is still full, no need to check.
 			continue
 		}
-		err := p.storage.WriteAll(context.Background(), minioMetaTmpBucket, fn, []byte{10000: 42})
+		err := p.storage.WriteAll(context.Background(), b33sMetaTmpBucket, fn, []byte{10000: 42})
 		if err != nil {
 			continue
 		}
-		b, err := p.storage.ReadAll(context.Background(), minioMetaTmpBucket, fn)
+		b, err := p.storage.ReadAll(context.Background(), b33sMetaTmpBucket, fn)
 		if err != nil || len(b) != 10001 {
 			continue
 		}
-		err = p.storage.Delete(context.Background(), minioMetaTmpBucket, fn, DeleteOptions{
+		err = p.storage.Delete(context.Background(), b33sMetaTmpBucket, fn, DeleteOptions{
 			Recursive: false,
 			Force:     false,
 		})

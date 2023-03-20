@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -349,7 +349,7 @@ func (c *iamCache) removeGroupFromMembershipsMap(group string) {
 // and group map and check the appropriate policy maps directly.
 func (c *iamCache) policyDBGet(mode UsersSysType, name string, isGroup bool) ([]string, time.Time, error) {
 	if isGroup {
-		if mode == MinIOUsersSysType {
+		if mode == B33SUsersSysType {
 			g, ok := c.iamGroupsMap[name]
 			if !ok {
 				return nil, time.Time{}, errNoSuchGroup
@@ -460,7 +460,7 @@ func (store *IAMStoreSys) LoadIAMCache(ctx context.Context) error {
 		// Sets default canned policies, if none are set.
 		setDefaultCannedPolicies(newCache.iamPolicyDocsMap)
 
-		if store.getUsersSysType() == MinIOUsersSysType {
+		if store.getUsersSysType() == B33SUsersSysType {
 			if err := store.loadUsers(ctx, regUser, newCache.iamUsersMap); err != nil {
 				return err
 			}
@@ -805,7 +805,7 @@ func (store *IAMStoreSys) GetGroupDescription(group string) (gd madmin.GroupDesc
 
 	policy := strings.Join(ps, ",")
 
-	if store.getUsersSysType() != MinIOUsersSysType {
+	if store.getUsersSysType() != B33SUsersSysType {
 		return madmin.GroupDesc{
 			Name:      group,
 			Policy:    policy,
@@ -833,7 +833,7 @@ func (store *IAMStoreSys) ListGroups(ctx context.Context) (res []string, err err
 	cache := store.lock()
 	defer store.unlock()
 
-	if store.getUsersSysType() == MinIOUsersSysType {
+	if store.getUsersSysType() == B33SUsersSysType {
 		m := map[string]GroupInfo{}
 		err = store.loadGroups(ctx, m)
 		if err != nil {
@@ -880,7 +880,7 @@ func (store *IAMStoreSys) PolicyDBUpdate(ctx context.Context, name string, isGro
 	if !isGroup {
 		mp = cache.iamUserPolicyMap[name]
 	} else {
-		if store.getUsersSysType() == MinIOUsersSysType {
+		if store.getUsersSysType() == B33SUsersSysType {
 			g, ok := cache.iamGroupsMap[name]
 			if !ok {
 				return updatedAt, nil, errNoSuchGroup
@@ -1011,7 +1011,7 @@ func (store *IAMStoreSys) PolicyNotificationHandler(ctx context.Context, policy 
 			if !pset.Contains(policy) {
 				continue
 			}
-			if store.getUsersSysType() == MinIOUsersSysType {
+			if store.getUsersSysType() == B33SUsersSysType {
 				_, ok := cache.iamUsersMap[u]
 				if !ok {
 					// happens when account is deleted or
@@ -1054,7 +1054,7 @@ func (store *IAMStoreSys) DeletePolicy(ctx context.Context, policy string) error
 	groups := []string{}
 	for u, mp := range cache.iamUserPolicyMap {
 		pset := mp.policySet()
-		if store.getUsersSysType() == MinIOUsersSysType {
+		if store.getUsersSysType() == B33SUsersSysType {
 			if _, ok := cache.iamUsersMap[u]; !ok {
 				// This case can happen when a temporary account is
 				// deleted or expired - remove it from userPolicyMap.
@@ -1241,7 +1241,7 @@ func filterPolicies(cache *iamCache, policyName string, bucketName string) (stri
 }
 
 // FilterPolicies - accepts a comma separated list of policy names as a string
-// and bucket and returns only policies that currently exist in MinIO. If
+// and bucket and returns only policies that currently exist in B33S. If
 // bucketName is non-empty, additionally filters policies matching the bucket.
 // The first returned value is the list of currently existing policies, and the
 // second is their combined policy definition.
@@ -1509,7 +1509,7 @@ func (store *IAMStoreSys) GetUserInfo(name string) (u madmin.UserInfo, err error
 	cache := store.rlock()
 	defer store.runlock()
 
-	if store.getUsersSysType() != MinIOUsersSysType {
+	if store.getUsersSysType() != B33SUsersSysType {
 		// If the user has a mapped policy or is a member of a group, we
 		// return that info. Otherwise we return error.
 		var groups []string
@@ -1593,7 +1593,7 @@ func (store *IAMStoreSys) UserNotificationHandler(ctx context.Context, accessKey
 		delete(cache.iamUsersMap, accessKey)
 
 		// 1. Start with updating user-group memberships
-		if store.getUsersSysType() == MinIOUsersSysType {
+		if store.getUsersSysType() == B33SUsersSysType {
 			memberOf := cache.iamUserGroupMemberships[accessKey].ToSlice()
 			for _, group := range memberOf {
 				_, removeErr := removeMembersFromGroup(ctx, store, cache, group, []string{accessKey}, true)
@@ -1670,7 +1670,7 @@ func (store *IAMStoreSys) DeleteUser(ctx context.Context, accessKey string, user
 	defer store.unlock()
 
 	// first we remove the user from their groups.
-	if store.getUsersSysType() == MinIOUsersSysType && userType == regUser {
+	if store.getUsersSysType() == B33SUsersSysType && userType == regUser {
 		memberOf := cache.iamUserGroupMemberships[accessKey].ToSlice()
 		for _, group := range memberOf {
 			_, removeErr := removeMembersFromGroup(ctx, store, cache, group, []string{accessKey}, false)
@@ -2210,7 +2210,7 @@ func (store *IAMStoreSys) LoadUser(ctx context.Context, accessKey string) {
 			store.loadUser(ctx, accessKey, svcUser, cache.iamUsersMap)
 			if svc, found := cache.iamUsersMap[accessKey]; found {
 				// Load parent user and mapped policies.
-				if store.getUsersSysType() == MinIOUsersSysType {
+				if store.getUsersSysType() == B33SUsersSysType {
 					store.loadUser(ctx, svc.Credentials.ParentUser, regUser, cache.iamUsersMap)
 				}
 				store.loadMappedPolicy(ctx, svc.Credentials.ParentUser, regUser, false, cache.iamUserPolicyMap)

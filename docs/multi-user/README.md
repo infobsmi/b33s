@@ -1,6 +1,6 @@
-# MinIO Multi-user Quickstart Guide [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
+# B33S Multi-user Quickstart Guide [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
-MinIO supports multiple long term users in addition to default user created during server startup. New users can be added after server starts up, and server can be configured to deny or allow access to buckets and resources to each of these users. This document explains how to add/remove users and modify their access rights.
+B33S supports multiple long term users in addition to default user created during server startup. New users can be added after server starts up, and server can be configured to deny or allow access to buckets and resources to each of these users. This document explains how to add/remove users and modify their access rights.
 
 ## Get started
 
@@ -8,8 +8,8 @@ In this document we will explain in detail on how to configure multiple users.
 
 ### 1. Prerequisites
 
-- Install mc - [MinIO Client Quickstart Guide](https://min.io/docs/minio/linux/reference/minio-mc.html#quickstart)
-- Install MinIO - [MinIO Quickstart Guide](https://min.io/docs/minio/linux/index.html#quickstart-for-linux)
+- Install mc - [B33S Client Quickstart Guide](https://min.io/docs/minio/linux/reference/minio-mc.html#quickstart)
+- Install B33S - [B33S Quickstart Guide](https://min.io/docs/minio/linux/index.html#quickstart-for-linux)
 - Configure etcd - [Etcd V3 Quickstart Guide](https://github.com/infobsmi/b33s/blob/master/docs/sts/etcd.md)
 
 ### 2. Create a new user with canned policy
@@ -44,7 +44,7 @@ Create new canned policy by name `getonly` using `getonly.json` policy file.
 mc admin policy add myminio getonly getonly.json
 ```
 
-Create a new user `newuser` on MinIO use `mc admin user`.
+Create a new user `newuser` on B33S use `mc admin user`.
 
 ```
 mc admin user add myminio newuser newuser123
@@ -141,7 +141,7 @@ mc cat myminio-newuser/my-bucketname/my-objectname
 
 You can use policy variables in the *Resource* element and in string comparisons in the *Condition* element.
 
-You can use a policy variable in the Resource element, but only in the resource portion of the ARN. This portion of the ARN appears after the 5th colon (:). You can't use a variable to replace parts of the ARN before the 5th colon, such as the service or account. The following policy might be attached to a group. It gives each of the users in the group full programmatic access to a user-specific object (their own "home directory") in MinIO.
+You can use a policy variable in the Resource element, but only in the resource portion of the ARN. This portion of the ARN appears after the 5th colon (:). You can't use a variable to replace parts of the ARN before the 5th colon, such as the service or account. The following policy might be attached to a group. It gives each of the users in the group full programmatic access to a user-specific object (their own "home directory") in B33S.
 
 ```
 {
@@ -194,7 +194,7 @@ List of policy variables for OpenID based STS.
 "jwt:client_id"
 ```
 
-Following example shows OpenID users with full programmatic access to a OpenID user-specific directory (their own "home directory") in MinIO.
+Following example shows OpenID users with full programmatic access to a OpenID user-specific directory (their own "home directory") in B33S.
 
 ```
 {
@@ -218,7 +218,7 @@ Following example shows OpenID users with full programmatic access to a OpenID u
 }
 ```
 
-If the user is authenticating using an STS credential which was authorized from AD/LDAP we allow `ldap:*` variables, currently only supports `ldap:username`. Following example shows LDAP users full programmatic access to a LDAP user-specific directory (their own "home directory") in MinIO.
+If the user is authenticating using an STS credential which was authorized from AD/LDAP we allow `ldap:*` variables, currently only supports `ldap:username`. Following example shows LDAP users full programmatic access to a LDAP user-specific directory (their own "home directory") in B33S.
 
 ```
 {
@@ -246,9 +246,9 @@ If the user is authenticating using an STS credential which was authorized from 
 
 - *aws:CurrentTime* - This can be used for conditions that check the date and time.
 - *aws:EpochTime* - This is the date in epoch or Unix time, for use with date/time conditions.
-- *aws:PrincipalType* - This value indicates whether the principal is an account (Root credential), user (MinIO user), or assumed role (STS)
+- *aws:PrincipalType* - This value indicates whether the principal is an account (Root credential), user (B33S user), or assumed role (STS)
 - *aws:SecureTransport* - This is a Boolean value that represents whether the request was sent over TLS.
-- *aws:SourceIp* - This is the requester's IP address, for use with IP address conditions. If running behind Nginx like proxies, MinIO preserve's the source IP.
+- *aws:SourceIp* - This is the requester's IP address, for use with IP address conditions. If running behind Nginx like proxies, B33S preserve's the source IP.
 
 ```
 {
@@ -262,12 +262,12 @@ If the user is authenticating using an STS credential which was authorized from 
 }
 ```
 
-- *aws:UserAgent* - This value is a string that contains information about the requester's client application. This string is generated by the client and can be unreliable. You can only use this context key from `mc` or other MinIO SDKs which standardize the User-Agent string.
-- *aws:username* - This is a string containing the friendly name of the current user, this value would point to STS temporary credential in `AssumeRole`ed requests, instead use `jwt:preferred_username` in case of OpenID connect and `ldap:username` in case of AD/LDAP connect. *aws:userid* is an alias to *aws:username* in MinIO.
+- *aws:UserAgent* - This value is a string that contains information about the requester's client application. This string is generated by the client and can be unreliable. You can only use this context key from `mc` or other B33S SDKs which standardize the User-Agent string.
+- *aws:username* - This is a string containing the friendly name of the current user, this value would point to STS temporary credential in `AssumeRole`ed requests, instead use `jwt:preferred_username` in case of OpenID connect and `ldap:username` in case of AD/LDAP connect. *aws:userid* is an alias to *aws:username* in B33S.
 
 ## Explore Further
 
-- [MinIO Client Complete Guide](https://min.io/docs/minio/linux/reference/minio-mc.html)
-- [MinIO STS Quickstart Guide](https://min.io/docs/minio/linux/developers/security-token-service.html)
-- [MinIO Admin Complete Guide](https://min.io/docs/minio/linux/reference/minio-mc-admin.html)
-- [The MinIO documentation website](https://min.io/docs/minio/linux/index.html)
+- [B33S Client Complete Guide](https://min.io/docs/minio/linux/reference/minio-mc.html)
+- [B33S STS Quickstart Guide](https://min.io/docs/minio/linux/developers/security-token-service.html)
+- [B33S Admin Complete Guide](https://min.io/docs/minio/linux/reference/minio-mc-admin.html)
+- [The B33S documentation website](https://min.io/docs/minio/linux/index.html)

@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -26,7 +26,7 @@ import (
 	"time"
 
 	"github.com/infobsmi/b33s/internal/logger"
-	"github.com/minio/pkg/console"
+	"github.com/b33s/pkg/console"
 )
 
 // a bucketMetacache keeps track of all caches generated
@@ -59,7 +59,7 @@ func newBucketMetacache(bucket string, cleanup bool) *bucketMetacache {
 			ez, ok := objAPI.(deleteAllStorager)
 			if ok {
 				ctx := context.Background()
-				ez.deleteAll(ctx, minioMetaBucket, metacachePrefixForID(bucket, slashSeparator))
+				ez.deleteAll(ctx, b33sMetaBucket, metacachePrefixForID(bucket, slashSeparator))
 			}
 		}
 	}
@@ -230,7 +230,7 @@ func (b *bucketMetacache) deleteAll() {
 
 	b.updated = true
 	// Delete all.
-	ez.deleteAll(ctx, minioMetaBucket, metacachePrefixForID(b.bucket, slashSeparator))
+	ez.deleteAll(ctx, b33sMetaBucket, metacachePrefixForID(b.bucket, slashSeparator))
 	b.caches = make(map[string]metacache, 10)
 	b.cachesRoot = make(map[string][]string, 10)
 }

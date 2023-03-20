@@ -1,6 +1,6 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33SObject Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -52,7 +52,7 @@ func (d DeleteMarkerReplication) Validate() error {
 	return nil
 }
 
-// DeleteReplication - whether versioned deletes are replicated - this is a MinIO only
+// DeleteReplication - whether versioned deletes are replicated - this is a B33S only
 // extension.
 type DeleteReplication struct {
 	Status Status `xml:"Status"` // should be set to "Disabled" by default
@@ -134,7 +134,7 @@ type Rule struct {
 	Status                  Status                  `xml:"Status" json:"Status"`
 	Priority                int                     `xml:"Priority" json:"Priority"`
 	DeleteMarkerReplication DeleteMarkerReplication `xml:"DeleteMarkerReplication" json:"DeleteMarkerReplication"`
-	// MinIO extension to replicate versioned deletes
+	// B33S extension to replicate versioned deletes
 	DeleteReplication         DeleteReplication         `xml:"DeleteReplication" json:"DeleteReplication"`
 	Destination               Destination               `xml:"Destination" json:"Destination"`
 	SourceSelectionCriteria   SourceSelectionCriteria   `xml:"SourceSelectionCriteria" json:"SourceSelectionCriteria"`

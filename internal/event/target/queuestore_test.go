@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -28,7 +28,7 @@ import (
 )
 
 // TestDir
-var queueDir = filepath.Join(os.TempDir(), "minio_test")
+var queueDir = filepath.Join(os.TempDir(), "b33s_test")
 
 // Sample test event.
 var testEvent = event.Event{EventVersion: "1.0", EventSource: "test_source", AwsRegion: "test_region", EventTime: "test_time", EventName: event.ObjectAccessedGet}

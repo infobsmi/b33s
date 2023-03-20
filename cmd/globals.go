@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -164,10 +164,10 @@ var (
 		Region: globalMinioDefaultRegion,
 	}
 
-	// MinIO local server address (in `host:port` format)
+	// B33S local server address (in `host:port` format)
 	globalMinioAddr = ""
 
-	// MinIO default port, can be changed through command line.
+	// B33S default port, can be changed through command line.
 	globalMinioPort        = GlobalMinioDefaultPort
 	globalMinioConsolePort = "13333"
 
@@ -260,7 +260,7 @@ var (
 	globalPublicCerts []*x509.Certificate
 
 	globalDomainNames []string      // Root domains for virtual host style requests
-	globalDomainIPs   set.StringSet // Root domain IP address(s) for a distributed MinIO deployment
+	globalDomainIPs   set.StringSet // Root domain IP address(s) for a distributed B33S deployment
 
 	globalOperationTimeout       = newDynamicTimeout(10*time.Minute, 5*time.Minute) // default timeout for general ops
 	globalDeleteOperationTimeout = newDynamicTimeout(5*time.Minute, 1*time.Minute)  // default time for delete ops
@@ -370,10 +370,10 @@ var (
 	globalObjectPerfBucket       = "minio-perf-test-tmp-bucket"
 	globalObjectPerfUserMetadata = "X-Amz-Meta-Minio-Object-Perf" // Clients can set this to bypass S3 API service freeze. Used by object pref tests.
 
-	// MinIO version unix timestamp
+	// B33S version unix timestamp
 	globalVersionUnix uint64
 
-	// MinIO client
+	// B33S client
 	globalMinioClient *minio.Client
 
 	// Public key for subnet confidential information

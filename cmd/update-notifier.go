@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -42,7 +42,7 @@ func prepareUpdateMessage(downloadURL string, older time.Duration) string {
 	newerThan := humanize.RelTime(t, t.Add(older), "ago", "")
 
 	if globalCLIContext.JSON {
-		return fmt.Sprintf("You are running an older version of MinIO released %s, update: %s", newerThan, downloadURL)
+		return fmt.Sprintf("You are running an older version of B33S released %s, update: %s", newerThan, downloadURL)
 	}
 
 	// Return the nicely colored and formatted update message.
@@ -51,7 +51,7 @@ func prepareUpdateMessage(downloadURL string, older time.Duration) string {
 
 // colorizeUpdateMessage - inspired from Yeoman project npm package https://github.com/yeoman/update-notifier
 func colorizeUpdateMessage(updateString string, newerThan string) string {
-	msgLine1Fmt := " You are running an older version of MinIO released %s "
+	msgLine1Fmt := " You are running an older version of B33S released %s "
 	msgLine2Fmt := " Update: %s "
 
 	// Calculate length *without* color coding: with ANSI terminal

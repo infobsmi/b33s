@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -35,7 +35,7 @@ import (
 	"github.com/infobsmi/b33s/internal/hash"
 	"github.com/infobsmi/b33s/internal/logger"
 	"github.com/infobsmi/b33s/internal/sync/errgroup"
-	"github.com/minio/pkg/wildcard"
+	"github.com/b33s/pkg/wildcard"
 )
 
 const (

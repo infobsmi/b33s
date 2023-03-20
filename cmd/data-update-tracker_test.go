@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -129,7 +129,7 @@ func TestDataUpdateTracker(t *testing.T) {
 		},
 		{
 			// System bucket
-			in:    ".minio.sys/ignoreme/pls",
+			in:    ".b33s.sys/ignoreme/pls",
 			exist: false,
 		},
 		{

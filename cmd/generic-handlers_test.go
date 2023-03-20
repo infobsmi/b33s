@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -34,7 +34,7 @@ func TestGuessIsRPC(t *testing.T) {
 		t.Fatal("Unexpected return for nil request")
 	}
 
-	u, err := url.Parse("http://localhost:9000/minio/lock")
+	u, err := url.Parse("http://localhost:9000/b33s/lock")
 	if err != nil {
 		t.Fatal(err)
 	}

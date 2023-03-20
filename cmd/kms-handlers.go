@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2022 MinIO, Inc.
+// Copyright (c) 2015-2022 B33S, Inc.
 //
 // This file is part of B33S Object Storage stack
 //
@@ -23,14 +23,14 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/minio/kes"
-	"github.com/minio/madmin-go/v2"
+	"github.com/b33s/kes"
+	"github.com/b33s/madmin-go/v2"
 	"github.com/infobsmi/b33s/internal/kms"
 	"github.com/infobsmi/b33s/internal/logger"
-	iampolicy "github.com/minio/pkg/iam/policy"
+	iampolicy "github.com/b33s/pkg/iam/policy"
 )
 
-// KMSStatusHandler - GET /minio/kms/v1/status
+// KMSStatusHandler - GET /b33s/kms/v1/status
 func (a kmsAPIHandlers) KMSStatusHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := newContext(r, w, "KMSStatus")
 	defer logger.AuditLog(ctx, w, r, mustGetClaimsFromToken(r))
@@ -67,7 +67,7 @@ func (a kmsAPIHandlers) KMSStatusHandler(w http.ResponseWriter, r *http.Request)
 	writeSuccessResponseJSON(w, resp)
 }
 
-// KMSMetricsHandler - POST /minio/kms/v1/metrics
+// KMSMetricsHandler - POST /b33s/kms/v1/metrics
 func (a kmsAPIHandlers) KMSMetricsHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := newContext(r, w, "KMSMetrics")
 	defer logger.AuditLog(ctx, w, r, mustGetClaimsFromToken(r))
@@ -94,7 +94,7 @@ func (a kmsAPIHandlers) KMSMetricsHandler(w http.ResponseWriter, r *http.Request
 	}
 }
 
-// KMSAPIsHandler - POST /minio/kms/v1/apis
+// KMSAPIsHandler - POST /b33s/kms/v1/apis
 func (a kmsAPIHandlers) KMSAPIsHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := newContext(r, w, "KMSAPIs")
 	defer logger.AuditLog(ctx, w, r, mustGetClaimsFromToken(r))
@@ -131,7 +131,7 @@ type versionResponse struct {
 	Version string `json:"version"`
 }
 
-// KMSVersionHandler - POST /minio/kms/v1/version
+// KMSVersionHandler - POST /b33s/kms/v1/version
 func (a kmsAPIHandlers) KMSVersionHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := newContext(r, w, "KMSVersion")
 	defer logger.AuditLog(ctx, w, r, mustGetClaimsFromToken(r))
@@ -166,7 +166,7 @@ func (a kmsAPIHandlers) KMSVersionHandler(w http.ResponseWriter, r *http.Request
 	writeSuccessResponseJSON(w, v)
 }
 
-// KMSCreateKeyHandler - POST /minio/kms/v1/key/create?key-id=<master-key-id>
+// KMSCreateKeyHandler - POST /b33s/kms/v1/key/create?key-id=<master-key-id>
 func (a kmsAPIHandlers) KMSCreateKeyHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := newContext(r, w, "KMSCreateKey")
 	defer logger.AuditLog(ctx, w, r, mustGetClaimsFromToken(r))
@@ -194,7 +194,7 @@ func (a kmsAPIHandlers) KMSCreateKeyHandler(w http.ResponseWriter, r *http.Reque
 	writeSuccessResponseHeadersOnly(w)
 }
 
-// KMSDeleteKeyHandler - DELETE /minio/kms/v1/key/delete?key-id=<master-key-id>
+// KMSDeleteKeyHandler - DELETE /b33s/kms/v1/key/delete?key-id=<master-key-id>
 func (a kmsAPIHandlers) KMSDeleteKeyHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := newContext(r, w, "KMSDeleteKey")
 	defer logger.AuditLog(ctx, w, r, mustGetClaimsFromToken(r))
@@ -220,7 +220,7 @@ func (a kmsAPIHandlers) KMSDeleteKeyHandler(w http.ResponseWriter, r *http.Reque
 	writeSuccessResponseHeadersOnly(w)
 }
 
-// KMSListKeysHandler - GET /minio/kms/v1/key/list?pattern=<pattern>
+// KMSListKeysHandler - GET /b33s/kms/v1/key/list?pattern=<pattern>
 func (a kmsAPIHandlers) KMSListKeysHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := newContext(r, w, "KMSListKeys")
 	defer logger.AuditLog(ctx, w, r, mustGetClaimsFromToken(r))
@@ -260,7 +260,7 @@ type importKeyRequest struct {
 	Bytes string
 }
 
-// KMSImportKeyHandler - POST /minio/kms/v1/key/import?key-id=<master-key-id>
+// KMSImportKeyHandler - POST /b33s/kms/v1/key/import?key-id=<master-key-id>
 func (a kmsAPIHandlers) KMSImportKeyHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := newContext(r, w, "KMSImportKey")
 	defer logger.AuditLog(ctx, w, r, mustGetClaimsFromToken(r))
@@ -291,7 +291,7 @@ func (a kmsAPIHandlers) KMSImportKeyHandler(w http.ResponseWriter, r *http.Reque
 	writeSuccessResponseHeadersOnly(w)
 }
 
-// KMSKeyStatusHandler - GET /minio/kms/v1/key/status?key-id=<master-key-id>
+// KMSKeyStatusHandler - GET /b33s/kms/v1/key/status?key-id=<master-key-id>
 func (a kmsAPIHandlers) KMSKeyStatusHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := newContext(r, w, "KMSKeyStatus")
 
@@ -320,7 +320,7 @@ func (a kmsAPIHandlers) KMSKeyStatusHandler(w http.ResponseWriter, r *http.Reque
 		KeyID: keyID,
 	}
 
-	kmsContext := kms.Context{"MinIO admin API": "KMSKeyStatusHandler"} // Context for a test key operation
+	kmsContext := kms.Context{"B33S admin API": "KMSKeyStatusHandler"} // Context for a test key operation
 	// 1. Generate a new key using the KMS.
 	key, err := GlobalKMS.GenerateKey(ctx, keyID, kmsContext)
 	if err != nil {
@@ -367,7 +367,7 @@ func (a kmsAPIHandlers) KMSKeyStatusHandler(w http.ResponseWriter, r *http.Reque
 	writeSuccessResponseJSON(w, resp)
 }
 
-// KMSDescribePolicyHandler - GET /minio/kms/v1/policy/describe?policy=<policy>
+// KMSDescribePolicyHandler - GET /b33s/kms/v1/policy/describe?policy=<policy>
 func (a kmsAPIHandlers) KMSDescribePolicyHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := newContext(r, w, "KMSDescribePolicy")
 	defer logger.AuditLog(ctx, w, r, mustGetClaimsFromToken(r))
@@ -403,7 +403,7 @@ type assignPolicyRequest struct {
 	Identity string
 }
 
-// KMSAssignPolicyHandler - POST /minio/kms/v1/policy/assign?policy=<policy>
+// KMSAssignPolicyHandler - POST /b33s/kms/v1/policy/assign?policy=<policy>
 func (a kmsAPIHandlers) KMSAssignPolicyHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := newContext(r, w, "KMSAssignPolicy")
 	defer logger.AuditLog(ctx, w, r, mustGetClaimsFromToken(r))
@@ -435,7 +435,7 @@ func (a kmsAPIHandlers) KMSAssignPolicyHandler(w http.ResponseWriter, r *http.Re
 	writeSuccessResponseHeadersOnly(w)
 }
 
-// KMSSetPolicyHandler - POST /minio/kms/v1/policy/policy?policy=<policy>
+// KMSSetPolicyHandler - POST /b33s/kms/v1/policy/policy?policy=<policy>
 func (a kmsAPIHandlers) KMSSetPolicyHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := newContext(r, w, "KMSSetPolicy")
 	defer logger.AuditLog(ctx, w, r, mustGetClaimsFromToken(r))
@@ -466,7 +466,7 @@ func (a kmsAPIHandlers) KMSSetPolicyHandler(w http.ResponseWriter, r *http.Reque
 	writeSuccessResponseHeadersOnly(w)
 }
 
-// KMSDeletePolicyHandler - DELETE /minio/kms/v1/policy/delete?policy=<policy>
+// KMSDeletePolicyHandler - DELETE /b33s/kms/v1/policy/delete?policy=<policy>
 func (a kmsAPIHandlers) KMSDeletePolicyHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := newContext(r, w, "KMSDeletePolicy")
 	defer logger.AuditLog(ctx, w, r, mustGetClaimsFromToken(r))
@@ -493,7 +493,7 @@ func (a kmsAPIHandlers) KMSDeletePolicyHandler(w http.ResponseWriter, r *http.Re
 	writeSuccessResponseHeadersOnly(w)
 }
 
-// KMSListPoliciesHandler - GET /minio/kms/v1/policy/list?pattern=<pattern>
+// KMSListPoliciesHandler - GET /b33s/kms/v1/policy/list?pattern=<pattern>
 func (a kmsAPIHandlers) KMSListPoliciesHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := newContext(r, w, "KMSListPolicies")
 	defer logger.AuditLog(ctx, w, r, mustGetClaimsFromToken(r))
@@ -529,7 +529,7 @@ func (a kmsAPIHandlers) KMSListPoliciesHandler(w http.ResponseWriter, r *http.Re
 	}
 }
 
-// KMSGetPolicyHandler - GET /minio/kms/v1/policy/get?policy=<policy>
+// KMSGetPolicyHandler - GET /b33s/kms/v1/policy/get?policy=<policy>
 func (a kmsAPIHandlers) KMSGetPolicyHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := newContext(r, w, "KMSGetPolicy")
 	defer logger.AuditLog(ctx, w, r, mustGetClaimsFromToken(r))
@@ -561,7 +561,7 @@ func (a kmsAPIHandlers) KMSGetPolicyHandler(w http.ResponseWriter, r *http.Reque
 	}
 }
 
-// KMSDescribeIdentityHandler - GET /minio/kms/v1/identity/describe?identity=<identity>
+// KMSDescribeIdentityHandler - GET /b33s/kms/v1/identity/describe?identity=<identity>
 func (a kmsAPIHandlers) KMSDescribeIdentityHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := newContext(r, w, "KMSDescribeIdentity")
 	defer logger.AuditLog(ctx, w, r, mustGetClaimsFromToken(r))
@@ -602,7 +602,7 @@ type describeSelfIdentityResponse struct {
 	CreatedBy  string      `json:"createdBy"`
 }
 
-// KMSDescribeSelfIdentityHandler - GET /minio/kms/v1/identity/describe-self
+// KMSDescribeSelfIdentityHandler - GET /b33s/kms/v1/identity/describe-self
 func (a kmsAPIHandlers) KMSDescribeSelfIdentityHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := newContext(r, w, "KMSDescribeSelfIdentity")
 	defer logger.AuditLog(ctx, w, r, mustGetClaimsFromToken(r))
@@ -642,7 +642,7 @@ func (a kmsAPIHandlers) KMSDescribeSelfIdentityHandler(w http.ResponseWriter, r 
 	writeSuccessResponseJSON(w, i)
 }
 
-// KMSDeleteIdentityHandler - DELETE /minio/kms/v1/identity/delete?identity=<identity>
+// KMSDeleteIdentityHandler - DELETE /b33s/kms/v1/identity/delete?identity=<identity>
 func (a kmsAPIHandlers) KMSDeleteIdentityHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := newContext(r, w, "KMSDeleteIdentity")
 	defer logger.AuditLog(ctx, w, r, mustGetClaimsFromToken(r))
@@ -669,7 +669,7 @@ func (a kmsAPIHandlers) KMSDeleteIdentityHandler(w http.ResponseWriter, r *http.
 	writeSuccessResponseHeadersOnly(w)
 }
 
-// KMSListIdentitiesHandler - GET /minio/kms/v1/identity/list?pattern=<pattern>
+// KMSListIdentitiesHandler - GET /b33s/kms/v1/identity/list?pattern=<pattern>
 func (a kmsAPIHandlers) KMSListIdentitiesHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := newContext(r, w, "KMSListIdentities")
 	defer logger.AuditLog(ctx, w, r, mustGetClaimsFromToken(r))

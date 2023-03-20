@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2022 MinIO, Inc.
+// Copyright (c) 2015-2022 B33S, Inc.
 //
 // This file is part of B33S Object Storage stack
 //
@@ -47,9 +47,9 @@ import (
 	"github.com/infobsmi/b33s/internal/hash"
 	xhttp "github.com/infobsmi/b33s/internal/http"
 	"github.com/infobsmi/b33s/internal/logger"
-	"github.com/minio/pkg/bucket/policy"
-	iampolicy "github.com/minio/pkg/iam/policy"
-	"github.com/minio/sio"
+	"github.com/b33s/pkg/bucket/policy"
+	iampolicy "github.com/b33s/pkg/iam/policy"
+	"github.com/b33s/sio"
 )
 
 // Multipart objectAPIHandlers
@@ -1023,7 +1023,7 @@ func (api objectAPIHandlers) CompleteMultipartUploadHandler(w http.ResponseWrite
 		writeErrorResponse(ctx, w, toAPIError(ctx, err), r.URL)
 		return
 	}
-	if r.Header.Get(xMinIOExtract) == "true" && strings.HasSuffix(object, archiveExt) {
+	if r.Header.Get(xB33SExtract) == "true" && strings.HasSuffix(object, archiveExt) {
 		opts := ObjectOptions{VersionID: objInfo.VersionID, MTime: objInfo.ModTime}
 		if _, err := updateObjectMetadataWithZipInfo(ctx, objectAPI, bucket, object, opts); err != nil {
 			writeErrorResponse(ctx, w, toAPIError(ctx, err), r.URL)
@@ -1035,7 +1035,7 @@ func (api objectAPIHandlers) CompleteMultipartUploadHandler(w http.ResponseWrite
 	if dsc := mustReplicate(ctx, bucket, object, getMustReplicateOptions(objInfo, replication.ObjectReplicationType, opts)); dsc.ReplicateAny() {
 		scheduleReplication(ctx, objInfo.Clone(), objectAPI, dsc, replication.ObjectReplicationType)
 	}
-	if _, ok := r.Header[xhttp.MinIOSourceReplicationRequest]; ok {
+	if _, ok := r.Header[xhttp.B33SSourceReplicationRequest]; ok {
 		actualSize, _ := objInfo.GetActualSize()
 		defer globalReplicationStats.UpdateReplicaStat(bucket, actualSize)
 	}

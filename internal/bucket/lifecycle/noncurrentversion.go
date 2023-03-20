@@ -1,6 +1,6 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33SObject Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -41,7 +41,7 @@ func (n NoncurrentVersionExpiration) MarshalXML(e *xml.Encoder, start xml.StartE
 
 // UnmarshalXML decodes NoncurrentVersionExpiration
 func (n *NoncurrentVersionExpiration) UnmarshalXML(d *xml.Decoder, startElement xml.StartElement) error {
-	// To handle xml with MaxNoncurrentVersions from older MinIO releases.
+	// To handle xml with MaxNoncurrentVersions from older B33S releases.
 	// note: only one of MaxNoncurrentVersions or NewerNoncurrentVersions would be present.
 	type noncurrentExpiration struct {
 		XMLName                 xml.Name       `xml:"NoncurrentVersionExpiration"`

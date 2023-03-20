@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -21,9 +21,9 @@ import (
 	"runtime"
 	"runtime/debug"
 
-	"github.com/minio/madmin-go/v2/kernel"
+	"github.com/b33s/madmin-go/v2/kernel"
 	"github.com/infobsmi/b33s/internal/logger"
-	"github.com/minio/pkg/sys"
+	"github.com/b33s/pkg/sys"
 )
 
 func oldLinux() bool {
@@ -47,10 +47,10 @@ func setMaxResources() (err error) {
 	// Set the Go runtime max threads threshold to 90% of kernel setting.
 	sysMaxThreads, err := sys.GetMaxThreads()
 	if err == nil {
-		minioMaxThreads := (sysMaxThreads * 90) / 100
+		b33sMaxThreads := (sysMaxThreads * 90) / 100
 		// Only set max threads if it is greater than the default one
-		if minioMaxThreads > 10000 {
-			debug.SetMaxThreads(minioMaxThreads)
+		if b33sMaxThreads > 10000 {
+			debug.SetMaxThreads(b33sMaxThreads)
 		}
 	}
 

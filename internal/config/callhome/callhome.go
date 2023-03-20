@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2022 MinIO, Inc.
+// Copyright (c) 2015-2022 B33S, Inc.
 //
 // This file is part of B33S Object Storage stack
 //
@@ -92,9 +92,9 @@ func LookupConfig(kvs config.KVS) (cfg Config, err error) {
 		return cfg, err
 	}
 
-	cfg.Enable = env.Get(config.EnvMinIOCallhomeEnable,
+	cfg.Enable = env.Get(config.EnvB33SCallhomeEnable,
 		kvs.GetWithDefault(Enable, DefaultKVS)) == config.EnableOn
-	cfg.Frequency, err = time.ParseDuration(env.Get(config.EnvMinIOCallhomeFrequency,
+	cfg.Frequency, err = time.ParseDuration(env.Get(config.EnvB33SCallhomeFrequency,
 		kvs.GetWithDefault(Frequency, DefaultKVS)))
 	return cfg, err
 }

@@ -1,6 +1,6 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33SObject Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -26,7 +26,7 @@ import (
 	"testing"
 
 	"github.com/gorilla/mux"
-	xnet "github.com/minio/pkg/net"
+	xnet "github.com/b33s/pkg/net"
 )
 
 // Storage REST server, storageRESTReceiver and StorageRESTClient are
@@ -77,8 +77,8 @@ func testStorageAPIListVols(t *testing.T, storage StorageAPI) {
 		expectedResult []VolInfo
 		expectErr      bool
 	}{
-		{nil, []VolInfo{{Name: ".minio.sys"}}, false},
-		{[]string{"foo"}, []VolInfo{{Name: ".minio.sys"}, {Name: "foo"}}, false},
+		{nil, []VolInfo{{Name: ".b33s.sys"}}, false},
+		{[]string{"foo"}, []VolInfo{{Name: ".b33s.sys"}, {Name: "foo"}}, false},
 	}
 
 	for i, testCase := range testCases {

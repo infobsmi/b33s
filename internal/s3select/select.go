@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -30,14 +30,14 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/klauspost/compress/s2"
-	"github.com/klauspost/compress/zstd"
-	gzip "github.com/klauspost/pgzip"
 	"github.com/infobsmi/b33s/internal/s3select/csv"
 	"github.com/infobsmi/b33s/internal/s3select/json"
 	"github.com/infobsmi/b33s/internal/s3select/parquet"
 	"github.com/infobsmi/b33s/internal/s3select/simdj"
 	"github.com/infobsmi/b33s/internal/s3select/sql"
+	"github.com/klauspost/compress/s2"
+	"github.com/klauspost/compress/zstd"
+	gzip "github.com/klauspost/pgzip"
 	"github.com/minio/simdjson-go"
 	"github.com/pierrec/lz4"
 )

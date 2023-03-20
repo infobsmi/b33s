@@ -1,7 +1,7 @@
 //go:build ignore
 // +build ignore
 
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -57,8 +57,8 @@ var (
 
 func init() {
 	flag.StringVar(&stsEndpoint, "sts-ep", "http://localhost:9000", "STS endpoint")
-	flag.StringVar(&minioUsername, "u", "", "MinIO Username")
-	flag.StringVar(&minioPassword, "p", "", "MinIO Password")
+	flag.StringVar(&minioUsername, "u", "", "B33S Username")
+	flag.StringVar(&minioPassword, "p", "", "B33S Password")
 	flag.BoolVar(&displayCreds, "d", false, "Only show generated credentials")
 	flag.DurationVar(&expiryDuration, "e", 0, "Request a duration of validity for the generated credential")
 	flag.StringVar(&bucketToList, "b", "", "Bucket to list (defaults to username)")
@@ -124,7 +124,7 @@ func main() {
 		return
 	}
 
-	// Use generated credentials to authenticate with MinIO server
+	// Use generated credentials to authenticate with B33S server
 	minioClient, err := minio.New(stsEndpointURL.Host, opts)
 	if err != nil {
 		log.Fatalf("Error initializing client: %v", err)

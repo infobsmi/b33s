@@ -1,6 +1,6 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33SObject Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -168,7 +168,7 @@ func TestNewErasureSets(t *testing.T) {
 		// Do not attempt to create this path, the test validates
 		// so that newErasureSets initializes non existing paths
 		// and successfully returns initialized object layer.
-		disk := filepath.Join(globalTestTmpDir, "minio-"+nextSuffix())
+		disk := filepath.Join(globalTestTmpDir, "b33s-"+nextSuffix())
 		erasureDisks = append(erasureDisks, disk)
 		defer os.RemoveAll(disk)
 	}

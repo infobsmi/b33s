@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -457,10 +457,10 @@ func (api objectAPIHandlers) getObjectHandler(ctx context.Context, objectAPI Obj
 			if globalBucketVersioningSys.PrefixEnabled(bucket, object) && gr != nil {
 				if !gr.ObjInfo.VersionPurgeStatus.Empty() {
 					// Shows the replication status of a permanent delete of a version
-					w.Header()[xhttp.MinIODeleteReplicationStatus] = []string{string(gr.ObjInfo.VersionPurgeStatus)}
+					w.Header()[xhttp.B33SDeleteReplicationStatus] = []string{string(gr.ObjInfo.VersionPurgeStatus)}
 				}
 				if !gr.ObjInfo.ReplicationStatus.Empty() && gr.ObjInfo.DeleteMarker {
-					w.Header()[xhttp.MinIODeleteMarkerReplicationStatus] = []string{string(gr.ObjInfo.ReplicationStatus)}
+					w.Header()[xhttp.B33SDeleteMarkerReplicationStatus] = []string{string(gr.ObjInfo.ReplicationStatus)}
 				}
 
 				// Versioning enabled quite possibly object is deleted might be delete-marker
@@ -620,7 +620,7 @@ func (api objectAPIHandlers) GetObjectHandler(w http.ResponseWriter, r *http.Req
 		w.Header().Set(gzhttp.HeaderNoCompression, "true")
 	}
 
-	if r.Header.Get(xMinIOExtract) == "true" && strings.Contains(object, archivePattern) {
+	if r.Header.Get(xB33SExtract) == "true" && strings.Contains(object, archivePattern) {
 		api.getObjectInArchiveFileHandler(ctx, objectAPI, bucket, object, w, r)
 	} else {
 		api.getObjectHandler(ctx, objectAPI, bucket, object, w, r)
@@ -725,9 +725,9 @@ func (api objectAPIHandlers) headObjectHandler(ctx context.Context, objectAPI Ob
 		if globalBucketVersioningSys.PrefixEnabled(bucket, object) {
 			switch {
 			case !objInfo.VersionPurgeStatus.Empty():
-				w.Header()[xhttp.MinIODeleteReplicationStatus] = []string{string(objInfo.VersionPurgeStatus)}
+				w.Header()[xhttp.B33SDeleteReplicationStatus] = []string{string(objInfo.VersionPurgeStatus)}
 			case !objInfo.ReplicationStatus.Empty() && objInfo.DeleteMarker:
-				w.Header()[xhttp.MinIODeleteMarkerReplicationStatus] = []string{string(objInfo.ReplicationStatus)}
+				w.Header()[xhttp.B33SDeleteMarkerReplicationStatus] = []string{string(objInfo.ReplicationStatus)}
 			}
 			// Versioning enabled quite possibly object is deleted might be delete-marker
 			// if present set the headers, no idea why AWS S3 sets these headers.
@@ -743,7 +743,7 @@ func (api objectAPIHandlers) headObjectHandler(ctx context.Context, objectAPI Ob
 				topts.VersionID = ""
 				goi, gerr := getObjectInfo(ctx, bucket, object, topts)
 				if gerr == nil || goi.VersionID != "" { // object layer returned more info because object is deleted
-					w.Header().Set(xhttp.MinIOTargetReplicationReady, "true")
+					w.Header().Set(xhttp.B33STargetReplicationReady, "true")
 				}
 			}
 		}
@@ -892,7 +892,7 @@ func (api objectAPIHandlers) HeadObjectHandler(w http.ResponseWriter, r *http.Re
 		return
 	}
 
-	if r.Header.Get(xMinIOExtract) == "true" && strings.Contains(object, archivePattern) {
+	if r.Header.Get(xB33SExtract) == "true" && strings.Contains(object, archivePattern) {
 		api.headObjectInArchiveFileHandler(ctx, objectAPI, bucket, object, w, r)
 	} else {
 		api.headObjectHandler(ctx, objectAPI, bucket, object, w, r)
@@ -1919,7 +1919,7 @@ func (api objectAPIHandlers) PutObjectHandler(w http.ResponseWriter, r *http.Req
 		return
 	}
 
-	if r.Header.Get(xMinIOExtract) == "true" && strings.HasSuffix(object, archiveExt) {
+	if r.Header.Get(xB33SExtract) == "true" && strings.HasSuffix(object, archiveExt) {
 		opts := ObjectOptions{VersionID: objInfo.VersionID, MTime: objInfo.ModTime}
 		if _, err := updateObjectMetadataWithZipInfo(ctx, objectAPI, bucket, object, opts); err != nil {
 			writeErrorResponse(ctx, w, toAPIError(ctx, err), r.URL)
@@ -2262,9 +2262,9 @@ func (api objectAPIHandlers) PutObjectExtractHandler(w http.ResponseWriter, r *h
 		return nil
 	}
 	var opts untarOptions
-	opts.ignoreDirs = strings.EqualFold(r.Header.Get(xhttp.MinIOSnowballIgnoreDirs), "true")
-	opts.ignoreErrs = strings.EqualFold(r.Header.Get(xhttp.MinIOSnowballIgnoreErrors), "true")
-	opts.prefixAll = r.Header.Get(xhttp.MinIOSnowballPrefix)
+	opts.ignoreDirs = strings.EqualFold(r.Header.Get(xhttp.B33SSnowballIgnoreDirs), "true")
+	opts.ignoreErrs = strings.EqualFold(r.Header.Get(xhttp.B33SSnowballIgnoreErrors), "true")
+	opts.prefixAll = r.Header.Get(xhttp.B33SSnowballPrefix)
 	if opts.prefixAll != "" {
 		opts.prefixAll = trimLeadingSlash(pathJoin(opts.prefixAll, slashSeparator))
 	}

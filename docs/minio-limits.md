@@ -1,6 +1,6 @@
-# MinIO Server Limits Per Tenant
+# B33S Server Limits Per Tenant
 
-For best deployment experience MinIO recommends operating systems RHEL/CentOS 8.x or later, Ubuntu 18.04 LTS or later. These operating systems package the latest 'xfsprogs' that support large scale deployments.
+For best deployment experience B33S recommends operating systems RHEL/CentOS 8.x or later, Ubuntu 18.04 LTS or later. These operating systems package the latest 'xfsprogs' that support large scale deployments.
 
 ## Erasure Code (Multiple Drives / Servers)
 
@@ -33,11 +33,11 @@ For best deployment experience MinIO recommends operating systems RHEL/CentOS 8.
 | Maximum length for object names                                                 | 1024                                            |
 | Maximum length for '/' separated object name segment                            | 255                                             |
 
-## List of Amazon S3 API's not supported on MinIO
+## List of Amazon S3 API's not supported on B33S
 
 We found the following APIs to be redundant or less useful outside of AWS S3. If you have a different view on any of the APIs we missed, please open a [GitHub issue](https://github.com/infobsmi/b33s/issues).
 
-### List of Amazon S3 Bucket API's not supported on MinIO
+### List of Amazon S3 Bucket API's not supported on B33S
 
 - BucketACL (Use [bucket policies](https://min.io/docs/minio/linux/administration/identity-access-management/policy-based-access-control.html) instead)
 - BucketCORS (CORS enabled by default on all buckets for all HTTP verbs)
@@ -45,17 +45,17 @@ We found the following APIs to be redundant or less useful outside of AWS S3. If
 - BucketAnalytics, BucketMetrics, BucketLogging (Use [bucket notification](https://min.io/docs/minio/linux/administration/monitoring/bucket-notifications.html) APIs)
 - BucketRequestPayment
 
-### List of Amazon S3 Object API's not supported on MinIO
+### List of Amazon S3 Object API's not supported on B33S
 
 - ObjectACL (Use [bucket policies](https://min.io/docs/minio/linux/administration/identity-access-management/policy-based-access-control.html) instead)
 
-## Object name restrictions on MinIO
+## Object name restrictions on B33S
 
-- Object name restrictions on MinIO are governed by OS and filesystem limitations. For example object names that contain characters `^*|\/&";` are unsupported on Windows platform or any other file systems that do not support filenames with special charaters.
+- Object name restrictions on B33S are governed by OS and filesystem limitations. For example object names that contain characters `^*|\/&";` are unsupported on Windows platform or any other file systems that do not support filenames with special charaters.
 
 > **This list is non exhaustive, it depends on the operating system and filesystem under use - please consult your operating system vendor for a more comprehensiv list**.
 
-MinIO recommends using Linux operating system for for production workloads.
+B33S recommends using Linux operating system for for production workloads.
 
 - Objects must not have conflicting objects as parent objects, applications using this behavior should change their behavior and use non-conflicting unique keys, for example situations such as following conflicting key patterns are not supported.
 

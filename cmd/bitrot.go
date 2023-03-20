@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -25,8 +25,8 @@ import (
 	"hash"
 	"io"
 
-	"github.com/minio/highwayhash"
 	"github.com/infobsmi/b33s/internal/hash/sha256"
+	"github.com/minio/highwayhash"
 	"golang.org/x/crypto/blake2b"
 
 	xioutil "github.com/infobsmi/b33s/internal/ioutil"

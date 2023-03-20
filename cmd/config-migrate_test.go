@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -169,7 +169,7 @@ func TestServerConfigMigrateV2toV33(t *testing.T) {
 	}
 	defer os.RemoveAll(fsDir)
 
-	configPath := rootPath + SlashSeparator + minioConfigFile
+	configPath := rootPath + SlashSeparator + b33sConfigFile
 
 	// Create a corrupted config file
 	if err := os.WriteFile(configPath, []byte("{ \"version\":\"2\","), 0o644); err != nil {
@@ -228,7 +228,7 @@ func TestServerConfigMigrateFaultyConfig(t *testing.T) {
 	rootPath := t.TempDir()
 
 	globalConfigDir = &ConfigDir{path: rootPath}
-	configPath := rootPath + SlashSeparator + minioConfigFile
+	configPath := rootPath + SlashSeparator + b33sConfigFile
 
 	// Create a corrupted config file
 	if err := os.WriteFile(configPath, []byte("{ \"version\":\"2\", \"test\":"), 0o644); err != nil {
@@ -321,7 +321,7 @@ func TestServerConfigMigrateCorruptedConfig(t *testing.T) {
 	rootPath := t.TempDir()
 
 	globalConfigDir = &ConfigDir{path: rootPath}
-	configPath := rootPath + SlashSeparator + minioConfigFile
+	configPath := rootPath + SlashSeparator + b33sConfigFile
 
 	for i := 3; i <= 17; i++ {
 		// Create a corrupted config file

@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -20,7 +20,7 @@ package cmd
 import (
 	"testing"
 
-	"github.com/minio/madmin-go/v2"
+	"github.com/b33s/madmin-go/v2"
 	"github.com/infobsmi/b33s-go/v7/pkg/set"
 )
 
@@ -35,17 +35,17 @@ func TestGetMissingSiteNames(t *testing.T) {
 		// Test1: missing some sites in replicated setup
 		{
 			[]madmin.PeerInfo{
-				{Endpoint: "minio1:9000", Name: "minio1", DeploymentID: "dep1"},
-				{Endpoint: "minio2:9000", Name: "minio2", DeploymentID: "dep2"},
-				{Endpoint: "minio3:9000", Name: "minio3", DeploymentID: "dep3"},
+				{Endpoint: "b33s1:9000", Name: "b33s1", DeploymentID: "dep1"},
+				{Endpoint: "b33s2:9000", Name: "b33s2", DeploymentID: "dep2"},
+				{Endpoint: "b33s3:9000", Name: "b33s3", DeploymentID: "dep3"},
 			},
 			set.CreateStringSet("dep1", "dep2", "dep3"),
 			set.CreateStringSet("dep1"),
-			[]string{"minio2", "minio3"},
+			[]string{"b33s2", "b33s3"},
 		},
 		// Test2: new site added that is not in replicated setup
 		{
-			[]madmin.PeerInfo{{Endpoint: "minio1:9000", Name: "minio1", DeploymentID: "dep1"}, {Endpoint: "minio2:9000", Name: "minio2", DeploymentID: "dep2"}, {Endpoint: "minio3:9000", Name: "minio3", DeploymentID: "dep3"}},
+			[]madmin.PeerInfo{{Endpoint: "b33s1:9000", Name: "b33s1", DeploymentID: "dep1"}, {Endpoint: "b33s2:9000", Name: "b33s2", DeploymentID: "dep2"}, {Endpoint: "b33s3:9000", Name: "b33s3", DeploymentID: "dep3"}},
 			set.CreateStringSet("dep1", "dep2", "dep3"),
 			set.CreateStringSet("dep1", "dep2", "dep3", "dep4"),
 			[]string{},

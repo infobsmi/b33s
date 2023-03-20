@@ -1,6 +1,6 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33SObject Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -40,7 +40,7 @@ func TestMinioVersionToReleaseTime(t *testing.T) {
 		{"DEVELOPMENT.GOGET", false},
 	}
 	for i, testCase := range testCases {
-		_, err := minioVersionToReleaseTime(testCase.version)
+		_, err := b33sVersionToReleaseTime(testCase.version)
 		if (err == nil) != testCase.isOfficial {
 			t.Errorf("Test %d: Expected %v but got %v",
 				i+1, testCase.isOfficial, err == nil)
@@ -104,32 +104,32 @@ func TestDownloadURL(t *testing.T) {
 		globalIsCICD = sci
 	}()
 
-	minioVersion1 := releaseTimeToReleaseTag(UTCNow())
-	durl := getDownloadURL(minioVersion1)
+	b33sVersion1 := releaseTimeToReleaseTag(UTCNow())
+	durl := getDownloadURL(b33sVersion1)
 	if IsDocker() {
-		if durl != "podman pull quay.io/minio/minio:"+minioVersion1 {
-			t.Errorf("Expected %s, got %s", "podman pull quay.io/minio/minio:"+minioVersion1, durl)
+		if durl != "podman pull quay.io/b33s/b33s:"+b33sVersion1 {
+			t.Errorf("Expected %s, got %s", "podman pull quay.io/b33s/b33s:"+b33sVersion1, durl)
 		}
 	} else {
 		if runtime.GOOS == "windows" {
-			if durl != minioReleaseURL+"minio.exe" {
-				t.Errorf("Expected %s, got %s", minioReleaseURL+"minio.exe", durl)
+			if durl != b33sReleaseURL+"b33s.exe" {
+				t.Errorf("Expected %s, got %s", b33sReleaseURL+"b33s.exe", durl)
 			}
 		} else {
-			if durl != minioReleaseURL+"minio" {
-				t.Errorf("Expected %s, got %s", minioReleaseURL+"minio", durl)
+			if durl != b33sReleaseURL+"b33s" {
+				t.Errorf("Expected %s, got %s", b33sReleaseURL+"b33s", durl)
 			}
 		}
 	}
 
 	t.Setenv("KUBERNETES_SERVICE_HOST", "10.11.148.5")
-	durl = getDownloadURL(minioVersion1)
+	durl = getDownloadURL(b33sVersion1)
 	if durl != kubernetesDeploymentDoc {
 		t.Errorf("Expected %s, got %s", kubernetesDeploymentDoc, durl)
 	}
 
 	t.Setenv("MESOS_CONTAINER_NAME", "mesos-1111")
-	durl = getDownloadURL(minioVersion1)
+	durl = getDownloadURL(b33sVersion1)
 	if durl != mesosDeploymentDoc {
 		t.Errorf("Expected %s, got %s", mesosDeploymentDoc, durl)
 	}
@@ -147,19 +147,19 @@ func TestUserAgent(t *testing.T) {
 			envName:     "",
 			envValue:    "",
 			mode:        globalMinioModeFS,
-			expectedStr: fmt.Sprintf("MinIO (%s; %s; %s; source) MinIO/DEVELOPMENT.GOGET MinIO/DEVELOPMENT.GOGET MinIO/DEVELOPMENT.GOGET", runtime.GOOS, runtime.GOARCH, globalMinioModeFS),
+			expectedStr: fmt.Sprintf("B33S (%s; %s; %s; source) B33S/DEVELOPMENT.GOGET B33S/DEVELOPMENT.GOGET B33S/DEVELOPMENT.GOGET", runtime.GOOS, runtime.GOARCH, globalMinioModeFS),
 		},
 		{
 			envName:     "MESOS_CONTAINER_NAME",
 			envValue:    "mesos-11111",
 			mode:        globalMinioModeErasure,
-			expectedStr: fmt.Sprintf("MinIO (%s; %s; %s; %s; source) MinIO/DEVELOPMENT.GOGET MinIO/DEVELOPMENT.GOGET MinIO/DEVELOPMENT.GOGET MinIO/universe-%s", runtime.GOOS, runtime.GOARCH, globalMinioModeErasure, "dcos", "mesos-1111"),
+			expectedStr: fmt.Sprintf("B33S (%s; %s; %s; %s; source) B33S/DEVELOPMENT.GOGET B33S/DEVELOPMENT.GOGET B33S/DEVELOPMENT.GOGET B33S/universe-%s", runtime.GOOS, runtime.GOARCH, globalMinioModeErasure, "dcos", "mesos-1111"),
 		},
 		{
 			envName:     "KUBERNETES_SERVICE_HOST",
 			envValue:    "10.11.148.5",
 			mode:        globalMinioModeErasure,
-			expectedStr: fmt.Sprintf("MinIO (%s; %s; %s; %s; source) MinIO/DEVELOPMENT.GOGET MinIO/DEVELOPMENT.GOGET MinIO/DEVELOPMENT.GOGET", runtime.GOOS, runtime.GOARCH, globalMinioModeErasure, "kubernetes"),
+			expectedStr: fmt.Sprintf("B33S (%s; %s; %s; %s; source) B33S/DEVELOPMENT.GOGET B33S/DEVELOPMENT.GOGET B33S/DEVELOPMENT.GOGET", runtime.GOOS, runtime.GOARCH, globalMinioModeErasure, "kubernetes"),
 		},
 	}
 
@@ -246,8 +246,8 @@ func TestGetHelmVersion(t *testing.T) {
 	}
 
 	filename := createTempFile(
-		`app="virtuous-rat-minio"
-chart="minio-0.1.3"
+		`app="virtuous-rat-b33s"
+chart="b33s-0.1.3"
 heritage="Tiller"
 pod-template-hash="818089471"`)
 
@@ -259,7 +259,7 @@ pod-template-hash="818089471"`)
 	}{
 		{"", ""},
 		{"/tmp/non-existing-file", ""},
-		{filename, "minio-0.1.3"},
+		{filename, "b33s-0.1.3"},
 	}
 
 	for _, testCase := range testCases {
@@ -275,7 +275,7 @@ func TestDownloadReleaseData(t *testing.T) {
 	httpServer1 := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {}))
 	defer httpServer1.Close()
 	httpServer2 := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintln(w, "fbe246edbd382902db9a4035df7dce8cb441357d minio.RELEASE.2016-10-07T01-16-39Z")
+		fmt.Fprintln(w, "fbe246edbd382902db9a4035df7dce8cb441357d b33s.RELEASE.2016-10-07T01-16-39Z")
 	}))
 	defer httpServer2.Close()
 	httpServer3 := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -289,7 +289,7 @@ func TestDownloadReleaseData(t *testing.T) {
 		expectedErr        error
 	}{
 		{httpServer1.URL, "", nil},
-		{httpServer2.URL, "fbe246edbd382902db9a4035df7dce8cb441357d minio.RELEASE.2016-10-07T01-16-39Z\n", nil},
+		{httpServer2.URL, "fbe246edbd382902db9a4035df7dce8cb441357d b33s.RELEASE.2016-10-07T01-16-39Z\n", nil},
 		{httpServer3.URL, "", fmt.Errorf("Error downloading URL " + httpServer3.URL + ". Response: 404 Not Found")},
 	}
 
@@ -328,15 +328,15 @@ func TestParseReleaseData(t *testing.T) {
 		{"more than two fields", time.Time{}, "", "", true},
 		{"more than", time.Time{}, "", "", true},
 		{"more than.two.fields", time.Time{}, "", "", true},
-		{"more minio.RELEASE.fields", time.Time{}, "", "", true},
-		{"more minio.RELEASE.2016-10-07T01-16-39Z", time.Time{}, "", "", true},
+		{"more b33s.RELEASE.fields", time.Time{}, "", "", true},
+		{"more b33s.RELEASE.2016-10-07T01-16-39Z", time.Time{}, "", "", true},
 		{
-			"fbe246edbd382902db9a4035df7dce8cb441357d minio.RELEASE.2016-10-07T01-16-39Z\n", releaseTime, "fbe246edbd382902db9a4035df7dce8cb441357d",
-			"minio.RELEASE.2016-10-07T01-16-39Z", false,
+			"fbe246edbd382902db9a4035df7dce8cb441357d b33s.RELEASE.2016-10-07T01-16-39Z\n", releaseTime, "fbe246edbd382902db9a4035df7dce8cb441357d",
+			"b33s.RELEASE.2016-10-07T01-16-39Z", false,
 		},
 		{
-			"fbe246edbd382902db9a4035df7dce8cb441357d minio.RELEASE.2016-10-07T01-16-39Z.customer-hotfix\n", releaseTime, "fbe246edbd382902db9a4035df7dce8cb441357d",
-			"minio.RELEASE.2016-10-07T01-16-39Z.customer-hotfix", false,
+			"fbe246edbd382902db9a4035df7dce8cb441357d b33s.RELEASE.2016-10-07T01-16-39Z.customer-hotfix\n", releaseTime, "fbe246edbd382902db9a4035df7dce8cb441357d",
+			"b33s.RELEASE.2016-10-07T01-16-39Z.customer-hotfix", false,
 		},
 	}
 

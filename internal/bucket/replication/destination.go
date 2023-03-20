@@ -1,6 +1,6 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33SObject Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -28,8 +28,8 @@ import (
 // DestinationARNPrefix - destination ARN prefix as per AWS S3 specification.
 const DestinationARNPrefix = "arn:aws:s3:::"
 
-// DestinationARNMinIOPrefix - destination ARN prefix for MinIO.
-const DestinationARNMinIOPrefix = "arn:minio:replication:"
+// DestinationARNB33SPrefix - destination ARN prefix for B33S.
+const DestinationARNB33SPrefix = "arn:minio:replication:"
 
 // Destination - destination in ReplicationConfiguration.
 type Destination struct {
@@ -37,7 +37,7 @@ type Destination struct {
 	Bucket       string   `xml:"Bucket" json:"Bucket"`
 	StorageClass string   `xml:"StorageClass" json:"StorageClass"`
 	ARN          string
-	// EncryptionConfiguration TODO: not needed for MinIO
+	// EncryptionConfiguration TODO: not needed for B33S
 }
 
 func (d Destination) isValidStorageClass() bool {
@@ -65,7 +65,7 @@ func (d Destination) LegacyArn() bool {
 // TargetArn returns true if arn format has prefix  "arn:minio:replication:::"
 // used for multi-destination targets
 func (d Destination) TargetArn() bool {
-	return strings.HasPrefix(d.ARN, DestinationARNMinIOPrefix)
+	return strings.HasPrefix(d.ARN, DestinationARNB33SPrefix)
 }
 
 // MarshalXML - encodes to XML data.
@@ -123,7 +123,7 @@ func (d Destination) Validate(bucketName string) error {
 
 // parseDestination - parses string to Destination.
 func parseDestination(s string) (Destination, error) {
-	if !strings.HasPrefix(s, DestinationARNPrefix) && !strings.HasPrefix(s, DestinationARNMinIOPrefix) {
+	if !strings.HasPrefix(s, DestinationARNPrefix) && !strings.HasPrefix(s, DestinationARNB33SPrefix) {
 		return Destination{}, Errorf("invalid destination '%s'", s)
 	}
 

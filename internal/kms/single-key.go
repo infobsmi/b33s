@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -33,8 +33,8 @@ import (
 	"golang.org/x/crypto/chacha20"
 	"golang.org/x/crypto/chacha20poly1305"
 
-	"github.com/minio/kes"
 	"github.com/infobsmi/b33s/internal/hash/sha256"
+	"github.com/minio/kes"
 )
 
 // Parse parses s as single-key KMS. The given string

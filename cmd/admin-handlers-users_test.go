@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -33,7 +33,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/minio/madmin-go/v2"
+	"github.com/b33s/madmin-go/v2"
 	"github.com/infobsmi/b33s-go/v7"
 	"github.com/infobsmi/b33s-go/v7/pkg/credentials"
 	cr "github.com/infobsmi/b33s-go/v7/pkg/credentials"
@@ -58,7 +58,7 @@ type TestSuiteIAM struct {
 
 	endpoint string
 	adm      *madmin.AdminClient
-	client   *minio.Client
+	client   *b33s.Client
 }
 
 func newTestSuiteIAM(c TestSuiteCommon, withEtcdBackend bool) *TestSuiteIAM {
@@ -88,13 +88,13 @@ func (s *TestSuiteIAM) iamSetup(c *check) {
 	// Set transport, so that TLS is handled correctly.
 	s.adm.SetCustomTransport(s.TestSuiteCommon.client.Transport)
 
-	s.client, err = minio.New(s.endpoint, &minio.Options{
+	s.client, err = b33s.New(s.endpoint, &b33s.Options{
 		Creds:     credentials.NewStaticV4(s.accessKey, s.secretKey, ""),
 		Secure:    s.secure,
 		Transport: s.TestSuiteCommon.client.Transport,
 	})
 	if err != nil {
-		c.Fatalf("error creating minio client: %v", err)
+		c.Fatalf("error creating b33s client: %v", err)
 	}
 }
 
@@ -177,14 +177,14 @@ func (s *TestSuiteIAM) getAdminClient(c *check, accessKey, secretKey, sessionTok
 	return madmClnt
 }
 
-func (s *TestSuiteIAM) getUserClient(c *check, accessKey, secretKey, sessionToken string) *minio.Client {
-	client, err := minio.New(s.endpoint, &minio.Options{
+func (s *TestSuiteIAM) getUserClient(c *check, accessKey, secretKey, sessionToken string) *b33s.Client {
+	client, err := b33s.New(s.endpoint, &b33s.Options{
 		Creds:     credentials.NewStaticV4(accessKey, secretKey, sessionToken),
 		Secure:    s.secure,
 		Transport: s.TestSuiteCommon.client.Transport,
 	})
 	if err != nil {
-		c.Fatalf("error creating user minio client: %s", err)
+		c.Fatalf("error creating user b33s client: %s", err)
 	}
 	return client
 }
@@ -244,7 +244,7 @@ func (s *TestSuiteIAM) TestUserCreate(c *check) {
 	}
 
 	client := s.getUserClient(c, accessKey, secretKey, "")
-	err = client.MakeBucket(ctx, getRandomBucketName(), minio.MakeBucketOptions{})
+	err = client.MakeBucket(ctx, getRandomBucketName(), b33s.MakeBucketOptions{})
 	if err != nil {
 		c.Fatalf("user could not create bucket: %v", err)
 	}
@@ -256,13 +256,13 @@ func (s *TestSuiteIAM) TestUserCreate(c *check) {
 		c.Fatalf("Unable to update user's secret key: %v", err)
 	}
 	// 3.10.1 Check that old password no longer works.
-	err = client.MakeBucket(ctx, getRandomBucketName(), minio.MakeBucketOptions{})
+	err = client.MakeBucket(ctx, getRandomBucketName(), b33s.MakeBucketOptions{})
 	if err == nil {
 		c.Fatalf("user was unexpectedly able to create bucket with bad password!")
 	}
 	// 3.10.2 Check that new password works.
 	client = s.getUserClient(c, accessKey, newSecretKey, "")
-	err = client.MakeBucket(ctx, getRandomBucketName(), minio.MakeBucketOptions{})
+	err = client.MakeBucket(ctx, getRandomBucketName(), b33s.MakeBucketOptions{})
 	if err != nil {
 		c.Fatalf("user could not create bucket: %v", err)
 	}
@@ -281,7 +281,7 @@ func (s *TestSuiteIAM) TestUserCreate(c *check) {
 		c.Fatalf("user was not listed after disabling: %s", accessKey)
 	}
 	c.Assert(v.Status, madmin.AccountDisabled)
-	err = client.MakeBucket(ctx, getRandomBucketName(), minio.MakeBucketOptions{})
+	err = client.MakeBucket(ctx, getRandomBucketName(), b33s.MakeBucketOptions{})
 	if err == nil {
 		c.Fatalf("user account was not disabled!")
 	}
@@ -299,7 +299,7 @@ func (s *TestSuiteIAM) TestUserCreate(c *check) {
 	if ok {
 		c.Fatalf("user not deleted: %s", accessKey)
 	}
-	err = client.MakeBucket(ctx, getRandomBucketName(), minio.MakeBucketOptions{})
+	err = client.MakeBucket(ctx, getRandomBucketName(), b33s.MakeBucketOptions{})
 	if err == nil {
 		c.Fatalf("user account was not deleted!")
 	}
@@ -310,7 +310,7 @@ func (s *TestSuiteIAM) TestUserPolicyEscalationBug(c *check) {
 	defer cancel()
 
 	bucket := getRandomBucketName()
-	err := s.client.MakeBucket(ctx, bucket, minio.MakeBucketOptions{})
+	err := s.client.MakeBucket(ctx, bucket, b33s.MakeBucketOptions{})
 	if err != nil {
 		c.Fatalf("bucket creat error: %v", err)
 	}
@@ -363,7 +363,7 @@ func (s *TestSuiteIAM) TestUserPolicyEscalationBug(c *check) {
 	ep := s.adm.GetEndpointURL()
 	urlValue := url.Values{}
 	urlValue.Add("accessKey", accessKey)
-	u, err := url.Parse(fmt.Sprintf("%s://%s/minio/admin/v3/add-user?%s", ep.Scheme, ep.Host, s3utils.QueryEncode(urlValue)))
+	u, err := url.Parse(fmt.Sprintf("%s://%s/b33s/admin/v3/add-user?%s", ep.Scheme, ep.Host, s3utils.QueryEncode(urlValue)))
 	if err != nil {
 		c.Fatalf("unexpected url parse err: %v", err)
 	}
@@ -524,7 +524,7 @@ func (s *TestSuiteIAM) TestPolicyCreate(c *check) {
 	defer cancel()
 
 	bucket := getRandomBucketName()
-	err := s.client.MakeBucket(ctx, bucket, minio.MakeBucketOptions{})
+	err := s.client.MakeBucket(ctx, bucket, b33s.MakeBucketOptions{})
 	if err != nil {
 		c.Fatalf("bucket creat error: %v", err)
 	}
@@ -633,7 +633,7 @@ func (s *TestSuiteIAM) TestCannedPolicies(c *check) {
 	}
 
 	bucket := getRandomBucketName()
-	err = s.client.MakeBucket(ctx, bucket, minio.MakeBucketOptions{})
+	err = s.client.MakeBucket(ctx, bucket, b33s.MakeBucketOptions{})
 	if err != nil {
 		c.Fatalf("bucket creat error: %v", err)
 	}
@@ -677,7 +677,7 @@ func (s *TestSuiteIAM) TestGroupAddRemove(c *check) {
 	defer cancel()
 
 	bucket := getRandomBucketName()
-	err := s.client.MakeBucket(ctx, bucket, minio.MakeBucketOptions{})
+	err := s.client.MakeBucket(ctx, bucket, b33s.MakeBucketOptions{})
 	if err != nil {
 		c.Fatalf("bucket creat error: %v", err)
 	}
@@ -836,7 +836,7 @@ func (s *TestSuiteIAM) TestServiceAccountOpsByUser(c *check) {
 	defer cancel()
 
 	bucket := getRandomBucketName()
-	err := s.client.MakeBucket(ctx, bucket, minio.MakeBucketOptions{})
+	err := s.client.MakeBucket(ctx, bucket, b33s.MakeBucketOptions{})
 	if err != nil {
 		c.Fatalf("bucket creat error: %v", err)
 	}
@@ -917,7 +917,7 @@ func (s *TestSuiteIAM) TestServiceAccountOpsByAdmin(c *check) {
 	defer cancel()
 
 	bucket := getRandomBucketName()
-	err := s.client.MakeBucket(ctx, bucket, minio.MakeBucketOptions{})
+	err := s.client.MakeBucket(ctx, bucket, b33s.MakeBucketOptions{})
 	if err != nil {
 		c.Fatalf("bucket creat error: %v", err)
 	}
@@ -1031,7 +1031,7 @@ func (s *TestSuiteIAM) TestAccMgmtPlugin(c *check) {
 
 	// 0. Check that owner is able to make-bucket.
 	bucket := getRandomBucketName()
-	err := s.client.MakeBucket(ctx, bucket, minio.MakeBucketOptions{})
+	err := s.client.MakeBucket(ctx, bucket, b33s.MakeBucketOptions{})
 	if err != nil {
 		c.Fatalf("bucket creat error: %v", err)
 	}
@@ -1056,7 +1056,7 @@ func (s *TestSuiteIAM) TestAccMgmtPlugin(c *check) {
 
 	// 3. Check that user is able to make a bucket.
 	client := s.getUserClient(c, accessKey, secretKey, "")
-	err = client.MakeBucket(ctx, getRandomBucketName(), minio.MakeBucketOptions{})
+	err = client.MakeBucket(ctx, getRandomBucketName(), b33s.MakeBucketOptions{})
 	if err != nil {
 		c.Fatalf("user not create bucket: %v", err)
 	}
@@ -1065,7 +1065,7 @@ func (s *TestSuiteIAM) TestAccMgmtPlugin(c *check) {
 	c.mustListObjects(ctx, client, bucket)
 
 	// 3.2 check that user cannot upload an object.
-	_, err = client.PutObject(ctx, bucket, "objectName", bytes.NewBuffer([]byte("some content")), 12, minio.PutObjectOptions{})
+	_, err = client.PutObject(ctx, bucket, "objectName", bytes.NewBuffer([]byte("some content")), 12, b33s.PutObjectOptions{})
 	if err == nil {
 		c.Fatalf("user was able to upload unexpectedly")
 	}
@@ -1194,18 +1194,18 @@ func (c *check) mustNotCreateSvcAccount(ctx context.Context, tgtUser string, adm
 	}
 }
 
-func (c *check) mustNotListObjects(ctx context.Context, client *minio.Client, bucket string) {
+func (c *check) mustNotListObjects(ctx context.Context, client *b33s.Client, bucket string) {
 	c.Helper()
-	res := client.ListObjects(ctx, bucket, minio.ListObjectsOptions{})
+	res := client.ListObjects(ctx, bucket, b33s.ListObjectsOptions{})
 	v, ok := <-res
 	if !ok || v.Err == nil {
 		c.Fatalf("user was able to list unexpectedly! on %s", bucket)
 	}
 }
 
-func (c *check) mustPutObjectWithTags(ctx context.Context, client *minio.Client, bucket, object string) {
+func (c *check) mustPutObjectWithTags(ctx context.Context, client *b33s.Client, bucket, object string) {
 	c.Helper()
-	_, err := client.PutObject(ctx, bucket, object, bytes.NewBuffer([]byte("stuff")), 5, minio.PutObjectOptions{
+	_, err := client.PutObject(ctx, bucket, object, bytes.NewBuffer([]byte("stuff")), 5, b33s.PutObjectOptions{
 		UserTags: map[string]string{
 			"security": "public",
 			"virus":    "true",
@@ -1216,10 +1216,10 @@ func (c *check) mustPutObjectWithTags(ctx context.Context, client *minio.Client,
 	}
 }
 
-func (c *check) mustGetObject(ctx context.Context, client *minio.Client, bucket, object string) {
+func (c *check) mustGetObject(ctx context.Context, client *b33s.Client, bucket, object string) {
 	c.Helper()
 
-	r, err := client.GetObject(ctx, bucket, object, minio.GetObjectOptions{})
+	r, err := client.GetObject(ctx, bucket, object, b33s.GetObjectOptions{})
 	if err != nil {
 		c.Fatalf("user was unable to download the object: %v", err)
 	}
@@ -1231,10 +1231,10 @@ func (c *check) mustGetObject(ctx context.Context, client *minio.Client, bucket,
 	}
 }
 
-func (c *check) mustHeadObject(ctx context.Context, client *minio.Client, bucket, object string, tagCount int) {
+func (c *check) mustHeadObject(ctx context.Context, client *b33s.Client, bucket, object string, tagCount int) {
 	c.Helper()
 
-	oinfo, err := client.StatObject(ctx, bucket, object, minio.StatObjectOptions{})
+	oinfo, err := client.StatObject(ctx, bucket, object, b33s.StatObjectOptions{})
 	if err != nil {
 		c.Fatalf("user was unable to download the object: %v", err)
 	}
@@ -1244,16 +1244,16 @@ func (c *check) mustHeadObject(ctx context.Context, client *minio.Client, bucket
 	}
 }
 
-func (c *check) mustListObjects(ctx context.Context, client *minio.Client, bucket string) {
+func (c *check) mustListObjects(ctx context.Context, client *b33s.Client, bucket string) {
 	c.Helper()
-	res := client.ListObjects(ctx, bucket, minio.ListObjectsOptions{})
+	res := client.ListObjects(ctx, bucket, b33s.ListObjectsOptions{})
 	v, ok := <-res
 	if ok && v.Err != nil {
 		c.Fatalf("user was unable to list: %v", v.Err)
 	}
 }
 
-func (c *check) mustListBuckets(ctx context.Context, client *minio.Client) {
+func (c *check) mustListBuckets(ctx context.Context, client *b33s.Client) {
 	c.Helper()
 	_, err := client.ListBuckets(ctx)
 	if err != nil {
@@ -1261,10 +1261,10 @@ func (c *check) mustListBuckets(ctx context.Context, client *minio.Client) {
 	}
 }
 
-func (c *check) mustNotUpload(ctx context.Context, client *minio.Client, bucket string) {
+func (c *check) mustNotUpload(ctx context.Context, client *b33s.Client, bucket string) {
 	c.Helper()
-	_, err := client.PutObject(ctx, bucket, "some-object", bytes.NewBuffer([]byte("stuff")), 5, minio.PutObjectOptions{})
-	if e, ok := err.(minio.ErrorResponse); ok {
+	_, err := client.PutObject(ctx, bucket, "some-object", bytes.NewBuffer([]byte("stuff")), 5, b33s.PutObjectOptions{})
+	if e, ok := err.(b33s.ErrorResponse); ok {
 		if e.Code == "AccessDenied" {
 			return
 		}

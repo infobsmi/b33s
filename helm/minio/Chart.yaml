@@ -14,5 +14,5 @@ icon: https://min.io/resources/img/logo/MINIO_wordmark.png
 sources:
 - https://github.com/infobsmi/b33s
 maintainers:
-- name: MinIO, Inc
+- name: B33S, Inc
   email: dev@minio.io

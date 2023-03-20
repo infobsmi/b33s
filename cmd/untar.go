@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -32,10 +32,10 @@ import (
 	"sync"
 
 	"github.com/cosnicolaou/pbzip2"
+	"github.com/infobsmi/b33s/internal/logger"
 	"github.com/klauspost/compress/s2"
 	"github.com/klauspost/compress/zstd"
 	gzip "github.com/klauspost/pgzip"
-	"github.com/infobsmi/b33s/internal/logger"
 	"github.com/pierrec/lz4"
 )
 

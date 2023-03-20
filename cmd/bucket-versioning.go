@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -38,7 +38,7 @@ func (sys *BucketVersioningSys) Enabled(bucket string) bool {
 
 // PrefixEnabled returns true is versioning is enabled at bucket level and if
 // the given prefix doesn't match any excluded prefixes pattern. This is
-// part of a MinIO versioning configuration extension.
+// part of a B33S versioning configuration extension.
 func (sys *BucketVersioningSys) PrefixEnabled(bucket, prefix string) bool {
 	vc, err := sys.Get(bucket)
 	if err != nil {
@@ -57,7 +57,7 @@ func (sys *BucketVersioningSys) Suspended(bucket string) bool {
 }
 
 // PrefixSuspended returns true if the given prefix matches an excluded prefix
-// pattern. This is part of a MinIO versioning configuration extension.
+// pattern. This is part of a B33S versioning configuration extension.
 func (sys *BucketVersioningSys) PrefixSuspended(bucket, prefix string) bool {
 	vc, err := sys.Get(bucket)
 	if err != nil {

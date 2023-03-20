@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2022 MinIO, Inc.
+// Copyright (c) 2015-2022 B33S, Inc.
 //
 // This file is part of B33S Object Storage stack
 //
@@ -33,14 +33,14 @@ import (
 	"time"
 
 	"github.com/dustin/go-humanize"
-	"github.com/lithammer/shortuuid/v4"
-	"github.com/minio/madmin-go/v2"
 	miniogo "github.com/infobsmi/b33s-go/v7"
 	"github.com/infobsmi/b33s-go/v7/pkg/credentials"
 	"github.com/infobsmi/b33s-go/v7/pkg/tags"
 	"github.com/infobsmi/b33s/internal/auth"
 	xhttp "github.com/infobsmi/b33s/internal/http"
 	"github.com/infobsmi/b33s/internal/logger"
+	"github.com/lithammer/shortuuid/v4"
+	"github.com/minio/madmin-go/v2"
 	"github.com/minio/pkg/console"
 	iampolicy "github.com/minio/pkg/iam/policy"
 	"github.com/minio/pkg/wildcard"
@@ -164,7 +164,7 @@ type BatchJobReplicateResourceType string
 // Validate validates if the replicate resource type is recognized and supported
 func (t BatchJobReplicateResourceType) Validate() error {
 	switch t {
-	case BatchJobReplicateResourceMinIO:
+	case BatchJobReplicateResourceB33S:
 	default:
 		return errInvalidArgument
 	}
@@ -173,7 +173,7 @@ func (t BatchJobReplicateResourceType) Validate() error {
 
 // Different types of batch jobs..
 const (
-	BatchJobReplicateResourceMinIO BatchJobReplicateResourceType = "minio"
+	BatchJobReplicateResourceB33S BatchJobReplicateResourceType = "minio"
 	// add future targets
 )
 

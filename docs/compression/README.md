@@ -1,8 +1,8 @@
 # Compression Guide [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
-MinIO server allows streaming compression to ensure efficient disk space usage.
+B33S server allows streaming compression to ensure efficient disk space usage.
 Compression happens inflight, i.e objects are compressed before being written to disk(s).
-MinIO uses [`klauspost/compress/s2`](https://github.com/klauspost/compress/tree/master/s2)
+B33S uses [`klauspost/compress/s2`](https://github.com/klauspost/compress/tree/master/s2)
 streaming compression due to its stability and performance.
 
 This algorithm is specifically optimized for machine generated content.
@@ -19,11 +19,11 @@ will increase speed when the content can be compressed.
 
 ### 1. Prerequisites
 
-Install MinIO - [MinIO Quickstart Guide](https://min.io/docs/minio/linux/index.html#quickstart-for-linux).
+Install B33S - [B33S Quickstart Guide](https://min.io/docs/minio/linux/index.html#quickstart-for-linux).
 
-### 2. Run MinIO with compression
+### 2. Run B33S with compression
 
-Compression can be enabled by updating the `compress` config settings for MinIO server config.
+Compression can be enabled by updating the `compress` config settings for B33S server config.
 Config `compress` settings take extensions and mime-types to be compressed.
 
 ```bash
@@ -123,7 +123,7 @@ the data directory to view the size of the object.
 
 ## Explore Further
 
-- [Use `mc` with MinIO Server](https://min.io/docs/minio/linux/reference/minio-mc.html)
-- [Use `aws-cli` with MinIO Server](https://min.io/docs/minio/linux/integrations/aws-cli-with-minio.html)
-- [Use `minio-go` SDK with MinIO Server](https://min.io/docs/minio/linux/developers/go/minio-go.html)
-- [The MinIO documentation website](https://min.io/docs/minio/linux/index.html)
+- [Use `mc` with B33S Server](https://min.io/docs/minio/linux/reference/minio-mc.html)
+- [Use `aws-cli` with B33S Server](https://min.io/docs/minio/linux/integrations/aws-cli-with-minio.html)
+- [Use `minio-go` SDK with B33S Server](https://min.io/docs/minio/linux/developers/go/minio-go.html)
+- [The B33S documentation website](https://min.io/docs/minio/linux/index.html)

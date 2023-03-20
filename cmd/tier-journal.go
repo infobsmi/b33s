@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -75,7 +75,7 @@ func initTierDeletionJournal(ctx context.Context) (*tierJournal, error) {
 	for _, diskPath := range globalEndpoints.LocalDisksPaths() {
 		j.diskPath = diskPath
 
-		go j.deletePending(ctx)  // for existing journal entries from previous MinIO versions
+		go j.deletePending(ctx)  // for existing journal entries from previous B33S versions
 		go j.processEntries(ctx) // for newer journal entries circa free-versions
 		return j, nil
 	}

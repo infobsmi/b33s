@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -69,9 +69,9 @@ type ObjectOptions struct {
 	ProxyRequest                        bool      // only set for GET/HEAD in active-active replication scenario
 	ProxyHeaderSet                      bool      // only set for GET/HEAD in active-active replication scenario
 	ReplicationRequest                  bool      // true only if replication request
-	ReplicationSourceTaggingTimestamp   time.Time // set if MinIOSourceTaggingTimestamp received
-	ReplicationSourceLegalholdTimestamp time.Time // set if MinIOSourceObjectLegalholdTimestamp received
-	ReplicationSourceRetentionTimestamp time.Time // set if MinIOSourceObjectRetentionTimestamp received
+	ReplicationSourceTaggingTimestamp   time.Time // set if B33SSourceTaggingTimestamp received
+	ReplicationSourceLegalholdTimestamp time.Time // set if B33SSourceObjectLegalholdTimestamp received
+	ReplicationSourceRetentionTimestamp time.Time // set if B33SSourceObjectRetentionTimestamp received
 	DeletePrefix                        bool      // set true to enforce a prefix deletion, only application for DeleteObject API,
 
 	Speedtest bool // object call specifically meant for SpeedTest code, set to 'true' when invoked by SpeedtestHandler.

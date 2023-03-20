@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -32,7 +32,7 @@ import (
 
 func BenchmarkLockArgs(b *testing.B) {
 	args := dsync.LockArgs{
-		Owner:     "minio",
+		Owner:     "b33s",
 		UID:       "uid",
 		Source:    "lockArgs.go",
 		Quorum:    3,
@@ -56,7 +56,7 @@ func BenchmarkLockArgs(b *testing.B) {
 
 func BenchmarkLockArgsOld(b *testing.B) {
 	values := url.Values{}
-	values.Set("owner", "minio")
+	values.Set("owner", "b33s")
 	values.Set("uid", "uid")
 	values.Set("source", "lockArgs.go")
 	values.Set("quorum", "3")

@@ -2,29 +2,29 @@
 
 ## Introduction
 
-MinIO provides a custom STS API that allows integration with LDAP based corporate environments including Microsoft Active Directory. The MinIO server uses a separate LDAP service account to lookup user information. The login flow for a user is as follows:
+B33S provides a custom STS API that allows integration with LDAP based corporate environments including Microsoft Active Directory. The B33S server uses a separate LDAP service account to lookup user information. The login flow for a user is as follows:
 
 - User provides their AD/LDAP username and password to the STS API.
-- MinIO looks up the user's information (specifically the user's Distinguished Name) in the LDAP server.
-- On finding the user's info, MinIO verifies the login credentials with the AD/LDAP server.
-- MinIO optionally queries the AD/LDAP server for a list of groups that the user is a member of.
-- MinIO then checks if there are any policies [explicitly associated](#managing-usergroup-access-policy) with the user or their groups.
-- On finding at least one associated policy, MinIO generates temporary credentials for the user storing the list of groups in a cryptographically secure session token. The temporary access key, secret key and session token are returned to the user.
-- The user can now use these credentials to make requests to the MinIO server.
+- B33S looks up the user's information (specifically the user's Distinguished Name) in the LDAP server.
+- On finding the user's info, B33S verifies the login credentials with the AD/LDAP server.
+- B33S optionally queries the AD/LDAP server for a list of groups that the user is a member of.
+- B33S then checks if there are any policies [explicitly associated](#managing-usergroup-access-policy) with the user or their groups.
+- On finding at least one associated policy, B33S generates temporary credentials for the user storing the list of groups in a cryptographically secure session token. The temporary access key, secret key and session token are returned to the user.
+- The user can now use these credentials to make requests to the B33S server.
 
-The administrator will associate IAM access policies with each group and if required with the user too. The MinIO server then evaluates applicable policies on a user (these are the policies associated with the groups along with the policy on the user if any) to check if the request should be allowed or denied.
+The administrator will associate IAM access policies with each group and if required with the user too. The B33S server then evaluates applicable policies on a user (these are the policies associated with the groups along with the policy on the user if any) to check if the request should be allowed or denied.
 
-To ensure that changes in the LDAP directory are reflected in object storage access changes, MinIO performs an **Automatic LDAP sync**. MinIO periodically queries the LDAP service to:
+To ensure that changes in the LDAP directory are reflected in object storage access changes, B33S performs an **Automatic LDAP sync**. B33S periodically queries the LDAP service to:
 
-- find accounts (user DNs) that have been removed; any active STS credentials or MinIO service accounts belonging to these users are purged.
+- find accounts (user DNs) that have been removed; any active STS credentials or B33S service accounts belonging to these users are purged.
 
 - find accounts whose group memberships have changed; access policies available to a credential are updated to reflect the change, i.e. they will lose any privileges associated with a group they are removed from, and gain any privileges associated with a group they are added to.
 
-**Please note that when AD/LDAP is configured, MinIO will not support long term users defined internally.** Only AD/LDAP users (and the root user) are allowed. In addition to this, the server will not support operations on users or groups using `mc admin user` or `mc admin group` commands except `mc admin user info` and `mc admin group info` to list set policies for users and groups. This is because users and groups are defined externally in AD/LDAP.
+**Please note that when AD/LDAP is configured, B33S will not support long term users defined internally.** Only AD/LDAP users (and the root user) are allowed. In addition to this, the server will not support operations on users or groups using `mc admin user` or `mc admin group` commands except `mc admin user info` and `mc admin group info` to list set policies for users and groups. This is because users and groups are defined externally in AD/LDAP.
 
-## Configuring AD/LDAP on MinIO
+## Configuring AD/LDAP on B33S
 
-LDAP STS configuration can be performed via MinIO's standard configuration API (i.e. using `mc admin config set/get` commands) or equivalently via environment variables. For brevity we refer to environment variables here.
+LDAP STS configuration can be performed via B33S's standard configuration API (i.e. using `mc admin config set/get` commands) or equivalently via environment variables. For brevity we refer to environment variables here.
 
 LDAP is configured via the following environment variables:
 
@@ -62,27 +62,27 @@ MINIO_IDENTITY_LDAP_SERVER_STARTTLS         (on|off)    use StartTLS connection 
 
 The server address variable is _required_. TLS is assumed to be on by default. The port in the server address is optional and defaults to 636 if not provided.
 
-**MinIO sends LDAP credentials to the LDAP server for validation. So we _strongly recommend_ to use MinIO with AD/LDAP server over TLS or StartTLS _only_. Using plain-text connection between MinIO and LDAP server means _credentials can be compromised_ by anyone listening to network traffic.**
+**B33S sends LDAP credentials to the LDAP server for validation. So we _strongly recommend_ to use B33S with AD/LDAP server over TLS or StartTLS _only_. Using plain-text connection between B33S and LDAP server means _credentials can be compromised_ by anyone listening to network traffic.**
 
-If a self-signed certificate is being used, the certificate can be added to MinIO's certificates directory, so it can be trusted by the server.
+If a self-signed certificate is being used, the certificate can be added to B33S's certificates directory, so it can be trusted by the server.
 
 #### DNS SRV Records
 
 Many Active Directory and other LDAP services are setup with [DNS SRV Records](https://ldap.com/dns-srv-records-for-ldap/) for high-availability of the directory service. To use this to find LDAP servers to connect to, an LDAP client makes a DNS SRV record request to the DNS service on a domain that looks like `_service._proto.example.com`. For LDAP the `proto` value is always `tcp`, and `service` is usually `ldap` or `ldaps`.
 
-To enable MinIO to use the SRV records, specify the `srv_record_name` config parameter (or equivalently the `MINIO_IDENTITY_LDAP_SRV_RECORD_NAME` environment variable). This parameter can be set to `ldap` or `ldaps` and MinIO will substitute it into the `service` value. For example, when `server_addr=myldapserver.com` and `srv_record_name=ldap`, MinIO will lookup the SRV record for `_ldap._tcp.myldapserver.com` and pick an appropriate target for LDAP requests.
+To enable B33S to use the SRV records, specify the `srv_record_name` config parameter (or equivalently the `MINIO_IDENTITY_LDAP_SRV_RECORD_NAME` environment variable). This parameter can be set to `ldap` or `ldaps` and B33S will substitute it into the `service` value. For example, when `server_addr=myldapserver.com` and `srv_record_name=ldap`, B33S will lookup the SRV record for `_ldap._tcp.myldapserver.com` and pick an appropriate target for LDAP requests.
 
 If the DNS SRV record is at an entirely different place, say `_ldapsrv._tcpish.myldapserver.com`, then set `srv_record_name` to the special value `on` and set `server_addr=_ldapsrv._tcpish.myldapserver.com`.
 
 When using this feature, do not specify a port in the `server_addr` as the port is picked up automatically from the SRV record.
 
-With the default (empty) value for `srv_record_name`, MinIO **will not** perform any SRV record request.
+With the default (empty) value for `srv_record_name`, B33S **will not** perform any SRV record request.
 
 The value of `srv_record_name` does not affect any TLS settings - they must be configured with their own parameters.
 
 ### Lookup-Bind
 
-A low-privilege read-only LDAP service account is configured in the MinIO server by providing the account's Distinguished Name (DN) and password. This service account is used to perform directory lookups as needed.
+A low-privilege read-only LDAP service account is configured in the B33S server by providing the account's Distinguished Name (DN) and password. This service account is used to perform directory lookups as needed.
 
 ```
 MINIO_IDENTITY_LDAP_LOOKUP_BIND_DN*          (string)    DN for LDAP read-only service account used to perform DN and group lookups
@@ -93,7 +93,7 @@ If you set an empty lookup bind password, the lookup bind will use the unauthent
 
 ### User lookup
 
-When a user provides their LDAP credentials, MinIO runs a lookup query to find the user's Distinguished Name (DN). The search filter and base DN used in this lookup query are configured via the following variables:
+When a user provides their LDAP credentials, B33S runs a lookup query to find the user's Distinguished Name (DN). The search filter and base DN used in this lookup query are configured via the following variables:
 
 ```
 MINIO_IDENTITY_LDAP_USER_DN_SEARCH_BASE_DN*  (list)      ";" separated list of user search base DNs e.g. "dc=myldapserver,dc=com"
@@ -106,7 +106,7 @@ The returned user's DN and their password are then verified with the LDAP server
 
 ### Group membership search
 
-MinIO can be optionally configured to find the groups of a user from AD/LDAP by specifying the folllowing variables:
+B33S can be optionally configured to find the groups of a user from AD/LDAP by specifying the folllowing variables:
 
 ```
 MINIO_IDENTITY_LDAP_GROUP_SEARCH_FILTER     (string)    search filter for groups e.g. "(&(objectclass=groupOfNames)(memberUid=%s))"
@@ -141,7 +141,7 @@ In the configuration variables, `%s` is substituted with the _username_ from the
 
 ## Managing User/Group Access Policy
 
-Access policies may be associated by their name with a group or user directly. Access policies are first defined on the MinIO server using IAM policy JSON syntax. To define a new policy, you can use the [AWS policy generator](https://awspolicygen.s3.amazonaws.com/policygen.html). Copy the policy into a text file `mypolicy.json` and issue the command like so:
+Access policies may be associated by their name with a group or user directly. Access policies are first defined on the B33S server using IAM policy JSON syntax. To define a new policy, you can use the [AWS policy generator](https://awspolicygen.s3.amazonaws.com/policygen.html). Copy the policy into a text file `mypolicy.json` and issue the command like so:
 
 ```sh
 mc admin policy add myminio mypolicy mypolicy.json
@@ -276,5 +276,5 @@ $ go run ldap.go -u foouser -p foopassword
 
 ## Explore Further
 
-- [MinIO Admin Complete Guide](https://min.io/docs/minio/linux/reference/minio-mc-admin.html)
-- [The MinIO documentation website](https://min.io/docs/minio/linux/index.html)
+- [B33S Admin Complete Guide](https://min.io/docs/minio/linux/reference/minio-mc-admin.html)
+- [The B33S documentation website](https://min.io/docs/minio/linux/index.html)

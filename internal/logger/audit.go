@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -24,10 +24,10 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/klauspost/compress/gzhttp"
-	"github.com/minio/madmin-go/v2"
 	xhttp "github.com/infobsmi/b33s/internal/http"
 	"github.com/infobsmi/b33s/internal/logger/message/audit"
+	"github.com/klauspost/compress/gzhttp"
+	"github.com/minio/madmin-go/v2"
 )
 
 const contextAuditKey = contextKeyType("audit-entry")

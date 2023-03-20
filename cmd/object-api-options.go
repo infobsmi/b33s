@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -67,11 +67,11 @@ func getDefaultOpts(header http.Header, copySource bool, metadata map[string]str
 	if crypto.S3.IsRequested(header) || (metadata != nil && crypto.S3.IsEncrypted(metadata)) {
 		opts.ServerSideEncryption = encrypt.NewSSE()
 	}
-	if v, ok := header[xhttp.MinIOSourceProxyRequest]; ok {
+	if v, ok := header[xhttp.B33SSourceProxyRequest]; ok {
 		opts.ProxyHeaderSet = true
 		opts.ProxyRequest = strings.Join(v, "") == "true"
 	}
-	if _, ok := header[xhttp.MinIOSourceReplicationRequest]; ok {
+	if _, ok := header[xhttp.B33SSourceReplicationRequest]; ok {
 		opts.ReplicationRequest = true
 	}
 	opts.Speedtest = header.Get(globalObjectPerfUserMetadata) != ""
@@ -108,7 +108,7 @@ func getOpts(ctx context.Context, r *http.Request, bucket, object string) (Objec
 	}
 
 	deletePrefix := false
-	if d := r.Header.Get(xhttp.MinIOForceDelete); d != "" {
+	if d := r.Header.Get(xhttp.B33SForceDelete); d != "" {
 		if b, err := strconv.ParseBool(d); err == nil {
 			deletePrefix = b
 		} else {
@@ -124,14 +124,14 @@ func getOpts(ctx context.Context, r *http.Request, bucket, object string) (Objec
 	opts.DeletePrefix = deletePrefix
 	opts.PartNumber = partNumber
 	opts.VersionID = vid
-	delMarker := strings.TrimSpace(r.Header.Get(xhttp.MinIOSourceDeleteMarker))
+	delMarker := strings.TrimSpace(r.Header.Get(xhttp.B33SSourceDeleteMarker))
 	if delMarker != "" {
 		switch delMarker {
 		case "true":
 			opts.DeleteMarker = true
 		case "false":
 		default:
-			err = fmt.Errorf("Unable to parse %s, failed with %w", xhttp.MinIOSourceDeleteMarker, fmt.Errorf("DeleteMarker should be true or false"))
+			err = fmt.Errorf("Unable to parse %s, failed with %w", xhttp.B33SSourceDeleteMarker, fmt.Errorf("DeleteMarker should be true or false"))
 			logger.LogIf(ctx, err)
 			return opts, InvalidArgument{
 				Bucket: bucket,
@@ -140,14 +140,14 @@ func getOpts(ctx context.Context, r *http.Request, bucket, object string) (Objec
 			}
 		}
 	}
-	replReadyCheck := strings.TrimSpace(r.Header.Get(xhttp.MinIOCheckDMReplicationReady))
+	replReadyCheck := strings.TrimSpace(r.Header.Get(xhttp.B33SCheckDMReplicationReady))
 	if replReadyCheck != "" {
 		switch replReadyCheck {
 		case "true":
 			opts.CheckDMReplicationReady = true
 		case "false":
 		default:
-			err = fmt.Errorf("Unable to parse %s, failed with %w", xhttp.MinIOCheckDMReplicationReady, fmt.Errorf("should be true or false"))
+			err = fmt.Errorf("Unable to parse %s, failed with %w", xhttp.B33SCheckDMReplicationReady, fmt.Errorf("should be true or false"))
 			logger.LogIf(ctx, err)
 			return opts, InvalidArgument{
 				Bucket: bucket,
@@ -173,14 +173,14 @@ func delOpts(ctx context.Context, r *http.Request, bucket, object string) (opts 
 	// benefits of replication, make sure to apply version suspension
 	// only at bucket level instead.
 	opts.VersionSuspended = globalBucketVersioningSys.Suspended(bucket)
-	delMarker := strings.TrimSpace(r.Header.Get(xhttp.MinIOSourceDeleteMarker))
+	delMarker := strings.TrimSpace(r.Header.Get(xhttp.B33SSourceDeleteMarker))
 	if delMarker != "" {
 		switch delMarker {
 		case "true":
 			opts.DeleteMarker = true
 		case "false":
 		default:
-			err = fmt.Errorf("Unable to parse %s, failed with %w", xhttp.MinIOSourceDeleteMarker, fmt.Errorf("DeleteMarker should be true or false"))
+			err = fmt.Errorf("Unable to parse %s, failed with %w", xhttp.B33SSourceDeleteMarker, fmt.Errorf("DeleteMarker should be true or false"))
 			logger.LogIf(ctx, err)
 			return opts, InvalidArgument{
 				Bucket: bucket,
@@ -190,14 +190,14 @@ func delOpts(ctx context.Context, r *http.Request, bucket, object string) (opts 
 		}
 	}
 
-	mtime := strings.TrimSpace(r.Header.Get(xhttp.MinIOSourceMTime))
+	mtime := strings.TrimSpace(r.Header.Get(xhttp.B33SSourceMTime))
 	if mtime != "" {
 		opts.MTime, err = time.Parse(time.RFC3339Nano, mtime)
 		if err != nil {
 			return opts, InvalidArgument{
 				Bucket: bucket,
 				Object: object,
-				Err:    fmt.Errorf("Unable to parse %s, failed with %w", xhttp.MinIOSourceMTime, err),
+				Err:    fmt.Errorf("Unable to parse %s, failed with %w", xhttp.B33SSourceMTime, err),
 			}
 		}
 	} else {
@@ -231,7 +231,7 @@ func putOpts(ctx context.Context, r *http.Request, bucket, object string, metada
 		}
 	}
 
-	mtimeStr := strings.TrimSpace(r.Header.Get(xhttp.MinIOSourceMTime))
+	mtimeStr := strings.TrimSpace(r.Header.Get(xhttp.B33SSourceMTime))
 	mtime := UTCNow()
 	if mtimeStr != "" {
 		mtime, err = time.Parse(time.RFC3339, mtimeStr)
@@ -239,11 +239,11 @@ func putOpts(ctx context.Context, r *http.Request, bucket, object string, metada
 			return opts, InvalidArgument{
 				Bucket: bucket,
 				Object: object,
-				Err:    fmt.Errorf("Unable to parse %s, failed with %w", xhttp.MinIOSourceMTime, err),
+				Err:    fmt.Errorf("Unable to parse %s, failed with %w", xhttp.B33SSourceMTime, err),
 			}
 		}
 	}
-	retaintimeStr := strings.TrimSpace(r.Header.Get(xhttp.MinIOSourceObjectRetentionTimestamp))
+	retaintimeStr := strings.TrimSpace(r.Header.Get(xhttp.B33SSourceObjectRetentionTimestamp))
 	retaintimestmp := mtime
 	if retaintimeStr != "" {
 		retaintimestmp, err = time.Parse(time.RFC3339, retaintimeStr)
@@ -251,12 +251,12 @@ func putOpts(ctx context.Context, r *http.Request, bucket, object string, metada
 			return opts, InvalidArgument{
 				Bucket: bucket,
 				Object: object,
-				Err:    fmt.Errorf("Unable to parse %s, failed with %w", xhttp.MinIOSourceObjectRetentionTimestamp, err),
+				Err:    fmt.Errorf("Unable to parse %s, failed with %w", xhttp.B33SSourceObjectRetentionTimestamp, err),
 			}
 		}
 	}
 
-	lholdtimeStr := strings.TrimSpace(r.Header.Get(xhttp.MinIOSourceObjectLegalHoldTimestamp))
+	lholdtimeStr := strings.TrimSpace(r.Header.Get(xhttp.B33SSourceObjectLegalHoldTimestamp))
 	lholdtimestmp := mtime
 	if lholdtimeStr != "" {
 		lholdtimestmp, err = time.Parse(time.RFC3339, lholdtimeStr)
@@ -264,11 +264,11 @@ func putOpts(ctx context.Context, r *http.Request, bucket, object string, metada
 			return opts, InvalidArgument{
 				Bucket: bucket,
 				Object: object,
-				Err:    fmt.Errorf("Unable to parse %s, failed with %w", xhttp.MinIOSourceObjectLegalHoldTimestamp, err),
+				Err:    fmt.Errorf("Unable to parse %s, failed with %w", xhttp.B33SSourceObjectLegalHoldTimestamp, err),
 			}
 		}
 	}
-	tagtimeStr := strings.TrimSpace(r.Header.Get(xhttp.MinIOSourceTaggingTimestamp))
+	tagtimeStr := strings.TrimSpace(r.Header.Get(xhttp.B33SSourceTaggingTimestamp))
 	taggingtimestmp := mtime
 	if tagtimeStr != "" {
 		taggingtimestmp, err = time.Parse(time.RFC3339, tagtimeStr)
@@ -276,7 +276,7 @@ func putOpts(ctx context.Context, r *http.Request, bucket, object string, metada
 			return opts, InvalidArgument{
 				Bucket: bucket,
 				Object: object,
-				Err:    fmt.Errorf("Unable to parse %s, failed with %w", xhttp.MinIOSourceTaggingTimestamp, err),
+				Err:    fmt.Errorf("Unable to parse %s, failed with %w", xhttp.B33SSourceTaggingTimestamp, err),
 			}
 		}
 	}
@@ -293,7 +293,7 @@ func putOpts(ctx context.Context, r *http.Request, bucket, object string, metada
 			Err:    fmt.Errorf("invalid/unknown checksum sent: %v", err),
 		}
 	}
-	etag := strings.TrimSpace(r.Header.Get(xhttp.MinIOSourceETag))
+	etag := strings.TrimSpace(r.Header.Get(xhttp.B33SSourceETag))
 
 	if crypto.S3KMS.IsRequested(r.Header) {
 		keyID, context, err := crypto.S3KMS.ParseHTTP(r.Header)
@@ -352,7 +352,7 @@ func copySrcOpts(ctx context.Context, r *http.Request, bucket, object string) (O
 
 // get ObjectOptions for CompleteMultipart calls
 func completeMultipartOpts(ctx context.Context, r *http.Request, bucket, object string) (opts ObjectOptions, err error) {
-	mtimeStr := strings.TrimSpace(r.Header.Get(xhttp.MinIOSourceMTime))
+	mtimeStr := strings.TrimSpace(r.Header.Get(xhttp.B33SSourceMTime))
 	mtime := UTCNow()
 	if mtimeStr != "" {
 		mtime, err = time.Parse(time.RFC3339, mtimeStr)
@@ -360,7 +360,7 @@ func completeMultipartOpts(ctx context.Context, r *http.Request, bucket, object 
 			return opts, InvalidArgument{
 				Bucket: bucket,
 				Object: object,
-				Err:    fmt.Errorf("Unable to parse %s, failed with %w", xhttp.MinIOSourceMTime, err),
+				Err:    fmt.Errorf("Unable to parse %s, failed with %w", xhttp.B33SSourceMTime, err),
 			}
 		}
 	}

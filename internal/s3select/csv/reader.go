@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -26,8 +26,8 @@ import (
 	"sync"
 	"unicode/utf8"
 
-	csv "github.com/minio/csvparser"
 	"github.com/infobsmi/b33s/internal/s3select/sql"
+	csv "github.com/minio/csvparser"
 )
 
 // Reader - CSV record reader for S3Select.

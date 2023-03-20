@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -418,7 +418,7 @@ func ParseObjectLockRetentionHeaders(h http.Header) (rmode RetMode, r RetentionD
 	if err != nil {
 		return rmode, r, ErrInvalidRetentionDate
 	}
-	_, replReq := h[textproto.CanonicalMIMEHeaderKey(xhttp.MinIOSourceReplicationRequest)]
+	_, replReq := h[textproto.CanonicalMIMEHeaderKey(xhttp.B33SSourceReplicationRequest)]
 
 	t, err := UTCNowNTP()
 	if err != nil {

@@ -1,4 +1,4 @@
-// Copyright (c) 2022 MinIO, Inc.
+// Copyright (c) 2022 B33S, Inc.
 //
 // This file is part of B33S Object Storage stack
 //
@@ -29,9 +29,9 @@ import (
 	"time"
 
 	"github.com/dustin/go-humanize"
-	"github.com/minio/madmin-go/v2"
+	"github.com/b33s/madmin-go/v2"
 	"github.com/infobsmi/b33s-go/v7"
-	"github.com/minio/pkg/randreader"
+	"github.com/b33s/pkg/randreader"
 )
 
 // SpeedTestResult return value of the speedtest function
@@ -67,7 +67,7 @@ func (f *firstByteRecorder) Read(p []byte) (n int, err error) {
 	return n, err
 }
 
-// Runs the speedtest on local MinIO process.
+// Runs the speedtest on local B33S process.
 func selfSpeedTest(ctx context.Context, opts speedTestOpts) (SpeedTestResult, error) {
 	objAPI := newObjectLayerFn()
 	if objAPI == nil {
@@ -94,7 +94,7 @@ func selfSpeedTest(ctx context.Context, opts speedTestOpts) (SpeedTestResult, er
 
 	userMetadata := make(map[string]string)
 	userMetadata[globalObjectPerfUserMetadata] = "true" // Bypass S3 API freeze
-	popts := minio.PutObjectOptions{
+	popts := b33s.PutObjectOptions{
 		UserMetadata:         userMetadata,
 		DisableContentSha256: true,
 		DisableMultipart:     true,
@@ -148,7 +148,7 @@ func selfSpeedTest(ctx context.Context, opts speedTestOpts) (SpeedTestResult, er
 		downloadsCancel()
 	}()
 
-	gopts := minio.GetObjectOptions{}
+	gopts := b33s.GetObjectOptions{}
 	gopts.Set(globalObjectPerfUserMetadata, "true") // Bypass S3 API freeze
 
 	var downloadTimes madmin.TimeDurations
@@ -169,7 +169,7 @@ func selfSpeedTest(ctx context.Context, opts speedTestOpts) (SpeedTestResult, er
 				t := time.Now()
 				r, err := globalMinioClient.GetObject(downloadsCtx, opts.bucketName, tmpObjName, gopts)
 				if err != nil {
-					errResp, ok := err.(minio.ErrorResponse)
+					errResp, ok := err.(b33s.ErrorResponse)
 					if ok && errResp.StatusCode == http.StatusNotFound {
 						continue
 					}

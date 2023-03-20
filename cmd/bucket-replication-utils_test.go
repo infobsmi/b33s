@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -150,32 +150,32 @@ var parseReplicationDecisionTest = []struct {
 
 	{ // 2.
 		name:   "replicate decision for one target",
-		dsc:    "arn:minio:replication::id:bucket=true;false;arn:minio:replication::id:bucket;id",
+		dsc:    "arn:b33s:replication::id:bucket=true;false;arn:b33s:replication::id:bucket;id",
 		expErr: nil,
 		expDsc: ReplicateDecision{
 			targetsMap: map[string]replicateTargetDecision{
-				"arn:minio:replication::id:bucket": newReplicateTargetDecision("arn:minio:replication::id:bucket", true, false),
+				"arn:b33s:replication::id:bucket": newReplicateTargetDecision("arn:b33s:replication::id:bucket", true, false),
 			},
 		},
 	},
 	{ // 3.
 		name:   "replicate decision for multiple targets",
-		dsc:    "arn:minio:replication::id:bucket=true;false;arn:minio:replication::id:bucket;id,arn:minio:replication::id2:bucket=false;true;arn:minio:replication::id2:bucket;id2",
+		dsc:    "arn:b33s:replication::id:bucket=true;false;arn:b33s:replication::id:bucket;id,arn:b33s:replication::id2:bucket=false;true;arn:b33s:replication::id2:bucket;id2",
 		expErr: nil,
 		expDsc: ReplicateDecision{
 			targetsMap: map[string]replicateTargetDecision{
-				"arn:minio:replication::id:bucket":  newReplicateTargetDecision("arn:minio:replication::id:bucket", true, false),
-				"arn:minio:replication::id2:bucket": newReplicateTargetDecision("arn:minio:replication::id2:bucket", false, true),
+				"arn:b33s:replication::id:bucket":  newReplicateTargetDecision("arn:b33s:replication::id:bucket", true, false),
+				"arn:b33s:replication::id2:bucket": newReplicateTargetDecision("arn:b33s:replication::id2:bucket", false, true),
 			},
 		},
 	},
 	{ // 4.
 		name:   "invalid format replicate decision for one target",
-		dsc:    "arn:minio:replication::id:bucket:true;false;arn:minio:replication::id:bucket;id",
+		dsc:    "arn:b33s:replication::id:bucket:true;false;arn:b33s:replication::id:bucket;id",
 		expErr: errInvalidReplicateDecisionFormat,
 		expDsc: ReplicateDecision{
 			targetsMap: map[string]replicateTargetDecision{
-				"arn:minio:replication::id:bucket": newReplicateTargetDecision("arn:minio:replication::id:bucket", true, false),
+				"arn:b33s:replication::id:bucket": newReplicateTargetDecision("arn:b33s:replication::id:bucket", true, false),
 			},
 		},
 	},

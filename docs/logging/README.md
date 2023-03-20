@@ -1,10 +1,10 @@
-# MinIO Logging Quickstart Guide [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
+# B33S Logging Quickstart Guide [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
-This document explains how to configure MinIO server to log to different logging targets.
+This document explains how to configure B33S server to log to different logging targets.
 
 ## Log Targets
 
-MinIO supports currently two target types
+B33S supports currently two target types
 
 - console
 - http
@@ -15,7 +15,7 @@ Console target is on always and cannot be disabled.
 
 ### Logging HTTP Target
 
-HTTP target logs to a generic HTTP endpoint in JSON format and is not enabled by default. To enable HTTP target logging you would have to update your MinIO server configuration using `mc admin config set` command.
+HTTP target logs to a generic HTTP endpoint in JSON format and is not enabled by default. To enable HTTP target logging you would have to update your B33S server configuration using `mc admin config set` command.
 
 Assuming `mc` is already [configured](https://min.io/docs/minio/linux/reference/minio-mc.html#quickstart)
 
@@ -31,7 +31,7 @@ mc admin service restart myminio
 
 NOTE: `http://endpoint:port/path` is a placeholder value to indicate the URL format, please change this accordingly as per your configuration.
 
-MinIO also honors environment variable for HTTP target logging as shown below, this setting will override the endpoint settings in the MinIO server config.
+B33S also honors environment variable for HTTP target logging as shown below, this setting will override the endpoint settings in the B33S server config.
 
 ```
 export MINIO_LOGGER_WEBHOOK_ENABLE_target1="on"
@@ -58,7 +58,7 @@ mc admin service restart myminio
 
 NOTE: `http://endpoint:port/path` is a placeholder value to indicate the URL format, please change this accordingly as per your configuration.
 
-MinIO also honors environment variable for HTTP target Audit logging as shown below, this setting will override the endpoint settings in the MinIO server config.
+B33S also honors environment variable for HTTP target Audit logging as shown below, this setting will override the endpoint settings in the B33S server config.
 
 ```
 export MINIO_AUDIT_WEBHOOK_ENABLE_target1="on"
@@ -97,12 +97,12 @@ NOTE:
   },
   "remotehost": "127.0.0.1",
   "requestID": "16ABE7A785E7AC2C",
-  "userAgent": "MinIO (linux; amd64) minio-go/v7.0.15 mc/DEVELOPMENT.2021-10-06T23-39-34Z",
+  "userAgent": "B33S (linux; amd64) minio-go/v7.0.15 mc/DEVELOPMENT.2021-10-06T23-39-34Z",
   "requestHeader": {
     "Authorization": "AWS4-HMAC-SHA256 Credential=minio/20211008/us-east-1/s3/aws4_request,SignedHeaders=host;x-amz-content-sha256;x-amz-date;x-amz-decoded-content-length,Signature=4c60a59e5eb3b0a68693c7fee9dbb5a8a509e0717668669194d37bf182fde031",
     "Content-Length": "380",
     "Content-Type": "application/octet-stream",
-    "User-Agent": "MinIO (linux; amd64) minio-go/v7.0.15 mc/DEVELOPMENT.2021-10-06T23-39-34Z",
+    "User-Agent": "B33S (linux; amd64) minio-go/v7.0.15 mc/DEVELOPMENT.2021-10-06T23-39-34Z",
     "X-Amz-Content-Sha256": "STREAMING-AWS4-HMAC-SHA256-PAYLOAD",
     "X-Amz-Date": "20211008T004636Z",
     "X-Amz-Decoded-Content-Length": "207",
@@ -113,7 +113,7 @@ NOTE:
     "Content-Length": "0",
     "Content-Security-Policy": "block-all-mixed-content",
     "ETag": "4939450d1beec11e10a91ee7700bb593",
-    "Server": "MinIO",
+    "Server": "B33S",
     "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
     "Vary": "Origin,Accept-Encoding",
     "X-Amz-Request-Id": "16ABE7A785E7AC2C",
@@ -165,7 +165,7 @@ version          (string)    specify the version of the Kafka cluster
 comment          (sentence)  optionally add a comment to this setting
 ```
 
-Configure MinIO to send audit logs to locally running Kafka brokers
+Configure B33S to send audit logs to locally running Kafka brokers
 
 ```
 mc admin config set myminio/ audit_kafka:target1 brokers=localhost:29092 topic=auditlog
@@ -177,10 +177,10 @@ On another terminal assuming you have `kafkacat` installed
 ```
 kafkacat -b localhost:29092 -t auditlog  -C
 
-{"version":"1","deploymentid":"8a1d8091-b874-45df-b9ea-e044eede6ace","time":"2021-07-13T02:00:47.020547414Z","trigger":"incoming","api":{"name":"ListBuckets","status":"OK","statusCode":200,"timeToFirstByte":"261795ns","timeToResponse":"312490ns"},"remotehost":"127.0.0.1","requestID":"16913736591C237F","userAgent":"MinIO (linux; amd64) minio-go/v7.0.11 mc/DEVELOPMENT.2021-07-09T02-22-26Z","requestHeader":{"Authorization":"AWS4-HMAC-SHA256 Credential=minio/20210713/us-east-1/s3/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=7fe65c5467e05ca21de64094688da43f96f34fec82e8955612827079f4600527","User-Agent":"MinIO (linux; amd64) minio-go/v7.0.11 mc/DEVELOPMENT.2021-07-09T02-22-26Z","X-Amz-Content-Sha256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855","X-Amz-Date":"20210713T020047Z"},"responseHeader":{"Accept-Ranges":"bytes","Content-Length":"547","Content-Security-Policy":"block-all-mixed-content","Content-Type":"application/xml","Server":"MinIO","Vary":"Origin,Accept-Encoding","X-Amz-Request-Id":"16913736591C237F","X-Xss-Protection":"1; mode=block"}}
+{"version":"1","deploymentid":"8a1d8091-b874-45df-b9ea-e044eede6ace","time":"2021-07-13T02:00:47.020547414Z","trigger":"incoming","api":{"name":"ListBuckets","status":"OK","statusCode":200,"timeToFirstByte":"261795ns","timeToResponse":"312490ns"},"remotehost":"127.0.0.1","requestID":"16913736591C237F","userAgent":"B33S (linux; amd64) minio-go/v7.0.11 mc/DEVELOPMENT.2021-07-09T02-22-26Z","requestHeader":{"Authorization":"AWS4-HMAC-SHA256 Credential=minio/20210713/us-east-1/s3/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=7fe65c5467e05ca21de64094688da43f96f34fec82e8955612827079f4600527","User-Agent":"B33S (linux; amd64) minio-go/v7.0.11 mc/DEVELOPMENT.2021-07-09T02-22-26Z","X-Amz-Content-Sha256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855","X-Amz-Date":"20210713T020047Z"},"responseHeader":{"Accept-Ranges":"bytes","Content-Length":"547","Content-Security-Policy":"block-all-mixed-content","Content-Type":"application/xml","Server":"B33S","Vary":"Origin,Accept-Encoding","X-Amz-Request-Id":"16913736591C237F","X-Xss-Protection":"1; mode=block"}}
 ```
 
-MinIO also honors environment variable for Kafka target Audit logging as shown below, this setting will override the endpoint settings in the MinIO server config.
+B33S also honors environment variable for Kafka target Audit logging as shown below, this setting will override the endpoint settings in the B33S server config.
 
 ```
 mc admin config set myminio/ audit_kafka --env
@@ -223,5 +223,5 @@ NOTE:
 
 ## Explore Further
 
-- [MinIO Quickstart Guide](https://min.io/docs/minio/linux/index.html#quickstart-for-linux)
-- [Configure MinIO Server with TLS](https://min.io/docs/minio/linux/operations/network-encryption.html)
+- [B33S Quickstart Guide](https://min.io/docs/minio/linux/index.html#quickstart-for-linux)
+- [Configure B33S Server with TLS](https://min.io/docs/minio/linux/operations/network-encryption.html)

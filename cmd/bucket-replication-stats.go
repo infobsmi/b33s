@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -191,7 +191,7 @@ func NewReplicationStats(ctx context.Context, objectAPI ObjectLayer) *Replicatio
 	}
 }
 
-// load replication metrics at cluster start from latest replication stats saved in .minio.sys/buckets/replication/node-name.stats
+// load replication metrics at cluster start from latest replication stats saved in .b33s.sys/buckets/replication/node-name.stats
 // fallback to replication stats in data usage to be backward compatible
 func (r *ReplicationStats) loadInitialReplicationMetrics(ctx context.Context) {
 	m := make(map[string]*BucketReplicationStats)

@@ -1,7 +1,7 @@
 //go:build ignore
 // +build ignore
 
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //

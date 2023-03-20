@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -29,7 +29,7 @@ import (
 	"github.com/klauspost/compress/s2"
 	"github.com/infobsmi/b33s/internal/config/compress"
 	"github.com/infobsmi/b33s/internal/crypto"
-	"github.com/minio/pkg/trie"
+	"github.com/b33s/pkg/trie"
 )
 
 // Tests validate bucket name.
@@ -183,19 +183,19 @@ func TestIsMinioMetaBucketName(t *testing.T) {
 		bucket string
 		result bool
 	}{
-		// MinIO meta bucket.
+		// B33S meta bucket.
 		{
-			bucket: minioMetaBucket,
+			bucket: b33sMetaBucket,
 			result: true,
 		},
-		// MinIO meta bucket.
+		// B33S meta bucket.
 		{
-			bucket: minioMetaMultipartBucket,
+			bucket: b33sMetaMultipartBucket,
 			result: true,
 		},
-		// MinIO meta bucket.
+		// B33S meta bucket.
 		{
-			bucket: minioMetaTmpBucket,
+			bucket: b33sMetaTmpBucket,
 			result: true,
 		},
 		// Normal bucket

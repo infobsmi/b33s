@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -200,7 +200,7 @@ func mustReplicate(ctx context.Context, bucket, object string, mopts mustReplica
 	}
 
 	// Disable server-side replication on object prefixes which are excluded
-	// from versioning via the MinIO bucket versioning extension.
+	// from versioning via the B33S bucket versioning extension.
 	if !globalBucketVersioningSys.PrefixEnabled(bucket, object) {
 		return
 	}
@@ -342,7 +342,7 @@ func checkReplicateDelete(ctx context.Context, bucket string, dobj ObjectToDelet
 }
 
 // replicate deletes to the designated replication target if replication configuration
-// has delete marker replication or delete replication (MinIO extension to allow deletes where version id
+// has delete marker replication or delete replication (B33S extension to allow deletes where version id
 // is specified) enabled.
 // Similar to bucket replication for PUT operation, soft delete (a.k.a setting delete marker) and
 // permanent deletes (by specifying a version ID in the delete operation) have three states "Pending", "Complete"
@@ -654,8 +654,8 @@ func getCopyObjMetadata(oi ObjectInfo, sc string) map[string]string {
 		meta[xhttp.AmzStorageClass] = sc
 	}
 
-	meta[xhttp.MinIOSourceETag] = oi.ETag
-	meta[xhttp.MinIOSourceMTime] = oi.ModTime.UTC().Format(time.RFC3339Nano)
+	meta[xhttp.B33SSourceETag] = oi.ETag
+	meta[xhttp.B33SSourceMTime] = oi.ModTime.UTC().Format(time.RFC3339Nano)
 	meta[xhttp.AmzBucketReplicationStatus] = replication.Replica.String()
 	return meta
 }
@@ -1947,7 +1947,7 @@ func getProxyTargets(ctx context.Context, bucket, object string, opts ObjectOpti
 func proxyHeadToRepTarget(ctx context.Context, bucket, object string, rs *HTTPRangeSpec, opts ObjectOptions, proxyTargets *madmin.BucketTargets) (tgt *TargetClient, oi ObjectInfo, proxy proxyResult) {
 	// this option is set when active-active replication is in place between site A -> B,
 	// and site B does not have the object yet.
-	if opts.ProxyRequest || (opts.ProxyHeaderSet && !opts.ProxyRequest) { // true only when site B sets MinIOSourceProxyRequest header
+	if opts.ProxyRequest || (opts.ProxyHeaderSet && !opts.ProxyRequest) { // true only when site B sets B33SSourceProxyRequest header
 		return nil, oi, proxy
 	}
 	for _, t := range proxyTargets.Targets {
@@ -2138,7 +2138,7 @@ func resyncTarget(oi ObjectInfo, arn string, resetID string, resetBeforeDate tim
 	}
 	rs, ok := oi.UserDefined[targetResetHeader(arn)]
 	if !ok {
-		rs, ok = oi.UserDefined[xhttp.MinIOReplicationResetStatus] // for backward compatibility
+		rs, ok = oi.UserDefined[xhttp.B33SReplicationResetStatus] // for backward compatibility
 	}
 	if !ok { // existing object replication is enabled and object version is unreplicated so far.
 		if resetID != "" && oi.ModTime.Before(resetBeforeDate) { // trigger replication if `mc replicate reset` requested
@@ -2648,7 +2648,7 @@ func getReplicationDiff(ctx context.Context, objAPI ObjectLayer, bucket string, 
 				continue
 			}
 			// Ignore object prefixes which are excluded
-			// from versioning via the MinIO bucket versioning extension.
+			// from versioning via the B33S bucket versioning extension.
 			if globalBucketVersioningSys.PrefixSuspended(bucket, obj.Name) {
 				continue
 			}

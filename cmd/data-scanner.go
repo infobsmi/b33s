@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -35,7 +35,6 @@ import (
 
 	"github.com/bits-and-blooms/bloom/v3"
 	"github.com/dustin/go-humanize"
-	"github.com/minio/madmin-go/v2"
 	"github.com/infobsmi/b33s/internal/bucket/lifecycle"
 	"github.com/infobsmi/b33s/internal/bucket/object/lock"
 	"github.com/infobsmi/b33s/internal/bucket/replication"
@@ -43,6 +42,7 @@ import (
 	"github.com/infobsmi/b33s/internal/config/heal"
 	"github.com/infobsmi/b33s/internal/event"
 	"github.com/infobsmi/b33s/internal/logger"
+	"github.com/minio/madmin-go/v2"
 	"github.com/minio/pkg/console"
 	uatomic "go.uber.org/atomic"
 )

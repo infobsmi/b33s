@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -49,7 +49,7 @@ func setEventStreamHeaders(w http.ResponseWriter) {
 // Write http common headers
 func setCommonHeaders(w http.ResponseWriter) {
 	// Set the "Server" http header.
-	w.Header().Set(xhttp.ServerInfo, "MinIO")
+	w.Header().Set(xhttp.ServerInfo, "B33S")
 
 	// Set `x-amz-bucket-region` only if region is set on the server
 	// by default minio uses an empty region.
@@ -208,7 +208,7 @@ func setObjectHeaders(w http.ResponseWriter, objInfo ObjectInfo, rs *HTTPRangeSp
 		if i := strings.LastIndexByte(v, '/'); i >= 0 {
 			v = v[i+1:]
 		}
-		w.Header()[xhttp.MinIOCompressed] = []string{v}
+		w.Header()[xhttp.B33SCompressed] = []string{v}
 	}
 
 	return nil

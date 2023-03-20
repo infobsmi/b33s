@@ -1,6 +1,6 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33SObject Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -34,8 +34,8 @@ import (
 )
 
 var (
-	// GlobalMinIOVersion - is sent in the header to all http targets
-	GlobalMinIOVersion string
+	// GlobalB33SVersion - is sent in the header to all http targets
+	GlobalB33SVersion string
 
 	// GlobalDeploymentID - is sent in the header to all http targets
 	GlobalDeploymentID string
@@ -223,9 +223,9 @@ func NewServer(addrs []string) *Server {
 	return httpServer
 }
 
-// SetMinIOVersion -- MinIO version from the main package is set here
-func SetMinIOVersion(version string) {
-	GlobalMinIOVersion = version
+// SetB33SVersion -- B33S version from the main package is set here
+func SetB33SVersion(version string) {
+	GlobalB33SVersion = version
 }
 
 // SetDeploymentID -- Deployment Id from the main package is set here

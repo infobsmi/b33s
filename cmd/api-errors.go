@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -237,7 +237,7 @@ const (
 
 	// Add new extended error codes here.
 
-	// MinIO extended errors.
+	// B33S extended errors.
 	ErrReadQuorum
 	ErrWriteQuorum
 	ErrStorageFull
@@ -252,7 +252,7 @@ const (
 	ErrOperationMaxedOut
 	ErrInvalidRequest
 	ErrTransitionStorageClassNotFoundError
-	// MinIO storage class error codes
+	// B33S storage class error codes
 	ErrInvalidStorageClass
 	ErrBackendDown
 	// Add new extended error codes here.
@@ -1059,7 +1059,7 @@ var errorCodes = errorCodeMap{
 	},
 	ErrUnsupportedNotification: {
 		Code:           "UnsupportedNotification",
-		Description:    "MinIO server does not support Topic or Cloud Function based notifications.",
+		Description:    "B33S server does not support Topic or Cloud Function based notifications.",
 		HTTPStatusCode: http.StatusBadRequest,
 	},
 	ErrInvalidCopyPartRange: {
@@ -1180,7 +1180,7 @@ var errorCodes = errorCodeMap{
 		HTTPStatusCode: http.StatusBadRequest,
 	},
 
-	// MinIO extensions.
+	// B33S extensions.
 	ErrStorageFull: {
 		Code:           "XMinioStorageFull",
 		Description:    "Storage backend has reached its minimum free drive threshold. Please delete a few objects to proceed.",

@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -30,7 +30,7 @@ import (
 
 	"github.com/klauspost/cpuid/v2"
 	"github.com/infobsmi/b33s-go/v7"
-	"github.com/minio/simdjson-go"
+	"github.com/b33s/simdjson-go"
 )
 
 func newStringRSC(s string) io.ReadSeekCloser {
@@ -638,7 +638,7 @@ func TestJSONQueries(t *testing.T) {
 				Body:          io.NopCloser(bytes.NewReader(w.response)),
 				ContentLength: int64(len(w.response)),
 			}
-			res, err := minio.NewSelectResults(&resp, "testbucket")
+			res, err := b33s.NewSelectResults(&resp, "testbucket")
 			if err != nil {
 				t.Error(err)
 				return
@@ -684,7 +684,7 @@ func TestJSONQueries(t *testing.T) {
 				Body:          io.NopCloser(bytes.NewReader(w.response)),
 				ContentLength: int64(len(w.response)),
 			}
-			res, err := minio.NewSelectResults(&resp, "testbucket")
+			res, err := b33s.NewSelectResults(&resp, "testbucket")
 			if err != nil {
 				t.Error(err)
 				return
@@ -765,7 +765,7 @@ func TestCSVQueries(t *testing.T) {
 				Body:          io.NopCloser(bytes.NewReader(w.response)),
 				ContentLength: int64(len(w.response)),
 			}
-			res, err := minio.NewSelectResults(&resp, "testbucket")
+			res, err := b33s.NewSelectResults(&resp, "testbucket")
 			if err != nil {
 				t.Error(err)
 				return
@@ -948,7 +948,7 @@ func TestCSVQueries2(t *testing.T) {
 				Body:          io.NopCloser(bytes.NewReader(w.response)),
 				ContentLength: int64(len(w.response)),
 			}
-			res, err := minio.NewSelectResults(&resp, "testbucket")
+			res, err := b33s.NewSelectResults(&resp, "testbucket")
 			if err != nil {
 				t.Error(err)
 				return
@@ -1092,7 +1092,7 @@ true`,
 				Body:          io.NopCloser(bytes.NewReader(w.response)),
 				ContentLength: int64(len(w.response)),
 			}
-			res, err := minio.NewSelectResults(&resp, "testbucket")
+			res, err := b33s.NewSelectResults(&resp, "testbucket")
 			if err != nil {
 				t.Error(err)
 				return
@@ -1238,7 +1238,7 @@ func TestCSVInput(t *testing.T) {
 					Body:          io.NopCloser(bytes.NewReader(w.response)),
 					ContentLength: int64(len(w.response)),
 				}
-				res, err := minio.NewSelectResults(&resp, "testbucket")
+				res, err := b33s.NewSelectResults(&resp, "testbucket")
 				if err != nil {
 					t.Error(err)
 					return
@@ -1358,7 +1358,7 @@ func TestJSONInput(t *testing.T) {
 					Body:          io.NopCloser(bytes.NewReader(w.response)),
 					ContentLength: int64(len(w.response)),
 				}
-				res, err := minio.NewSelectResults(&resp, "testbucket")
+				res, err := b33s.NewSelectResults(&resp, "testbucket")
 				if err != nil {
 					t.Error(err)
 					return
@@ -1665,7 +1665,7 @@ func TestCSVRanges(t *testing.T) {
 				Body:          io.NopCloser(bytes.NewReader(w.response)),
 				ContentLength: int64(len(w.response)),
 			}
-			res, err := minio.NewSelectResults(&resp, "testbucket")
+			res, err := b33s.NewSelectResults(&resp, "testbucket")
 			if err != nil {
 				t.Error(err)
 				return
@@ -1767,7 +1767,7 @@ func TestParquetInput(t *testing.T) {
 					Body:          io.NopCloser(bytes.NewReader(w.response)),
 					ContentLength: int64(len(w.response)),
 				}
-				res, err := minio.NewSelectResults(&resp, "testbucket")
+				res, err := b33s.NewSelectResults(&resp, "testbucket")
 				if err != nil {
 					t.Error(err)
 					return
@@ -1868,7 +1868,7 @@ func TestParquetInputSchema(t *testing.T) {
 				Body:          io.NopCloser(bytes.NewReader(w.response)),
 				ContentLength: int64(len(w.response)),
 			}
-			res, err := minio.NewSelectResults(&resp, "testbucket")
+			res, err := b33s.NewSelectResults(&resp, "testbucket")
 			if err != nil {
 				t.Error(err)
 				return
@@ -1968,7 +1968,7 @@ func TestParquetInputSchemaCSV(t *testing.T) {
 				Body:          io.NopCloser(bytes.NewReader(w.response)),
 				ContentLength: int64(len(w.response)),
 			}
-			res, err := minio.NewSelectResults(&resp, "testbucket")
+			res, err := b33s.NewSelectResults(&resp, "testbucket")
 			if err != nil {
 				t.Error(err)
 				return

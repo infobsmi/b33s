@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2022 MinIO, Inc.
+// Copyright (c) 2015-2022 B33S, Inc.
 //
 // This file is part of B33S Object Storage stack
 //
@@ -29,13 +29,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/minio/madmin-go/v2"
 	"github.com/infobsmi/b33s-go/v7/pkg/set"
 	"github.com/infobsmi/b33s/internal/arn"
 	"github.com/infobsmi/b33s/internal/auth"
 	"github.com/infobsmi/b33s/internal/config"
 	"github.com/infobsmi/b33s/internal/config/identity/openid/provider"
 	"github.com/infobsmi/b33s/internal/hash/sha256"
+	"github.com/minio/madmin-go/v2"
 	iampolicy "github.com/minio/pkg/iam/policy"
 	xnet "github.com/minio/pkg/net"
 )

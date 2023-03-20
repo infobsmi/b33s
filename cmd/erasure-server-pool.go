@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -32,14 +32,14 @@ import (
 	"time"
 
 	"github.com/dustin/go-humanize"
-	"github.com/minio/madmin-go/v2"
+	"github.com/b33s/madmin-go/v2"
 	"github.com/infobsmi/b33s-go/v7/pkg/set"
 	"github.com/infobsmi/b33s-go/v7/pkg/tags"
 	"github.com/infobsmi/b33s/internal/bucket/lifecycle"
 	"github.com/infobsmi/b33s/internal/config/storageclass"
 	"github.com/infobsmi/b33s/internal/logger"
 	"github.com/infobsmi/b33s/internal/sync/errgroup"
-	"github.com/minio/pkg/wildcard"
+	"github.com/b33s/pkg/wildcard"
 )
 
 type erasureServerPools struct {
@@ -209,7 +209,7 @@ func (z *erasureServerPools) GetRawData(ctx context.Context, volume, file string
 						r = io.NopCloser(bytes.NewBuffer([]byte{}))
 					}
 					// Keep disk path instead of ID, to ensure that the downloaded zip file can be
-					// easily automated with `minio server hostname{1...n}/disk{1...m}`.
+					// easily automated with `b33s server hostname{1...n}/disk{1...m}`.
 					err = fn(r, disk.Hostname(), disk.Endpoint().Path, pathJoin(volume, si.Name), si)
 					r.Close()
 					if err != nil {
@@ -694,7 +694,7 @@ func (z *erasureServerPools) MakeBucketWithLocation(ctx context.Context, bucket 
 	g := errgroup.WithNErrs(len(z.serverPools))
 
 	// Lock the bucket name before creating.
-	lk := z.NewNSLock(minioMetaTmpBucket, bucket+".lck")
+	lk := z.NewNSLock(b33sMetaTmpBucket, bucket+".lck")
 	lkctx, err := lk.GetLock(ctx, globalOperationTimeout)
 	if err != nil {
 		return err
@@ -1671,18 +1671,18 @@ func (z *erasureServerPools) DeleteBucket(ctx context.Context, bucket string, op
 	}
 
 	// Purge the entire bucket metadata entirely.
-	z.deleteAll(context.Background(), minioMetaBucket, pathJoin(bucketMetaPrefix, bucket))
+	z.deleteAll(context.Background(), b33sMetaBucket, pathJoin(bucketMetaPrefix, bucket))
 	// If site replication is configured, hold on to deleted bucket state until sites sync
 	switch opts.SRDeleteOp {
 	case MarkDelete:
-		z.markDelete(context.Background(), minioMetaBucket, pathJoin(bucketMetaPrefix, deletedBucketsPrefix, bucket))
+		z.markDelete(context.Background(), b33sMetaBucket, pathJoin(bucketMetaPrefix, deletedBucketsPrefix, bucket))
 	}
 	// Success.
 	return nil
 }
 
 // deleteAll will rename bucket+prefix unconditionally across all disks to
-// minioMetaTmpDeletedBucket + unique uuid,
+// b33sMetaTmpDeletedBucket + unique uuid,
 // Note that set distribution is ignored so it should only be used in cases where
 // data is not distributed across sets. Errors are logged but individual
 // disk failures are not returned.
@@ -1694,7 +1694,7 @@ func (z *erasureServerPools) deleteAll(ctx context.Context, bucket, prefix strin
 	}
 }
 
-// markDelete will create a directory of deleted bucket in .minio.sys/buckets/.deleted across all disks
+// markDelete will create a directory of deleted bucket in .b33s.sys/buckets/.deleted across all disks
 // in situations where the deleted bucket needs to be held on to until all sites are in sync for
 // site replication
 func (z *erasureServerPools) markDelete(ctx context.Context, bucket, prefix string) {
@@ -1705,7 +1705,7 @@ func (z *erasureServerPools) markDelete(ctx context.Context, bucket, prefix stri
 	}
 }
 
-// purgeDelete deletes vol entry in .minio.sys/buckets/.deleted after site replication
+// purgeDelete deletes vol entry in .b33s.sys/buckets/.deleted after site replication
 // syncs the delete to peers.
 func (z *erasureServerPools) purgeDelete(ctx context.Context, bucket, prefix string) {
 	for _, servers := range z.serverPools {
@@ -1766,7 +1766,7 @@ func (z *erasureServerPools) ListBuckets(ctx context.Context, opts BucketOptions
 
 func (z *erasureServerPools) HealFormat(ctx context.Context, dryRun bool) (madmin.HealResultItem, error) {
 	// Acquire lock on format.json
-	formatLock := z.NewNSLock(minioMetaBucket, formatConfigFile)
+	formatLock := z.NewNSLock(b33sMetaBucket, formatConfigFile)
 	lkctx, err := formatLock.GetLock(ctx, globalOperationTimeout)
 	if err != nil {
 		return madmin.HealResultItem{}, err
@@ -1814,7 +1814,7 @@ func (z *erasureServerPools) HealBucket(ctx context.Context, bucket string, opts
 	// Attempt heal on the bucket metadata, ignore any failures
 	hopts := opts
 	hopts.Recreate = false
-	defer z.HealObject(ctx, minioMetaBucket, pathJoin(bucketMetaPrefix, bucket, bucketMetadataFile), "", hopts)
+	defer z.HealObject(ctx, b33sMetaBucket, pathJoin(bucketMetaPrefix, bucket, bucketMetadataFile), "", hopts)
 
 	for _, pool := range z.serverPools {
 		result, err := pool.HealBucket(ctx, bucket, opts)
@@ -2023,8 +2023,8 @@ func (z *erasureServerPools) HealObjects(ctx context.Context, bucket, prefix str
 		}
 		// We might land at .metacache, .trash, .multipart
 		// no need to heal them skip, only when bucket
-		// is '.minio.sys'
-		if bucket == minioMetaBucket {
+		// is '.b33s.sys'
+		if bucket == b33sMetaBucket {
 			if wildcard.Match("buckets/*/.metacache/*", entry.name) {
 				return nil
 			}

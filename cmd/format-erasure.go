@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -815,7 +815,7 @@ func makeFormatErasureMetaVolumes(disk StorageAPI) error {
 		dataUsageBucket,           // creates .minio.sys/buckets
 		minioConfigBucket,         // creates .minio.sys/config
 	}
-	// Attempt to create MinIO internal buckets.
+	// Attempt to create B33S internal buckets.
 	return disk.MakeVolBulk(context.TODO(), volumes...)
 }
 

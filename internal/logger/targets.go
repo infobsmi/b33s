@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2022 MinIO, Inc.
+// Copyright (c) 2015-2022 B33S, Inc.
 //
 // This file is part of B33S Object Storage stack
 //
@@ -22,10 +22,10 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/minio/madmin-go/v2"
 	"github.com/infobsmi/b33s/internal/logger/target/http"
 	"github.com/infobsmi/b33s/internal/logger/target/kafka"
 	"github.com/infobsmi/b33s/internal/logger/target/types"
+	"github.com/minio/madmin-go/v2"
 )
 
 // Target is the entity that we will receive

@@ -76,7 +76,7 @@
       }
     ]
   },
-  "description": "MinIO Grafana Dashboard - https://min.io/",
+  "description": "B33S Grafana Dashboard - https://min.io/",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "gnetId": 13502,
@@ -979,7 +979,7 @@
           "instant": true,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "Total online disks in MinIO Cluster",
+          "legendFormat": "Total online disks in B33S Cluster",
           "metric": "process_start_time_seconds",
           "refId": "A",
           "step": 60,
@@ -2223,7 +2223,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "Total number of bytes received and sent among all MinIO server instances",
+      "description": "Total number of bytes received and sent among all B33S server instances",
       "fieldConfig": {
         "defaults": {
           "links": []
@@ -2806,7 +2806,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "Number of online disks per MinIO Server",
+      "description": "Number of online disks per B33S Server",
       "fieldConfig": {
         "defaults": {
           "links": []
@@ -3176,7 +3176,7 @@
     ]
   },
   "timezone": "",
-  "title": "MinIO Dashboard",
+  "title": "B33S Dashboard",
   "uid": "TgmJnqnnk",
   "version": 5,
   "weekStart": ""

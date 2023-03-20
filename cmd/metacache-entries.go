@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -27,7 +27,7 @@ import (
 	"strings"
 
 	"github.com/infobsmi/b33s/internal/logger"
-	"github.com/minio/pkg/console"
+	"github.com/b33s/pkg/console"
 )
 
 // metaCacheEntry is an object or a directory within an unknown bucket.

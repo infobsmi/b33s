@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -25,8 +25,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/minio/madmin-go/v2"
-	minio "github.com/infobsmi/b33s-go/v7"
+	"github.com/b33s/madmin-go/v2"
+	b33s "github.com/infobsmi/b33s-go/v7"
 	cr "github.com/infobsmi/b33s-go/v7/pkg/credentials"
 	"github.com/infobsmi/b33s-go/v7/pkg/set"
 )
@@ -79,7 +79,7 @@ func (s *TestSuiteIAM) TestSTSWithTags(c *check) {
 
 	bucket := getRandomBucketName()
 	object := getRandomObjectName()
-	err := s.client.MakeBucket(ctx, bucket, minio.MakeBucketOptions{})
+	err := s.client.MakeBucket(ctx, bucket, b33s.MakeBucketOptions{})
 	if err != nil {
 		c.Fatalf("bucket creat error: %v", err)
 	}
@@ -161,7 +161,7 @@ func (s *TestSuiteIAM) TestSTSWithTags(c *check) {
 		c.Fatalf("err calling assumeRole: %v", err)
 	}
 
-	minioClient, err := minio.New(s.endpoint, &minio.Options{
+	b33sClient, err := b33s.New(s.endpoint, &b33s.Options{
 		Creds:     cr.NewStaticV4(value.AccessKeyID, value.SecretAccessKey, value.SessionToken),
 		Secure:    s.secure,
 		Transport: s.TestSuiteCommon.client.Transport,
@@ -176,11 +176,11 @@ func (s *TestSuiteIAM) TestSTSWithTags(c *check) {
 	c.mustHeadObject(ctx, uClient, bucket, object, 2)
 
 	// Validate that the client can remove objects
-	if err = minioClient.RemoveObjectTagging(ctx, bucket, object, minio.RemoveObjectTaggingOptions{}); err != nil {
+	if err = b33sClient.RemoveObjectTagging(ctx, bucket, object, b33s.RemoveObjectTaggingOptions{}); err != nil {
 		c.Fatalf("user is unable to delete the object tags: %v", err)
 	}
 
-	if err = minioClient.RemoveObject(ctx, bucket, object, minio.RemoveObjectOptions{}); err != nil {
+	if err = b33sClient.RemoveObject(ctx, bucket, object, b33s.RemoveObjectOptions{}); err != nil {
 		c.Fatalf("user is unable to delete the object: %v", err)
 	}
 }
@@ -190,7 +190,7 @@ func (s *TestSuiteIAM) TestSTS(c *check) {
 	defer cancel()
 
 	bucket := getRandomBucketName()
-	err := s.client.MakeBucket(ctx, bucket, minio.MakeBucketOptions{})
+	err := s.client.MakeBucket(ctx, bucket, b33s.MakeBucketOptions{})
 	if err != nil {
 		c.Fatalf("bucket creat error: %v", err)
 	}
@@ -248,7 +248,7 @@ func (s *TestSuiteIAM) TestSTS(c *check) {
 		c.Fatalf("err calling assumeRole: %v", err)
 	}
 
-	minioClient, err := minio.New(s.endpoint, &minio.Options{
+	b33sClient, err := b33s.New(s.endpoint, &b33s.Options{
 		Creds:     cr.NewStaticV4(value.AccessKeyID, value.SecretAccessKey, value.SessionToken),
 		Secure:    s.secure,
 		Transport: s.TestSuiteCommon.client.Transport,
@@ -258,10 +258,10 @@ func (s *TestSuiteIAM) TestSTS(c *check) {
 	}
 
 	// Validate that the client from sts creds can access the bucket.
-	c.mustListObjects(ctx, minioClient, bucket)
+	c.mustListObjects(ctx, b33sClient, bucket)
 
 	// Validate that the client cannot remove any objects
-	err = minioClient.RemoveObject(ctx, bucket, "someobject", minio.RemoveObjectOptions{})
+	err = b33sClient.RemoveObject(ctx, bucket, "someobject", b33s.RemoveObjectOptions{})
 	if err.Error() != "Access Denied." {
 		c.Fatalf("unexpected non-access-denied err: %v", err)
 	}
@@ -272,7 +272,7 @@ func (s *TestSuiteIAM) TestSTSWithGroupPolicy(c *check) {
 	defer cancel()
 
 	bucket := getRandomBucketName()
-	err := s.client.MakeBucket(ctx, bucket, minio.MakeBucketOptions{})
+	err := s.client.MakeBucket(ctx, bucket, b33s.MakeBucketOptions{})
 	if err != nil {
 		c.Fatalf("bucket creat error: %v", err)
 	}
@@ -345,7 +345,7 @@ func (s *TestSuiteIAM) TestSTSWithGroupPolicy(c *check) {
 
 	// Check that STS user client has access coming from parent user's
 	// group.
-	minioClient, err := minio.New(s.endpoint, &minio.Options{
+	b33sClient, err := b33s.New(s.endpoint, &b33s.Options{
 		Creds:     cr.NewStaticV4(value.AccessKeyID, value.SecretAccessKey, value.SessionToken),
 		Secure:    s.secure,
 		Transport: s.TestSuiteCommon.client.Transport,
@@ -355,10 +355,10 @@ func (s *TestSuiteIAM) TestSTSWithGroupPolicy(c *check) {
 	}
 
 	// Validate that the client from sts creds can access the bucket.
-	c.mustListObjects(ctx, minioClient, bucket)
+	c.mustListObjects(ctx, b33sClient, bucket)
 
 	// Validate that the client cannot remove any objects
-	err = minioClient.RemoveObject(ctx, bucket, "someobject", minio.RemoveObjectOptions{})
+	err = b33sClient.RemoveObject(ctx, bucket, "someobject", b33s.RemoveObjectOptions{})
 	if err.Error() != "Access Denied." {
 		c.Fatalf("unexpected non-access-denied err: %v", err)
 	}
@@ -371,7 +371,7 @@ func (s *TestSuiteIAM) TestSTSForRoot(c *check) {
 	defer cancel()
 
 	bucket := getRandomBucketName()
-	err := s.client.MakeBucket(ctx, bucket, minio.MakeBucketOptions{})
+	err := s.client.MakeBucket(ctx, bucket, b33s.MakeBucketOptions{})
 	if err != nil {
 		c.Fatalf("bucket create error: %v", err)
 	}
@@ -391,7 +391,7 @@ func (s *TestSuiteIAM) TestSTSForRoot(c *check) {
 		c.Fatalf("err calling assumeRole: %v", err)
 	}
 
-	minioClient, err := minio.New(s.endpoint, &minio.Options{
+	b33sClient, err := b33s.New(s.endpoint, &b33s.Options{
 		Creds:     cr.NewStaticV4(value.AccessKeyID, value.SecretAccessKey, value.SessionToken),
 		Secure:    s.secure,
 		Transport: s.TestSuiteCommon.client.Transport,
@@ -401,11 +401,11 @@ func (s *TestSuiteIAM) TestSTSForRoot(c *check) {
 	}
 
 	// Validate that the client from sts creds can access the bucket.
-	c.mustListObjects(ctx, minioClient, bucket)
+	c.mustListObjects(ctx, b33sClient, bucket)
 
 	// Validate that a bucket can be created
 	bucket2 := getRandomBucketName()
-	err = minioClient.MakeBucket(ctx, bucket2, minio.MakeBucketOptions{})
+	err = b33sClient.MakeBucket(ctx, bucket2, b33s.MakeBucketOptions{})
 	if err != nil {
 		c.Fatalf("bucket creat error: %v", err)
 	}
@@ -497,7 +497,7 @@ func (s *TestSuiteIAM) TestLDAPSTS(c *check) {
 	defer cancel()
 
 	bucket := getRandomBucketName()
-	err := s.client.MakeBucket(ctx, bucket, minio.MakeBucketOptions{})
+	err := s.client.MakeBucket(ctx, bucket, b33s.MakeBucketOptions{})
 	if err != nil {
 		c.Fatalf("bucket create error: %v", err)
 	}
@@ -554,7 +554,7 @@ func (s *TestSuiteIAM) TestLDAPSTS(c *check) {
 		c.Fatalf("Expected to generate STS creds, got err: %#v", err)
 	}
 
-	minioClient, err := minio.New(s.endpoint, &minio.Options{
+	b33sClient, err := b33s.New(s.endpoint, &b33s.Options{
 		Creds:     cr.NewStaticV4(value.AccessKeyID, value.SecretAccessKey, value.SessionToken),
 		Secure:    s.secure,
 		Transport: s.TestSuiteCommon.client.Transport,
@@ -577,10 +577,10 @@ func (s *TestSuiteIAM) TestLDAPSTS(c *check) {
 	}
 
 	// Validate that the client from sts creds can access the bucket.
-	c.mustListObjects(ctx, minioClient, bucket)
+	c.mustListObjects(ctx, b33sClient, bucket)
 
 	// Validate that the client cannot remove any objects
-	err = minioClient.RemoveObject(ctx, bucket, "someobject", minio.RemoveObjectOptions{})
+	err = b33sClient.RemoveObject(ctx, bucket, "someobject", b33s.RemoveObjectOptions{})
 	if err.Error() != "Access Denied." {
 		c.Fatalf("unexpected non-access-denied err: %v", err)
 	}
@@ -608,7 +608,7 @@ func (s *TestSuiteIAM) TestLDAPSTS(c *check) {
 		c.Fatalf("Expected to generate STS creds, got err: %#v", err)
 	}
 
-	minioClient, err = minio.New(s.endpoint, &minio.Options{
+	b33sClient, err = b33s.New(s.endpoint, &b33s.Options{
 		Creds:     cr.NewStaticV4(value.AccessKeyID, value.SecretAccessKey, value.SessionToken),
 		Secure:    s.secure,
 		Transport: s.TestSuiteCommon.client.Transport,
@@ -618,10 +618,10 @@ func (s *TestSuiteIAM) TestLDAPSTS(c *check) {
 	}
 
 	// Validate that the client from sts creds can access the bucket.
-	c.mustListObjects(ctx, minioClient, bucket)
+	c.mustListObjects(ctx, b33sClient, bucket)
 
 	// Validate that the client cannot remove any objects
-	err = minioClient.RemoveObject(ctx, bucket, "someobject", minio.RemoveObjectOptions{})
+	err = b33sClient.RemoveObject(ctx, bucket, "someobject", b33s.RemoveObjectOptions{})
 	c.Assert(err.Error(), "Access Denied.")
 }
 
@@ -630,7 +630,7 @@ func (s *TestSuiteIAM) TestLDAPSTSServiceAccounts(c *check) {
 	defer cancel()
 
 	bucket := getRandomBucketName()
-	err := s.client.MakeBucket(ctx, bucket, minio.MakeBucketOptions{})
+	err := s.client.MakeBucket(ctx, bucket, b33s.MakeBucketOptions{})
 	if err != nil {
 		c.Fatalf("bucket create error: %v", err)
 	}
@@ -677,7 +677,7 @@ func (s *TestSuiteIAM) TestLDAPSTSServiceAccounts(c *check) {
 	}
 
 	// Check that the LDAP sts cred is actually working.
-	minioClient, err := minio.New(s.endpoint, &minio.Options{
+	b33sClient, err := b33s.New(s.endpoint, &b33s.Options{
 		Creds:     cr.NewStaticV4(value.AccessKeyID, value.SecretAccessKey, value.SessionToken),
 		Secure:    s.secure,
 		Transport: s.TestSuiteCommon.client.Transport,
@@ -687,7 +687,7 @@ func (s *TestSuiteIAM) TestLDAPSTSServiceAccounts(c *check) {
 	}
 
 	// Validate that the client from sts creds can access the bucket.
-	c.mustListObjects(ctx, minioClient, bucket)
+	c.mustListObjects(ctx, b33sClient, bucket)
 
 	// Create an madmin client with user creds
 	userAdmClient, err := madmin.NewWithOptions(s.endpoint, &madmin.Options{
@@ -733,7 +733,7 @@ func (s *TestSuiteIAM) TestLDAPSTSServiceAccountsWithGroups(c *check) {
 	defer cancel()
 
 	bucket := getRandomBucketName()
-	err := s.client.MakeBucket(ctx, bucket, minio.MakeBucketOptions{})
+	err := s.client.MakeBucket(ctx, bucket, b33s.MakeBucketOptions{})
 	if err != nil {
 		c.Fatalf("bucket create error: %v", err)
 	}
@@ -780,7 +780,7 @@ func (s *TestSuiteIAM) TestLDAPSTSServiceAccountsWithGroups(c *check) {
 	}
 
 	// Check that the LDAP sts cred is actually working.
-	minioClient, err := minio.New(s.endpoint, &minio.Options{
+	b33sClient, err := b33s.New(s.endpoint, &b33s.Options{
 		Creds:     cr.NewStaticV4(value.AccessKeyID, value.SecretAccessKey, value.SessionToken),
 		Secure:    s.secure,
 		Transport: s.TestSuiteCommon.client.Transport,
@@ -790,7 +790,7 @@ func (s *TestSuiteIAM) TestLDAPSTSServiceAccountsWithGroups(c *check) {
 	}
 
 	// Validate that the client from sts creds can access the bucket.
-	c.mustListObjects(ctx, minioClient, bucket)
+	c.mustListObjects(ctx, b33sClient, bucket)
 
 	// Create an madmin client with user creds
 	userAdmClient, err := madmin.NewWithOptions(s.endpoint, &madmin.Options{
@@ -834,7 +834,7 @@ func (s *TestSuiteIAM) TestOpenIDSTS(c *check) {
 	defer cancel()
 
 	bucket := getRandomBucketName()
-	err := s.client.MakeBucket(ctx, bucket, minio.MakeBucketOptions{})
+	err := s.client.MakeBucket(ctx, bucket, b33s.MakeBucketOptions{})
 	if err != nil {
 		c.Fatalf("bucket create error: %v", err)
 	}
@@ -885,7 +885,7 @@ func (s *TestSuiteIAM) TestOpenIDSTS(c *check) {
 		c.Fatalf("Expected to generate STS creds, got err: %#v", err)
 	}
 
-	minioClient, err := minio.New(s.endpoint, &minio.Options{
+	b33sClient, err := b33s.New(s.endpoint, &b33s.Options{
 		Creds:     cr.NewStaticV4(value.AccessKeyID, value.SecretAccessKey, value.SessionToken),
 		Secure:    s.secure,
 		Transport: s.TestSuiteCommon.client.Transport,
@@ -895,10 +895,10 @@ func (s *TestSuiteIAM) TestOpenIDSTS(c *check) {
 	}
 
 	// Validate that the client from sts creds can access the bucket.
-	c.mustListObjects(ctx, minioClient, bucket)
+	c.mustListObjects(ctx, b33sClient, bucket)
 
 	// Validate that the client cannot remove any objects
-	err = minioClient.RemoveObject(ctx, bucket, "someobject", minio.RemoveObjectOptions{})
+	err = b33sClient.RemoveObject(ctx, bucket, "someobject", b33s.RemoveObjectOptions{})
 	if err.Error() != "Access Denied." {
 		c.Fatalf("unexpected non-access-denied err: %v", err)
 	}
@@ -909,7 +909,7 @@ func (s *TestSuiteIAM) TestOpenIDSTSAddUser(c *check) {
 	defer cancel()
 
 	bucket := getRandomBucketName()
-	err := s.client.MakeBucket(ctx, bucket, minio.MakeBucketOptions{})
+	err := s.client.MakeBucket(ctx, bucket, b33s.MakeBucketOptions{})
 	if err != nil {
 		c.Fatalf("bucket create error: %v", err)
 	}
@@ -999,7 +999,7 @@ func (s *TestSuiteIAM) TestOpenIDServiceAcc(c *check) {
 	defer cancel()
 
 	bucket := getRandomBucketName()
-	err := s.client.MakeBucket(ctx, bucket, minio.MakeBucketOptions{})
+	err := s.client.MakeBucket(ctx, bucket, b33s.MakeBucketOptions{})
 	if err != nil {
 		c.Fatalf("bucket create error: %v", err)
 	}
@@ -1087,8 +1087,8 @@ func (s *TestSuiteIAM) TestOpenIDServiceAcc(c *check) {
 }
 
 var testAppParams = OpenIDClientAppParams{
-	ClientID:     "minio-client-app",
-	ClientSecret: "minio-client-app-secret",
+	ClientID:     "b33s-client-app",
+	ClientSecret: "b33s-client-app-secret",
 	ProviderURL:  "http://127.0.0.1:5556/dex",
 	RedirectURL:  "http://127.0.0.1:10000/oauth_callback",
 }
@@ -1143,8 +1143,8 @@ func (s *TestSuiteIAM) SetUpOpenID(c *check, serverAddr string, rolePolicy strin
 	configCmds := []string{
 		"identity_openid",
 		fmt.Sprintf("config_url=%s/.well-known/openid-configuration", serverAddr),
-		"client_id=minio-client-app",
-		"client_secret=minio-client-app-secret",
+		"client_id=b33s-client-app",
+		"client_secret=b33s-client-app-secret",
 		"scopes=openid,groups",
 		"redirect_uri=http://127.0.0.1:10000/oauth_callback",
 	}
@@ -1231,8 +1231,8 @@ func TestIAMWithOpenIDWithRolePolicyWithPolicyVariablesServerSuite(t *testing.T)
 }
 
 const (
-	testRoleARN  = "arn:minio:iam:::role/nOybJqMNzNmroqEKq5D0EUsRZw0"
-	testRoleARN2 = "arn:minio:iam:::role/domXb70kze7Ugc1SaxaeFchhLP4"
+	testRoleARN  = "arn:b33s:iam:::role/nOybJqMNzNmroqEKq5D0EUsRZw0"
+	testRoleARN2 = "arn:b33s:iam:::role/domXb70kze7Ugc1SaxaeFchhLP4"
 )
 
 var (
@@ -1247,8 +1247,8 @@ var (
 		openIDServer := os.Getenv(EnvTestOpenIDServer)
 		if openIDServer != "" {
 			apps = append(apps, OpenIDClientAppParams{
-				ClientID:     "minio-client-app",
-				ClientSecret: "minio-client-app-secret",
+				ClientID:     "b33s-client-app",
+				ClientSecret: "b33s-client-app-secret",
 				ProviderURL:  openIDServer,
 				RedirectURL:  "http://127.0.0.1:10000/oauth_callback",
 			})
@@ -1258,8 +1258,8 @@ var (
 		openIDServer2 := os.Getenv(EnvTestOpenIDServer2)
 		if openIDServer2 != "" {
 			apps = append(apps, OpenIDClientAppParams{
-				ClientID:     "minio-client-app-2",
-				ClientSecret: "minio-client-app-secret-2",
+				ClientID:     "b33s-client-app-2",
+				ClientSecret: "b33s-client-app-secret-2",
 				ProviderURL:  openIDServer2,
 				RedirectURL:  "http://127.0.0.1:10000/oauth_callback",
 			})
@@ -1275,7 +1275,7 @@ func (s *TestSuiteIAM) TestOpenIDSTSWithRolePolicy(c *check, roleARN string, cli
 	defer cancel()
 
 	bucket := getRandomBucketName()
-	err := s.client.MakeBucket(ctx, bucket, minio.MakeBucketOptions{})
+	err := s.client.MakeBucket(ctx, bucket, b33s.MakeBucketOptions{})
 	if err != nil {
 		c.Fatalf("bucket create error: %v", err)
 	}
@@ -1304,7 +1304,7 @@ func (s *TestSuiteIAM) TestOpenIDSTSWithRolePolicy(c *check, roleARN string, cli
 	}
 	// fmt.Printf("value: %#v\n", value)
 
-	minioClient, err := minio.New(s.endpoint, &minio.Options{
+	b33sClient, err := b33s.New(s.endpoint, &b33s.Options{
 		Creds:     cr.NewStaticV4(value.AccessKeyID, value.SecretAccessKey, value.SessionToken),
 		Secure:    s.secure,
 		Transport: s.TestSuiteCommon.client.Transport,
@@ -1314,7 +1314,7 @@ func (s *TestSuiteIAM) TestOpenIDSTSWithRolePolicy(c *check, roleARN string, cli
 	}
 
 	// Validate that the client from sts creds can access the bucket.
-	c.mustListObjects(ctx, minioClient, bucket)
+	c.mustListObjects(ctx, b33sClient, bucket)
 }
 
 func (s *TestSuiteIAM) TestOpenIDServiceAccWithRolePolicy(c *check) {
@@ -1322,7 +1322,7 @@ func (s *TestSuiteIAM) TestOpenIDServiceAccWithRolePolicy(c *check) {
 	defer cancel()
 
 	bucket := getRandomBucketName()
-	err := s.client.MakeBucket(ctx, bucket, minio.MakeBucketOptions{})
+	err := s.client.MakeBucket(ctx, bucket, b33s.MakeBucketOptions{})
 	if err != nil {
 		c.Fatalf("bucket create error: %v", err)
 	}
@@ -1493,7 +1493,7 @@ func (s *TestSuiteIAM) TestOpenIDSTSWithRolePolicyWithPolVar(c *check, roleARN s
 	// Create project buckets
 	buckets := []string{"projecta", "projectb", "projectaorb", "other"}
 	for _, bucket := range buckets {
-		err := s.client.MakeBucket(ctx, bucket, minio.MakeBucketOptions{})
+		err := s.client.MakeBucket(ctx, bucket, b33s.MakeBucketOptions{})
 		if err != nil {
 			c.Fatalf("bucket create error: %v", err)
 		}
@@ -1507,7 +1507,7 @@ func (s *TestSuiteIAM) TestOpenIDSTSWithRolePolicyWithPolVar(c *check, roleARN s
 		}
 	}
 
-	makeSTSClient := func(user, password string) *minio.Client {
+	makeSTSClient := func(user, password string) *b33s.Client {
 		// Generate web identity JWT by interacting with OpenID IDP.
 		token, err := MockOpenIDTestUserInteraction(ctx, clientApp, user, password)
 		if err != nil {
@@ -1532,7 +1532,7 @@ func (s *TestSuiteIAM) TestOpenIDSTSWithRolePolicyWithPolVar(c *check, roleARN s
 		}
 		// fmt.Printf("value: %#v\n", value)
 
-		minioClient, err := minio.New(s.endpoint, &minio.Options{
+		b33sClient, err := b33s.New(s.endpoint, &b33s.Options{
 			Creds:     cr.NewStaticV4(value.AccessKeyID, value.SecretAccessKey, value.SessionToken),
 			Secure:    s.secure,
 			Transport: s.TestSuiteCommon.client.Transport,
@@ -1541,7 +1541,7 @@ func (s *TestSuiteIAM) TestOpenIDSTSWithRolePolicyWithPolVar(c *check, roleARN s
 			c.Fatalf("Error initializing client: %v", err)
 		}
 
-		return minioClient
+		return b33sClient
 	}
 
 	// user dillon's groups attribute is ["projecta", "projectb"]
@@ -1705,7 +1705,7 @@ func (s *TestSuiteIAM) TestOpenIDSTSWithRolePolicyUnderAMP(c *check, roleARN str
 	defer cancel()
 
 	bucket := getRandomBucketName()
-	err := s.client.MakeBucket(ctx, bucket, minio.MakeBucketOptions{})
+	err := s.client.MakeBucket(ctx, bucket, b33s.MakeBucketOptions{})
 	if err != nil {
 		c.Fatalf("bucket create error: %v", err)
 	}
@@ -1734,7 +1734,7 @@ func (s *TestSuiteIAM) TestOpenIDSTSWithRolePolicyUnderAMP(c *check, roleARN str
 	}
 	// fmt.Printf("value: %#v\n", value)
 
-	minioClient, err := minio.New(s.endpoint, &minio.Options{
+	b33sClient, err := b33s.New(s.endpoint, &b33s.Options{
 		Creds:     cr.NewStaticV4(value.AccessKeyID, value.SecretAccessKey, value.SessionToken),
 		Secure:    s.secure,
 		Transport: s.TestSuiteCommon.client.Transport,
@@ -1744,11 +1744,11 @@ func (s *TestSuiteIAM) TestOpenIDSTSWithRolePolicyUnderAMP(c *check, roleARN str
 	}
 
 	// Validate that the client from sts creds can access the bucket.
-	c.mustListObjects(ctx, minioClient, bucket)
+	c.mustListObjects(ctx, b33sClient, bucket)
 
 	// Validate that the client from STS creds cannot upload any object as
 	// it is denied by the plugin.
-	c.mustNotUpload(ctx, minioClient, bucket)
+	c.mustNotUpload(ctx, b33sClient, bucket)
 }
 
 func (s *TestSuiteIAM) TestOpenIDServiceAccWithRolePolicyUnderAMP(c *check) {
@@ -1756,7 +1756,7 @@ func (s *TestSuiteIAM) TestOpenIDServiceAccWithRolePolicyUnderAMP(c *check) {
 	defer cancel()
 
 	bucket := getRandomBucketName()
-	err := s.client.MakeBucket(ctx, bucket, minio.MakeBucketOptions{})
+	err := s.client.MakeBucket(ctx, bucket, b33s.MakeBucketOptions{})
 	if err != nil {
 		c.Fatalf("bucket create error: %v", err)
 	}

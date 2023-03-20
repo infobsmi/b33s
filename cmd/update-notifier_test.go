@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -67,7 +67,7 @@ func TestPrepareUpdateMessage(t *testing.T) {
 		{2 * 365 * 24 * time.Hour, "my_download_url", "2 years ago"},
 	}
 
-	plainMsg := "You are running an older version of MinIO released"
+	plainMsg := "You are running an older version of B33S released"
 
 	for i, testCase := range testCases {
 		output := prepareUpdateMessage(testCase.dlURL, testCase.older)

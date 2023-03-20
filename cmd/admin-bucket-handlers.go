@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -934,7 +934,7 @@ func (a adminAPIHandlers) ImportBucketMetadataHandler(w http.ResponseWriter, r *
 			}
 			kmsKey := encConfig.KeyID()
 			if kmsKey != "" {
-				kmsContext := kms.Context{"MinIO admin API": "ServerInfoHandler"} // Context for a test key operation
+				kmsContext := kms.Context{"B33S admin API": "ServerInfoHandler"} // Context for a test key operation
 				_, err := GlobalKMS.GenerateKey(ctx, kmsKey, kmsContext)
 				if err != nil {
 					if errors.Is(err, kes.ErrKeyNotFound) {

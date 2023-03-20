@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -29,7 +29,7 @@ import (
 	"github.com/infobsmi/b33s/internal/auth"
 	xjwt "github.com/infobsmi/b33s/internal/jwt"
 	"github.com/infobsmi/b33s/internal/logger"
-	iampolicy "github.com/minio/pkg/iam/policy"
+	iampolicy "github.com/b33s/pkg/iam/policy"
 )
 
 const (

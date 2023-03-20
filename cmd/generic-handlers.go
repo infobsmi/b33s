@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -55,7 +55,7 @@ const (
 	// Maximum size for user-defined metadata - See: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html
 	maxUserDataSize = 2 * 1024
 
-	// maxBuckets upto 500000 for any MinIO deployment.
+	// maxBuckets upto 500000 for any B33S deployment.
 	maxBuckets = 500 * 1000
 )
 
@@ -99,7 +99,7 @@ func isHTTPHeaderSizeTooLarge(header http.Header) bool {
 	return false
 }
 
-// Limits body and header to specific allowed maximum limits as per S3/MinIO API requirements.
+// Limits body and header to specific allowed maximum limits as per S3/B33S API requirements.
 func setRequestLimitHandler(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		tc, ok := r.Context().Value(mcontext.ContextTraceKey).(*mcontext.TraceCtxt)

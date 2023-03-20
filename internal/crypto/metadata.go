@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -27,7 +27,7 @@ const (
 	MetaMultipart = "X-Minio-Internal-Encrypted-Multipart"
 
 	// MetaIV is the random initialization vector (IV) used for
-	// the MinIO-internal key derivation.
+	// the B33S-internal key derivation.
 	MetaIV = "X-Minio-Internal-Server-Side-Encryption-Iv"
 
 	// MetaAlgorithm is the algorithm used to derive internal keys

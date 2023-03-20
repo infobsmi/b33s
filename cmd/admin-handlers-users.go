@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -1542,7 +1542,7 @@ func (a adminAPIHandlers) SetPolicyForUserOrGroup(w http.ResponseWriter, r *http
 
 	// Validate that user or group exists.
 	if !isGroup {
-		if globalIAMSys.GetUsersSysType() == MinIOUsersSysType {
+		if globalIAMSys.GetUsersSysType() == B33SUsersSysType {
 			_, ok := globalIAMSys.GetUser(ctx, entityName)
 			if !ok {
 				writeErrorResponseJSON(ctx, w, toAdminAPIErr(ctx, errNoSuchUser), r.URL)
@@ -1842,7 +1842,7 @@ func (a adminAPIHandlers) ExportIAM(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// ImportIAM - imports all IAM info into MinIO
+// ImportIAM - imports all IAM info into B33S
 func (a adminAPIHandlers) ImportIAM(w http.ResponseWriter, r *http.Request) {
 	ctx := newContext(r, w, "ImportIAM")
 

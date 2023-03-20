@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -28,12 +28,12 @@ import (
 	"sync"
 	"time"
 
-	"github.com/minio/madmin-go/v2"
+	"github.com/b33s/madmin-go/v2"
 	"github.com/infobsmi/b33s/internal/bpool"
 	"github.com/infobsmi/b33s/internal/dsync"
 	"github.com/infobsmi/b33s/internal/logger"
 	"github.com/infobsmi/b33s/internal/sync/errgroup"
-	"github.com/minio/pkg/console"
+	"github.com/b33s/pkg/console"
 )
 
 // OfflineDisk represents an unavailable disk.
@@ -325,7 +325,7 @@ func (er erasureObjects) getOnlineDisksWithHealing() (newDisks []StorageAPI, hea
 	return newDisks, healing
 }
 
-// Clean-up previously deleted objects. from .minio.sys/tmp/.trash/
+// Clean-up previously deleted objects. from .b33s.sys/tmp/.trash/
 func (er erasureObjects) cleanupDeletedObjects(ctx context.Context) {
 	// run multiple cleanup's local to this server.
 	var wg sync.WaitGroup
@@ -335,9 +335,9 @@ func (er erasureObjects) cleanupDeletedObjects(ctx context.Context) {
 			go func(disk StorageAPI) {
 				defer wg.Done()
 				diskPath := disk.Endpoint().Path
-				readDirFn(pathJoin(diskPath, minioMetaTmpDeletedBucket), func(ddir string, typ os.FileMode) error {
+				readDirFn(pathJoin(diskPath, b33sMetaTmpDeletedBucket), func(ddir string, typ os.FileMode) error {
 					wait := deletedCleanupSleeper.Timer(ctx)
-					removeAll(pathJoin(diskPath, minioMetaTmpDeletedBucket, ddir))
+					removeAll(pathJoin(diskPath, b33sMetaTmpDeletedBucket, ddir))
 					wait()
 					return nil
 				})

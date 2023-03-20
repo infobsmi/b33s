@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -25,7 +25,7 @@ import (
 	"strings"
 	"testing"
 
-	minio "github.com/infobsmi/b33s-go/v7"
+	b33s "github.com/infobsmi/b33s-go/v7"
 )
 
 func TestParsePostPolicyForm(t *testing.T) {
@@ -80,7 +80,7 @@ func TestParsePostPolicyForm(t *testing.T) {
 
 // Test Post Policy parsing and checking conditions
 func TestPostPolicyForm(t *testing.T) {
-	pp := minio.NewPostPolicy()
+	pp := b33s.NewPostPolicy()
 	pp.SetBucket("testbucket")
 	pp.SetContentType("image/jpeg")
 	pp.SetUserMetadata("uuid", "14365123651274")

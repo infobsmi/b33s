@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -26,7 +26,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/minio/madmin-go/v2"
+	"github.com/b33s/madmin-go/v2"
 	"github.com/infobsmi/b33s/internal/logger"
 	"github.com/infobsmi/b33s/internal/sync/errgroup"
 )
@@ -118,7 +118,7 @@ func (er erasureObjects) healBucket(ctx context.Context, storageDisks []StorageA
 			beforeState[index] = madmin.DriveStateOk
 			afterState[index] = madmin.DriveStateOk
 
-			if bucket == minioReservedBucket {
+			if bucket == b33sReservedBucket {
 				return nil
 			}
 
@@ -570,13 +570,13 @@ func (er *erasureObjects) healObject(ctx context.Context, bucket string, object 
 					inlineBuffers[i] = bytes.NewBuffer(make([]byte, 0, erasure.ShardFileSize(latestMeta.Size)+32))
 					writers[i] = newStreamingBitrotWriterBuffer(inlineBuffers[i], DefaultBitrotAlgorithm, erasure.ShardSize())
 				} else {
-					writers[i] = newBitrotWriter(disk, minioMetaTmpBucket, partPath,
+					writers[i] = newBitrotWriter(disk, b33sMetaTmpBucket, partPath,
 						tillOffset, DefaultBitrotAlgorithm, erasure.ShardSize())
 				}
 			}
 
 			// Heal each part. erasure.Heal() will write the healed
-			// part to .minio/tmp/uuid/ which needs to be renamed
+			// part to .b33s/tmp/uuid/ which needs to be renamed
 			// later to the final location.
 			err = erasure.Heal(ctx, writers, readers, partSize)
 			closeBitrotReaders(readers)
@@ -624,7 +624,7 @@ func (er *erasureObjects) healObject(ctx context.Context, bucket string, object 
 
 	}
 
-	defer er.deleteAll(context.Background(), minioMetaTmpBucket, tmpID)
+	defer er.deleteAll(context.Background(), b33sMetaTmpBucket, tmpID)
 
 	// Rename from tmp location to the actual location.
 	for i, disk := range outDatedDisks {
@@ -636,7 +636,7 @@ func (er *erasureObjects) healObject(ctx context.Context, bucket string, object 
 		partsMetadata[i].Erasure.Index = i + 1
 
 		// Attempt a rename now from healed data to final location.
-		if _, err = disk.RenameData(ctx, minioMetaTmpBucket, tmpID, partsMetadata[i], bucket, object); err != nil {
+		if _, err = disk.RenameData(ctx, b33sMetaTmpBucket, tmpID, partsMetadata[i], bucket, object); err != nil {
 			logger.LogIf(ctx, err)
 			return result, err
 		}

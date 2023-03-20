@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -33,17 +33,17 @@ import (
 )
 
 const (
-	// Minimum length for MinIO access key.
+	// Minimum length for B33S access key.
 	accessKeyMinLen = 3
 
-	// Maximum length for MinIO access key.
+	// Maximum length for B33S access key.
 	// There is no max length enforcement for access keys
 	accessKeyMaxLen = 20
 
-	// Minimum length for MinIO secret key for both server
+	// Minimum length for B33S secret key for both server
 	secretKeyMinLen = 8
 
-	// Maximum secret key length for MinIO, this
+	// Maximum secret key length for B33S, this
 	// is used when autogenerating new credentials.
 	// There is no max length enforcement for secret keys
 	secretKeyMaxLen = 40

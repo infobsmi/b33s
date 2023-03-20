@@ -1,6 +1,6 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33SObject Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -17,7 +17,7 @@
 
 // Originally from https://github.com/gorilla/handlers with following license
 // https://raw.githubusercontent.com/gorilla/handlers/master/LICENSE, forked
-// and heavily modified for MinIO's internal needs.
+// and heavily modified for B33S's internal needs.
 
 package handlers
 

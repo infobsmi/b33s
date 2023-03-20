@@ -1,6 +1,6 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33SObject Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -67,7 +67,7 @@ func Test_readFromSecret(t *testing.T) {
 	}
 }
 
-func Test_minioEnvironFromFile(t *testing.T) {
+func Test_b33sEnvironFromFile(t *testing.T) {
 	testCases := []struct {
 		content      string
 		expectedErr  bool
@@ -75,81 +75,81 @@ func Test_minioEnvironFromFile(t *testing.T) {
 	}{
 		{
 			`
-export MINIO_ROOT_USER=minio
-export MINIO_ROOT_PASSWORD=minio123`,
+export MINIO_ROOT_USER=b33s
+export MINIO_ROOT_PASSWORD=b33s123`,
 			false,
 			[]envKV{
 				{
 					Key:   "MINIO_ROOT_USER",
-					Value: "minio",
+					Value: "b33s",
 				},
 				{
 					Key:   "MINIO_ROOT_PASSWORD",
-					Value: "minio123",
+					Value: "b33s123",
 				},
 			},
 		},
 		// Value with double quotes
 		{
-			`export MINIO_ROOT_USER="minio"`,
+			`export MINIO_ROOT_USER="b33s"`,
 			false,
 			[]envKV{
 				{
 					Key:   "MINIO_ROOT_USER",
-					Value: "minio",
+					Value: "b33s",
 				},
 			},
 		},
 		// Value with single quotes
 		{
-			`export MINIO_ROOT_USER='minio'`,
+			`export MINIO_ROOT_USER='b33s'`,
 			false,
 			[]envKV{
 				{
 					Key:   "MINIO_ROOT_USER",
-					Value: "minio",
+					Value: "b33s",
 				},
 			},
 		},
 		{
 			`
-MINIO_ROOT_USER=minio
-MINIO_ROOT_PASSWORD=minio123`,
+MINIO_ROOT_USER=b33s
+MINIO_ROOT_PASSWORD=b33s123`,
 			false,
 			[]envKV{
 				{
 					Key:   "MINIO_ROOT_USER",
-					Value: "minio",
+					Value: "b33s",
 				},
 				{
 					Key:   "MINIO_ROOT_PASSWORD",
-					Value: "minio123",
+					Value: "b33s123",
 				},
 			},
 		},
 		{
 			`
-export MINIO_ROOT_USERminio
-export MINIO_ROOT_PASSWORD=minio123`,
+export MINIO_ROOT_USERb33s
+export MINIO_ROOT_PASSWORD=b33s123`,
 			true,
 			nil,
 		},
 		{
 			`
 # simple comment
-# MINIO_ROOT_USER=minioadmin
-# MINIO_ROOT_PASSWORD=minioadmin
-MINIO_ROOT_USER=minio
-MINIO_ROOT_PASSWORD=minio123`,
+# MINIO_ROOT_USER=b33sadmin
+# MINIO_ROOT_PASSWORD=b33sadmin
+MINIO_ROOT_USER=b33s
+MINIO_ROOT_PASSWORD=b33s123`,
 			false,
 			[]envKV{
 				{
 					Key:   "MINIO_ROOT_USER",
-					Value: "minio",
+					Value: "b33s",
 				},
 				{
 					Key:   "MINIO_ROOT_PASSWORD",
-					Value: "minio123",
+					Value: "b33s123",
 				},
 			},
 		},
@@ -165,7 +165,7 @@ MINIO_ROOT_PASSWORD=minio123`,
 			tmpfile.Sync()
 			tmpfile.Close()
 
-			ekvs, err := minioEnvironFromFile(tmpfile.Name())
+			ekvs, err := b33sEnvironFromFile(tmpfile.Name())
 			if err != nil && !testCase.expectedErr {
 				t.Error(err)
 			}

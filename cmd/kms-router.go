@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2022 MinIO, Inc.
+// Copyright (c) 2015-2022 B33S, Inc.
 //
 // This file is part of B33S Object Storage stack
 //
@@ -21,9 +21,9 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/infobsmi/b33s/internal/logger"
 	"github.com/klauspost/compress/gzhttp"
 	"github.com/klauspost/compress/gzip"
-	"github.com/infobsmi/b33s/internal/logger"
 )
 
 const (

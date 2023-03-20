@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -52,7 +52,7 @@ var (
 	errInvalidSSEParameters = errors.New("The SSE-C key for key-rotation is not correct") // special access denied
 	errKMSNotConfigured     = errors.New("KMS not configured for a server side encrypted object")
 	errKMSKeyNotFound       = errors.New("Invalid KMS keyId")
-	// Additional MinIO errors for SSE-C requests.
+	// Additional B33S errors for SSE-C requests.
 	errObjectTampered = errors.New("The requested object was modified and may be compromised")
 	// error returned when invalid encryption parameters are specified
 	errInvalidEncryptionParameters = errors.New("The encryption parameters are not applicable to this object")
@@ -756,7 +756,7 @@ func (o *ObjectInfo) DecryptedSize() (int64, error) {
 // it consists of a 128 bit hex value (32 hex chars) and exactly
 // one '-' followed by a 32-bit number.
 // This special case adresses randomly-generated ETags generated
-// by the MinIO server when running in non-compat mode. These
+// by the B33S server when running in non-compat mode. These
 // random ETags are not encrypt.
 //
 // Calling DecryptETag with a non-randomly generated ETag will

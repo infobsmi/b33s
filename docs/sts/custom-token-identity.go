@@ -1,7 +1,7 @@
 //go:build ignore
 // +build ignore
 
-// Copyright (c) 2015-2022 MinIO, Inc.
+// Copyright (c) 2015-2022 B33S, Inc.
 //
 // This file is part of B33S Object Storage stack
 //
@@ -95,7 +95,7 @@ func main() {
 		return
 	}
 
-	// Use generated credentials to authenticate with MinIO server
+	// Use generated credentials to authenticate with B33S server
 	stsEndpointURL, err := url.Parse(stsEndpoint)
 	if err != nil {
 		log.Fatalf("Error parsing sts endpoint: %v", err)

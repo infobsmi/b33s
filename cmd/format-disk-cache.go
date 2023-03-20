@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -30,7 +30,7 @@ import (
 
 	jsoniter "github.com/json-iterator/go"
 	"github.com/infobsmi/b33s/internal/logger"
-	"github.com/minio/sio"
+	"github.com/b33s/sio"
 )
 
 const (
@@ -121,7 +121,7 @@ func createFormatCache(fsFormatPath string, format *formatCacheV1) error {
 		return err
 	}
 	if fi.Size() != 0 {
-		// format.json already got created because of another minio process's createFormatCache()
+		// format.json already got created because of another b33s process's createFormatCache()
 		return nil
 	}
 	return jsonSave(file, format)
@@ -132,12 +132,12 @@ func createFormatCache(fsFormatPath string, format *formatCacheV1) error {
 func initFormatCache(ctx context.Context, drives []string) (formats []*formatCacheV2, err error) {
 	nformats := newFormatCacheV2(drives)
 	for i, drive := range drives {
-		if err = os.MkdirAll(pathJoin(drive, minioMetaBucket), 0o777); err != nil {
+		if err = os.MkdirAll(pathJoin(drive, b33sMetaBucket), 0o777); err != nil {
 			logger.GetReqInfo(ctx).AppendTags("drive", drive)
 			logger.LogIf(ctx, err)
 			return nil, err
 		}
-		cacheFormatPath := pathJoin(drive, minioMetaBucket, formatConfigFile)
+		cacheFormatPath := pathJoin(drive, b33sMetaBucket, formatConfigFile)
 		// Fresh disk - create format.json for this cfs
 		if err = createFormatCache(cacheFormatPath, nformats[i]); err != nil {
 			logger.GetReqInfo(ctx).AppendTags("drive", drive)
@@ -153,7 +153,7 @@ func loadFormatCache(ctx context.Context, drives []string) ([]*formatCacheV2, bo
 	var formatV2 *formatCacheV2
 	migrating := false
 	for i, drive := range drives {
-		cacheFormatPath := pathJoin(drive, minioMetaBucket, formatConfigFile)
+		cacheFormatPath := pathJoin(drive, b33sMetaBucket, formatConfigFile)
 		f, err := os.OpenFile(cacheFormatPath, os.O_RDWR, 0o666)
 		if err != nil {
 			if osIsNotExist(err) {
@@ -316,7 +316,7 @@ func validateCacheFormats(ctx context.Context, migrating bool, formats []*format
 func cacheDrivesUnformatted(drives []string) bool {
 	count := 0
 	for _, drive := range drives {
-		cacheFormatPath := pathJoin(drive, minioMetaBucket, formatConfigFile)
+		cacheFormatPath := pathJoin(drive, b33sMetaBucket, formatConfigFile)
 		if _, err := os.Stat(cacheFormatPath); osIsNotExist(err) {
 			count++
 		}
@@ -376,15 +376,15 @@ func migrateCacheData(ctx context.Context, c *diskCache, bucket, object, oldfile
 //	    - part.1         <== data
 //	    - cache.json     <== metadata
 func migrateOldCache(ctx context.Context, c *diskCache) error {
-	oldCacheBucketsPath := path.Join(c.dir, minioMetaBucket, "buckets")
-	cacheFormatPath := pathJoin(c.dir, minioMetaBucket, formatConfigFile)
+	oldCacheBucketsPath := path.Join(c.dir, b33sMetaBucket, "buckets")
+	cacheFormatPath := pathJoin(c.dir, b33sMetaBucket, formatConfigFile)
 
 	if _, err := os.Stat(oldCacheBucketsPath); err != nil {
-		// remove .minio.sys sub directories
-		removeAll(path.Join(c.dir, minioMetaBucket, "multipart"))
-		removeAll(path.Join(c.dir, minioMetaBucket, "tmp"))
-		removeAll(path.Join(c.dir, minioMetaBucket, "trash"))
-		removeAll(path.Join(c.dir, minioMetaBucket, "buckets"))
+		// remove .b33s.sys sub directories
+		removeAll(path.Join(c.dir, b33sMetaBucket, "multipart"))
+		removeAll(path.Join(c.dir, b33sMetaBucket, "tmp"))
+		removeAll(path.Join(c.dir, b33sMetaBucket, "trash"))
+		removeAll(path.Join(c.dir, b33sMetaBucket, "buckets"))
 		// just migrate cache format
 		return migrateCacheFormatJSON(cacheFormatPath)
 	}
@@ -468,11 +468,11 @@ func migrateOldCache(ctx context.Context, c *diskCache) error {
 		removeAll(path.Join(c.dir, bucket))
 	}
 
-	// remove .minio.sys sub directories
-	removeAll(path.Join(c.dir, minioMetaBucket, "multipart"))
-	removeAll(path.Join(c.dir, minioMetaBucket, "tmp"))
-	removeAll(path.Join(c.dir, minioMetaBucket, "trash"))
-	removeAll(path.Join(c.dir, minioMetaBucket, "buckets"))
+	// remove .b33s.sys sub directories
+	removeAll(path.Join(c.dir, b33sMetaBucket, "multipart"))
+	removeAll(path.Join(c.dir, b33sMetaBucket, "tmp"))
+	removeAll(path.Join(c.dir, b33sMetaBucket, "trash"))
+	removeAll(path.Join(c.dir, b33sMetaBucket, "buckets"))
 
 	return migrateCacheFormatJSON(cacheFormatPath)
 }

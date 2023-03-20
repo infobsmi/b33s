@@ -1,6 +1,6 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33SObject Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -340,7 +340,7 @@ func TestCreateEndpoints(t *testing.T) {
 	}
 }
 
-// Tests get local peer functionality, local peer is supposed to only return one entry per minio service.
+// Tests get local peer functionality, local peer is supposed to only return one entry per b33s service.
 // So it means that if you have say localhost:9000 and localhost:9001 as endpointArgs then localhost:9001
 // is considered a remote service from localhost:9000 perspective.
 func TestGetLocalPeer(t *testing.T) {

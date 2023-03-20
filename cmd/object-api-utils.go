@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -52,15 +52,15 @@ import (
 )
 
 const (
-	// MinIO meta bucket.
+	// B33S meta bucket.
 	minioMetaBucket = ".minio.sys"
 	// Multipart meta prefix.
 	mpartMetaPrefix = "multipart"
-	// MinIO Multipart meta prefix.
+	// B33S Multipart meta prefix.
 	minioMetaMultipartBucket = minioMetaBucket + SlashSeparator + mpartMetaPrefix
-	// MinIO tmp meta prefix.
+	// B33S tmp meta prefix.
 	minioMetaTmpBucket = minioMetaBucket + "/tmp"
-	// MinIO tmp meta prefix for deleted objects.
+	// B33S tmp meta prefix for deleted objects.
 	minioMetaTmpDeletedBucket = minioMetaTmpBucket + "/.trash"
 	// DNS separator (period), used for bucket name validation.
 	dnsDelimiter = "."
@@ -76,7 +76,7 @@ const (
 	compMinIndexSize = 8 << 20
 )
 
-// isMinioBucket returns true if given bucket is a MinIO internal
+// isMinioBucket returns true if given bucket is a B33S internal
 // bucket and false otherwise.
 func isMinioMetaBucketName(bucket string) bool {
 	return strings.HasPrefix(bucket, minioMetaBucket)

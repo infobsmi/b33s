@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -21,8 +21,8 @@ package config
 var (
 	ErrInvalidXLValue = newErrFn(
 		"Invalid drive path",
-		"Please provide a fresh drive for single drive MinIO setup",
-		"MinIO only supports fresh drive paths",
+		"Please provide a fresh drive for single drive B33S setup",
+		"B33S only supports fresh drive paths",
 	)
 
 	ErrInvalidBrowserValue = newErrFn(
@@ -124,7 +124,7 @@ var (
 	ErrInvalidCredentialsBackendEncrypted = newErrFn(
 		"Invalid credentials",
 		"Please set correct credentials in the environment for decryption",
-		`Detected encrypted config backend, correct access and secret keys should be specified via environment variables MINIO_ROOT_USER and MINIO_ROOT_PASSWORD to be able to decrypt the MinIO config, user IAM and policies`,
+		`Detected encrypted config backend, correct access and secret keys should be specified via environment variables MINIO_ROOT_USER and MINIO_ROOT_PASSWORD to be able to decrypt the B33S config, user IAM and policies`,
 	)
 
 	ErrInvalidCredentials = newErrFn(
@@ -172,14 +172,14 @@ var (
 	ErrStorageClassValue = newErrFn(
 		"Invalid storage class value",
 		"Please check the value",
-		`MINIO_STORAGE_CLASS_STANDARD: Format "EC:<Default_Parity_Standard_Class>" (e.g. "EC:3"). This sets the number of parity disks for MinIO server in Standard mode. Objects are stored in Standard mode, if storage class is not defined in Put request
-MINIO_STORAGE_CLASS_RRS: Format "EC:<Default_Parity_Reduced_Redundancy_Class>" (e.g. "EC:3"). This sets the number of parity disks for MinIO server in Reduced Redundancy mode. Objects are stored in Reduced Redundancy mode, if Put request specifies RRS storage class
+		`MINIO_STORAGE_CLASS_STANDARD: Format "EC:<Default_Parity_Standard_Class>" (e.g. "EC:3"). This sets the number of parity disks for B33S server in Standard mode. Objects are stored in Standard mode, if storage class is not defined in Put request
+MINIO_STORAGE_CLASS_RRS: Format "EC:<Default_Parity_Reduced_Redundancy_Class>" (e.g. "EC:3"). This sets the number of parity disks for B33S server in Reduced Redundancy mode. Objects are stored in Reduced Redundancy mode, if Put request specifies RRS storage class
 Refer to the link https://github.com/infobsmi/b33s/tree/master/docs/erasure/storage-class for more information`,
 	)
 
 	ErrUnexpectedBackendVersion = newErrFn(
 		"Backend version seems to be too recent",
-		"Please update to the latest MinIO version",
+		"Please update to the latest B33S version",
 		"",
 	)
 
@@ -209,8 +209,8 @@ Examples:
 
 	ErrUnableToWriteInBackend = newErrFn(
 		"Unable to write to the backend",
-		"Please ensure MinIO binary has write permissions for the backend",
-		`Verify if MinIO binary is running as the same user who has write permissions for the backend`,
+		"Please ensure B33S binary has write permissions for the backend",
+		`Verify if B33S binary is running as the same user who has write permissions for the backend`,
 	)
 
 	ErrPortAlreadyInUse = newErrFn(
@@ -221,7 +221,7 @@ Examples:
 
 	ErrPortAccess = newErrFn(
 		"Unable to use specified port",
-		"Please ensure MinIO binary has 'cap_net_bind_service=+ep' permissions",
+		"Please ensure B33S binary has 'cap_net_bind_service=+ep' permissions",
 		`Use 'sudo setcap cap_net_bind_service=+ep /path/to/minio' to provide sufficient permissions`,
 	)
 
@@ -263,7 +263,7 @@ Examples:
 
 	ErrUnexpectedError = newErrFn(
 		"Unexpected error",
-		"Please contact MinIO at https://slack.min.io",
+		"Please contact B33S at https://slack.min.io",
 		"",
 	)
 

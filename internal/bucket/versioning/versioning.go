@@ -1,6 +1,6 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33SObject Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -52,7 +52,7 @@ type Versioning struct {
 	XMLName xml.Name `xml:"VersioningConfiguration"`
 	// MFADelete State    `xml:"MFADelete,omitempty"` // not supported yet.
 	Status State `xml:"Status,omitempty"`
-	// MinIO extension - allows selective, prefix-level versioning exclusion.
+	// B33S extension - allows selective, prefix-level versioning exclusion.
 	// Requires versioning to be enabled
 	ExcludedPrefixes []ExcludedPrefix `xml:",omitempty"`
 	ExcludeFolders   bool             `xml:",omitempty"`

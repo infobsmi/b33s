@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -195,7 +195,7 @@ func testGetBucketLocationHandler(obj ObjectLayer, instanceType, bucketName stri
 	// ListBucketsHandler doesn't support bucket policies, setting the policies shouldn't make any difference.
 	anonReq, err := newTestRequest(http.MethodGet, getBucketLocationURL("", bucketName), 0, nil)
 	if err != nil {
-		t.Fatalf("MinIO %s: Failed to create an anonymous request.", instanceType)
+		t.Fatalf("B33S %s: Failed to create an anonymous request.", instanceType)
 	}
 
 	// ExecObjectLayerAPIAnonTest - Calls the HTTP API handler using the anonymous request, validates the ErrAccessDeniedResponse,
@@ -211,7 +211,7 @@ func testGetBucketLocationHandler(obj ObjectLayer, instanceType, bucketName stri
 	nilBucket := "dummy-bucket"
 	nilReq, err := newTestRequest(http.MethodGet, getBucketLocationURL("", nilBucket), 0, nil)
 	if err != nil {
-		t.Errorf("MinIO %s: Failed to create HTTP request for testing the response when object Layer is set to `nil`.", instanceType)
+		t.Errorf("B33S %s: Failed to create HTTP request for testing the response when object Layer is set to `nil`.", instanceType)
 	}
 	// Executes the object layer set to `nil` test.
 	// `ExecObjectLayerAPINilTest` manages the operation.
@@ -296,7 +296,7 @@ func testHeadBucketHandler(obj ObjectLayer, instanceType, bucketName string, api
 	// Test for Anonymous/unsigned http request.
 	anonReq, err := newTestRequest(http.MethodHead, getHEADBucketURL("", bucketName), 0, nil)
 	if err != nil {
-		t.Fatalf("MinIO %s: Failed to create an anonymous request for bucket \"%s\": <ERROR> %v",
+		t.Fatalf("B33S %s: Failed to create an anonymous request for bucket \"%s\": <ERROR> %v",
 			instanceType, bucketName, err)
 	}
 
@@ -313,7 +313,7 @@ func testHeadBucketHandler(obj ObjectLayer, instanceType, bucketName string, api
 	nilBucket := "dummy-bucket"
 	nilReq, err := newTestRequest(http.MethodHead, getHEADBucketURL("", nilBucket), 0, nil)
 	if err != nil {
-		t.Errorf("MinIO %s: Failed to create HTTP request for testing the response when object Layer is set to `nil`.", instanceType)
+		t.Errorf("B33S %s: Failed to create HTTP request for testing the response when object Layer is set to `nil`.", instanceType)
 	}
 	// execute the object layer set to `nil` test.
 	// `ExecObjectLayerAPINilTest` manages the operation.
@@ -529,7 +529,7 @@ func testListMultipartUploadsHandler(obj ObjectLayer, instanceType, bucketName s
 	// Test for Anonymous/unsigned http request.
 	anonReq, err := newTestRequest(http.MethodGet, url, 0, nil)
 	if err != nil {
-		t.Fatalf("MinIO %s: Failed to create an anonymous request for bucket \"%s\": <ERROR> %v",
+		t.Fatalf("B33S %s: Failed to create an anonymous request for bucket \"%s\": <ERROR> %v",
 			instanceType, bucketName, err)
 	}
 
@@ -549,7 +549,7 @@ func testListMultipartUploadsHandler(obj ObjectLayer, instanceType, bucketName s
 
 	nilReq, err := newTestRequest(http.MethodGet, url, 0, nil)
 	if err != nil {
-		t.Errorf("MinIO %s: Failed to create HTTP request for testing the response when object Layer is set to `nil`.", instanceType)
+		t.Errorf("B33S %s: Failed to create HTTP request for testing the response when object Layer is set to `nil`.", instanceType)
 	}
 	// execute the object layer set to `nil` test.
 	// `ExecObjectLayerAPINilTest` manages the operation.
@@ -625,7 +625,7 @@ func testListBucketsHandler(obj ObjectLayer, instanceType, bucketName string, ap
 	// ListBucketsHandler doesn't support bucket policies, setting the policies shouldn't make a difference.
 	anonReq, err := newTestRequest(http.MethodGet, getListBucketURL(""), 0, nil)
 	if err != nil {
-		t.Fatalf("MinIO %s: Failed to create an anonymous request.", instanceType)
+		t.Fatalf("B33S %s: Failed to create an anonymous request.", instanceType)
 	}
 
 	// ExecObjectLayerAPIAnonTest - Calls the HTTP API handler using the anonymous request, validates the ErrAccessDeniedResponse,
@@ -640,7 +640,7 @@ func testListBucketsHandler(obj ObjectLayer, instanceType, bucketName string, ap
 
 	nilReq, err := newTestRequest(http.MethodGet, getListBucketURL(""), 0, nil)
 	if err != nil {
-		t.Errorf("MinIO %s: Failed to create HTTP request for testing the response when object Layer is set to `nil`.", instanceType)
+		t.Errorf("B33S %s: Failed to create HTTP request for testing the response when object Layer is set to `nil`.", instanceType)
 	}
 	// execute the object layer set to `nil` test.
 	// `ExecObjectLayerAPINilTest` manages the operation.
@@ -835,7 +835,7 @@ func testAPIDeleteMultipleObjectsHandler(obj ObjectLayer, instanceType, bucketNa
 		},
 		// Test case - 5.
 		// Anonymous user access denied response
-		// Currently anonymous users cannot delete multiple objects in MinIO server
+		// Currently anonymous users cannot delete multiple objects in B33S server
 		{
 			bucket:             bucketName,
 			objects:            anonRequest,
@@ -881,19 +881,19 @@ func testAPIDeleteMultipleObjectsHandler(obj ObjectLayer, instanceType, bucketNa
 		apiRouter.ServeHTTP(rec, req)
 		// Assert the response code with the expected status.
 		if rec.Code != testCase.expectedRespStatus {
-			t.Errorf("Test %d: MinIO %s: Expected the response status to be `%d`, but instead found `%d`", i+1, instanceType, testCase.expectedRespStatus, rec.Code)
+			t.Errorf("Test %d: B33S %s: Expected the response status to be `%d`, but instead found `%d`", i+1, instanceType, testCase.expectedRespStatus, rec.Code)
 		}
 
 		// read the response body.
 		actualContent, err = io.ReadAll(rec.Body)
 		if err != nil {
-			t.Fatalf("Test %d : MinIO %s: Failed parsing response body: <ERROR> %v", i+1, instanceType, err)
+			t.Fatalf("Test %d : B33S %s: Failed parsing response body: <ERROR> %v", i+1, instanceType, err)
 		}
 
 		// Verify whether the bucket obtained object is same as the one created.
 		if testCase.expectedContent != nil && !bytes.Equal(testCase.expectedContent, actualContent) {
 			t.Log(string(testCase.expectedContent), string(actualContent))
-			t.Errorf("Test %d : MinIO %s: Object content differs from expected value.", i+1, instanceType)
+			t.Errorf("Test %d : B33S %s: Object content differs from expected value.", i+1, instanceType)
 		}
 	}
 
@@ -907,7 +907,7 @@ func testAPIDeleteMultipleObjectsHandler(obj ObjectLayer, instanceType, bucketNa
 
 	nilReq, err := newTestSignedRequestV4(http.MethodPost, getDeleteMultipleObjectsURL("", nilBucket), 0, nil, "", "", nil)
 	if err != nil {
-		t.Errorf("MinIO %s: Failed to create HTTP request for testing the response when object Layer is set to `nil`.", instanceType)
+		t.Errorf("B33S %s: Failed to create HTTP request for testing the response when object Layer is set to `nil`.", instanceType)
 	}
 	// execute the object layer set to `nil` test.
 	// `ExecObjectLayerAPINilTest` manages the operation.

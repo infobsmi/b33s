@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -324,7 +324,7 @@ func (target *ElasticsearchTarget) checkAndInitClient(ctx context.Context) error
 		return errors.New("unable to determine support status of ES (should not happen)")
 
 	case ESSDeprecated:
-		return errors.New("there is no currently deprecated version of ES in MinIO")
+		return errors.New("there is no currently deprecated version of ES in B33S")
 
 	case ESSSupported:
 		target.client = clientV7

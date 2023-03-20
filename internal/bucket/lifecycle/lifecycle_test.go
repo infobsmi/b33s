@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -680,9 +680,9 @@ func TestSetPredictionHeaders(t *testing.T) {
 		if expHdrs, ok := w.Header()[xhttp.AmzExpiration]; ok && !strings.Contains(expHdrs[0], lc.Rules[tc.expRuleID].ID) {
 			t.Fatalf("Test %d: Expected %s header", i+1, xhttp.AmzExpiration)
 		}
-		if transHdrs, ok := w.Header()[xhttp.MinIOTransition]; ok {
+		if transHdrs, ok := w.Header()[xhttp.B33STransition]; ok {
 			if !strings.Contains(transHdrs[0], lc.Rules[tc.transRuleID].ID) {
-				t.Fatalf("Test %d: Expected %s header", i+1, xhttp.MinIOTransition)
+				t.Fatalf("Test %d: Expected %s header", i+1, xhttp.B33STransition)
 			}
 
 			if tc.obj.IsLatest {

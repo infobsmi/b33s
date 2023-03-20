@@ -3,7 +3,7 @@
 Each metric includes a label for the server that calculated the metric.
 Each metric has a label for the server that generated the metric.
 
-These metrics can be from any MinIO server once per collection.
+These metrics can be from any B33S server once per collection.
 
 | Name                                         | Description                                                                                                         |
 |:---------------------------------------------|:--------------------------------------------------------------------------------------------------------------------|
@@ -27,8 +27,8 @@ These metrics can be from any MinIO server once per collection.
 | `minio_cluster_capacity_raw_total_bytes`     | Total capacity online in the cluster.                                                                               |
 | `minio_cluster_capacity_usable_free_bytes`   | Total free usable capacity online in the cluster.                                                                   |
 | `minio_cluster_capacity_usable_total_bytes`  | Total usable capacity online in the cluster.                                                                        |
-| `minio_cluster_nodes_offline_total`          | Total number of MinIO nodes offline.                                                                                |
-| `minio_cluster_nodes_online_total`           | Total number of MinIO nodes online.                                                                                 |
+| `minio_cluster_nodes_offline_total`          | Total number of B33S nodes offline.                                                                                |
+| `minio_cluster_nodes_online_total`           | Total number of B33S nodes online.                                                                                 |
 | `minio_cluster_ilm_transitioned_bytes`       | Total bytes transitioned to a tier                                                                                  |
 | `minio_cluster_ilm_transitioned_objects`     | Total number of objects transitioned to a tier                                                                      |
 | `minio_cluster_ilm_transitioned_versions`    | Total number of versions transitioned to a tier                                                                     |
@@ -44,14 +44,14 @@ These metrics can be from any MinIO server once per collection.
 | `minio_node_disk_free_bytes`                 | Total storage available on a disk.                                                                                  |
 | `minio_node_disk_total_bytes`                | Total storage on a disk.                                                                                            |
 | `minio_node_disk_used_bytes`                 | Total storage used on a disk.                                                                                       |
-| `minio_node_file_descriptor_limit_total`     | Limit on total number of open file descriptors for the MinIO Server process.                                        |
-| `minio_node_file_descriptor_open_total`      | Total number of open file descriptors by the MinIO Server process.                                                  |
+| `minio_node_file_descriptor_limit_total`     | Limit on total number of open file descriptors for the B33S Server process.                                        |
+| `minio_node_file_descriptor_open_total`      | Total number of open file descriptors by the B33S Server process.                                                  |
 | `minio_node_io_rchar_bytes`                  | Total bytes read by the process from the underlying storage system including cache, /proc/[pid]/io rchar            |
 | `minio_node_io_read_bytes`                   | Total bytes read by the process from the underlying storage system, /proc/[pid]/io read_bytes                       |
 | `minio_node_io_wchar_bytes`                  | Total bytes written by the process to the underlying storage system including page cache, /proc/[pid]/io wchar      |
 | `minio_node_io_write_bytes`                  | Total bytes written by the process to the underlying storage system, /proc/[pid]/io write_bytes                     |
-| `minio_node_process_starttime_seconds`       | Start time for MinIO process per node, time in seconds since Unix epoc.                                             |
-| `minio_node_process_uptime_seconds`          | Uptime for MinIO process per node in seconds.                                                                       |
+| `minio_node_process_starttime_seconds`       | Start time for B33S process per node, time in seconds since Unix epoc.                                             |
+| `minio_node_process_uptime_seconds`          | Uptime for B33S process per node in seconds.                                                                       |
 | `minio_node_syscall_read_total`              | Total read SysCalls to the kernel. /proc/[pid]/io syscr                                                             |
 | `minio_node_syscall_write_total`             | Total write SysCalls to the kernel. /proc/[pid]/io syscw                                                            |
 | `minio_s3_requests_errors_total`             | Total number S3 requests with 4xx and 5xx errors                                                                    |
@@ -62,5 +62,5 @@ These metrics can be from any MinIO server once per collection.
 | `minio_s3_time_ttfb_seconds_distribution`    | Distribution of the time to first byte across API calls.                                                            |
 | `minio_s3_traffic_received_bytes`            | Total number of s3 bytes received.                                                                                  |
 | `minio_s3_traffic_sent_bytes`                | Total number of s3 bytes sent                                                                                       |
-| `minio_software_commit_info`                 | Git commit hash for the MinIO release.                                                                              |
-| `minio_software_version_info`                | MinIO Release tag for the server                                                                                    |
+| `minio_software_commit_info`                 | Git commit hash for the B33S release.                                                                              |
+| `minio_software_version_info`                | B33S Release tag for the server                                                                                    |

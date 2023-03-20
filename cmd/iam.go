@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -57,8 +57,8 @@ type UsersSysType string
 
 // Types of users configured in the server.
 const (
-	// This mode uses the internal users system in MinIO.
-	MinIOUsersSysType UsersSysType = "MinIOUsersSys"
+	// This mode uses the internal users system in B33S.
+	B33SUsersSysType UsersSysType = "B33SUsersSys"
 
 	// This mode uses users and groups from a configured LDAP
 	// server.
@@ -101,7 +101,7 @@ type IAMSys struct {
 	configLoaded chan struct{}
 }
 
-// IAMUserType represents a user type inside MinIO server
+// IAMUserType represents a user type inside B33S server
 type IAMUserType int
 
 const (
@@ -291,7 +291,7 @@ func (sys *IAMSys) Init(ctx context.Context, objAPI ObjectLayer, etcdClient *etc
 		// Migrate IAM configuration, if necessary.
 		if err := saveIAMFormat(retryCtx, sys.store); err != nil {
 			if configRetriableErrors(err) {
-				logger.Info("Waiting for all MinIO IAM sub-system to be initialized.. possible cause (%v)", err)
+				logger.Info("Waiting for all B33S IAM sub-system to be initialized.. possible cause (%v)", err)
 				continue
 			}
 			logger.LogIf(ctx, errors.New("IAM sub-system is partially initialized, unable to write the IAM format"))
@@ -305,7 +305,7 @@ func (sys *IAMSys) Init(ctx context.Context, objAPI ObjectLayer, etcdClient *etc
 	for {
 		if err := sys.Load(retryCtx); err != nil {
 			if configRetriableErrors(err) {
-				logger.Info("Waiting for all MinIO IAM sub-system to be initialized.. possible cause (%v)", err)
+				logger.Info("Waiting for all B33S IAM sub-system to be initialized.. possible cause (%v)", err)
 				time.Sleep(time.Duration(r.Float64() * float64(5*time.Second)))
 				continue
 			}
@@ -542,7 +542,7 @@ func (sys *IAMSys) DeletePolicy(ctx context.Context, policyName string, notifyPe
 		return nil
 	}
 
-	// Notify all other MinIO peers to delete policy
+	// Notify all other B33S peers to delete policy
 	for _, nerr := range globalNotificationSys.DeletePolicy(policyName) {
 		if nerr.Err != nil {
 			logger.GetReqInfo(ctx).SetTags("peerAddress", nerr.Host.String())
@@ -617,7 +617,7 @@ func (sys *IAMSys) SetPolicy(ctx context.Context, policyName string, p iampolicy
 	}
 
 	if !sys.HasWatcher() {
-		// Notify all other MinIO peers to reload policy
+		// Notify all other B33S peers to reload policy
 		for _, nerr := range globalNotificationSys.LoadPolicy(policyName) {
 			if nerr.Err != nil {
 				logger.GetReqInfo(ctx).SetTags("peerAddress", nerr.Host.String())
@@ -638,7 +638,7 @@ func (sys *IAMSys) DeleteUser(ctx context.Context, accessKey string, notifyPeers
 		return err
 	}
 
-	// Notify all other MinIO peers to delete user.
+	// Notify all other B33S peers to delete user.
 	if notifyPeers && !sys.HasWatcher() {
 		for _, nerr := range globalNotificationSys.DeleteUser(accessKey) {
 			if nerr.Err != nil {
@@ -653,7 +653,7 @@ func (sys *IAMSys) DeleteUser(ctx context.Context, accessKey string, notifyPeers
 
 // CurrentPolicies - returns comma separated policy string, from
 // an input policy after validating if there are any current
-// policies which exist on MinIO corresponding to the input.
+// policies which exist on B33S corresponding to the input.
 func (sys *IAMSys) CurrentPolicies(policyName string) string {
 	if !sys.Initialized() {
 		return ""
@@ -664,7 +664,7 @@ func (sys *IAMSys) CurrentPolicies(policyName string) string {
 }
 
 func (sys *IAMSys) notifyForUser(ctx context.Context, accessKey string, isTemp bool) {
-	// Notify all other MinIO peers to reload user.
+	// Notify all other B33S peers to reload user.
 	if !sys.HasWatcher() {
 		for _, nerr := range globalNotificationSys.LoadUser(accessKey, isTemp) {
 			if nerr.Err != nil {
@@ -863,7 +863,7 @@ func (sys *IAMSys) SetUserStatus(ctx context.Context, accessKey string, status m
 		return updatedAt, errServerNotInitialized
 	}
 
-	if sys.usersSysType != MinIOUsersSysType {
+	if sys.usersSysType != B33SUsersSysType {
 		return updatedAt, errIAMActionNotAllowed
 	}
 
@@ -1158,7 +1158,7 @@ func (sys *IAMSys) CreateUser(ctx context.Context, accessKey string, ureq madmin
 		return updatedAt, errServerNotInitialized
 	}
 
-	if sys.usersSysType != MinIOUsersSysType {
+	if sys.usersSysType != B33SUsersSysType {
 		return updatedAt, errIAMActionNotAllowed
 	}
 
@@ -1185,7 +1185,7 @@ func (sys *IAMSys) SetUserSecretKey(ctx context.Context, accessKey string, secre
 		return errServerNotInitialized
 	}
 
-	if sys.usersSysType != MinIOUsersSysType {
+	if sys.usersSysType != B33SUsersSysType {
 		return errIAMActionNotAllowed
 	}
 
@@ -1379,7 +1379,7 @@ func (sys *IAMSys) GetUser(ctx context.Context, accessKey string) (u UserIdentit
 	return u, ok && u.Credentials.IsValid()
 }
 
-// Notify all other MinIO peers to load group.
+// Notify all other B33S peers to load group.
 func (sys *IAMSys) notifyForGroup(ctx context.Context, group string) {
 	if !sys.HasWatcher() {
 		for _, nerr := range globalNotificationSys.LoadGroup(group) {
@@ -1398,7 +1398,7 @@ func (sys *IAMSys) AddUsersToGroup(ctx context.Context, group string, members []
 		return updatedAt, errServerNotInitialized
 	}
 
-	if sys.usersSysType != MinIOUsersSysType {
+	if sys.usersSysType != B33SUsersSysType {
 		return updatedAt, errIAMActionNotAllowed
 	}
 
@@ -1418,7 +1418,7 @@ func (sys *IAMSys) RemoveUsersFromGroup(ctx context.Context, group string, membe
 		return updatedAt, errServerNotInitialized
 	}
 
-	if sys.usersSysType != MinIOUsersSysType {
+	if sys.usersSysType != B33SUsersSysType {
 		return updatedAt, errIAMActionNotAllowed
 	}
 
@@ -1437,7 +1437,7 @@ func (sys *IAMSys) SetGroupStatus(ctx context.Context, group string, enabled boo
 		return updatedAt, errServerNotInitialized
 	}
 
-	if sys.usersSysType != MinIOUsersSysType {
+	if sys.usersSysType != B33SUsersSysType {
 		return updatedAt, errIAMActionNotAllowed
 	}
 
@@ -1484,7 +1484,7 @@ func (sys *IAMSys) PolicyDBSet(ctx context.Context, name, policy string, userTyp
 		return
 	}
 
-	// Notify all other MinIO peers to reload policy
+	// Notify all other B33S peers to reload policy
 	if !sys.HasWatcher() {
 		for _, nerr := range globalNotificationSys.LoadPolicyMapping(name, userType, isGroup) {
 			if nerr.Err != nil {
@@ -1536,7 +1536,7 @@ func (sys *IAMSys) PolicyDBUpdateLDAP(ctx context.Context, isAttach bool,
 		return updatedAt, nil, err
 	}
 
-	// Notify all other MinIO peers to reload policy
+	// Notify all other B33S peers to reload policy
 	if !sys.HasWatcher() {
 		for _, nerr := range globalNotificationSys.LoadPolicyMapping(dn, userType, isGroup) {
 			if nerr.Err != nil {
@@ -1884,7 +1884,7 @@ func (sys *IAMSys) GetUsersSysType() UsersSysType {
 // NewIAMSys - creates new config system object.
 func NewIAMSys() *IAMSys {
 	return &IAMSys{
-		usersSysType: MinIOUsersSysType,
+		usersSysType: B33SUsersSysType,
 		configLoaded: make(chan struct{}),
 	}
 }

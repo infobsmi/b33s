@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -391,7 +391,7 @@ func initServer(ctx context.Context, newObject ObjectLayer) error {
 		// which shall be retried again by this loop.
 		lkctx, err := txnLk.GetLock(ctx, lockTimeout)
 		if err != nil {
-			logger.Info("Waiting for all MinIO sub-systems to be initialized.. trying to acquire lock")
+			logger.Info("Waiting for all B33S sub-systems to be initialized.. trying to acquire lock")
 
 			time.Sleep(time.Duration(r.Float64() * float64(5*time.Second)))
 			continue
@@ -399,7 +399,7 @@ func initServer(ctx context.Context, newObject ObjectLayer) error {
 
 		// These messages only meant primarily for distributed setup, so only log during distributed setup.
 		if globalIsDistErasure {
-			logger.Info("Waiting for all MinIO sub-systems to be initialized.. lock acquired")
+			logger.Info("Waiting for all B33S sub-systems to be initialized.. lock acquired")
 		}
 
 		// Migrate all backend configs to encrypted backend configs, optionally
@@ -413,7 +413,7 @@ func initServer(ctx context.Context, newObject ObjectLayer) error {
 				// All successful return.
 				if globalIsDistErasure {
 					// These messages only meant primarily for distributed setup, so only log during distributed setup.
-					logger.Info("All MinIO sub-systems initialized successfully in %s", time.Since(t1))
+					logger.Info("All B33S sub-systems initialized successfully in %s", time.Since(t1))
 				}
 				return nil
 			}
@@ -423,7 +423,7 @@ func initServer(ctx context.Context, newObject ObjectLayer) error {
 		txnLk.Unlock(lkctx.Cancel)
 
 		if configRetriableErrors(err) {
-			logger.Info("Waiting for all MinIO sub-systems to be initialized.. possible cause (%v)", err)
+			logger.Info("Waiting for all B33S sub-systems to be initialized.. possible cause (%v)", err)
 			time.Sleep(time.Duration(r.Float64() * float64(5*time.Second)))
 			continue
 		}
@@ -453,7 +453,7 @@ func initConfigSubsystem(ctx context.Context, newObject ObjectLayer) error {
 	return nil
 }
 
-// Return the list of address that MinIO server needs to listen on:
+// Return the list of address that B33S server needs to listen on:
 //   - Returning 127.0.0.1 is necessary so Console will be able to send
 //     requests to the local S3 API.
 //   - The returned List needs to be deduplicated as well.
@@ -533,13 +533,13 @@ func serverMain(ctx *cli.Context) {
 
 	// Verify kernel release and version.
 	if oldLinux() {
-		logger.Info(color.RedBold("WARNING: Detected Linux kernel version older than 4.0.0 release, there are some known potential performance problems with this kernel version. MinIO recommends a minimum of 4.x.x linux kernel version for best performance"))
+		logger.Info(color.RedBold("WARNING: Detected Linux kernel version older than 4.0.0 release, there are some known potential performance problems with this kernel version. B33S recommends a minimum of 4.x.x linux kernel version for best performance"))
 	}
 
 	maxProcs := runtime.GOMAXPROCS(0)
 	cpuProcs := runtime.NumCPU()
 	if maxProcs < cpuProcs {
-		logger.Info(color.RedBold("WARNING: Detected GOMAXPROCS(%d) < NumCPU(%d), please make sure to provide all PROCS to MinIO for optimal performance", maxProcs, cpuProcs))
+		logger.Info(color.RedBold("WARNING: Detected GOMAXPROCS(%d) < NumCPU(%d), please make sure to provide all PROCS to B33S for optimal performance", maxProcs, cpuProcs))
 	}
 
 	// Configure server.
@@ -581,7 +581,7 @@ func serverMain(ctx *cli.Context) {
 	}
 
 	xhttp.SetDeploymentID(globalDeploymentID)
-	xhttp.SetMinIOVersion(Version)
+	xhttp.SetB33SVersion(Version)
 
 	globalLeaderLock = newSharedLock(GlobalContext, newObject, "leader.lock")
 
@@ -692,7 +692,7 @@ func serverMain(ctx *cli.Context) {
 
 		// initialize the new disk cache objects.
 		if globalCacheConfig.Enabled {
-			logger.Info(color.Yellow("WARNING: Drive caching is deprecated for single/multi drive MinIO setups."))
+			logger.Info(color.Yellow("WARNING: Drive caching is deprecated for single/multi drive B33S setups."))
 			var cacheAPI CacheObjectLayer
 			cacheAPI, err = newServerCacheObjects(GlobalContext, globalCacheConfig)
 			logger.FatalIf(err, "Unable to initialize drive caching")
@@ -714,7 +714,7 @@ func serverMain(ctx *cli.Context) {
 		Transport: globalProxyTransport,
 		Region:    region,
 	})
-	logger.FatalIf(err, "Unable to initialize MinIO client")
+	logger.FatalIf(err, "Unable to initialize B33S client")
 
 	if serverDebugLog {
 		logger.Info("== DEBUG Mode enabled ==")

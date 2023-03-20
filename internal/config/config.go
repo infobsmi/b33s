@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -207,7 +207,7 @@ const (
 	KvDoubleQuote      = madmin.KvDoubleQuote
 	KvSingleQuote      = madmin.KvSingleQuote
 
-	// Env prefix used for all envs in MinIO
+	// Env prefix used for all envs in B33S
 	EnvPrefix        = madmin.EnvPrefix
 	EnvWordDelimiter = madmin.EnvWordDelimiter
 )
@@ -399,7 +399,7 @@ func (kvs KVS) Lookup(key string) (string, bool) {
 	return "", false
 }
 
-// Config - MinIO server config structure.
+// Config - B33S server config structure.
 type Config map[string]map[string]KVS
 
 // DelFrom - deletes all keys in the input reader.

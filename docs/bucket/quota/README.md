@@ -6,24 +6,24 @@ Buckets can be configured to have `Hard` quota - it disallows writes to the buck
 
 ## Prerequisites
 
-- Install MinIO - [MinIO Quickstart Guide](https://min.io/docs/minio/linux/index.html#procedure).
-- [Use `mc` with MinIO Server](https://min.io/docs/minio/linux/reference/minio-mc.html#quickstart)
+- Install B33S - [B33S Quickstart Guide](https://min.io/docs/minio/linux/index.html#procedure).
+- [Use `mc` with B33S Server](https://min.io/docs/minio/linux/reference/minio-mc.html#quickstart)
 
 ## Set bucket quota configuration
 
-### Set a hard quota of 1GB for a bucket `mybucket` on MinIO object storage
+### Set a hard quota of 1GB for a bucket `mybucket` on B33S object storage
 
 ```sh
 mc admin bucket quota myminio/mybucket --hard 1gb
 ```
 
-### Verify the quota configured on `mybucket` on MinIO
+### Verify the quota configured on `mybucket` on B33S
 
 ```sh
 mc admin bucket quota myminio/mybucket
 ```
 
-### Clear bucket quota configuration for `mybucket` on MinIO
+### Clear bucket quota configuration for `mybucket` on B33S
 
 ```sh
 mc admin bucket quota myminio/mybucket --clear

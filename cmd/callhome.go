@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2022 MinIO, Inc.
+// Copyright (c) 2015-2022 B33S, Inc.
 //
 // This file is part of B33S Object Storage stack
 //
@@ -28,7 +28,7 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/minio/madmin-go/v2"
+	"github.com/b33s/madmin-go/v2"
 	"github.com/infobsmi/b33s/internal/logger"
 )
 
@@ -70,7 +70,7 @@ func initCallhome(ctx context.Context, objAPI ObjectLayer) {
 
 func runCallhome(ctx context.Context, objAPI ObjectLayer) bool {
 	// Make sure only 1 callhome is running on the cluster.
-	locker := objAPI.NewNSLock(minioMetaBucket, "callhome/runCallhome.lock")
+	locker := objAPI.NewNSLock(b33sMetaBucket, "callhome/runCallhome.lock")
 	lkctx, err := locker.GetLock(ctx, callhomeLeaderLockTimeout)
 	if err != nil {
 		// lock timedout means some other node is the leader,

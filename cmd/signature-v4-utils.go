@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -71,7 +71,7 @@ func skipContentSha256Cksum(r *http.Request) bool {
 		// S3 strict compatibility is disabled.
 		if r.ContentLength > 0 && !globalCLIContext.StrictS3Compat {
 			// We return true only in situations when
-			// deployment has asked MinIO to allow for
+			// deployment has asked B33S to allow for
 			// such broken clients and content-length > 0.
 			return true
 		}

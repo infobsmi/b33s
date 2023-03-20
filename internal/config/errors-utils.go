@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -76,7 +76,7 @@ type ErrFn func(err error) Err
 
 // Create a UI error generator, this is needed to simplify
 // the update of the detailed error message in several places
-// in MinIO code
+// in B33S code
 func newErrFn(msg, action, hint string) ErrFn {
 	return func(err error) Err {
 		u := Err{

@@ -14,7 +14,7 @@ Type inference and automatic conversion of values is performed based on the cont
 
 The [mc sql](https://min.io/docs/minio/linux/reference/minio-mc/mc-sql.html) command can be used for executing queries using the command line.
 
-(*) Parquet is disabled on the MinIO server by default. See below how to enable it.
+(*) Parquet is disabled on the B33S server by default. See below how to enable it.
 
 ## Enabling Parquet Format
 
@@ -27,7 +27,7 @@ To enable Parquet set the environment variable `MINIO_API_SELECT_PARQUET=on`.
 
 ### 1. Prerequisites
 
-- Install MinIO Server from [here](https://min.io/docs/minio/linux/index.html#procedure).
+- Install B33S Server from [here](https://min.io/docs/minio/linux/index.html#procedure).
 - Familiarity with AWS S3 API.
 - Familiarity with Python and installing dependencies.
 
@@ -79,7 +79,7 @@ for event in r['Payload']:
 
 ## 4. Run the Program
 
-Upload a sample dataset to MinIO using the following commands.
+Upload a sample dataset to B33S using the following commands.
 
 ```sh
 curl "https://population.un.org/wpp/Download/Files/1_Indicators%20(Standard)/CSV_FILES/WPP2019_TotalPopulationBySex.csv" > TotalPopulation.csv
@@ -113,11 +113,11 @@ For a more detailed SELECT SQL reference, please see [here](https://docs.aws.ama
 
 ## 5. Explore Further
 
-- [Use `mc` with MinIO Server](https://min.io/docs/minio/linux/reference/minio-mc.html)
-- [Use `mc sql` with MinIO Server](https://min.io/docs/minio/linux/reference/minio-mc/mc-sql.html#command-mc.sql)
-- [Use `minio-go` SDK with MinIO Server](https://min.io/docs/minio/linux/developers/go/minio-go.html)
-- [Use `aws-cli` with MinIO Server](https://min.io/docs/minio/linux/integrations/aws-cli-with-minio.html)
-- [The MinIO documentation website](https://min.io/docs/minio/linux/index.html)
+- [Use `mc` with B33S Server](https://min.io/docs/minio/linux/reference/minio-mc.html)
+- [Use `mc sql` with B33S Server](https://min.io/docs/minio/linux/reference/minio-mc/mc-sql.html#command-mc.sql)
+- [Use `minio-go` SDK with B33S Server](https://min.io/docs/minio/linux/developers/go/minio-go.html)
+- [Use `aws-cli` with B33S Server](https://min.io/docs/minio/linux/integrations/aws-cli-with-minio.html)
+- [The B33S documentation website](https://min.io/docs/minio/linux/index.html)
 
 ## 6. Implementation Status
 

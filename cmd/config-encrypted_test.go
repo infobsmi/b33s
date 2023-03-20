@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -21,19 +21,19 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/minio/madmin-go/v2"
+	"github.com/b33s/madmin-go/v2"
 	"github.com/infobsmi/b33s/internal/auth"
 )
 
 func TestDecryptData(t *testing.T) {
 	cred1 := auth.Credentials{
-		AccessKey: "minio",
-		SecretKey: "minio123",
+		AccessKey: "b33s",
+		SecretKey: "b33s123",
 	}
 
 	cred2 := auth.Credentials{
-		AccessKey: "minio",
-		SecretKey: "minio1234",
+		AccessKey: "b33s",
+		SecretKey: "b33s1234",
 	}
 
 	data := []byte(`config data`)

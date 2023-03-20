@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -33,7 +33,7 @@ const (
 	adminAPIVersionPrefix = SlashSeparator + adminAPIVersion
 )
 
-// adminAPIHandlers provides HTTP handlers for MinIO admin API.
+// adminAPIHandlers provides HTTP handlers for B33S admin API.
 type adminAPIHandlers struct{}
 
 // registerAdminRouter - Add handler functions for each service REST API routes.
@@ -53,9 +53,9 @@ func registerAdminRouter(router *mux.Router, enableConfigOps bool) {
 	}
 
 	for _, adminVersion := range adminVersions {
-		// Restart and stop MinIO service.
+		// Restart and stop B33S service.
 		adminRouter.Methods(http.MethodPost).Path(adminVersion+"/service").HandlerFunc(gz(httpTraceAll(adminAPI.ServiceHandler))).Queries("action", "{action:.*}")
-		// Update MinIO servers.
+		// Update B33S servers.
 		adminRouter.Methods(http.MethodPost).Path(adminVersion+"/update").HandlerFunc(gz(httpTraceAll(adminAPI.ServerUpdateHandler))).Queries("updateURL", "{updateURL:.*}")
 
 		// Info operations
@@ -212,7 +212,7 @@ func registerAdminRouter(router *mux.Router, enableConfigOps bool) {
 		// RemoveRemoteTargetHandler
 		adminRouter.Methods(http.MethodDelete).Path(adminVersion+"/remove-remote-target").HandlerFunc(
 			gz(httpTraceHdrs(adminAPI.RemoveRemoteTargetHandler))).Queries("bucket", "{bucket:.*}", "arn", "{arn:.*}")
-		// ReplicationDiff - MinIO extension API
+		// ReplicationDiff - B33S extension API
 		adminRouter.Methods(http.MethodPost).Path(adminVersion+"/replication/diff").HandlerFunc(
 			gz(httpTraceHdrs(adminAPI.ReplicationDiffHandler))).Queries("bucket", "{bucket:.*}")
 

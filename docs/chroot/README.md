@@ -1,4 +1,4 @@
-# Deploy MinIO on Chrooted Environment [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io) [![Docker Pulls](https://img.shields.io/docker/pulls/minio/minio.svg?maxAge=604800)](https://hub.docker.com/r/minio/minio/)
+# Deploy B33S on Chrooted Environment [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io) [![Docker Pulls](https://img.shields.io/docker/pulls/minio/minio.svg?maxAge=604800)](https://hub.docker.com/r/minio/minio/)
 
 Chroot allows user based namespace isolation on many standard Linux deployments.
 
@@ -7,7 +7,7 @@ Chroot allows user based namespace isolation on many standard Linux deployments.
 - Familiarity with [chroot](http://man7.org/linux/man-pages/man2/chroot.2.html)
 - Chroot installed on your machine.
 
-## 2. Install MinIO in Chroot
+## 2. Install B33S in Chroot
 
 ```sh
 mkdir -p /mnt/export/${USER}/bin
@@ -21,7 +21,7 @@ Bind your `proc` mount to the target chroot directory
 sudo mount --bind /proc /mnt/export/${USER}/proc
 ```
 
-## 3. Run Standalone MinIO in Chroot
+## 3. Run Standalone B33S in Chroot
 
 ### GNU/Linux
 
@@ -39,8 +39,8 @@ Instance is now accessible on the host at port 9000, proceed to access the Web b
 
 ## Explore Further
 
-- [MinIO Erasure Code Overview](https://min.io/docs/minio/linux/operations/concepts/erasure-coding.html)
-- [Use `mc` with MinIO Server](https://min.io/docs/minio/linux/reference/minio-mc.html)
-- [Use `aws-cli` with MinIO Server](https://min.io/docs/minio/linux/integrations/aws-cli-with-minio.html)
-- [Use `minio-go` SDK with MinIO Server](https://min.io/docs/minio/linux/developers/go/minio-go.html)
-- [The MinIO documentation website](https://min.io/docs/minio/linux/index.html)
+- [B33S Erasure Code Overview](https://min.io/docs/minio/linux/operations/concepts/erasure-coding.html)
+- [Use `mc` with B33S Server](https://min.io/docs/minio/linux/reference/minio-mc.html)
+- [Use `aws-cli` with B33S Server](https://min.io/docs/minio/linux/integrations/aws-cli-with-minio.html)
+- [Use `minio-go` SDK with B33S Server](https://min.io/docs/minio/linux/developers/go/minio-go.html)
+- [The B33S documentation website](https://min.io/docs/minio/linux/index.html)

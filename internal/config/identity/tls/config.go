@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -32,9 +32,9 @@ const (
 	EnvIdentityTLSEnabled = "MINIO_IDENTITY_TLS_ENABLE"
 
 	// EnvIdentityTLSSkipVerify is an environment variable that controls whether
-	// MinIO verifies the client certificate present by the client
+	// B33S verifies the client certificate present by the client
 	// when requesting temp. credentials.
-	// By default, MinIO always verify the client certificate.
+	// By default, B33S always verify the client certificate.
 	//
 	// The client certificate verification should only be skipped
 	// when debugging or testing a setup since it allows arbitrary

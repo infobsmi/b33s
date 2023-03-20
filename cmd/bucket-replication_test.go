@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -24,7 +24,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/minio/madmin-go/v2"
+	"github.com/b33s/madmin-go/v2"
 	"github.com/infobsmi/b33s/internal/bucket/replication"
 	xhttp "github.com/infobsmi/b33s/internal/http"
 )
@@ -168,7 +168,7 @@ var (
 				ReplicationStatusInternal: "arn1:PENDING;",
 				ReplicationStatus:         replication.Pending,
 				VersionID:                 "a3348c34-c352-4498-82f0-1098e8b34df9",
-				UserDefined:               map[string]string{xhttp.MinIOReplicationResetStatus: fmt.Sprintf("%s;abc", UTCNow().AddDate(0, -1, 0).String())},
+				UserDefined:               map[string]string{xhttp.B33SReplicationResetStatus: fmt.Sprintf("%s;abc", UTCNow().AddDate(0, -1, 0).String())},
 			},
 			expectedSync: true,
 			dsc:          ReplicateDecision{targetsMap: map[string]replicateTargetDecision{"arn1": newReplicateTargetDecision("arn1", true, false)}},
@@ -187,7 +187,7 @@ var (
 				ReplicationStatusInternal: "arn1:FAILED;",
 				ReplicationStatus:         replication.Failed,
 				VersionID:                 "a3348c34-c352-4498-82f0-1098e8b34df9",
-				UserDefined:               map[string]string{xhttp.MinIOReplicationResetStatus: fmt.Sprintf("%s;abc", UTCNow().AddDate(0, -1, 0).String())},
+				UserDefined:               map[string]string{xhttp.B33SReplicationResetStatus: fmt.Sprintf("%s;abc", UTCNow().AddDate(0, -1, 0).String())},
 			},
 			dsc: ReplicateDecision{targetsMap: map[string]replicateTargetDecision{"arn1": newReplicateTargetDecision("arn1", true, false)}},
 			rcfg: replicationConfig{
@@ -205,7 +205,7 @@ var (
 				Size:              100,
 				ReplicationStatus: replication.StatusType(""),
 				VersionID:         "a3348c34-c352-4498-82f0-1098e8b34df9",
-				UserDefined:       map[string]string{xhttp.MinIOReplicationResetStatus: fmt.Sprintf("%s;abc", UTCNow().AddDate(0, -1, 0).String())},
+				UserDefined:       map[string]string{xhttp.B33SReplicationResetStatus: fmt.Sprintf("%s;abc", UTCNow().AddDate(0, -1, 0).String())},
 			},
 			dsc: ReplicateDecision{targetsMap: map[string]replicateTargetDecision{"arn1": newReplicateTargetDecision("arn1", true, false)}},
 			rcfg: replicationConfig{
@@ -226,7 +226,7 @@ var (
 				ReplicationStatusInternal: "arn1:COMPLETED;",
 				ReplicationStatus:         replication.Completed,
 				VersionID:                 "a3348c34-c352-4498-82f0-1098e8b34df8",
-				UserDefined:               map[string]string{xhttp.MinIOReplicationResetStatus: fmt.Sprintf("%s;abc", UTCNow().AddDate(0, -1, 0).String())},
+				UserDefined:               map[string]string{xhttp.B33SReplicationResetStatus: fmt.Sprintf("%s;abc", UTCNow().AddDate(0, -1, 0).String())},
 			},
 			expectedSync: true,
 			dsc:          ReplicateDecision{targetsMap: map[string]replicateTargetDecision{"arn1": newReplicateTargetDecision("arn1", true, false)}},
@@ -246,7 +246,7 @@ var (
 
 				ReplicationStatus: replication.Pending,
 				VersionID:         "a3348c34-c352-4498-82f0-1098e8b34df9",
-				UserDefined:       map[string]string{xhttp.MinIOReplicationResetStatus: fmt.Sprintf("%s;%s", UTCNow().AddDate(0, 0, -1).Format(http.TimeFormat), "abc")},
+				UserDefined:       map[string]string{xhttp.B33SReplicationResetStatus: fmt.Sprintf("%s;%s", UTCNow().AddDate(0, 0, -1).Format(http.TimeFormat), "abc")},
 				ModTime:           UTCNow().AddDate(0, 0, -2),
 			},
 			expectedSync: true,
@@ -266,7 +266,7 @@ var (
 				ReplicationStatusInternal: "arn1:COMPLETED;",
 				ReplicationStatus:         replication.Completed,
 				VersionID:                 "a3348c34-c352-4498-82f0-1098e8b34df9",
-				UserDefined:               map[string]string{xhttp.MinIOReplicationResetStatus: fmt.Sprintf("%s;%s", start.Format(http.TimeFormat), "xyz")},
+				UserDefined:               map[string]string{xhttp.B33SReplicationResetStatus: fmt.Sprintf("%s;%s", start.Format(http.TimeFormat), "xyz")},
 			},
 			expectedSync: false,
 			dsc:          ReplicateDecision{targetsMap: map[string]replicateTargetDecision{"arn1": newReplicateTargetDecision("arn1", true, false)}},

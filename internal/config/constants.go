@@ -1,6 +1,6 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33SObject Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -54,15 +54,15 @@ const (
 	EnvSiteName   = "MINIO_SITE_NAME"
 	EnvSiteRegion = "MINIO_SITE_REGION"
 
-	EnvMinIOSubnetLicense = "MINIO_SUBNET_LICENSE" // Deprecated Dec 2021
-	EnvMinIOSubnetAPIKey  = "MINIO_SUBNET_API_KEY"
-	EnvMinIOSubnetProxy   = "MINIO_SUBNET_PROXY"
+	EnvB33SSubnetLicense = "MINIO_SUBNET_LICENSE" // Deprecated Dec 2021
+	EnvB33SSubnetAPIKey  = "MINIO_SUBNET_API_KEY"
+	EnvB33SSubnetProxy   = "MINIO_SUBNET_PROXY"
 
-	EnvMinIOCallhomeEnable    = "MINIO_CALLHOME_ENABLE"
-	EnvMinIOCallhomeFrequency = "MINIO_CALLHOME_FREQUENCY"
+	EnvB33SCallhomeEnable    = "MINIO_CALLHOME_ENABLE"
+	EnvB33SCallhomeFrequency = "MINIO_CALLHOME_FREQUENCY"
 
-	EnvMinIOServerURL          = "MINIO_SERVER_URL"
-	EnvMinIOBrowserRedirectURL = "MINIO_BROWSER_REDIRECT_URL"
+	EnvB33SServerURL          = "MINIO_SERVER_URL"
+	EnvB33SBrowserRedirectURL = "MINIO_BROWSER_REDIRECT_URL"
 	EnvRootDiskThresholdSize   = "MINIO_ROOTDISK_THRESHOLD_SIZE"
 
 	EnvUpdate = "MINIO_UPDATE"

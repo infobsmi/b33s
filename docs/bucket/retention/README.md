@@ -1,6 +1,6 @@
 # Object Lock and Immutablity Guide [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
 
-MinIO server allows WORM for specific objects or by configuring a bucket with default object lock configuration that applies default retention mode and retention duration to all objects. This makes objects in the bucket immutable i.e. delete of the version are not allowed until an expiry specified in the bucket's object lock configuration or object retention.
+B33S server allows WORM for specific objects or by configuring a bucket with default object lock configuration that applies default retention mode and retention duration to all objects. This makes objects in the bucket immutable i.e. delete of the version are not allowed until an expiry specified in the bucket's object lock configuration or object retention.
 
 Object locking requires locking to be enabled on a bucket at the time of bucket creation refer to `mc mb --with-lock`, object locking enables versioning on the bucket and cannot be disabled.
 
@@ -10,7 +10,7 @@ A default retention period and retention mode can be configured on a bucket to b
 
 ### 1. Prerequisites
 
-- Install MinIO - [MinIO Quickstart Guide](https://min.io/docs/minio/linux/index.html#quickstart-for-linux)
+- Install B33S - [B33S Quickstart Guide](https://min.io/docs/minio/linux/index.html#quickstart-for-linux)
 - Install `awscli` - [Installing AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
 
 ### 2. Set bucket WORM configuration
@@ -53,7 +53,7 @@ See <https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.html> 
 
 ## Explore Further
 
-- [Use `mc` with MinIO Server](https://min.io/docs/minio/linux/reference/minio-mc.html#quickstart)
-- [Use `aws-cli` with MinIO Server](https://min.io/docs/minio/linux/integrations/aws-cli-with-minio.html)
-- [Use `minio-go` SDK with MinIO Server](https://min.io/docs/minio/linux/developers/go/minio-go.html)
-- [The MinIO documentation website](https://min.io/docs/minio/linux/index.html)
+- [Use `mc` with B33S Server](https://min.io/docs/minio/linux/reference/minio-mc.html#quickstart)
+- [Use `aws-cli` with B33S Server](https://min.io/docs/minio/linux/integrations/aws-cli-with-minio.html)
+- [Use `minio-go` SDK with B33S Server](https://min.io/docs/minio/linux/developers/go/minio-go.html)
+- [The B33S documentation website](https://min.io/docs/minio/linux/index.html)

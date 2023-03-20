@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2022 MinIO, Inc.
+// Copyright (c) 2015-2022 B33S, Inc.
 //
 // This file is part of B33S Object Storage stack
 //
@@ -30,10 +30,10 @@ import (
 	xhttp "github.com/infobsmi/b33s/internal/http"
 	"github.com/infobsmi/b33s/internal/logger"
 	"github.com/infobsmi/b33s/internal/pubsub"
-	"github.com/minio/pkg/bucket/policy"
+	"github.com/b33s/pkg/bucket/policy"
 )
 
-// EventNotifier - notifies external systems about events in MinIO.
+// EventNotifier - notifies external systems about events in B33S.
 type EventNotifier struct {
 	sync.RWMutex
 	targetList                 *event.TargetList
@@ -248,16 +248,16 @@ func (args eventArgs) ToEvent(escape bool) event.Event {
 
 	respElements := map[string]string{
 		"x-amz-request-id": args.RespElements["requestId"],
-		"x-minio-origin-endpoint": func() string {
+		"x-b33s-origin-endpoint": func() string {
 			if globalMinioEndpoint != "" {
 				return globalMinioEndpoint
 			}
 			return getAPIEndpoints()[0]
-		}(), // MinIO specific custom elements.
+		}(), // B33S specific custom elements.
 	}
 	// Add deployment as part of
 	if globalDeploymentID != "" {
-		respElements["x-minio-deployment-id"] = globalDeploymentID
+		respElements["x-b33s-deployment-id"] = globalDeploymentID
 	}
 	if args.RespElements["content-length"] != "" {
 		respElements["content-length"] = args.RespElements["content-length"]
@@ -268,7 +268,7 @@ func (args eventArgs) ToEvent(escape bool) event.Event {
 	}
 	newEvent := event.Event{
 		EventVersion:      "2.0",
-		EventSource:       "minio:s3",
+		EventSource:       "b33s:s3",
 		AwsRegion:         args.ReqParams["region"],
 		EventTime:         eventTime.Format(event.AMZTimeFormat),
 		EventName:         args.EventName,
@@ -315,7 +315,7 @@ func sendEvent(args eventArgs) {
 	args.Object.Size, _ = args.Object.GetActualSize()
 
 	// avoid generating a notification for REPLICA creation event.
-	if _, ok := args.ReqParams[xhttp.MinIOSourceReplicationRequest]; ok {
+	if _, ok := args.ReqParams[xhttp.B33SSourceReplicationRequest]; ok {
 		return
 	}
 	// remove sensitive encryption entries in metadata.

@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -27,7 +27,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/minio/madmin-go/v2"
+	"github.com/b33s/madmin-go/v2"
 	"github.com/infobsmi/b33s-go/v7"
 	"github.com/infobsmi/b33s-go/v7/pkg/credentials"
 )
@@ -39,8 +39,8 @@ var (
 )
 
 type warmBackendS3 struct {
-	client       *minio.Client
-	core         *minio.Core
+	client       *b33s.Client
+	core         *b33s.Core
 	Bucket       string
 	Prefix       string
 	StorageClass string
@@ -64,12 +64,12 @@ func (s3 *warmBackendS3) getDest(object string) string {
 }
 
 func (s3 *warmBackendS3) Put(ctx context.Context, object string, r io.Reader, length int64) (remoteVersionID, error) {
-	res, err := s3.client.PutObject(ctx, s3.Bucket, s3.getDest(object), r, length, minio.PutObjectOptions{StorageClass: s3.StorageClass})
+	res, err := s3.client.PutObject(ctx, s3.Bucket, s3.getDest(object), r, length, b33s.PutObjectOptions{StorageClass: s3.StorageClass})
 	return remoteVersionID(res.VersionID), s3.ToObjectError(err, object)
 }
 
 func (s3 *warmBackendS3) Get(ctx context.Context, object string, rv remoteVersionID, opts WarmBackendGetOpts) (io.ReadCloser, error) {
-	gopts := minio.GetObjectOptions{}
+	gopts := b33s.GetObjectOptions{}
 
 	if rv != "" {
 		gopts.VersionID = string(rv)
@@ -79,7 +79,7 @@ func (s3 *warmBackendS3) Get(ctx context.Context, object string, rv remoteVersio
 			return nil, s3.ToObjectError(err, object)
 		}
 	}
-	c := &minio.Core{Client: s3.client}
+	c := &b33s.Core{Client: s3.client}
 	// Important to use core primitives here to pass range get options as is.
 	r, _, _, err := c.GetObject(ctx, s3.Bucket, s3.getDest(object), gopts)
 	if err != nil {
@@ -89,7 +89,7 @@ func (s3 *warmBackendS3) Get(ctx context.Context, object string, rv remoteVersio
 }
 
 func (s3 *warmBackendS3) Remove(ctx context.Context, object string, rv remoteVersionID) error {
-	ropts := minio.RemoveObjectOptions{}
+	ropts := b33s.RemoveObjectOptions{}
 	if rv != "" {
 		ropts.VersionID = string(rv)
 	}
@@ -119,16 +119,16 @@ func newWarmBackendS3(conf madmin.TierS3) (*warmBackendS3, error) {
 	getRemoteTierTargetInstanceTransportOnce.Do(func() {
 		getRemoteTierTargetInstanceTransport = newHTTPTransport(10 * time.Minute)
 	})
-	opts := &minio.Options{
+	opts := &b33s.Options{
 		Creds:     creds,
 		Secure:    u.Scheme == "https",
 		Transport: getRemoteTierTargetInstanceTransport,
 	}
-	client, err := minio.New(u.Host, opts)
+	client, err := b33s.New(u.Host, opts)
 	if err != nil {
 		return nil, err
 	}
-	core, err := minio.NewCore(u.Host, opts)
+	core, err := b33s.NewCore(u.Host, opts)
 	if err != nil {
 		return nil, err
 	}

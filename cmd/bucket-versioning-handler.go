@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -25,9 +25,9 @@ import (
 
 	humanize "github.com/dustin/go-humanize"
 	"github.com/gorilla/mux"
-	"github.com/minio/madmin-go/v2"
 	"github.com/infobsmi/b33s/internal/bucket/versioning"
 	"github.com/infobsmi/b33s/internal/logger"
+	"github.com/minio/madmin-go/v2"
 	"github.com/minio/pkg/bucket/policy"
 )
 

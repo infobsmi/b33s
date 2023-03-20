@@ -1,6 +1,6 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33SObject Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -65,7 +65,7 @@ func TestHTTPRequestRangeSpec(t *testing.T) {
 		"bytes=-1-10",
 		"bytes=0-+3",
 		"bytes=+3-+5",
-		"bytes=10-11,12-10", // Unsupported by S3/MinIO (valid in RFC)
+		"bytes=10-11,12-10", // Unsupported by S3/B33S (valid in RFC)
 	}
 	for i, urs := range unparsableRangeSpecs {
 		rs, err := parseRequestRangeSpec(urs)

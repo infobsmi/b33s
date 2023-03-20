@@ -1,5 +1,5 @@
 /*
- * MinIO Object Storage (c) 2021 MinIO, Inc.
+ * B33S Object Storage (c) 2021 B33S, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package target
 import (
 	"testing"
 
-	xnet "github.com/minio/pkg/net"
+	xnet "github.com/b33s/pkg/net"
 	natsserver "github.com/nats-io/nats-server/v2/test"
 )
 
@@ -48,8 +48,8 @@ func TestNatsConnPlain(t *testing.T) {
 func TestNatsConnUserPass(t *testing.T) {
 	opts := natsserver.DefaultTestOptions
 	opts.Port = 14223
-	opts.Username = "testminio"
-	opts.Password = "miniotest"
+	opts.Username = "testb33s"
+	opts.Password = "b33stest"
 	s := natsserver.RunServer(&opts)
 	defer s.Shutdown()
 

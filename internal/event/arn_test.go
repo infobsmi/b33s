@@ -1,6 +1,6 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
-// This file is part of MinIO Object Storage stack
+// This file is part of B33SObject Storage stack
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -29,8 +29,8 @@ func TestARNString(t *testing.T) {
 		expectedResult string
 	}{
 		{ARN{}, ""},
-		{ARN{TargetID{"1", "webhook"}, ""}, "arn:minio:sqs::1:webhook"},
-		{ARN{TargetID{"1", "webhook"}, "us-east-1"}, "arn:minio:sqs:us-east-1:1:webhook"},
+		{ARN{TargetID{"1", "webhook"}, ""}, "arn:b33s:sqs::1:webhook"},
+		{ARN{TargetID{"1", "webhook"}, "us-east-1"}, "arn:b33s:sqs:us-east-1:1:webhook"},
 	}
 
 	for i, testCase := range testCases {
@@ -49,8 +49,8 @@ func TestARNMarshalXML(t *testing.T) {
 		expectErr    bool
 	}{
 		{ARN{}, []byte("<ARN></ARN>"), false},
-		{ARN{TargetID{"1", "webhook"}, ""}, []byte("<ARN>arn:minio:sqs::1:webhook</ARN>"), false},
-		{ARN{TargetID{"1", "webhook"}, "us-east-1"}, []byte("<ARN>arn:minio:sqs:us-east-1:1:webhook</ARN>"), false},
+		{ARN{TargetID{"1", "webhook"}, ""}, []byte("<ARN>arn:b33s:sqs::1:webhook</ARN>"), false},
+		{ARN{TargetID{"1", "webhook"}, "us-east-1"}, []byte("<ARN>arn:b33s:sqs:us-east-1:1:webhook</ARN>"), false},
 	}
 
 	for i, testCase := range testCases {
@@ -76,9 +76,9 @@ func TestARNUnmarshalXML(t *testing.T) {
 		expectErr   bool
 	}{
 		{[]byte("<ARN></ARN>"), nil, true},
-		{[]byte("<ARN>arn:minio:sqs:::</ARN>"), nil, true},
-		{[]byte("<ARN>arn:minio:sqs::1:webhook</ARN>"), &ARN{TargetID{"1", "webhook"}, ""}, false},
-		{[]byte("<ARN>arn:minio:sqs:us-east-1:1:webhook</ARN>"), &ARN{TargetID{"1", "webhook"}, "us-east-1"}, false},
+		{[]byte("<ARN>arn:b33s:sqs:::</ARN>"), nil, true},
+		{[]byte("<ARN>arn:b33s:sqs::1:webhook</ARN>"), &ARN{TargetID{"1", "webhook"}, ""}, false},
+		{[]byte("<ARN>arn:b33s:sqs:us-east-1:1:webhook</ARN>"), &ARN{TargetID{"1", "webhook"}, "us-east-1"}, false},
 	}
 
 	for i, testCase := range testCases {
@@ -105,12 +105,12 @@ func TestParseARN(t *testing.T) {
 		expectErr   bool
 	}{
 		{"", nil, true},
-		{"arn:minio:sqs:::", nil, true},
-		{"arn:minio:sqs::1:webhook:remote", nil, true},
+		{"arn:b33s:sqs:::", nil, true},
+		{"arn:b33s:sqs::1:webhook:remote", nil, true},
 		{"arn:aws:sqs::1:webhook", nil, true},
-		{"arn:minio:sns::1:webhook", nil, true},
-		{"arn:minio:sqs::1:webhook", &ARN{TargetID{"1", "webhook"}, ""}, false},
-		{"arn:minio:sqs:us-east-1:1:webhook", &ARN{TargetID{"1", "webhook"}, "us-east-1"}, false},
+		{"arn:b33s:sns::1:webhook", nil, true},
+		{"arn:b33s:sqs::1:webhook", &ARN{TargetID{"1", "webhook"}, ""}, false},
+		{"arn:b33s:sqs:us-east-1:1:webhook", &ARN{TargetID{"1", "webhook"}, "us-east-1"}, false},
 	}
 
 	for i, testCase := range testCases {

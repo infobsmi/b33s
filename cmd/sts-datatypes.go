@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -55,7 +55,7 @@ type AssumeRoleResponse struct {
 
 // AssumeRoleResult - Contains the response to a successful AssumeRole
 // request, including temporary credentials that can be used to make
-// MinIO API requests.
+// B33S API requests.
 type AssumeRoleResult struct {
 	// The identifiers for the temporary security credentials that the operation
 	// returns.
@@ -86,7 +86,7 @@ type AssumeRoleWithWebIdentityResponse struct {
 }
 
 // WebIdentityResult - Contains the response to a successful AssumeRoleWithWebIdentity
-// request, including temporary credentials that can be used to make MinIO API requests.
+// request, including temporary credentials that can be used to make B33S API requests.
 type WebIdentityResult struct {
 	// The identifiers for the temporary security credentials that the operation
 	// returns.
@@ -136,7 +136,7 @@ type AssumeRoleWithClientGrantsResponse struct {
 }
 
 // ClientGrantsResult - Contains the response to a successful AssumeRoleWithClientGrants
-// request, including temporary credentials that can be used to make MinIO API requests.
+// request, including temporary credentials that can be used to make B33S API requests.
 type ClientGrantsResult struct {
 	// The identifiers for the temporary security credentials that the operation
 	// returns.

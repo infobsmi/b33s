@@ -15,7 +15,7 @@ exit_1() {
 }
 
 cleanup() {
-    echo "Cleaning up instances of MinIO"
+    echo "Cleaning up instances of B33S"
     pkill minio
     pkill -9 minio
     rm -rf /tmp/minio-internal-idp{1,2,3}

@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -319,7 +319,7 @@ func (p *poolMeta) validate(pools []*erasureSets) (bool, error) {
 	replaceScheme := func(k string) string {
 		// This is needed as fallback when users are updating
 		// from http->https or https->http, we need to verify
-		// both because MinIO remembers the command-line in
+		// both because B33S remembers the command-line in
 		// "exact" order - as long as this order is not disturbed
 		// we allow changing the "scheme" i.e internode communication
 		// from plain-text to TLS or from TLS to plain-text.

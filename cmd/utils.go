@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -92,7 +92,7 @@ func IsErr(err error, errs ...error) bool {
 	return false
 }
 
-// ErrorRespToObjectError converts MinIO errors to minio object layer errors.
+// ErrorRespToObjectError converts B33S errors to minio object layer errors.
 func ErrorRespToObjectError(err error, params ...string) error {
 	if err == nil {
 		return nil
@@ -113,7 +113,7 @@ func ErrorRespToObjectError(err error, params ...string) error {
 
 	minioErr, ok := err.(minio.ErrorResponse)
 	if !ok {
-		// We don't interpret non MinIO errors. As minio errors will
+		// We don't interpret non B33S errors. As minio errors will
 		// have StatusCode to help to convert to object errors.
 		return err
 	}
@@ -578,7 +578,7 @@ func newInternodeHTTPTransport(tlsConfig *tls.Config, dialTimeout time.Duration)
 		WriteBufferSize:       32 << 10, // 32KiB moving up from 4KiB default
 		ReadBufferSize:        32 << 10, // 32KiB moving up from 4KiB default
 		IdleConnTimeout:       15 * time.Second,
-		ResponseHeaderTimeout: 15 * time.Minute, // Set conservative timeouts for MinIO internode.
+		ResponseHeaderTimeout: 15 * time.Minute, // Set conservative timeouts for B33S internode.
 		TLSHandshakeTimeout:   15 * time.Second,
 		ExpectContinueTimeout: 15 * time.Second,
 		TLSClientConfig:       tlsConfig,
@@ -1004,7 +1004,7 @@ func lcp(strs []string, pre bool) string {
 	return xfix
 }
 
-// Returns the mode in which MinIO is running
+// Returns the mode in which B33S is running
 func getMinioMode() string {
 	mode := globalMinioModeFS
 	if globalIsDistErasure {
@@ -1110,7 +1110,7 @@ func (t *timedValue) update(v interface{}) {
 	t.lastUpdate = time.Now()
 }
 
-// On MinIO a directory object is stored as a regular object with "__XLDIR__" suffix.
+// On B33S a directory object is stored as a regular object with "__XLDIR__" suffix.
 // For ex. "prefix/" is stored as "prefix__XLDIR__"
 func encodeDirObject(object string) string {
 	if HasSuffix(object, slashSeparator) {

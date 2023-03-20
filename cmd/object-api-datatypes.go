@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -434,7 +434,7 @@ type ListObjectVersionsInfo struct {
 	// request to get next set of objects.
 	//
 	// NOTE: AWS S3 returns NextMarker only if you have delimiter request parameter specified,
-	//       MinIO always returns NextMarker.
+	//       B33S always returns NextMarker.
 	NextMarker string
 
 	// NextVersionIDMarker may be set of IsTruncated is true
@@ -460,7 +460,7 @@ type ListObjectsInfo struct {
 	// request to get next set of objects.
 	//
 	// NOTE: AWS S3 returns NextMarker only if you have delimiter request parameter specified,
-	//       MinIO always returns NextMarker.
+	//       B33S always returns NextMarker.
 	NextMarker string
 
 	// List of objects info for this request.

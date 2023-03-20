@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2022 MinIO, Inc.
+// Copyright (c) 2015-2022 B33S, Inc.
 //
 // This file is part of B33S Object Storage stack
 //
@@ -36,7 +36,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/gorilla/mux"
 
-	"github.com/minio/madmin-go/v2"
+	"github.com/b33s/madmin-go/v2"
 	"github.com/infobsmi/b33s-go/v7/pkg/set"
 	"github.com/infobsmi/b33s-go/v7/pkg/tags"
 	sse "github.com/infobsmi/b33s/internal/bucket/encryption"
@@ -51,8 +51,8 @@ import (
 	"github.com/infobsmi/b33s/internal/kms"
 	"github.com/infobsmi/b33s/internal/logger"
 	"github.com/infobsmi/b33s/internal/sync/errgroup"
-	"github.com/minio/pkg/bucket/policy"
-	iampolicy "github.com/minio/pkg/iam/policy"
+	"github.com/b33s/pkg/bucket/policy"
+	iampolicy "github.com/b33s/pkg/iam/policy"
 )
 
 const (
@@ -720,7 +720,7 @@ func (api objectAPIHandlers) PutBucketHandler(w http.ResponseWriter, r *http.Req
 	}
 
 	forceCreate := false
-	if vs := r.Header.Get(xhttp.MinIOForceCreate); len(vs) > 0 {
+	if vs := r.Header.Get(xhttp.B33SForceCreate); len(vs) > 0 {
 		v := strings.ToLower(vs)
 		switch v {
 		case "true", "false":
@@ -1171,7 +1171,7 @@ func (api objectAPIHandlers) PostPolicyBucketHandler(w http.ResponseWriter, r *h
 }
 
 // GetBucketPolicyStatusHandler -  Retrieves the policy status
-// for an MinIO bucket, indicating whether the bucket is public.
+// for an B33S bucket, indicating whether the bucket is public.
 func (api objectAPIHandlers) GetBucketPolicyStatusHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := newContext(r, w, "GetBucketPolicyStatus")
 
@@ -1285,7 +1285,7 @@ func (api objectAPIHandlers) DeleteBucketHandler(w http.ResponseWriter, r *http.
 	}
 
 	forceDelete := false
-	if value := r.Header.Get(xhttp.MinIOForceDelete); value != "" {
+	if value := r.Header.Get(xhttp.B33SForceDelete); value != "" {
 		var err error
 		forceDelete, err = strconv.ParseBool(value)
 		if err != nil {

@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -160,7 +160,7 @@ func (c *OperatorDNS) Close() error {
 
 // List - Retrieves list of DNS entries for the domain.
 // This is a No Op for Operator because, there is no intent to enforce global
-// namespace at MinIO level with this DNS entry. The global namespace in
+// namespace at B33S level with this DNS entry. The global namespace in
 // enforced by the Kubernetes Operator
 func (c *OperatorDNS) List() (srvRecords map[string][]SrvRecord, err error) {
 	return nil, ErrNotImplemented
@@ -168,7 +168,7 @@ func (c *OperatorDNS) List() (srvRecords map[string][]SrvRecord, err error) {
 
 // Get - Retrieves DNS records for a bucket.
 // This is a No Op for Operator because, there is no intent to enforce global
-// namespace at MinIO level with this DNS entry. The global namespace in
+// namespace at B33S level with this DNS entry. The global namespace in
 // enforced by the Kubernetes Operator
 func (c *OperatorDNS) Get(bucket string) (srvRecords []SrvRecord, err error) {
 	return nil, ErrNotImplemented
@@ -179,7 +179,7 @@ func (c *OperatorDNS) String() string {
 	return "webhookDNS"
 }
 
-// OperatorDNS - represents dns config for MinIO k8s operator.
+// OperatorDNS - represents dns config for B33S k8s operator.
 type OperatorDNS struct {
 	httpClient *http.Client
 	Endpoint   string

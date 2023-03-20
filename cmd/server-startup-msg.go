@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -39,7 +39,7 @@ func getFormatStr(strLen int, padding int) string {
 
 // Prints the formatted startup message.
 func printStartupMessage(apiEndpoints []string, err error) {
-	logger.Info(color.Bold("MinIO Object Storage Server"))
+	logger.Info(color.Bold("B33S Object Storage Server"))
 	if err != nil {
 		if globalConsoleSys != nil {
 			globalConsoleSys.Send(fmt.Sprintf("Server startup failed with '%v', some features may be missing", err))

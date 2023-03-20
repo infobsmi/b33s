@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -109,7 +109,7 @@ func (er erasureObjects) getBucketInfo(ctx context.Context, bucketName string, o
 			volInfo, err := storageDisks[index].StatVol(ctx, bucketName)
 			if err != nil {
 				if opts.Deleted {
-					dvi, derr := storageDisks[index].StatVol(ctx, pathJoin(minioMetaBucket, bucketMetaPrefix, deletedBucketsPrefix, bucketName))
+					dvi, derr := storageDisks[index].StatVol(ctx, pathJoin(b33sMetaBucket, bucketMetaPrefix, deletedBucketsPrefix, bucketName))
 					if derr != nil {
 						return err
 					}
@@ -191,7 +191,7 @@ func (er erasureObjects) DeleteBucket(ctx context.Context, bucket string, opts D
 		// we should proceed to attempt a force delete of such buckets.
 		for index, err := range dErrs {
 			if err == errVolumeNotEmpty && storageDisks[index] != nil {
-				storageDisks[index].RenameFile(ctx, bucket, "", minioMetaTmpDeletedBucket, mustGetUUID())
+				storageDisks[index].RenameFile(ctx, bucket, "", b33sMetaTmpDeletedBucket, mustGetUUID())
 				purgedDangling = true
 			}
 		}
@@ -200,14 +200,14 @@ func (er erasureObjects) DeleteBucket(ctx context.Context, bucket string, opts D
 			err = nil
 		}
 		if opts.SRDeleteOp == MarkDelete {
-			er.markDelete(ctx, minioMetaBucket, pathJoin(bucketMetaPrefix, deletedBucketsPrefix, bucket))
+			er.markDelete(ctx, b33sMetaBucket, pathJoin(bucketMetaPrefix, deletedBucketsPrefix, bucket))
 		}
 	}
 
 	return toObjectErr(err, bucket)
 }
 
-// markDelete creates a vol entry in .minio.sys/buckets/.deleted until site replication
+// markDelete creates a vol entry in .b33s.sys/buckets/.deleted until site replication
 // syncs the delete to peers
 func (er erasureObjects) markDelete(ctx context.Context, bucket, prefix string) error {
 	storageDisks := er.getDisks()
@@ -232,7 +232,7 @@ func (er erasureObjects) markDelete(ctx context.Context, bucket, prefix string) 
 	return toObjectErr(err, bucket)
 }
 
-// purgeDelete deletes vol entry in .minio.sys/buckets/.deleted after site replication
+// purgeDelete deletes vol entry in .b33s.sys/buckets/.deleted after site replication
 // syncs the delete to peers OR on a new MakeBucket call.
 func (er erasureObjects) purgeDelete(ctx context.Context, bucket, prefix string) error {
 	storageDisks := er.getDisks()

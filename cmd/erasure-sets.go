@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2021 MinIO, Inc.
+// Copyright (c) 2000-2023 Infobsmi
 //
 // This file is part of B33S Object Storage stack
 //
@@ -34,14 +34,14 @@ import (
 	"github.com/dchest/siphash"
 	"github.com/dustin/go-humanize"
 	"github.com/google/uuid"
-	"github.com/minio/madmin-go/v2"
+	"github.com/b33s/madmin-go/v2"
 	"github.com/infobsmi/b33s-go/v7/pkg/set"
 	"github.com/infobsmi/b33s-go/v7/pkg/tags"
 	"github.com/infobsmi/b33s/internal/bpool"
 	"github.com/infobsmi/b33s/internal/dsync"
 	"github.com/infobsmi/b33s/internal/logger"
 	"github.com/infobsmi/b33s/internal/sync/errgroup"
-	"github.com/minio/pkg/console"
+	"github.com/b33s/pkg/console"
 )
 
 // setsDsyncLockers is encapsulated type for Close()
@@ -885,7 +885,7 @@ func listDeletedBuckets(ctx context.Context, storageDisks []StorageAPI, delBucke
 				// we ignore disk not found errors
 				return nil
 			}
-			volsInfo, err := storageDisks[index].ListDir(ctx, minioMetaBucket, pathJoin(bucketMetaPrefix, deletedBucketsPrefix), -1)
+			volsInfo, err := storageDisks[index].ListDir(ctx, b33sMetaBucket, pathJoin(bucketMetaPrefix, deletedBucketsPrefix), -1)
 			if err != nil {
 				if err == errFileNotFound {
 					return nil
@@ -895,11 +895,11 @@ func listDeletedBuckets(ctx context.Context, storageDisks []StorageAPI, delBucke
 			for _, volName := range volsInfo {
 				mu.Lock()
 				if _, ok := delBuckets[volName]; !ok {
-					vi, err := storageDisks[index].StatVol(ctx, pathJoin(minioMetaBucket, bucketMetaPrefix, deletedBucketsPrefix, volName))
+					vi, err := storageDisks[index].StatVol(ctx, pathJoin(b33sMetaBucket, bucketMetaPrefix, deletedBucketsPrefix, volName))
 					if err != nil {
 						return err
 					}
-					bkt := strings.TrimPrefix(vi.Name, pathJoin(minioMetaBucket, bucketMetaPrefix, deletedBucketsPrefix))
+					bkt := strings.TrimPrefix(vi.Name, pathJoin(b33sMetaBucket, bucketMetaPrefix, deletedBucketsPrefix))
 					bkt = strings.TrimPrefix(bkt, slashSeparator)
 					bkt = strings.TrimSuffix(bkt, slashSeparator)
 					vi.Name = bkt
@@ -1227,7 +1227,7 @@ func markRootDisksAsDown(storageDisks []StorageAPI, errs []error) {
 			continue
 		}
 		if storageDisks[i] != nil && infos[i].RootDisk {
-			// We should not heal on root disk. i.e in a situation where the minio-administrator has unmounted a
+			// We should not heal on root disk. i.e in a situation where the b33s-administrator has unmounted a
 			// defective drive we should not heal a path on the root disk.
 			logger.LogIf(GlobalContext, fmt.Errorf("Drive `%s` is part of root drive, will not be used", storageDisks[i]))
 			storageDisks[i] = nil
